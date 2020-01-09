@@ -1,0 +1,10 @@
+.caption-text p {
+  font-size: 12px;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.caption-text-description p {
+  font-size: 11px;
+  color: #555;
+}

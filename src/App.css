@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Open+Sans&display=swap');
+
+/* ------------------------------------------------------------------
+General Styles
+------------------------------------------------------------------ */
+
+body {
+  background: #fff;
+  overflow-x: hidden;
+  -ms-overflow-style: scrollbar;
+  font: 400 14px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  border: 0;
+}
+
+
+/* ------------------------------------------------------------------
+Navigation
+------------------------------------------------------------------- */
+
+.navbar-brand {
+  float: left;
+  padding: 20px 10px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+}
+
+.navbar-brand li {
+  font: 100 28px "Lato", sans-serif;
+  font-style: italic;
+  text-transform: none;
+  list-style: none;
+  color: #111;
+  letter-spacing: 0px;
+}
+
+.navbar-custom {
+  -webkit-transition: background 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000), padding 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+     -moz-transition: background 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000), padding 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+       -o-transition: background 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000), padding 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+          transition: background 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000), padding 0.3s cubic-bezier(0.300, 0.100, 0.580, 1.000);
+}
+
+.navbar-custom {
+  background: rgba(255, 255, 255, 0.95);
+  border: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 10px;
+  /*webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+         box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);*/
+  /*box-shadow: 0 1px 2px rgba(201, 105, 104);*/
+}
+
+.navbar-custom .navbar-brand {
+  float: none;
+  height: 60px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-top: 0;
+  padding-bottom: 8px;
+  letter-spacing: 4px;
+  font-weight: 400;
+  font-size: 20px;
+  color: #111;
+}
+
+.navbar-custom a,
+.navbar-custom .navbar-brand {
+  color: #828282;
+  -webkit-transition: none;
+     -moz-transition: none;
+       -o-transition: none;
+          transition: none;
+}
+
+.navbar-custom .nav li > a {
+  position: relative;
+}
+
+.navbar-custom .nav > li > a:focus,
+.navbar-custom .nav > li > a:hover,
+.navbar-custom .nav .open > a,
+.navbar-custom .nav .open > a:focus,
+.navbar-custom .nav .open > a:hover,
+.navbar-custom .dropdown-menu > li > a:focus,
+.navbar-custom .dropdown-menu > li > a:hover {
+  background: none;
+  color: rgba(104, 104, 104, 0.7);
+}
+
+/* Navbar toggle */
+
+.navbar-custom .navbar-toggle {
+  margin-top: 13px;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+  background: #111;
+}
+
+/* Navbar dropdown */
+
+.navbar-custom .dropdown-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0;
+  padding: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.navbar-custom .dropdown-menu > li > a {
+  border: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 10px;
+  padding: 11px 15px;
+}
+
+.navbar-custom .dropdown-menu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  right: auto;
+  margin-top: -1px;
+}
+
+.leftauto {
+  right: 0 !important;
+  left: auto !important;
+}
+
+.navbar-custom .dropdown-menu.left-side {
+
+  right: 100%;
+  left: auto;
+}
+
+.navbar-custom .dropdown-toggle:after {
+  position: absolute;
+  display: block;
+  right: 0;
+  top: 50%;
+  margin-top: -5px;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 9px;
+  content: "\f107";
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar-custom .navbar-nav > .dropdown > .dropdown-toggle {
+  padding-right: 28px;
+}
+
+.navbar-custom .navbar-nav > .dropdown > .dropdown-toggle:after {
+  position: absolute;
+  display: block;
+  right: 15px;
+  top: 50%;
+  margin-top: -5px;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 9px;
+  content: "\f107";
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.light-logo {
+  display: none !important;
+}
+
+.navbar-transparent.navbar-dark .light-logo {
+  display: block !important;
+}
+
+.navbar-transparent.navbar-dark .dark-logo {
+  display: none !important;
+}
+
+.dark-logo-2 {
+  float: right;
+  opacity: .7;
+}
+
+/* Push search */
+
+.navbar-custom .navbar-nav > .dropdown > .dropdown-toggle.search-dropdown:after {
+  content: "";
+}
+
+#viz-canvas {
+  position: fixed;
+  right: 0;
+  top: 101px;
+  bottom: 0;
+  width: 60%;
+  max-width: calc(100%-200px);
+  /*overflow-y: scroll;*/
+}

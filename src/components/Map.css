@@ -1,0 +1,18 @@
+path.stateBoundary {
+  stroke: #444;
+  stroke-width: 0.7px;
+  fill: transparent;
+}
+
+path.stateBoundary:hover {
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.mapCanvas {
+  overflow: hidden;
+}
+
+.map .unselectable {
+  pointer-events: none;
+}

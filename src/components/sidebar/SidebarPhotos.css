@@ -1,0 +1,19 @@
+#sidebar-photos {
+  position: fixed;
+  left: 0;
+  top: 101px;
+  /*top: 60%;*/
+  bottom: 0;
+  width: 33%;
+  min-width: 200px;
+  overflow-y: scroll;
+  /*border-right: 1px solid;*/
+}
+
+#sidebar-photos .notSelected {
+  color: silver;
+}
+
+#sidebar-photos .notSelected img {
+  opacity: 0.5;
+}
