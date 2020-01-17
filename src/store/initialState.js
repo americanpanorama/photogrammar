@@ -1,5 +1,3 @@
-import sidebarPhotos from '../../public/data/randomSelections/1-8.json';
-
 // const { hash } = window.location;
 // hash.replace(/^#\/?|\/$/g, '').split('&').forEach((pair) => {
 //   const [key, value] = pair.split('=');
@@ -8,7 +6,8 @@ import sidebarPhotos from '../../public/data/randomSelections/1-8.json';
 export default {
   selectedPhotographer: null,
   selectedCounty: null,
-  sidebarPhotos,
+  sidebarPhotos: [],
+  sidebarPhotosOffset: 0,
   countiesData: [],
   selectedPhotoData: null,
   mapPosition: {
@@ -16,6 +15,7 @@ export default {
     y: 0,
     z: 1,
   },
+  randomPhotoNumbers: [],
   dimensions: {
     calculated: false,
     vizCanvas: {

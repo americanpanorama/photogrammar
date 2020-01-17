@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import './Photo.css';
 
 const Photo = ({ photoMetadata, selectPhoto, selectPhotographer }) => {
-  const { callNumber } = useParams();
-  if (!photoMetadata || photoMetadata.call_number !== callNumber) {
-    selectPhoto(callNumber);
+  const { id: loc_item_link } = useParams();
+  if (!photoMetadata || photoMetadata.loc_item_link !== decodeURIComponent(loc_item_link)) {
+    selectPhoto(loc_item_link);
     return null;
   }
   const {
@@ -17,13 +17,13 @@ const Photo = ({ photoMetadata, selectPhoto, selectPhotographer }) => {
     city,
     county,
     state,
-    longitude,
-    latitude,
+    // longitude,
+    // latitude,
     img_large_path,
   } = photoMetadata;
   return (
-    <div class="row multi-columns-row">
-      <div class="photo-details">
+    <div className="row multi-columns-row">
+      <div className="photo-details">
         <div className="col-sm-3 col-md-3 col-lg-3">
           <div className="caption-text">
             <p>{`${photographer_name} - ${city || county}, ${state}`}</p>

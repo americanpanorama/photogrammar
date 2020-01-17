@@ -11,6 +11,8 @@ const mapStateToProps = state => ({
     ...sp,
     fill: Photographers.find(p => sp.photographerKey === p.key).color,
   })),
+  width: state.dimensions.steamgraph.width,
+  height: state.dimensions.steamgraph.height,
 });
 
 const mapDispatchToProps = {

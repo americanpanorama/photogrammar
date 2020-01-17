@@ -1,0 +1,57 @@
+.photoCard {
+  height: 350px;
+  width: 200px;
+}
+
+.photoCard .thumbnail {
+  height: 175px;
+  border: 0;
+  border-bottom: 1px solid grey;
+  border-radius: 0;
+  vertical-align: bottom;
+  position: relative;
+  margin: 0;
+}
+
+.photoCard .thumbnail img {
+  vertical-align: bottom;
+  position: absolute;
+  bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+
+}
+
+.photoCard .post-entry-caption {
+  height: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow: hidden;
+}
+
+.photoCard .post-entry-location {
+  height: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.photoCard .post-entry-photographer,
+.photoCard .post-entry-date {
+  height: 20px;
+  line-height: 1.2;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.photoCard a {
+  color: #777;
+}
+
+.photoCard .post-entry a {
+  color: #333;
+}

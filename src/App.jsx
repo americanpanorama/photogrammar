@@ -51,7 +51,7 @@ const App = ({ initializeData }) => {
 
         <div id="viz-canvas">
           <Switch>
-            <Route path="/photo/:callNumber">
+            <Route path="/photo/:id">
               <Photo />
             </Route>
             <Route path={["/county/:placeId", "/state/:placeId", "/"]}>

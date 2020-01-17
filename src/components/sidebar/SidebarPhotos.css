@@ -1,13 +1,38 @@
-#sidebar-photos {
+#sidebar {
   position: fixed;
   left: 0;
   top: 101px;
-  /*top: 60%;*/
-  bottom: 0;
+  bottom: 10px;
   width: 33%;
   min-width: 200px;
-  overflow-y: scroll;
-  /*border-right: 1px solid;*/
+  border-right: 1px solid;
+  overflow: hidden;
+}
+
+#sidebar header {
+  width: 90%;
+  height: 50px;
+  margin: 10px auto;
+}
+
+#sidebar header h3 {
+  color: black;
+  font-size: 1.25em;
+}
+
+#sidebar header .timeAndNav {
+  display: flex;
+  justify-content: space-between;
+}
+
+#sidebar header .timeAndNav button {
+  margin-left: 10px;
+}
+
+#sidebar-photos {
+  height: 100%;
+  display: flex;
+  width: 100vw;
 }
 
 #sidebar-photos .notSelected {
@@ -17,3 +42,15 @@
 #sidebar-photos .notSelected img {
   opacity: 0.5;
 }
+
+#sidebar-photos .photoPage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end;
+  align-content: space-around;
+  height: 100%;
+  width: 33%;
+  margin: 0;
+}
+

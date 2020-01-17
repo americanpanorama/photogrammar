@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Steamgraph = ({ selectedPhotographer, paths, selectPhotographer }) => {
+const Steamgraph = ({ selectedPhotographer, paths, selectPhotographer, width, height }) => {
   return (
     <svg
-      width={900}
-      height={300}
+      width={width}
+      height={height}
     >
-      <g transform={`scale(900, 300)`}>
+      <g transform={`scale(${width}, ${height})`}>
         {paths.map((sp, i) => (
           <path
             d={sp.d}

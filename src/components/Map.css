@@ -1,12 +1,10 @@
 path.stateBoundary {
   stroke: #444;
-  stroke-width: 0.7px;
   fill: transparent;
 }
 
 path.stateBoundary:hover {
   stroke: black;
-  stroke-width: 2px;
 }
 
 .mapCanvas {
@@ -15,4 +13,14 @@ path.stateBoundary:hover {
 
 .map .unselectable {
   pointer-events: none;
+}
+
+.map {
+  display: inline-block;
+}
+
+.mapControls {
+  display: inline-block;
+  
+  vertical-align: top;
 }
