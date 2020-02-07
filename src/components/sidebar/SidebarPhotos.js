@@ -1,20 +1,16 @@
 import { connect } from 'react-redux';
 import SidebarPhotos from './SidebarPhotos.jsx';
 import { loadSidebarPhotos } from '../../store/actions';
-import { getSelectedPhotographerMetadata, getSelectedCountyMetadata } from '../../store/selectors';
+import { getSelectedPhotographerMetadata, getSelectedCountyMetadata, getSelectedStateName, getSelectedPhotographerName } from '../../store/selectors';
 
 const mapStateToProps = state => {
-  const { sidebarPhotos, selectedPhotographer, selectedCounty, sidebarPhotosOffset, dimensions } = state;
+  const { sidebarPhotos, selectedPhotographer, selectedCounty, selectedState, sidebarPhotosOffset, randomPhotoNumbers, dimensions } = state;
   const { displayableCards } = dimensions.photoCards;
   const { width: sidebarWidth } = dimensions.sidebar;
   let nextOffset = sidebarPhotosOffset + displayableCards;
   let previousOffset = (sidebarPhotosOffset - displayableCards >= 0) ? sidebarPhotosOffset - displayableCards : -1;
 
-  let selectedPhotographerName;
-  if (selectedPhotographer) {
-    const { firstname, lastname } = getSelectedPhotographerMetadata(state);
-    selectedPhotographerName = `${firstname} ${lastname}`;
-  }
+  const selectedPhotographerName = getSelectedPhotographerName(state);
 
   let selectedCountyName;
   if (selectedCounty) {
@@ -28,9 +24,11 @@ const mapStateToProps = state => {
   }
 
   return {
-    photos: sidebarPhotos,
     selectedPhotographer,
+    selectedPhotographerName,
     selectedCounty,
+    selectedState,
+    selectedStateName: getSelectedStateName(state),
     header,
     displayableCards,
     sidebarPhotosOffset,
@@ -39,6 +37,7 @@ const mapStateToProps = state => {
     selectedPhotoCallNumber: (state.selectedPhotoData && state.selectedPhotoData.call_number)
       ? state.selectedPhotoData.call_number : null,
     sidebarWidth,
+    randomPhotoNumbers,
   };
 };
 

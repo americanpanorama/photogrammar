@@ -11,9 +11,25 @@ const countiesData = (state = initialState, action) => (
     ? action.payload.counties : state
 );
 
-const selectedCounty = (state = initialState, action) => (
-  (action.type === A.SELECT_COUNTY) ? action.payload.county : state
-);
+const selectedCounty = (state = initialState, action) => {
+  if (action.type === A.SELECT_COUNTY) {
+    return action.payload.county;
+  }
+  if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
+    return null;
+  }
+  return state
+};
+
+const selectedState = (state = initialState, action) => {
+  if (action.type === A.SELECT_STATE) {
+    return action.payload.state;
+  }
+  if (action.type === A.SELECT_NATION) {
+    return null;
+  }
+  return state;
+};
 
 const selectedPhotoData = (state = initialState, action) => {
   if (action.type === A.SELECT_PHOTO) {
@@ -26,15 +42,28 @@ const selectedPhotoData = (state = initialState, action) => {
 };
 
 const sidebarPhotos = (state = initialState, action) => {
-  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS || action.type === A.SELECT_COUNTY) {
-    return action.payload.sidebarPhotos;
-  }
+  // if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
+  //   || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
+  //   || action.type === A.SELECT_NATION) {
+  //   return action.payload.sidebarPhotos;
+  // }
   return state;
 };
 
 const sidebarPhotosOffset = (state = initialState, action) => {
-  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS || action.type === A.SELECT_COUNTY) {
+  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
+    || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
+    || action.type === A.SELECT_NATION) {
     return action.payload.sidebarPhotosOffset;
+  }
+  return state;
+};
+
+const sidebarPhotosCount = (state = initialState, action) => {
+  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
+    || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
+    || action.type === A.SELECT_NATION) {
+    return action.payload.sidebarPhotosCount;
   }
   return state;
 };
@@ -56,10 +85,12 @@ const dimensions = (state = initialState, action) => (
 const combinedReducer = combineReducers({
   selectedPhotographer,
   selectedCounty,
+  selectedState,
   selectedPhotoData,
   countiesData,
   sidebarPhotos,
   sidebarPhotosOffset,
+  sidebarPhotosCount,
   mapPosition,
   randomPhotoNumbers,
   dimensions,

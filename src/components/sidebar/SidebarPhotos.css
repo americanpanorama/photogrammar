@@ -21,8 +21,13 @@
 }
 
 #sidebar header .timeAndNav {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto auto 80px;
+}
+
+#sidebar header .timeAndNav .counts,
+#sidebar header .timeAndNav nav {
+  justify-self: end;
 }
 
 #sidebar header .timeAndNav button {

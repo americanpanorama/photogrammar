@@ -6,8 +6,9 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
-import SidebarPhotos from './components/sidebar/SidebarPhotos.js';
+import FetchSidebarPhotos from './components/sidebar/FetchSidebarPhotos.js';
 import Map from './components/Map.js';
+import Stats from './components/Stats.js';
 import Photo from './components/Photo.js';
 import Steamgraph from './components/Steamgraph.js';
 import PhotographerFilter from './components/PhotographerFilter.js';
@@ -39,7 +40,7 @@ const App = ({ initializeData }) => {
                 <li><a href="#about" className="section-scroll">Photographers</a></li>
                 <li><a href="#news" className="section-scroll">Themes</a></li>
                 <li>
-                  <Link to="/maps">Maps</Link>
+                  <Link to={`${process.env.PUBLIC_URL}/maps`}>Maps</Link>
                 </li>
                 <li><a href="#latest-maps" className="section-scroll">Labs</a></li>
                 <li><a href="#projects" className="section-scroll">About</a></li>
@@ -47,14 +48,15 @@ const App = ({ initializeData }) => {
             </div>
           </div>
         </nav>
-        <SidebarPhotos />
+        <FetchSidebarPhotos />
 
         <div id="viz-canvas">
           <Switch>
-            <Route path="/photo/:id">
+            <Route path={`${process.env.PUBLIC_URL}/photo/:id`}>
               <Photo />
             </Route>
-            <Route path={["/county/:placeId", "/state/:placeId", "/"]}>
+            <Route path={[`${process.env.PUBLIC_URL}/county/:placeId`, `${process.env.PUBLIC_URL}/state/:placeId`, `${process.env.PUBLIC_URL}/`]}>
+              <Stats />
               <Map />
               <Steamgraph />
               <PhotographerFilter />

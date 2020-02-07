@@ -13,7 +13,7 @@ const PhotoCard = ({ photo, selectedPhotograph }) => {
       className="photoCard"
     >
       <Link
-        to={`/photo/${encodeURIComponent(photo.loc_item_link)}`}
+        to={`${process.env.PUBLIC_URL}/photo/${encodeURIComponent(photo.loc_item_link)}`}
       >
         <div
           className={(!selectedPhotograph || selectedPhotograph === photo.loc_item_link) ? '' : 'notSelected'}

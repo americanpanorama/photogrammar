@@ -6,8 +6,10 @@
 export default {
   selectedPhotographer: null,
   selectedCounty: null,
+  selectedState: null,
   sidebarPhotos: [],
   sidebarPhotosOffset: 0,
+  sidebarPhotosCount: 300,
   countiesData: [],
   selectedPhotoData: null,
   mapPosition: {

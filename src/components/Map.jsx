@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import { Link, useParams, useLocation } from "react-router-dom";
 import './Map.css';
 
-const Map = ({ counties, states, selectedCounty, translateX, translateY, scale, setXYZ, selectCounty, mapDimensions }) => {
+const Map = ({ counties, states, selectedCounty, selectedState, translateX, translateY, scale, setXYZ, selectCounty, selectState, selectNation, mapDimensions }) => {
   const projection = d3.geoAlbersUsa()
     .translate([mapDimensions.width /2, mapDimensions.height /2]);
   const path = d3.geoPath(projection); 
@@ -18,15 +18,23 @@ const Map = ({ counties, states, selectedCounty, translateX, translateY, scale, 
     selectCounty(placeId);
   }
 
+  if (mapView === 'state') {
+    selectState(placeId);
+  }
+
+  if (mapView === 'national' && (selectedState || selectedCounty)) {
+    selectNation();
+  }
+
   let geometry = {type: "Feature", properties: {}, geometry: {type: "Polygon", coordinates: [[[-124.98046874999999, 24.607069137709683 ], [-66.357421875, 24.607069137709683 ], [-66.357421875, 49.32512199104001 ], [-124.98046874999999, 49.32512199104001 ], [-124.98046874999999, 24.607069137709683 ] ] ] } };
   let properties;
   let linkUp;
   if (mapView === 'state') {
     ({ geometry } = states.find(st => st.properties.abbr === placeId));
-    linkUp = '/';
+    linkUp = 'maps';
   } else if (mapView === 'county') {
     ({ geometry, properties } = counties.find(c => c.properties.nhgis_join === placeId));
-    linkUp = `/state/${properties.stateAbbr}`;
+    linkUp = `state/${properties.stateAbbr}`;
   }
 
   const gutter = 0.9;
@@ -136,7 +144,7 @@ const Map = ({ counties, states, selectedCounty, translateX, translateY, scale, 
         }}
       >
         {(linkUp) && (
-          <Link to={linkUp}>
+          <Link to={`${process.env.PUBLIC_URL}/${linkUp}`}>
             <button>
               {'<'}
             </button>
@@ -155,7 +163,7 @@ const Map = ({ counties, states, selectedCounty, translateX, translateY, scale, 
             if (mapView === 'state' && c.properties.photoCount > 0) {
               return (
                 <Link
-                  to={`/county/${c.properties.nhgis_join}`}
+                  to={`${process.env.PUBLIC_URL}/county/${c.properties.nhgis_join}`}
                   key={c.properties.nhgis_join}
                 >
                   <path
@@ -195,7 +203,7 @@ const Map = ({ counties, states, selectedCounty, translateX, translateY, scale, 
             if (mapView === 'national' || (mapView === 'state' && st.properties.abbr !== placeId)) {
               return (
                 <Link
-                  to={`/state/${st.properties.abbr}`}
+                  to={`${process.env.PUBLIC_URL}/state/${st.properties.abbr}`}
                   key={st.properties.name}
                 >
                   <path

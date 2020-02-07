@@ -4,10 +4,12 @@ import * as d3 from 'd3';
 import PhotoCard from './PhotoCard.js';
 import './SidebarPhotos.css';
 
-const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, header, selectedCounty, previousOffset, nextOffset, displayableCards, sidebarWidth, loadSidebarPhotos }) => {
+
+const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, selectedPhotographerName, header, selectedCounty, selectedState, selectedStateName, previousOffset, nextOffset, displayableCards, sidebarWidth, randomPhotoNumbers, loadSidebarPhotos }) => {
+  console.log(photos);
   const newPhotoSet = {
     photos,
-    setId: `${(selectedPhotographer) ? selectedPhotographer : ''}${(selectedCounty) ? selectedCounty : ''}`,
+    setId: `${(selectedPhotographer) ? selectedPhotographer : ''}${(selectedCounty) ? selectedCounty : ''}${(selectedState) ? selectedState : ''}`,
     offset: sidebarPhotosOffset,
   };
   const [photoSet, setPhotoSet] = useState(newPhotoSet);
@@ -50,7 +52,6 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, head
   } else if (photoSet.setId !== newPhotoSet.setId) {
     setPhotoSet(newPhotoSet);
   }
-
   return (
     <div id="sidebar">
       <header className="highlight-text">
@@ -59,6 +60,10 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, head
         </h3>
         <div className='timeAndNav'>
           <h4>
+            time
+          </h4>
+          <h4 className='counts'>
+            {`${sidebarPhotosOffset + 1}-${sidebarPhotosOffset + displayableCards} of num`}
           </h4>
           <nav>
             {(previousOffset >= 0) && (
@@ -104,6 +109,7 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, head
       </div>
     </div>
   );
+
 };
 
 export default SidebarPhotos;
