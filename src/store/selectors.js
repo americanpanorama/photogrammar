@@ -8,15 +8,34 @@ const getSelectedPhotographer = state => state.selectedPhotographer;
 const getSelectedCounty = state => state.selectedCounty;
 const getSelectedState = state => state.selectedState;
 const getCountiesData = state => state.countiesData;
+const getTimeRange = state => state.timeRange;
 const getSidebarPhotosOffset = state => state.sidebarPhotosOffset;
 const getDimensions = state => state.dimensions;
 const getRandomPhotoNumbers = state => state.randomPhotoNumbers;
 
 export const getCounties = createSelector(
-  [getCountiesData],
-  (countiesData) => {
+  [getCountiesData, getTimeRange],
+  (countiesData, timeRange) => {
     return counties.features.map((f) => {
-      const photoCount = (countiesData[f.properties.nhgis_join]) ? countiesData[f.properties.nhgis_join].total : 0;
+      let photoCount;
+      const [startTime, endTime] = timeRange;
+      if (!countiesData[f.properties.nhgis_join]) {
+        photoCount = 0;
+      } else if (startTime > 193501 || endTime < 193504) {
+        photoCount = Object
+          .keys(countiesData[f.properties.nhgis_join])
+          .filter(k => {
+            if (k === 'total' || k === 'photographers') {
+              return false;
+            }
+            return k.substring(1) >= startTime && k.substring(1) <= endTime;
+          })
+          .reduce((accumulator, k) => {
+            return countiesData[f.properties.nhgis_join][k] + accumulator;
+          }, 0);
+      } else {
+        photoCount = countiesData[f.properties.nhgis_join].total;
+      }
       const fill = (photoCount > 0) ? '#6a1b9a' : 'white'; //'#eceff1';
       const fillOpacity = (photoCount > 0) ? Math.min(1, photoCount * 50 / f.properties.area_sqmi + 0.1) : 0.75;
       const strokeOpacity = (photoCount > 0) ? 1 : 0;
@@ -156,14 +175,15 @@ export const getSelectedStatePhotographers = createSelector(
 );
 
 export const getSidebarPhotosQuery = createSelector(
-  [getSelectedPhotographer, getSelectedCounty, getSelectedState, getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers],
-  (selectedPhotographer, selectedCounty, selectedState, offset, dimensions, randomPhotoNumbers) => {
+  [getSelectedPhotographer, getSelectedCounty, getSelectedState, getTimeRange, getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers],
+  (selectedPhotographer, selectedCounty, selectedState, timeRange, offset, dimensions, randomPhotoNumbers) => {
     let query;
     const { displayableCards } = dimensions.photoCards;
+    const [startTime, endTime] = timeRange;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const sqlQueryBase = 'SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos';
     const wheres = [];
-    if (selectedPhotographer || selectedCounty || selectedState) {
+    if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501 || endTime < 194504) {
       if (selectedPhotographer) {
         const photographer = Photographers.find(p => p.key === selectedPhotographer);
         let name;
@@ -178,6 +198,16 @@ export const getSidebarPhotosQuery = createSelector(
       } else if (selectedState) {
         wheres.push(`state = '${stateabbrs[selectedState]}'`)
       }
+      if (startTime > 193501) {
+        const startYear = Math.floor(startTime / 100);
+        const startMonth = startTime % 100;
+        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+      }
+      if (endTime < 194504) {
+        const endYear = Math.floor(endTime / 100);
+        const endMonth = endTime % 100;
+        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+      }
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where} order by year, month limit ${displayableCards} offset ${offset}`;
     } else {
@@ -189,5 +219,108 @@ export const getSidebarPhotosQuery = createSelector(
       //query = `${sqlQueryBase} TABLESAMPLE BERNOULLI (100 * 60 / 176212.0) limit ${displayableCards}`;
     }
     return encodeURI(`${cartoURLBase}${query}`);
+  }
+);
+
+export const getSidebarPhotoCountQuery = createSelector(
+  [getSelectedPhotographer, getSelectedCounty, getSelectedState, getTimeRange],
+  (selectedPhotographer, selectedCounty, selectedState, timeRange) => {
+    let query;
+    const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
+    const sqlQueryBase = 'SELECT count(cartodb_id) FROM photogrammar_photos';
+    const [startTime, endTime] = timeRange;
+    const wheres = [];
+    if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501 || endTime < 194504) {
+      if (selectedPhotographer) {
+        const photographer = Photographers.find(p => p.key === selectedPhotographer);
+        let name;
+        if (photographer) {
+          const { firstname, lastname } = photographer;
+          name = `${firstname} ${lastname}`;
+        }
+        wheres.push(`photographer_name = '${name}'`);
+      }
+      if (selectedCounty) {
+        wheres.push(`nhgis_join = '${selectedCounty}'`);
+      } else if (selectedState) {
+        wheres.push(`state = '${stateabbrs[selectedState]}'`)
+      }
+      if (startTime > 193501) {
+        const startYear = Math.floor(startTime / 100);
+        const startMonth = startTime % 100;
+        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+      }
+      if (endTime < 194504) {
+        const endYear = Math.floor(endTime / 100);
+        const endMonth = endTime % 100;
+        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+      }
+      const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
+      query = `${sqlQueryBase} ${where}`;
+      return encodeURI(`${cartoURLBase}${query} `);
+    } 
+    return null;
+  }
+);
+
+export const getPhotographersCountQuery = createSelector(
+  [getSelectedPhotographer, getSelectedCounty, getSelectedState, getTimeRange, getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers],
+  (selectedPhotographer, selectedCounty, selectedState, timeRange, offset, dimensions, randomPhotoNumbers) => {
+    let query;
+    const { displayableCards } = dimensions.photoCards;
+    const [startTime, endTime] = timeRange;
+    const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
+    const sqlQueryBase = 'SELECT photographer_name, count(photographer_name) FROM photogrammar_photos';
+    const wheres = [];
+    if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501 || endTime < 194504) {
+      if (selectedPhotographer) {
+        const photographer = Photographers.find(p => p.key === selectedPhotographer);
+        let name;
+        if (photographer) {
+          const { firstname, lastname } = photographer;
+          name = `${firstname} ${lastname}`;
+        }
+        wheres.push(`photographer_name = '${name}'`);
+      }
+      if (selectedCounty) {
+        wheres.push(`nhgis_join = '${selectedCounty}'`);
+      } else if (selectedState) {
+        wheres.push(`state = '${stateabbrs[selectedState]}'`)
+      }
+      if (startTime > 193501) {
+        const startYear = Math.floor(startTime / 100);
+        const startMonth = startTime % 100;
+        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+      }
+      if (endTime < 194504) {
+        const endYear = Math.floor(endTime / 100);
+        const endMonth = endTime % 100;
+        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+      }
+      const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
+      query = `${sqlQueryBase} ${where} group by photographer_name order by case when photographer_name is null then 1 else 0 end, count(photographer_name) desc`;
+    } else {
+      // it's national
+      query = randomPhotoNumbers
+        .slice(offset, displayableCards + offset)
+        .map(offset => `(${sqlQueryBase} limit 1 offset ${offset})`)
+        .join(' union ');
+      //query = `${sqlQueryBase} TABLESAMPLE BERNOULLI (100 * 60 / 176212.0) limit ${displayableCards}`;
+    }
+    return encodeURI(`${cartoURLBase}${query}`);
+  }
+);
+
+export const getDateRangeString = createSelector(
+  [getTimeRange],
+  (timeRange) => {
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const yearMonths = timeRange.map(tr => ({
+      year: Math.floor(tr / 100),
+      month: tr % 100,
+    }));
+    const startString = `${monthNames[yearMonths[0].month]} ${yearMonths[0].year}`;
+    const endString = `${monthNames[yearMonths[1].month]} ${yearMonths[1].year}`;
+    return `${startString}-${endString}`;
   }
 );

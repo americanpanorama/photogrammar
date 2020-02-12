@@ -1,6 +1,14 @@
 import { connect } from 'react-redux';
 import Stats from './Stats.jsx';
-import { getSelectedCountyMetadata, getSelectedCountyPhotographers, getSelectedStatePhotoCount, getSelectedStatePhotographers, getSelectedStateName } from '../store/selectors';
+import {
+  getSelectedCountyMetadata,
+  getSelectedCountyPhotographers,
+  getSelectedStatePhotoCount,
+  getSelectedStatePhotographers,
+  getSelectedStateName,
+  getSidebarPhotoCountQuery,
+  getPhotographersCountQuery,
+} from '../store/selectors';
 
 const mapStateToProps = state => {
   let placeName;
@@ -23,6 +31,8 @@ const mapStateToProps = state => {
     placeName,
     numPhotographs,
     photographers,
+    photoCountQuery: getSidebarPhotoCountQuery(state),
+    photographersCountQuery: getPhotographersCountQuery(state),
   };
 };
 

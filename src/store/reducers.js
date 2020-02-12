@@ -41,32 +41,24 @@ const selectedPhotoData = (state = initialState, action) => {
   return state
 };
 
-const sidebarPhotos = (state = initialState, action) => {
-  // if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
-  //   || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
-  //   || action.type === A.SELECT_NATION) {
-  //   return action.payload.sidebarPhotos;
-  // }
-  return state;
-};
-
 const sidebarPhotosOffset = (state = initialState, action) => {
   if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
     || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
     || action.type === A.SELECT_NATION) {
     return action.payload.sidebarPhotosOffset;
   }
-  return state;
-};
-
-const sidebarPhotosCount = (state = initialState, action) => {
-  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
-    || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
-    || action.type === A.SELECT_NATION) {
-    return action.payload.sidebarPhotosCount;
+  if (action.type === A.SET_PHOTO_OFFSET) {
+    return action.payload;
   }
   return state;
 };
+
+const timeRange = (state = initialState, action) => {
+  if (action.type === A.SET_TIME_RANGE) {
+    return action.payload;
+  }
+  return state;
+}
 
 const mapPosition = (state = initialState, action) => (
   (action.type === A.MAP_MOVED) ? action.payload : state
@@ -87,10 +79,9 @@ const combinedReducer = combineReducers({
   selectedCounty,
   selectedState,
   selectedPhotoData,
+  timeRange,
   countiesData,
-  sidebarPhotos,
   sidebarPhotosOffset,
-  sidebarPhotosCount,
   mapPosition,
   randomPhotoNumbers,
   dimensions,

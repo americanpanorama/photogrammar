@@ -3,7 +3,6 @@ import App from './App.jsx';
 import { initializeData } from './store/actions';
 
 const mapStateToProps = state => ({
-
 });
 
 const mapDispatchToProps = {

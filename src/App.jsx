@@ -7,10 +7,12 @@ import {
 } from "react-router-dom";
 import './App.css';
 import FetchSidebarPhotos from './components/sidebar/FetchSidebarPhotos.js';
+import FetchPhotoCount from './components/sidebar/FetchPhotoCount.js';
 import Map from './components/Map.js';
 import Stats from './components/Stats.js';
 import Photo from './components/Photo.js';
 import Steamgraph from './components/Steamgraph.js';
+import TimelineSlider from './components/TimelineSlider.js';
 import PhotographerFilter from './components/PhotographerFilter.js';
 
 const App = ({ initializeData }) => {
@@ -48,7 +50,11 @@ const App = ({ initializeData }) => {
             </div>
           </div>
         </nav>
-        <FetchSidebarPhotos />
+
+        <div id="sidebar">
+          <FetchPhotoCount />
+          <FetchSidebarPhotos />
+        </div>
 
         <div id="viz-canvas">
           <Switch>
@@ -59,6 +65,7 @@ const App = ({ initializeData }) => {
               <Stats />
               <Map />
               <Steamgraph />
+              <TimelineSlider />
               <PhotographerFilter />
             </Route>
           </Switch>

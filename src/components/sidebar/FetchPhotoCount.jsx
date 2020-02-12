@@ -1,9 +1,9 @@
 import React from 'react';
 import { useFetch } from 'react-async';
 import PropTypes from 'prop-types';
-import SidebarPhotos from './SidebarPhotos.js';
+import SidebarHeader from './SidebarHeader.js';
 
-const FetchSidebarPhotos = ({ query }) => {
+const FetchPhotoCount = ({ query, nationalCount }) => {
   if (query) {
     const { data, error } = useFetch(query, {
       headers: { accept: "application/json" },
@@ -16,23 +16,26 @@ const FetchSidebarPhotos = ({ query }) => {
     // if (error) return error.message
     if (data) {
       return (
-        <SidebarPhotos
-          photos={data.rows}
+        <SidebarHeader
+          count={data.rows[0].count}
         />
       )
     }
-  }
-
-  return null;
+  } 
+  return (
+    <SidebarHeader
+      count={nationalCount}
+    />
+  );
 };
 
-export default FetchSidebarPhotos;
+export default FetchPhotoCount;
 
-FetchSidebarPhotos.propTypes = {
+FetchPhotoCount.propTypes = {
   query: PropTypes.string,
 };
 
-FetchSidebarPhotos.defaultProps = {
+FetchPhotoCount.defaultProps = {
   query: null,
 };
 

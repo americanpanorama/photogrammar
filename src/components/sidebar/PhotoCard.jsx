@@ -19,10 +19,14 @@ const PhotoCard = ({ photo, selectedPhotograph }) => {
           className={(!selectedPhotograph || selectedPhotograph === photo.loc_item_link) ? '' : 'notSelected'}
         >
           <div className="thumbnail">
-            <img
-              src={`http://photogrammar.yale.edu/photos/service/pnp/${photo.img_thumb_img}`}
-              alt={photo.caption}
-            />
+            {(photo.img_thumb_img) ? (
+              <img
+                src={`http://photogrammar.yale.edu/photos/service/pnp/${photo.img_thumb_img}`}
+                alt={photo.caption}
+              />
+            ) : (
+              <div className='noimage'>no image</div>
+            )}
           </div>
           <div className="post-entry-caption">
             {photo.caption}

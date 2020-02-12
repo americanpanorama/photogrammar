@@ -4,12 +4,10 @@ import * as d3 from 'd3';
 import PhotoCard from './PhotoCard.js';
 import './SidebarPhotos.css';
 
-
-const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, selectedPhotographerName, header, selectedCounty, selectedState, selectedStateName, previousOffset, nextOffset, displayableCards, sidebarWidth, randomPhotoNumbers, loadSidebarPhotos }) => {
-  console.log(photos);
+const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset, nextOffset, displayableCards, sidebarWidth, setPhotoOffset }) => {
   const newPhotoSet = {
     photos,
-    setId: `${(selectedPhotographer) ? selectedPhotographer : ''}${(selectedCounty) ? selectedCounty : ''}${(selectedState) ? selectedState : ''}`,
+    setId: photoSetId,
     offset: sidebarPhotosOffset,
   };
   const [photoSet, setPhotoSet] = useState(newPhotoSet);
@@ -28,7 +26,7 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, sele
         .on("end", () => {
           const newPhotoSet = {
             photos,
-            setId: `${(selectedPhotographer) ? selectedPhotographer : ''}${(selectedCounty) ? selectedCounty : ''}`,
+            setId: photoSetId,
             offset: sidebarPhotosOffset,
           };
           setPhotoSet(newPhotoSet);
@@ -53,61 +51,28 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, selectedPhotographer, sele
     setPhotoSet(newPhotoSet);
   }
   return (
-    <div id="sidebar">
-      <header className="highlight-text">
-        <h3>
-          {header}
-        </h3>
-        <div className='timeAndNav'>
-          <h4>
-            time
-          </h4>
-          <h4 className='counts'>
-            {`${sidebarPhotosOffset + 1}-${sidebarPhotosOffset + displayableCards} of num`}
-          </h4>
-          <nav>
-            {(previousOffset >= 0) && (
-              <button
-                onClick={loadSidebarPhotos}
-                id={previousOffset}
-              >
-                {'<'}
-              </button>
-            )}
-            {(nextOffset >= 0) && (
-              <button
-                onClick={loadSidebarPhotos}
-                id={nextOffset}
-              >
-                {'>'}
-              </button>
-            )}
-          </nav>
+    <div
+      id="sidebar-photos"
+      ref={sidebarPhotosRef}
+      style={{
+        marginLeft,
+      }}
+    >
+      {photoSets.map(ps => (
+        <div
+          className='photoPage'
+          key={`${ps.setId}-${ps.offset}`}
+        >
+          {ps.photos.map(photo => (
+            <PhotoCard
+              key={photo.loc_item_link}
+              photo={photo}
+              //notSelected={selectedPhotoCallNumber && selectedPhotoCallNumber !== photo.call_number}
+            />
+          ))}
         </div>
-      </header>
-      <div
-        id="sidebar-photos"
-        ref={sidebarPhotosRef}
-        style={{
-          marginLeft,
-        }}
-      >
-        {photoSets.map(ps => (
-          <div
-            className='photoPage'
-            key={`${ps.setId}-${ps.offset}`}
-          >
-            {ps.photos.map(photo => (
-              <PhotoCard
-                key={photo.loc_item_link}
-                photo={photo}
-                //notSelected={selectedPhotoCallNumber && selectedPhotoCallNumber !== photo.call_number}
-              />
-            ))}
-          </div>
-        ))}
+      ))}
       </div>
-    </div>
   );
 
 };

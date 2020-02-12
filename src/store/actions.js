@@ -1,5 +1,4 @@
 import A from './actionTypes';
-import Photographers from '../../public/data/photographers.json';
 
 const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
 const sqlQueryBase = 'SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos';
@@ -7,30 +6,12 @@ const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ
 
 export function initializeData() {
   return async (dispatch, getState) => {
-    const { dimensions, countiesData, sidebarPhotos } = getState();
-    const randomPhotoNumbers = generateRandomPhotoNumbers();
-    dispatch({
-      type: A.GENERATE_RANDOM_PHOTO_NUMBERS,
-      payload: randomPhotoNumbers,
-    });
+    const { dimensions, countiesData} = getState();
     const theDimensions = calculateDimensions();
     if (!dimensions.calculated) {
       dispatch({
         type: A.DIMENSIONS_CALCULATED,
         payload: theDimensions,
-      });
-    }
-    if (sidebarPhotos.length === 0) {
-      const { displayableCards } = theDimensions.photoCards;
-      const query = createSidebarPhotosNationalQuery(randomPhotoNumbers.slice(0, displayableCards)); 
-      const { rows: sidebarPhotos } = await fetchJSON(encodeURI(`${cartoURLBase}${query}`));
-      dispatch({
-        type: A.LOAD_SIDEBAR_PHOTOS,
-        payload: {
-          sidebarPhotos,
-          sidebarPhotosOffset: 0,
-          sidebarPhotosCount: randomPhotoNumbers.length,
-        },
       });
     }
     if (countiesData.length === 0) {
@@ -45,169 +26,57 @@ export function initializeData() {
   }
 }
 
-function createSidebarPhotosNationalQuery (offsets) {
-  const individualQueries = offsets.map(offset => `(${sqlQueryBase} limit 1 offset ${offset})`);
-  return individualQueries.join(' union ');
-}
-
-export function generateRandomPhotoNumbers(count = 200) {
-  const totalRecords = 176212;
-  const randomPhotoNumbers = [];
-  while (randomPhotoNumbers.length < count) {
-    const rn = Math.floor(Math.random() * totalRecords);
-    if (!randomPhotoNumbers.includes(rn)) {
-      randomPhotoNumbers.push(rn);
-    }
-  }
-  return randomPhotoNumbers;
-}
-
 export function selectNation() {
-  return async (dispatch, getState) => {
-    const { selectedPhotographer, dimensions, randomPhotoNumbers } = getState();
-    const { displayableCards } = dimensions.photoCards;
-    const offset = 0;
-    const wheres = [];
-    let sidebarPhotos = [];
-    let sidebarPhotosCount = randomPhotoNumbers.length;
-    if (selectedPhotographer) {
-      if (selectedPhotographer) {
-        const { firstname, lastname } = Photographers.find(p => p.key === selectedPhotographer);
-        wheres.push(`photographer_name = '${firstname} ${lastname}'`);
-      }
-      const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
-      sidebarPhotosCount = await getFetchablePhotosCount(where);
-      sidebarPhotos = await fetchPhotos(where, displayableCards, offset);
-    } else {
-      // it's national without a photographer
-      const query = createSidebarPhotosNationalQuery(randomPhotoNumbers.slice(offset, displayableCards + offset)); 
-      const { rows } = await fetchJSON(encodeURI(`${cartoURLBase}${query}`));
-      sidebarPhotos = rows;
+  return {
+    type: A.SELECT_NATION,
+    payload: {
+      sidebarPhotosOffset: 0,
     }
-    dispatch({
-      type: A.SELECT_NATION,
-      payload: {
-        sidebarPhotos,
-        sidebarPhotosOffset: offset,
-        sidebarPhotosCount,
-      }
-    });
-  }
+  };
 }
 
 export function selectPhotographer(eOrId) {
   return async (dispatch, getState) => {
     const selectedPhotographer = getEventId(eOrId);
-    const { dimensions } = getState();
-    const { displayableCards } = dimensions.photoCards;
     const { counties } = (selectedPhotographer)
       ? await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`)
       : await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/all.json`);
-    let sidebarPhotos;
-    let sidebarPhotosCount;
-    if (selectedPhotographer) {
-      const { firstname, lastname } = Photographers.find(p => p.key === selectedPhotographer);
-      const where = `where photographer_name = '${firstname} ${lastname}'`;
-      //sidebarPhotosCount = await getFetchablePhotosCount(where);
-      sidebarPhotos = await fetchPhotos(where, displayableCards, 0);
-    } else {
-      //sidebarPhotos = await fetchJSON(`${process.env.PUBLIC_URL}/data/randomSelections/${new Date().getMonth()}-${new Date().getYear()}.json`);
-    }
     dispatch({
       type: A.SELECT_PHOTOGRAPHER,
       payload: {
         photographer: selectedPhotographer,
         counties,
-        sidebarPhotos,
         sidebarPhotosOffset: 0,
-        sidebarPhotosCount : 100,
       }
     });
   };
 }
 
 export function selectCounty(eOrId) {
-  return async (dispatch, getState) => {
-    const selectedCounty = getEventId(eOrId);
-    const { dimensions } = getState();
-    const { displayableCards } = dimensions.photoCards;
-    let sidebarPhotos;
-    if (selectedCounty) {
-      const where = `where nhgis_join = '${selectedCounty}'`;
-      sidebarPhotos = await fetchPhotos(where, displayableCards, 0);
-    } else {
-      //sidebarPhotos = await fetchJSON(`${process.env.PUBLIC_URL}/data/randomSelections/${new Date().getMonth()}-${new Date().getYear()}.json`);
+  return {
+    type: A.SELECT_COUNTY,
+    payload: {
+      county: getEventId(eOrId),
+      sidebarPhotosOffset: 0,
     }
-    dispatch({
-      type: A.SELECT_COUNTY,
-      payload: {
-        county: selectedCounty,
-        sidebarPhotos,
-        sidebarPhotosOffset: 0,
-        sidebarPhotosCount: 100,
-      }
-    });
-  }
-}
-
-export function selectState(eOrId) {
-  return async (dispatch, getState) => {
-    const selectedState = getEventId(eOrId);
-    const { dimensions } = getState();
-    const { displayableCards } = dimensions.photoCards;
-    let sidebarPhotos;
-    if (selectedState) {
-      const where = `where state = '${getStateNameFromAbbr(selectedState)}'`;
-      sidebarPhotos = await fetchPhotos(where, displayableCards, 0);
-    }
-    dispatch({
-      type: A.SELECT_STATE,
-      payload: {
-        state: selectedState,
-        sidebarPhotos,
-        sidebarPhotosOffset: 0,
-        sidebarPhotosCount: 100,
-      }
-    });
   };
 }
 
-export function loadSidebarPhotos(eOrId) {
-  return async(dispatch, getState) => {
-    const offset = getEventId(eOrId, 'number');
-    const { selectedPhotographer, selectedCounty, selectedState, dimensions, randomPhotoNumbers } = getState();
-    const { displayableCards } = dimensions.photoCards;
-    const wheres = [];
-    let sidebarPhotos = [];
-    let sidebarPhotosCount = randomPhotoNumbers.length;
-    if (selectedPhotographer || selectedCounty || selectedState) {
-      if (selectedPhotographer) {
-        const { firstname, lastname } = Photographers.find(p => p.key === selectedPhotographer);
-        wheres.push(`photographer_name = '${firstname} ${lastname}'`);
-      }
-      if (selectedCounty) {
-        wheres.push(`nhgis_join = '${selectedCounty}'`);
-      } else if (selectedState) {
-        wheres.push(`state === '${getStateNameFromAbbr[selectedState]}'`)
-      }
-      const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
-      //sidebarPhotosCount = await getFetchablePhotosCount(where);
-      sidebarPhotos = await fetchPhotos(where, displayableCards, offset);
-    } else {
-      // it's national
-      const query = createSidebarPhotosNationalQuery(randomPhotoNumbers.slice(offset, displayableCards + offset)); 
-      const { rows } = await fetchJSON(encodeURI(`${cartoURLBase}${query}`));
-      sidebarPhotos = rows;
+export function selectState(eOrId) {
+  return {
+    type: A.SELECT_STATE,
+    payload: {
+      state: getEventId(eOrId),
+      sidebarPhotosOffset: 0,
     }
-    dispatch({
-      type: A.LOAD_SIDEBAR_PHOTOS,
-      payload: {
-        sidebarPhotos: sidebarPhotos,
-        sidebarPhotosOffset: offset,
-        sidebarPhotosCount: 100,
-      } 
-    });
-  }
+  };
+}
+
+export function setPhotoOffset(eOrId) {
+  return {
+    type: A.SET_PHOTO_OFFSET,
+    payload: getEventId(eOrId, 'number')
+  };
 }
 
 export function selectPhoto(eOrId) {
@@ -226,16 +95,24 @@ export function selectPhoto(eOrId) {
   }
 }
 
+export function setTimeRange(tr) {
+  return {
+    type: A.SET_TIME_RANGE,
+    payload: tr,
+  };
+}
+
 export function calculateDimensions() {
   const padding = 10;
   const photographersFilterHeight = 50;
+  const timelineSliderHeight = 50;
   const headerElements = document.getElementsByClassName('navbar');
   // this should be calculated from the DOM--if it's there
   const headerHeight = (headerElements && headerElements.length >= 1) ? headerElements.height : 101;
   const { innerHeight, innerWidth } = window;
 
   const vizCanvas = {
-    height: innerHeight - headerHeight - padding * 4 - photographersFilterHeight,
+    height: innerHeight - headerHeight - padding * 4 - photographersFilterHeight - timelineSliderHeight,
     width: Math.min(innerWidth * 0.66, innerWidth - 200) - padding * 2,
   }
 
@@ -298,14 +175,17 @@ export function calculateDimensions() {
 
   const sidebarWidth = Math.max(200, innerWidth * 0.33);
   const sidebarHeight = vizCanvas.height;
+  const sidebarHeaderHeight = 70;
   const sidebar = {
     width: sidebarWidth,
     height: sidebarHeight,
+    headerHeight: sidebarHeaderHeight,
+    photosHeight: sidebarHeight - sidebarHeaderHeight,
   }
   const photoCardWidth = 200;
   const photoCardHeight = 350;
   const cols = Math.floor(sidebarWidth / photoCardWidth);
-  const rows = Math.floor(sidebarHeight / photoCardHeight);
+  const rows = Math.floor(sidebar.photosHeight / photoCardHeight);
   const photoCards = {
     cols,
     rows,
@@ -350,21 +230,6 @@ async function fetchJSON(path) {
   const response = await fetch(path);
   const json = await response.json();
   return json;
-}
-
-async function fetchPhotos(where, limit = 10, offset = 0) {
-  const query = `${sqlQueryBase} ${where} order by year, month limit ${limit} offset ${offset}`;
-  const response = await fetch(encodeURI(`${cartoURLBase}${query}`));
-  const results = await response.json();
-  const { rows } = results;
-  return rows;
-}
-
-async function getFetchablePhotosCount(where) {
-  const query = `select count(call_number) from photogrammar_photos ${where}`;
-  const response = await fetch(encodeURI(`${cartoURLBase}${query}`));
-  const results = await response.json();
-  return results.rows[0].count;
 }
 
 export function getStateNameFromAbbr (abbr) {

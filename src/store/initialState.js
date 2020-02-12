@@ -3,21 +3,30 @@
 //   const [key, value] = pair.split('=');
 // });
 
+const numsToGenerate = 1000;
+const totalRecords = 176212;
+const randomPhotoNumbers = [];
+while (randomPhotoNumbers.length < numsToGenerate) {
+  const rn = Math.floor(Math.random() * totalRecords);
+  if (!randomPhotoNumbers.includes(rn)) {
+    randomPhotoNumbers.push(rn);
+  }
+}
+
 export default {
   selectedPhotographer: null,
   selectedCounty: null,
   selectedState: null,
-  sidebarPhotos: [],
   sidebarPhotosOffset: 0,
-  sidebarPhotosCount: 300,
   countiesData: [],
   selectedPhotoData: null,
+  timeRange: [193501, 194504],
   mapPosition: {
     x: 0,
     y: 0,
     z: 1,
   },
-  randomPhotoNumbers: [],
+  randomPhotoNumbers,
   dimensions: {
     calculated: false,
     vizCanvas: {
@@ -33,5 +42,8 @@ export default {
       height: '100%',
       width: '100%'
     },
+    photoCards: {
+      displayableCards: 6,
+    }
   }
 };

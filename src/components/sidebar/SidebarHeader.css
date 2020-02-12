@@ -1,0 +1,46 @@
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 101px;
+  bottom: 10px;
+  width: 33%;
+  min-width: 200px;
+  border-right: 1px solid;
+  overflow: hidden;
+}
+
+#sidebar header {
+  width: 90%;
+  height: 50px;
+  margin: 10px auto;
+}
+
+#sidebar header h3 {
+  margin: 0;
+  color: black;
+  font-size: 1.25em;
+  line-height: 25px;
+}
+
+#sidebar header .timeAndNav {
+  display: grid;
+  grid-template-columns: auto auto 40px 40px;
+  height: 25px;
+}
+
+#sidebar header .timeAndNav h4,
+#sidebar header .timeAndNav counts {
+  line-height: 25px;
+  margin: 0;
+}
+
+#sidebar header .timeAndNav .counts,
+#sidebar header .timeAndNav button {
+  justify-self: end;
+}
+
+#sidebar header .timeAndNav button {
+  margin-left: 10px;
+  height: 25px;
+}
+

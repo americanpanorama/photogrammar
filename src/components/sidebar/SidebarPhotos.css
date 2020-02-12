@@ -9,51 +9,22 @@
   overflow: hidden;
 }
 
-#sidebar header {
-  width: 90%;
-  height: 50px;
-  margin: 10px auto;
-}
-
-#sidebar header h3 {
-  color: black;
-  font-size: 1.25em;
-}
-
-#sidebar header .timeAndNav {
-  display: grid;
-  grid-template-columns: auto auto 80px;
-}
-
-#sidebar header .timeAndNav .counts,
-#sidebar header .timeAndNav nav {
-  justify-self: end;
-}
-
-#sidebar header .timeAndNav button {
-  margin-left: 10px;
-}
 
 #sidebar-photos {
-  height: 100%;
+  /* the sidebar header is 70px in height) */
+  height: calc(100% - 70px);
   display: flex;
   width: 100vw;
 }
 
-#sidebar-photos .notSelected {
-  color: silver;
-}
 
-#sidebar-photos .notSelected img {
-  opacity: 0.5;
-}
 
 #sidebar-photos .photoPage {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: flex-end;
-  align-content: space-around;
+  align-content: flex-start;
   height: 100%;
   width: 33%;
   margin: 0;
