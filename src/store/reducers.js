@@ -11,6 +11,12 @@ const countiesData = (state = initialState, action) => (
     ? action.payload.counties : state
 );
 
+const timelineCells = (state = initialState, action) => (
+  (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
+    || action.type === A.SELECT_NATION)
+    ? action.payload.timelineCells : state
+);
+
 const selectedCounty = (state = initialState, action) => {
   if (action.type === A.SELECT_COUNTY) {
     return action.payload.county;
@@ -81,6 +87,7 @@ const combinedReducer = combineReducers({
   selectedPhotoData,
   timeRange,
   countiesData,
+  timelineCells,
   sidebarPhotosOffset,
   mapPosition,
   randomPhotoNumbers,

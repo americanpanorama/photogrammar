@@ -13,6 +13,8 @@ const getSidebarPhotosOffset = state => state.sidebarPhotosOffset;
 const getDimensions = state => state.dimensions;
 const getRandomPhotoNumbers = state => state.randomPhotoNumbers;
 
+export const getPhotographers = () => Photographers;
+
 export const getCounties = createSelector(
   [getCountiesData, getTimeRange],
   (countiesData, timeRange) => {
@@ -324,3 +326,5 @@ export const getDateRangeString = createSelector(
     return `${startString}-${endString}`;
   }
 );
+
+

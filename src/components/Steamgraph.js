@@ -3,6 +3,7 @@ import Steamgraph from './Steamgraph.jsx';
 import { selectPhotographer } from '../store/actions';
 
 import SteamgraphPaths from '../../public/data/steamgraphPaths.json';
+//import SteamgraphPaths from '../../public/data/steamgraphs/CA.json';
 import Photographers from '../../public/data/photographers.json';
 
 const mapStateToProps = state => ({

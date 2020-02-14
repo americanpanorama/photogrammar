@@ -11,9 +11,8 @@ import FetchPhotoCount from './components/sidebar/FetchPhotoCount.js';
 import Map from './components/Map.js';
 import Stats from './components/Stats.js';
 import Photo from './components/Photo.js';
-import Steamgraph from './components/Steamgraph.js';
+import TimelineHeatmap from './components/TimelineHeatmap.js';
 import TimelineSlider from './components/TimelineSlider.js';
-import PhotographerFilter from './components/PhotographerFilter.js';
 
 const App = ({ initializeData }) => {
   initializeData();
@@ -64,9 +63,8 @@ const App = ({ initializeData }) => {
             <Route path={[`${process.env.PUBLIC_URL}/county/:placeId`, `${process.env.PUBLIC_URL}/state/:placeId`, `${process.env.PUBLIC_URL}/`]}>
               <Stats />
               <Map />
-              <Steamgraph />
+              <TimelineHeatmap />
               <TimelineSlider />
-              <PhotographerFilter />
             </Route>
           </Switch>
         </div>

@@ -2,7 +2,10 @@ import { connect } from 'react-redux';
 import TimelineSlider from './TimelineSlider.jsx';
 import { setTimeRange } from '../store/actions';
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  width: state.dimensions.timelineHeatmap.width,
+  leftAxisWidth: state.dimensions.timelineHeatmap.leftAxisWidth,
+});
 
 const mapDispatchToProps = {
   setTimeRange,

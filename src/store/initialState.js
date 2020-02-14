@@ -19,6 +19,7 @@ export default {
   selectedState: null,
   sidebarPhotosOffset: 0,
   countiesData: [],
+  timelineCells: [],
   selectedPhotoData: null,
   timeRange: [193501, 194504],
   mapPosition: {

@@ -6,14 +6,14 @@ import './TimelineSlider.css';
 import 'rc-slider/assets/index.css';
 
 
-const TimelineSlider = ({setTimeRange}) => {
+const TimelineSlider = ({width, leftAxisWidth, setTimeRange}) => {
   const monthNum = m => (m - 1) / 12;
   const numToMonth = num => Math.round(num * 12) + 1;
   const x = d3.scaleLinear()
-    .domain([1935, 1945 + monthNum(3)])
+    .domain([1935, 1944 + monthNum(6)])
     .range([0, 100]);
   const marks = {};
-  [1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1944, 1945].forEach(y => {
+  [1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1944].forEach(y => {
     marks[x(y)] = {
       label: y
     };
@@ -31,7 +31,13 @@ const TimelineSlider = ({setTimeRange}) => {
   }
 
   return (
-      <div className='timelineSlider'>
+      <div
+        className='timelineSlider'
+        style={{
+          width: width - leftAxisWidth,
+          marginLeft: leftAxisWidth,
+        }}
+      >
         <Range
           allowCross={false}
           defaultValue={[0, 100]}
