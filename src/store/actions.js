@@ -1,13 +1,13 @@
 import A from './actionTypes';
 import Photographers from '../../public/data/photographers.json';
-console.log(Photographers);
+
 const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
 const sqlQueryBase = 'SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos';
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
 
 export function initializeData() {
   return async (dispatch, getState) => {
-    const { dimensions, countiesData} = getState();
+    const { dimensions, countiesData, timelineCells, selectedCounty, selectedState } = getState();
     const theDimensions = calculateDimensions();
     if (!dimensions.calculated) {
       dispatch({
@@ -23,6 +23,23 @@ export function initializeData() {
           counties,
         }
       });
+    }
+    if (timelineCells.length === 0) {
+      const { selectedCounty, selectedState } = getState();
+      let timelineCells = [];
+      if (selectedCounty) {
+        timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/counties/${selectedCounty}.json`);
+      } else if (selectedState) {
+        timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/states/${selectedState}.json`);
+      } else {
+        timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/national.json`);
+      }
+      dispatch({
+        type: A.LOAD_TIMELINE_CELLS,
+        payload: {
+          timelineCells,
+        }
+      })
     }
   }
 }
@@ -41,7 +58,9 @@ export function selectNation() {
 
 export function selectPhotographer(eOrId) {
   return async (dispatch, getState) => {
-    const selectedPhotographer = getEventId(eOrId);
+    const clickedPhotographer = getEventId(eOrId);
+    const selectedPhotographer = (getState().selectedPhotographer !== clickedPhotographer)
+      ? clickedPhotographer : null;
     const { counties } = (selectedPhotographer)
       ? await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`)
       : await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/all.json`);
@@ -56,10 +75,22 @@ export function selectPhotographer(eOrId) {
   };
 }
 
+export function clearPhotographer() {
+  return async (dispatch, getState) => {
+    const { counties } = await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/all.json`);
+    dispatch({
+      type: A.CLEAR_PHOTOGRAPHER,
+      payload: {
+        counties,
+        sidebarPhotosOffset: 0,
+      }
+    });
+  };
+}
+
 export function selectCounty(eOrId) {
   return async (dispatch, getState) => {
     const county = getEventId(eOrId);
-    console.log(`${process.env.PUBLIC_URL}/data/photoCounts/counties/${county}.json`);
     dispatch({
       type: A.SELECT_COUNTY,
       payload: {
@@ -77,7 +108,6 @@ async function getTimelineCells(getState) {
   if (selectedCounty) {
     timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/counties/${selectedCounty}.json`);
   } else if (selectedState) {
-    console.log(`${process.env.PUBLIC_URL}/data/photoCounts/states/${selectedState}.json`);
     timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/states/${selectedState}.json`);
   } else {
     timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/national.json`);

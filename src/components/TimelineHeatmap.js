@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import TimelineHeatmap from './TimelineHeatmap.jsx';
-import { selectPhotographer } from '../store/actions';
+import { selectPhotographer, clearPhotographer } from '../store/actions';
 import { getPhotographers } from '../store/selectors';
 
 const mapStateToProps = state => {
+  const { selectedState, selectedCounty, selectedPhotographer, timeRange, dimensions } = state;
   const timelineCells = state.timelineCells.filter(tc => tc.year < 1944 || tc.month <= 6);
   const activePhotographers = timelineCells.map(tc => tc.photographer);
   const photographers = getPhotographers()
@@ -24,22 +25,26 @@ const mapStateToProps = state => {
       return 0;
     })
     .map(p => {
-      p.active = activePhotographers.includes(p.key);
+      p.active = activePhotographers.includes(p.key)
+        && timeRange[1] > p.firstDate && timeRange[0] < p.lastDate;
       return p;
     });
   return {
     timelineCells,
     photographers,
-    selectedState: state.selectedState,
-    selectedCounty: state.selectedCounty,
-    width: state.dimensions.timelineHeatmap.width,
+    selectedState,
+    selectedCounty,
+    selectedPhotographer,
+    timeRange,
+    width: dimensions.timelineHeatmap.width,
     height: photographers.length * 15,
-    leftAxisWidth: state.dimensions.timelineHeatmap.leftAxisWidth,
+    leftAxisWidth: dimensions.timelineHeatmap.leftAxisWidth,
   }
 };
 
 const mapDispatchToProps = {
   selectPhotographer,
+  clearPhotographer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineHeatmap);

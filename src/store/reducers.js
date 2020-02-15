@@ -2,18 +2,25 @@ import { combineReducers } from 'redux';
 import A from './actionTypes';
 import initialState from './initialState';
 
-const selectedPhotographer = (state = initialState, action) => (
-  (action.type === A.SELECT_PHOTOGRAPHER) ? action.payload.photographer : state
-);
+const selectedPhotographer = (state = initialState, action) => {
+  if (action.type === A.SELECT_PHOTOGRAPHER) {
+    return action.payload.photographer;
+  }  
+  if (action.type === A.CLEAR_PHOTOGRAPHER) {
+    return null;
+  }
+  return state
+};
 
 const countiesData = (state = initialState, action) => (
-  (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_COUNTIES)
+  (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
+    || action.type === A.LOAD_COUNTIES)
     ? action.payload.counties : state
 );
 
 const timelineCells = (state = initialState, action) => (
   (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
-    || action.type === A.SELECT_NATION)
+    || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS)
     ? action.payload.timelineCells : state
 );
 
@@ -50,7 +57,7 @@ const selectedPhotoData = (state = initialState, action) => {
 const sidebarPhotosOffset = (state = initialState, action) => {
   if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
     || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
-    || action.type === A.SELECT_NATION) {
+    || action.type === A.SELECT_NATION || action.type === A.CLEAR_PHOTOGRAPHER) {
     return action.payload.sidebarPhotosOffset;
   }
   if (action.type === A.SET_PHOTO_OFFSET) {
