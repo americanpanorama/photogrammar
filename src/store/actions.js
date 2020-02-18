@@ -144,6 +144,16 @@ export function selectPhoto(eOrId) {
       const query = `${sqlQueryBase} where loc_item_link = '${id}' `;
       const { rows } = await fetchJSON(`${cartoURLBase}${encodeURIComponent(query)}`);
       const photoData = rows[0];
+
+      // get the similar photos
+      const { loc_item_link } = photoData;
+      const queries = [...Array(14).keys()].map(n => n+1).map(x => {
+        return `SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos where loc_item_link = (select nn${x} from similarphotos where source = '${loc_item_link}')`
+      });
+      const similarPhotosQuery = queries.join(' union ');
+      const { rows: similarPhotoRows } = await fetchJSON(`${cartoURLBase}${encodeURIComponent(similarPhotosQuery)}`);
+      photoData.similarPhotos = similarPhotoRows;
+      
       dispatch({
         type: A.SELECT_PHOTO,
         payload: photoData,
@@ -173,10 +183,11 @@ export function calculateDimensions() {
     width: Math.min(innerWidth * 0.66, innerWidth - 200) - padding * 2,
   }
 
+  const leftAxisWidth = 120;
   const timelineHeatmap = {
-    width: vizCanvas.width - padding * 2,
+    width: vizCanvas.width - leftAxisWidth,
     height: Photographers.length * 15,
-    leftAxisWidth: 150,
+    leftAxisWidth,
   };
 
   const mapControlsWidth = 50;

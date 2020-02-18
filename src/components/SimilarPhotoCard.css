@@ -1,0 +1,53 @@
+.similarPhotoCard {
+  height: 250px;
+  width: 400px;
+  display: inline-block;
+}
+
+.similarPhotoCard h4 {
+  font-size: 1.1em;
+}
+
+.similarPhotoCard .thumbnail {
+  height: 175px;
+  display: inline-block;
+  border: none;
+}
+
+.similarPhotoCard .thumbnail img {
+  width: 150px;
+}
+
+
+.similarPhotoCard .captions {
+  display: inline-block;
+  padding-left: 10px;
+  width: 200px;
+  vertical-align: top;
+  max-height: 130px;
+  overflow: hidden;
+}
+
+.similarPhotoCard .post-entry-caption {
+  height: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow: hidden;
+}
+
+.similarPhotoCard .post-entry-location {
+  height: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.similarPhotoCard a {
+  color: #777;
+}
+
+.similarPhotoCard .post-entry a {
+  color: #333;
+}
+

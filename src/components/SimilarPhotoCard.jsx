@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import './PhotoCard.css';
+import './SimilarPhotoCard.css';
 
-const PhotoCard = ({ photo, selectedPhotograph }) => {
+const SimilarPhotoCard = ({ photo }) => {
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
   return (
     <div
-      key={photo.loc_item_link}
-      className={`photoCard ${(selectedPhotograph === photo.loc_item_link) ? 'selected' : 'notSelected'}`}
+      className="similarPhotoCard"
     >
       <Link
         to={`${process.env.PUBLIC_URL}/photo/${encodeURIComponent(photo.loc_item_link)}`}
       >
+        <h4>
+          {`${(photo.photographer_name) ? `${photo.photographer_name},` : ''} ${(photo.month) ? monthNames[parseInt(photo.month, 10) - 1] : ''} ${(photo.year) ? photo.year : ''}`}
+        </h4>
         <div>
           <div className="thumbnail">
             {(photo.img_thumb_img) ? (
@@ -27,17 +29,8 @@ const PhotoCard = ({ photo, selectedPhotograph }) => {
               <div className='noimage'>no image</div>
             )}
           </div>
-          <div className="post-entry-caption">
+          <div className='captions'>
             {photo.caption}
-          </div>
-          <div className="post-entry-location">
-            {(photo.county && photo.state) ? `${photo.county}, ${photo.state}` : null}
-          </div>
-          <div className="post-entry-photographer">
-            {photo.photographer_name}
-          </div>
-          <div className="post-entry-date">
-            {`${monthNames[parseInt(photo.month, 10) - 1]} ${photo.year}`}
           </div>
         </div>
       </Link>
@@ -45,13 +38,13 @@ const PhotoCard = ({ photo, selectedPhotograph }) => {
   );
 };
 
-export default PhotoCard;
+export default SimilarPhotoCard;
 
-PhotoCard.propTypes = {
+SimilarPhotoCard.propTypes = {
   photo: PropTypes.object,
   selectedPhotograph: PropTypes.string,
 };
 
-PhotoCard.defaultProps = {
+SimilarPhotoCard.defaultProps = {
   selectedPhotograph: null,
 };

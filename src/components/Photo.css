@@ -1,10 +1,36 @@
+.selectedPhoto {
+  display: grid;
+  grid-template-columns: 50px 300px auto;
+
+}
+
+.similarPhotos h2 {
+  font-size: 1.4em;
+  text-align: center;
+  border-bottom: 1px solid black;
+  width: calc(100% - 20px);
+}
+
+.similarPhotos {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  overflow-x: scroll;
+}
+
+.similarPhotos .cards {
+  width: 6000px;
+  height: 250px;
+}
+
 .caption-text p {
-  font-size: 12px;
+  font-size: 1.2em;
   color: #111;
   margin-bottom: 5px;
 }
 
 .caption-text-description p {
-  font-size: 11px;
+  font-size: 1.2em;
   color: #555;
 }
+
+

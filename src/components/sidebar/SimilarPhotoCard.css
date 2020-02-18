@@ -1,19 +1,13 @@
 .photoCard {
   height: 350px;
   width: 200px;
-  border: 3px solid transparent;
-  border-radius: 10px;
-  margin: 5px;
-  padding: 5px;
-}
-
-.photoCard.selected {
-  border-color: grey;
 }
 
 .photoCard .thumbnail {
   height: 175px;
-  border: none;
+  border: 0;
+  border-bottom: 1px solid grey;
+  border-radius: 0;
   vertical-align: bottom;
   position: relative;
   margin: 0;
@@ -70,6 +64,10 @@
 
 .photoCard .notSelected {
   color: silver;
+}
+
+.photoCard .notSelected img {
+  opacity: 0.5;
 }
 
 
