@@ -1,7 +1,12 @@
 .selectedPhoto {
   display: grid;
   grid-template-columns: 50px 300px auto;
+}
 
+.selectedPhoto .img img {
+  padding-left: 20px;
+  max-width: calc(100% - 40px);
+  max-height: calc(100vh - 101px -  325px);
 }
 
 .similarPhotos h2 {

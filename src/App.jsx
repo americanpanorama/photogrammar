@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,8 +14,12 @@ import Photo from './components/Photo.js';
 import TimelineHeatmap from './components/TimelineHeatmap.js';
 import TimelineSlider from './components/TimelineSlider.js';
 
-const App = ({ initializeData }) => {
+const App = ({ initializeData, windowResized }) => {
   initializeData();
+
+  useEffect(() => {
+    window.addEventListener('resize', windowResized);
+  }, []);
 
   return (
     <Router>

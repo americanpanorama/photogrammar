@@ -7,6 +7,14 @@ path.stateBoundary:hover {
   stroke: black;
 }
 
+.mapControls {
+  width: 50px;
+}
+
+.mapControls button {
+  margin-top: 35px;
+}
+
 .mapCanvas {
   overflow: hidden;
 }

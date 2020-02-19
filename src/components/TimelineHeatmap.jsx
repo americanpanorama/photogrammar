@@ -6,8 +6,6 @@ const TimelineHeatmap = (props) => {
   const {
     timelineCells,
     photographers,
-    selectedState,
-    selectedCounty,
     selectedPhotographer,
     selectPhotographer,
     clearPhotographer,
@@ -23,7 +21,6 @@ const TimelineHeatmap = (props) => {
   });
 
   const monthNum = m => (m - 1) / 12;
-  const numToMonth = num => Math.round(num * 12) + 1;
   const getTimeCode = (year, month) => year * 100 + month;
   const timeCodeToNum = timecode => Math.floor(timecode / 100) + monthNum(timecode % 100);
   const x = d3.scaleLinear()
@@ -152,6 +149,7 @@ const TimelineHeatmap = (props) => {
 export default TimelineHeatmap;
 
 TimelineHeatmap.propTypes = {
+  timelineCells: PropTypes.array.isRequired,
 };
 
 TimelineHeatmap.defaultProps = {

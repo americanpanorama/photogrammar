@@ -37,7 +37,7 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
     linkUp = `state/${properties.stateAbbr}`;
   }
 
-  const gutter = 0.9;
+  const gutter = (mapView === 'county') ? 0.5 : 0.9;
   const gbounds = path.bounds(geometry);
   const center = [(gbounds[0][0] + gbounds[1][0]) / 2, (gbounds[0][1] + gbounds[1][1]) / 2];
   const dx = Math.abs(gbounds[1][0] - gbounds[0][0]);
@@ -79,9 +79,9 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
           d3.select(countyRefs[nhgisJoin].current)
             .transition()
             .duration(750)
-            .style("stroke-width", 0.25 / scale);
+            .style("stroke-width", (nhgisJoin === selectedCounty) ?  3 / scale : 1 / scale);
         });
-    }
+    }, [scale, selectedCounty]
   );
 
   // zoom to the state or county if necessary
@@ -138,10 +138,6 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
     <React.Fragment>
       <div
         className='mapControls'
-        style={{
-          width: 50,
-          height: mapDimensions.height,
-        }}
       >
         {(linkUp) && (
           <Link to={`${process.env.PUBLIC_URL}/${linkUp}`}>
@@ -160,7 +156,7 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
           ref={ref}
         >
           {filteredCounties.map(c => {
-            if (mapView === 'state' && c.properties.photoCount > 0) {
+            if (mapView !== 'national' && c.properties.photoCount > 0) {
               return (
                 <Link
                   to={`${process.env.PUBLIC_URL}/county/${c.properties.nhgis_join}`}
@@ -171,14 +167,14 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
                     style={{
                       fill: c.properties.fill,
                       fillOpacity: c.properties.fillOpacity,
-                      strokeWidth: 0.25,
+                      strokeWidth: (c.properties.nhgis_join === selectedCounty) ?  3 / scale : 1 / scale,
                       stroke: 'black',
-                      strokeOpacity: c.properties.strokeOpacity,
+                      strokeOpacity: 1,
                     }}
                     ref={countyRefs[c.properties.nhgis_join]} 
                     id={c.properties.nhgis_join}
-                    onMouseEnter={onCountyHover}
-                    onMouseLeave={onCountyOut}
+                    //onMouseEnter={onCountyHover}
+                    //onMouseLeave={onCountyOut}
                   />
                 </Link>
               );
@@ -189,7 +185,7 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
                 style={{
                   fill: c.properties.fill,
                   fillOpacity: c.properties.fillOpacity,
-                  strokeWidth: 0.25,
+                  strokeWidth: 0.7 / scale,
                   stroke: 'black',
                   strokeOpacity: c.properties.strokeOpacity,
                 }}

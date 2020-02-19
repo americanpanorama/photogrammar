@@ -25,7 +25,6 @@ export function initializeData() {
       });
     }
     if (timelineCells.length === 0) {
-      const { selectedCounty, selectedState } = getState();
       let timelineCells = [];
       if (selectedCounty) {
         timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/counties/${selectedCounty}.json`);
@@ -102,19 +101,6 @@ export function selectCounty(eOrId) {
   };
 }
 
-async function getTimelineCells(getState) {
-  const { selectedCounty, selectedState } = getState();
-  let timelineCells = [];
-  if (selectedCounty) {
-    timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/counties/${selectedCounty}.json`);
-  } else if (selectedState) {
-    timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/states/${selectedState}.json`);
-  } else {
-    timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/national.json`);
-  }
-  return timelineCells;
-}
-
 export function selectState(eOrId) {
   return async (dispatch, getState) => {
     const state = getEventId(eOrId);
@@ -169,11 +155,18 @@ export function setTimeRange(tr) {
   };
 }
 
+export function windowResized() {
+  const theDimensions = calculateDimensions();
+  return {
+    type: A.DIMENSIONS_CALCULATED,
+    payload: theDimensions,
+  };
+}
+ 
 export function calculateDimensions() {
   const padding = 10;
-  const photographersFilterHeight = 40;
   const timelineSliderHeight = 50;
-  const headerElements = document.getElementsByClassName('navbar');
+  const headerElements = 101;
   // this should be calculated from the DOM--if it's there
   const headerHeight = (headerElements && headerElements.length >= 1) ? headerElements.height : 101;
   const { innerHeight, innerWidth } = window;
