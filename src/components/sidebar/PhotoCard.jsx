@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './PhotoCard.css';
 
-const PhotoCard = ({ photo, selectedPhotograph }) => {
+const PhotoCard = ({ photo, selectedPhotograph, width, interiorWidth, margin, padding, borderWidth }) => {
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
@@ -12,9 +12,15 @@ const PhotoCard = ({ photo, selectedPhotograph }) => {
     <div
       key={photo.loc_item_link}
       className={`photoCard ${(selectedPhotograph === photo.loc_item_link) ? 'selected' : 'notSelected'}`}
+      style={{
+        width: interiorWidth,
+        padding: padding,
+        margin: margin,
+        borderWidth: borderWidth,
+      }}
     >
       <Link
-        to={`${process.env.PUBLIC_URL}/photo/${encodeURIComponent(photo.loc_item_link)}`}
+        to={`/photo/${encodeURIComponent(photo.loc_item_link)}`}
       >
         <div>
           <div className="thumbnail">
@@ -37,7 +43,7 @@ const PhotoCard = ({ photo, selectedPhotograph }) => {
             {photo.photographer_name}
           </div>
           <div className="post-entry-date">
-            {`${monthNames[parseInt(photo.month, 10) - 1]} ${photo.year}`}
+            {`${(photo.month) ? monthNames[parseInt(photo.month, 10) - 1] : ''} ${(photo.year) ? photo.year : ''}`}
           </div>
         </div>
       </Link>

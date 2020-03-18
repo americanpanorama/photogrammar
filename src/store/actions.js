@@ -4,11 +4,13 @@ import Photographers from '../../public/data/photographers.json';
 const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
 const sqlQueryBase = 'SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos';
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
+//const basename = '/panorama/photogrammar';
+const basename = '';
 
 export function initializeData() {
   return async (dispatch, getState) => {
-    const { dimensions, countiesData, timelineCells, selectedCounty, selectedState } = getState();
-    const theDimensions = calculateDimensions();
+    const { dimensions, countiesData, timelineCells, selectedCounty, selectedState, isWelcomeOpen } = getState();
+    const theDimensions = calculateDimensions({ isWelcomeOpen });
     if (!dimensions.calculated) {
       dispatch({
         type: A.DIMENSIONS_CALCULATED,
@@ -16,7 +18,7 @@ export function initializeData() {
       });
     }
     if (countiesData.length === 0) {
-      const { counties } = await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/all.json`);
+      const { counties } = await fetchJSON(`${basename}/data/photographers/all.json`);
       dispatch({
         type: A.LOAD_COUNTIES,
         payload: {
@@ -27,11 +29,11 @@ export function initializeData() {
     if (timelineCells.length === 0) {
       let timelineCells = [];
       if (selectedCounty) {
-        timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/counties/${selectedCounty}.json`);
+        timelineCells = await fetchJSON(`${basename}/data/photoCounts/counties/${selectedCounty}.json`);
       } else if (selectedState) {
-        timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/states/${selectedState}.json`);
+        timelineCells = await fetchJSON(`${basename}/data/photoCounts/states/${selectedState}.json`);
       } else {
-        timelineCells = await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/national.json`);
+        timelineCells = await fetchJSON(`${basename}/data/photoCounts/national.json`);
       }
       dispatch({
         type: A.LOAD_TIMELINE_CELLS,
@@ -49,7 +51,7 @@ export function selectNation() {
       type: A.SELECT_NATION,
       payload: {
         sidebarPhotosOffset: 0,
-        timelineCells: await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/national.json`),
+        timelineCells: await fetchJSON(`${basename}/data/photoCounts/national.json`),
       }
     });
   };
@@ -61,8 +63,8 @@ export function selectPhotographer(eOrId) {
     const selectedPhotographer = (getState().selectedPhotographer !== clickedPhotographer)
       ? clickedPhotographer : null;
     const { counties } = (selectedPhotographer)
-      ? await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`)
-      : await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/all.json`);
+      ? await fetchJSON(`${basename}/data/photographers/${selectedPhotographer}.json`)
+      : await fetchJSON(`${basename}/data/photographers/all.json`);
     dispatch({
       type: A.SELECT_PHOTOGRAPHER,
       payload: {
@@ -76,7 +78,7 @@ export function selectPhotographer(eOrId) {
 
 export function clearPhotographer() {
   return async (dispatch, getState) => {
-    const { counties } = await fetchJSON(`${process.env.PUBLIC_URL}/data/photographers/all.json`);
+    const { counties } = await fetchJSON(`${basename}/data/photographers/all.json`);
     dispatch({
       type: A.CLEAR_PHOTOGRAPHER,
       payload: {
@@ -95,7 +97,7 @@ export function selectCounty(eOrId) {
       payload: {
         county,
         sidebarPhotosOffset: 0,
-        timelineCells: await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/counties/${county}.json`),
+        timelineCells: await fetchJSON(`${basename}/data/photoCounts/counties/${county}.json`),
       }
     });
   };
@@ -109,7 +111,7 @@ export function selectState(eOrId) {
       payload: {
         state,
         sidebarPhotosOffset: 0,
-        timelineCells: await fetchJSON(`${process.env.PUBLIC_URL}/data/photoCounts/states/${state}.json`),
+        timelineCells: await fetchJSON(`${basename}/data/photoCounts/states/${state}.json`),
       }
     });
   }
@@ -148,6 +150,19 @@ export function selectPhoto(eOrId) {
   }
 }
 
+export function closeWelcome() {
+  return (dispatch, getState) => {
+    const theDimensions = calculateDimensions({ isWelcomeOpen: false });
+    dispatch({
+      type: A.DIMENSIONS_CALCULATED,
+      payload: theDimensions,
+    });
+    dispatch({
+      type: A.CLOSE_WELCOME
+    });
+  }
+}
+
 export function setTimeRange(tr) {
   return {
     type: A.SET_TIME_RANGE,
@@ -156,14 +171,16 @@ export function setTimeRange(tr) {
 }
 
 export function windowResized() {
-  const theDimensions = calculateDimensions();
-  return {
-    type: A.DIMENSIONS_CALCULATED,
-    payload: theDimensions,
-  };
+  return (dispatch, getState) => {
+    const theDimensions = calculateDimensions({ isWelcomeOpen: getState().isWelcomeOpen });
+    dispatch({
+      type: A.DIMENSIONS_CALCULATED,
+      payload: theDimensions,
+    });
+  }
 }
  
-export function calculateDimensions() {
+export function calculateDimensions(options) {
   const padding = 10;
   const timelineSliderHeight = 50;
   const headerElements = 101;
@@ -171,15 +188,17 @@ export function calculateDimensions() {
   const headerHeight = (headerElements && headerElements.length >= 1) ? headerElements.height : 101;
   const { innerHeight, innerWidth } = window;
 
+  let welcomeHeight = (options && options.isWelcomeOpen) ? 0 : 0;
+
   const vizCanvas = {
-    height: innerHeight - headerHeight - padding * 4  - timelineSliderHeight,
+    height: Math.max(600, innerHeight - headerHeight - padding * 4  - timelineSliderHeight),
     width: Math.min(innerWidth * 0.66, innerWidth - 200) - padding * 2,
   }
 
   const leftAxisWidth = 120;
   const timelineHeatmap = {
-    width: vizCanvas.width - leftAxisWidth,
-    height: Photographers.length * 15,
+    width: vizCanvas.width,
+    height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
     leftAxisWidth,
   };
 
@@ -234,7 +253,7 @@ export function calculateDimensions() {
   };
 
   const sidebarWidth = Math.max(200, innerWidth * 0.33);
-  const sidebarHeight = vizCanvas.height;
+  const sidebarHeight = vizCanvas.height - welcomeHeight;
   const sidebarHeaderHeight = 70;
   const sidebar = {
     width: sidebarWidth,
@@ -242,14 +261,22 @@ export function calculateDimensions() {
     headerHeight: sidebarHeaderHeight,
     photosHeight: sidebarHeight - sidebarHeaderHeight,
   }
-  const photoCardWidth = 200;
+  const photoCardWidth = Math.min(200, sidebarWidth / 2);
+  const photoCardPaddingMargin = Math.min(5, photoCardWidth * 0.25);
+  const photoCardBorderWidth = Math.max(3, photoCardWidth * 0.015);
+  const interiorWidth = photoCardWidth - photoCardPaddingMargin * 4 - photoCardBorderWidth * 2;
   const photoCardHeight = 350;
   const cols = Math.floor(sidebarWidth / photoCardWidth);
-  const rows = Math.floor(sidebar.photosHeight / photoCardHeight);
+  const rows = Math.max(1, Math.floor(sidebar.photosHeight / photoCardHeight));
   const photoCards = {
     cols,
     rows,
     displayableCards: cols * rows,
+    width: photoCardWidth,
+    interiorWidth,
+    padding: photoCardPaddingMargin,
+    margin: photoCardPaddingMargin,
+    borderWidth: photoCardBorderWidth,
   };
 
   const dimensions = {

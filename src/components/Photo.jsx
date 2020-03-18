@@ -1,14 +1,13 @@
 import React from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SimilarPhotoCard from './SimilarPhotoCard.jsx';
 import USOutline from '../../public/data/us_outline.json';
 import './Photo.css';
 
-const Photo = ({ photoMetadata, centroid, selectPhoto, selectPhotographer }) => {
+const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotographer }) => {
   const { id: loc_item_link } = useParams();
-  let history = useHistory();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   if (!photoMetadata || photoMetadata.loc_item_link !== decodeURIComponent(loc_item_link)) {
     selectPhoto(loc_item_link);
@@ -42,9 +41,11 @@ const Photo = ({ photoMetadata, centroid, selectPhoto, selectPhotographer }) => 
   return (
     <div className="selectedPhoto">
       <div className='close'>
-        <button onClick={() => history.goBack()}>
-          {'<'}
-        </button>
+        <Link to={`/${mapLink}`}>
+          <button>
+            {'<'}
+          </button>
+        </Link>
       </div>
       <div className="metadata">
         <div className="caption-text">

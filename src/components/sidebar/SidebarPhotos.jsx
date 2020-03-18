@@ -50,6 +50,11 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
   } else if (photoSet.setId !== newPhotoSet.setId) {
     setPhotoSet(newPhotoSet);
   }
+
+  console.log(photoSets);
+  const blankCardsCount = (photoSets.length >= 1 && photoSets[photoSets.length - 1].photos)
+  ? [...Array(Math.max(0, displayableCards - photoSets[photoSets.length - 1].photos.length)).keys()] : [];
+
   return (
     <div
       id="sidebar-photos"
@@ -70,7 +75,18 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
               //notSelected={selectedPhotoCallNumber && selectedPhotoCallNumber !== photo.call_number}
             />
           ))}
+
+          {/* hacky--uggh--but fill in any blank spots at the end with 'empty cards' to maintain alignment  */}
+          {blankCardsCount.map(idx => (
+            <div 
+              className='blankCard' 
+              key={`blankCard${idx}`}
+            />
+          ))}
         </div>
+
+
+
       ))}
       </div>
   );

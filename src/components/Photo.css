@@ -38,4 +38,8 @@
   color: #555;
 }
 
+.selectedPhoto .close {
+  margin-top: 35px;
+}
+
 

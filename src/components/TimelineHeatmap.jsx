@@ -136,7 +136,7 @@ const TimelineHeatmap = (props) => {
           y={y(15)}
           textAnchor='end'
           onClick={clearPhotographer}
-          fontSize="1.5em"
+          fontSize={height / photographers.length * 1.5}
           fill="#6a1b9a"
         >
           clear selected photographer

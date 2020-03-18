@@ -37,7 +37,7 @@ const mapStateToProps = state => {
     selectedPhotographer,
     timeRange,
     width: dimensions.timelineHeatmap.width,
-    height: photographers.length * 15,
+    height: dimensions.timelineHeatmap.height,
     leftAxisWidth: dimensions.timelineHeatmap.leftAxisWidth,
   }
 };

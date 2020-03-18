@@ -28,6 +28,7 @@ export default {
     z: 1,
   },
   randomPhotoNumbers,
+  isWelcomeOpen: false,
   dimensions: {
     calculated: false,
     vizCanvas: {
@@ -46,5 +47,5 @@ export default {
     photoCards: {
       displayableCards: 6,
     }
-  }
+  },
 };

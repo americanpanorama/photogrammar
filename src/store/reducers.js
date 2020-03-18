@@ -48,7 +48,7 @@ const selectedPhotoData = (state = initialState, action) => {
   if (action.type === A.SELECT_PHOTO) {
     return action.payload;
   }
-  if (action.type === A.SELECT_PHOTOGRAPHER) {
+  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
     return null;
   }
   return state
@@ -85,6 +85,10 @@ const dimensions = (state = initialState, action) => (
   (action.type === A.DIMENSIONS_CALCULATED) ? action.payload : state
 );
 
+const isWelcomeOpen = (state = initialState, action) => (
+  (action.type === A.CLOSE_WELCOME) ? false : state
+);
+
 
 
 const combinedReducer = combineReducers({
@@ -99,6 +103,7 @@ const combinedReducer = combineReducers({
   mapPosition,
   randomPhotoNumbers,
   dimensions,
+  isWelcomeOpen,
 });
 
 export default combinedReducer;

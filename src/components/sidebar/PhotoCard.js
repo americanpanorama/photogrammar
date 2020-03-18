@@ -1,9 +1,17 @@
 import { connect } from 'react-redux';
 import PhotoCard from './PhotoCard.jsx';
 
-const mapStateToProps = state => ({
-  selectedPhotograph: (state.selectedPhotoData) ? state.selectedPhotoData.loc_item_link : null,
-});
+const mapStateToProps = state => {
+  const { width, interiorWidth, padding, margin, borderWidth } = state.dimensions.photoCards;
+  return {
+    selectedPhotograph: (state.selectedPhotoData) ? state.selectedPhotoData.loc_item_link : null,
+    width,
+    interiorWidth,
+    padding,
+    margin,
+    borderWidth,
+  };
+};
 
 const mapDispatchToProps = {};
 

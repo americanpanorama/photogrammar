@@ -1,10 +1,9 @@
 .photoCard {
   height: 350px;
-  width: 200px;
-  border: 3px solid transparent;
+  border: 0px solid pink;
   border-radius: 10px;
-  margin: 5px;
-  padding: 5px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .photoCard.selected {

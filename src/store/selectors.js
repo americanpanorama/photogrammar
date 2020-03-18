@@ -329,6 +329,19 @@ export const getDateRangeString = createSelector(
   }
 );
 
+export const getMapLink = createSelector(
+  [getSelectedCounty, getSelectedState],
+  (selectedCounty, selectedState) => {
+    if (selectedCounty) {
+      return `county/${selectedCounty}`;
+    }
+    if (selectedState) {
+      return `state/${selectedState}`;
+    }
+    return 'maps';
+  }
+)
+
 
 
 

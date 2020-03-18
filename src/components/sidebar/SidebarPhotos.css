@@ -1,12 +1,13 @@
 #sidebar {
   position: fixed;
-  left: 0;
+  left: 10px;
   top: 101px;
   bottom: 10px;
   width: 33%;
   min-width: 200px;
   border-right: 1px solid;
   overflow: hidden;
+  z-index: 1000;
 }
 
 
@@ -22,11 +23,16 @@
 #sidebar-photos .photoPage {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: flex-end;
   align-content: flex-start;
   height: 100%;
   width: 33%;
   margin: 0;
+}
+
+.blankCard {
+  width: 200px;
+  height: 1px;
 }
 

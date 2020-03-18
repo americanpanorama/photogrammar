@@ -140,7 +140,7 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
         className='mapControls'
       >
         {(linkUp) && (
-          <Link to={`${process.env.PUBLIC_URL}/${linkUp}`}>
+          <Link to={`/${linkUp}`}>
             <button>
               {'<'}
             </button>
@@ -159,7 +159,7 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
             if (mapView !== 'national' && c.properties.photoCount > 0) {
               return (
                 <Link
-                  to={`${process.env.PUBLIC_URL}/county/${c.properties.nhgis_join}`}
+                  to={`/county/${c.properties.nhgis_join}`}
                   key={c.properties.nhgis_join}
                 >
                   <path
@@ -199,7 +199,7 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
             if (mapView === 'national' || (mapView === 'state' && st.properties.abbr !== placeId)) {
               return (
                 <Link
-                  to={`${process.env.PUBLIC_URL}/state/${st.properties.abbr}`}
+                  to={`/state/${st.properties.abbr}`}
                   key={st.properties.name}
                 >
                   <path

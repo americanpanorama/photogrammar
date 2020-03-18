@@ -13,7 +13,7 @@ const SimilarPhotoCard = ({ photo }) => {
       className="similarPhotoCard"
     >
       <Link
-        to={`${process.env.PUBLIC_URL}/photo/${encodeURIComponent(photo.loc_item_link)}`}
+        to={`/photo/${encodeURIComponent(photo.loc_item_link)}`}
       >
         <h4>
           {`${(photo.photographer_name) ? `${photo.photographer_name},` : ''} ${(photo.month) ? monthNames[parseInt(photo.month, 10) - 1] : ''} ${(photo.year) ? photo.year : ''}`}

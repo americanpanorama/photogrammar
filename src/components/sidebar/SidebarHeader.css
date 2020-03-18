@@ -1,14 +1,3 @@
-#sidebar {
-  position: fixed;
-  left: 0;
-  top: 101px;
-  bottom: 10px;
-  width: 33%;
-  min-width: 200px;
-  border-right: 1px solid;
-  overflow: hidden;
-}
-
 #sidebar header {
   width: 90%;
   height: 50px;
