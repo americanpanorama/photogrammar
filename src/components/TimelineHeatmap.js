@@ -39,6 +39,7 @@ const mapStateToProps = state => {
     width: dimensions.timelineHeatmap.width,
     height: dimensions.timelineHeatmap.height,
     leftAxisWidth: dimensions.timelineHeatmap.leftAxisWidth,
+    baseColor: (state.selectedMapView === 'counties') ? '#6a1b9a' : '#289261',
   }
 };
 

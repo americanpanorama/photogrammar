@@ -51,7 +51,6 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
     setPhotoSet(newPhotoSet);
   }
 
-  console.log(photoSets);
   const blankCardsCount = (photoSets.length >= 1 && photoSets[photoSets.length - 1].photos)
   ? [...Array(Math.max(0, displayableCards - photoSets[photoSets.length - 1].photos.length)).keys()] : [];
 

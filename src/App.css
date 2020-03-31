@@ -44,14 +44,36 @@ button:focus {
   outline: none;
 }
 
+
+
+/* ------------------------------------------------------------------
+Layout
+------------------------------------------------------------------- */
+
+
+.wrapper {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  grid-template-rows: 100px auto;
+}
+
+#sidebard {
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+
+#viz-canvas {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  border-left: 1px solid black;
+  position: relative;
+}
+
 /* ------------------------------------------------------------------
 Navigation
 ------------------------------------------------------------------- */
 
 nav.navbar {
-  height: 100px;
-  width: 90%;
-  margin: 0 auto;
 }
 
 .navbar a {
@@ -60,14 +82,12 @@ nav.navbar {
 }
 
 .navbar-header {
+
   padding: 20px 10px;
   font-size: 18px;
   line-height: 20px;
   height: 50px;
-  width: 28%;
-  min-width: 180px;
   text-align: right;
-  float: left;
   font: 100 28px "Lato", sans-serif;
   font-style: italic;
   text-transform: none;
@@ -252,11 +272,12 @@ nav.navbar {
 }
 
 #viz-canvas {
-  position: fixed;
+
+  /*position: fixed;
   right: 0;
   top: 101px;
   bottom: 0;
   width: 66%;
   max-width: calc(100%-200px);
-  /*overflow-y: scroll;*/
+  overflow-y: scroll;*/
 }

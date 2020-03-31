@@ -1,138 +1,165 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
+import County from './County.jsx';
+import State from './State.jsx';
+import City from './City.jsx';
+import MapLabel from './MapLabel.jsx';
+import States from '../../data/svgs/states.json';
 import { Link, useParams, useLocation } from "react-router-dom";
 import './Map.css';
 
-const Map = ({ counties, states, selectedCounty, selectedState, translateX, translateY, scale, setXYZ, selectCounty, selectState, selectNation, mapDimensions }) => {
-  const projection = d3.geoAlbersUsa()
-    .translate([mapDimensions.width /2, mapDimensions.height /2]);
-  const path = d3.geoPath(projection); 
-
-  const { placeId } = useParams();
-  const location = useLocation();
-  const mapView = (location.pathname.split('/').length > 1 && ["state", "county"].includes(location.pathname.split('/')[1]))
-    ? location.pathname.split('/')[1] : 'national';
-
-  if (mapView === 'county' && placeId !== selectedCounty) {
-    selectCounty(placeId);
-  }
-
-  if (mapView === 'state') {
-    selectState(placeId);
-  }
-
-  if (mapView === 'national' && (selectedState || selectedCounty)) {
-    selectNation();
-  }
-
-  let geometry = {type: "Feature", properties: {}, geometry: {type: "Polygon", coordinates: [[[-124.98046874999999, 24.607069137709683 ], [-66.357421875, 24.607069137709683 ], [-66.357421875, 49.32512199104001 ], [-124.98046874999999, 49.32512199104001 ], [-124.98046874999999, 24.607069137709683 ] ] ] } };
-  let properties;
-  let linkUp;
-  if (mapView === 'state') {
-    ({ geometry } = states.find(st => st.properties.abbr === placeId));
-    linkUp = 'maps';
-  } else if (mapView === 'county') {
-    ({ geometry, properties } = counties.find(c => c.properties.nhgis_join === placeId));
-    linkUp = `state/${properties.stateAbbr}`;
-  }
-
-  const gutter = (mapView === 'county') ? 0.5 : 0.9;
-  const gbounds = path.bounds(geometry);
-  const center = [(gbounds[0][0] + gbounds[1][0]) / 2, (gbounds[0][1] + gbounds[1][1]) / 2];
-  const dx = Math.abs(gbounds[1][0] - gbounds[0][0]);
-  const dy = Math.abs(gbounds[1][1] - gbounds[0][1]);
-  const calculatedScale = gutter / Math.max(dx / mapDimensions.width, dy / mapDimensions.height);
-  const x = mapDimensions.width / 2 - calculatedScale * center[0];
-  const y = mapDimensions.height / 2 - calculatedScale * center[1];
+const Map = (props) => {
+  const {
+    counties,
+    cities,
+    selectedCounty,
+    selectedCity,
+    selectedState,
+    selectedMapView,
+    selectCounty,
+    selectCity,
+    selectState,
+    selectNation,
+    mapParameters,
+    linkUp,
+ } = props;
 
   const ref = useRef(null);
-  const stateRefs = {};
-  states.forEach(st => {
-    stateRefs[st.properties.abbr] = useRef(null);
-  });
-  const filteredCounties = counties
-    .filter(c => c.properties.nhgis_join && c.properties.nhgis_join !== 'NULL'
-      && (mapView !== 'state' || c.properties.stateAbbr === placeId));
-  const countyRefs = {};
-  counties.forEach(c => {
-    countyRefs[c.properties.nhgis_join] = useRef(null);
-  });
+  const isRetrievingData = useRef(false);
+  const [ hoveredCounty, setHoveredCounty ] = useState(null);
+  const [ hoveredCity, setHoveredCity ] = useState(null);
+  // const [ hoveredState, setHoveredState ] = useState(null);
+  const [ translateX, setTranslateX ] = useState(mapParameters.translateX);
+  const [ translateY, setTranslateY ] = useState(mapParameters.translateY);
+  const [ scale, setScale ] = useState(mapParameters.scale);
+  const { placeId } = useParams();
+  const location = useLocation();
+
+  // set selected place from url if necessary
+  const mapScale = (location.pathname.split('/').length > 1
+    && ["state", "county", "city"].includes(location.pathname.split('/')[1]))
+    ? location.pathname.split('/')[1] : 'national';
+  const cityDivisor = (mapScale !== 'national') ? 3000 : 6000;
+  if (selectedMapView === 'counties' && mapScale === 'county') {
+    if (placeId !== selectedCounty && !isRetrievingData.current) {
+      selectCounty(placeId);
+      isRetrievingData.current = true;
+    } else if(placeId === selectedCounty && isRetrievingData.current) {
+      isRetrievingData.current = false;
+    }
+  }
+  if (mapScale === 'city' && placeId !== selectedCity) {
+    selectCity(placeId);
+  }
+  if (mapScale === 'state' && (placeId !== selectedState || selectedCounty || selectedCity)) {
+    selectState(placeId);
+  }
+  if (mapScale === 'national' && (selectedState || selectedCounty)) {
+    if (!isRetrievingData.current) {
+      selectNation();
+      isRetrievingData.current == true;
+    } else {
+      isRetrievingData.current == false;
+    }
+  }
+
+  const mapLabelParams = {};
+  if (selectedCity) {
+    const selectedCityMetadata = cities.find(c => c.key === selectedCity);
+    mapLabelParams.label = selectedCityMetadata.city;
+    mapLabelParams.x = selectedCityMetadata.center[0]
+    mapLabelParams.y = selectedCityMetadata.center[1] - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
+  } else if (selectedCounty) {
+    const selectedCountyMetadata = counties.find(c => c.nhgis_join === selectedCounty);
+    if (selectedCountyMetadata) {
+      mapLabelParams.label = selectedCountyMetadata.name;
+      mapLabelParams.x = selectedCountyMetadata.center[0]
+      mapLabelParams.y = selectedCountyMetadata.center[1]
+    }
+  }
+
+  const filteredCounties = (mapScale !== 'state') ? counties
+    : counties.filter(c => c.state === placeId);
+
+  const selectedCityMetadata = (selectedCity) ? cities.find(c => c.key === selectedCity) : null;
 
   useEffect(
     () => {
       d3.select(ref.current)
         .transition()
-        .duration(750)
-        .attr("transform", `translate(${translateX} ${translateY}) scale(${scale})`);
-      states
-        .map(st => st.properties.abbr)
-        .forEach(abbr => {
-          d3.select(stateRefs[abbr].current)
-            .transition()
-            .duration(750)
-            .style("stroke-width", 0.7 / scale);
+        .duration(1000)
+        .attr("transform", `translate(${mapParameters.translateX} ${mapParameters.translateY}) scale(${mapParameters.scale})`)
+        .on("end", () => {
+          setTranslateX(mapParameters.translateX);
+          setTranslateY(mapParameters.translateY);
+          setScale(mapParameters.scale);
         });
-      filteredCounties
-        .map(c => c.properties.nhgis_join)
-        .forEach(nhgisJoin => {
-          d3.select(countyRefs[nhgisJoin].current)
-            .transition()
-            .duration(750)
-            .style("stroke-width", (nhgisJoin === selectedCounty) ?  3 / scale : 1 / scale);
-        });
-    }, [scale, selectedCounty]
+    }, [mapParameters]
   );
 
-  // zoom to the state or county if necessary
-  if (translateX !== x || translateY !== y || scale !== calculatedScale) {
-    setXYZ(x, y, calculatedScale);
+  // useEffect(
+  //   () => {
+  //     const svg = document.getElementById("map");
+  //     const cityLabels = d3.selectAll('.cityLabel');
+
+  //     cityLabels.nodes().forEach((label, i) => {
+  //       const nodesToCheck = cityLabels.nodes().slice(i + 1, 100);
+  //       const labelBB = label.getBBox();
+  //       const XY = label.transform.baseVal.consolidate();
+  //       labelBB.x += XY.matrix.e;
+  //       labelBB.y += XY.matrix.f;
+
+  //       nodesToCheck.forEach(ntc => {
+  //         const ntcBB = ntc.getBBox();
+  //         console.log(ntc, labelBB, svg.checkIntersection(ntc, labelBB));
+  //         if (svg.checkIntersection(ntc, labelBB)) {
+  //           //console.log(label);
+  //           d3.select(label)
+  //             .style('display', 'none');
+  //         }
+  //       });
+  //       //console.log(label.getBBox());
+
+  //       //d3.select(label).style('display', 'none');
+  //     });
+  //   }
+  // );
+
+
+  // const onStateHover = (abbr) => {
+  //   // find the state
+  //   const hs = States.find(state => state.abbr === abbr);
+  //   console.log('hover');
+  //   setTimeout(() => setHoveredState(hs), 250);
+  // };
+
+  // const onStateUnhover = () => {
+  //   console.log('unhover');
+  //   setHoveredState(null);
+  // }
+
+  const onCityHover = (cityKey) => {
+    // find the city
+    const hoveredCity = cities.find(city => cityKey === city.key);
+    setHoveredCity(hoveredCity);
   }
 
-  const onStateHover = (e) => {
-    const stateAbbr = e.currentTarget.id;
-    Object.keys(stateRefs)
-      .forEach(abbr => {
-        const fillOpacity = (abbr === stateAbbr) ? 0 : 0.7;
-        const strokeWidth = (abbr === stateAbbr) ? 3 / scale : 0.7 / scale;
-        d3.select(stateRefs[abbr].current)
-          .style("fill-opacity", fillOpacity)
-          .style("stroke-width", strokeWidth);
-      });
-  };
+  const onCityUnhover = () => {
+    setHoveredCity(null);
+  }
 
-  const onStateOut = (e) => {
-    Object.keys(stateRefs)
-      .forEach(abbr => {
-        d3.select(stateRefs[abbr].current)
-          .style("fill-opacity", 0)
-          .style("stroke-width", 0.7 / scale);
-      });
-  };
+  const onCountyHover = (nhgis_join) => {
+    // find the city
+    if (nhgis_join !== selectedCounty) {
+      const hoveredCounty = counties.find(counties => nhgis_join === counties.nhgis_join);
+      setHoveredCounty(hoveredCounty);
+    }
+  }
 
-  const onCountyHover = (e) => {
-    const currentNhgisJoin = e.currentTarget.id;
-    filteredCounties
-      .map(c => c.properties.nhgis_join)
-      .forEach(nhgisJoin => {
-        const adjustedStroke = (nhgisJoin === currentNhgisJoin) ? 'black' : 'grey';
-        const adjustedStrokeWidth = (nhgisJoin === currentNhgisJoin) ? 1 / scale : 0.25 / scale;
-
-        d3.select(countyRefs[nhgisJoin].current)
-          .style("stroke", adjustedStroke)
-          .style("stroke-width", adjustedStrokeWidth);
-      });
-  };
-
-  const onCountyOut = (e) => {
-    filteredCounties
-      .map(c => c.properties.nhgis_join)
-      .forEach(nhgisJoin => {
-        d3.select(countyRefs[nhgisJoin].current)
-          .style("stroke", 'grey')
-          .style("stroke-width", 0.25 / scale);
-      });
-  };
+  const onCountyUnhover = () => {
+    setHoveredCounty(null);
+  }
 
   return (
     <React.Fragment>
@@ -140,7 +167,7 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
         className='mapControls'
       >
         {(linkUp) && (
-          <Link to={`/${linkUp}`}>
+          <Link to={linkUp}>
             <button>
               {'<'}
             </button>
@@ -148,90 +175,112 @@ const Map = ({ counties, states, selectedCounty, selectedState, translateX, tran
         )}
       </div>
       <svg
-        width={mapDimensions.width}
-        height={mapDimensions.height}
+        width={mapParameters.width}
+        height={mapParameters.height}
         className='map'
+        id='map'
       >
         <g
+          transform={`translate(${translateX} ${translateY}) scale(${scale})`}
           ref={ref}
         >
-          {filteredCounties.map(c => {
-            if (mapView !== 'national' && c.properties.photoCount > 0) {
+          {counties.map(c => (
+            <County
+              {...c}
+              scale={mapParameters.scale}
+              selectedCounty={selectedCounty}
+              strokeWidth={(mapScale === 'national') ?  0 : 0.75 / mapParameters.scale}
+              linkActive={mapScale !== 'national' && c.photoCount > 0}
+              key={c.nhgis_join}
+              onCountyHover={onCountyHover}
+              onCountyUnhover={onCountyUnhover}
+            />
+          ))}
+          { cities.map(city => {
+            if (city.center && city.center[0]) {
+              const { key } = city;
+              let fillOpacity = 0.25;
+              let stroke='#289261';
+              if (hoveredCity || selectedCity) {
+                if ((hoveredCity && key === hoveredCity.key )|| key === selectedCity) {
+                  fillOpacity = 0.7;
+                } else {
+                  fillOpacity = 0.1;
+                  stroke='transparent';
+                }
+              }
               return (
-                <Link
-                  to={`/county/${c.properties.nhgis_join}`}
-                  key={c.properties.nhgis_join}
-                >
-                  <path
-                    d={path(c.geometry)}
-                    style={{
-                      fill: c.properties.fill,
-                      fillOpacity: c.properties.fillOpacity,
-                      strokeWidth: (c.properties.nhgis_join === selectedCounty) ?  3 / scale : 1 / scale,
-                      stroke: 'black',
-                      strokeOpacity: 1,
-                    }}
-                    ref={countyRefs[c.properties.nhgis_join]} 
-                    id={c.properties.nhgis_join}
-                    //onMouseEnter={onCountyHover}
-                    //onMouseLeave={onCountyOut}
-                  />
-                </Link>
+                <City
+                  cx={city.center[0]}
+                  cy={city.center[1]}
+                  r={Math.sqrt(city.total / (cityDivisor * mapParameters.scale))}
+                  fillOpacity={fillOpacity}
+                  stroke={stroke}
+                  strokeWidth={0.5 / mapParameters.scale}
+                  scale={scale}
+                  name={city.city}
+                  id={city.key}
+                  key={city.key}
+                  linkActive={mapScale !== 'national'}
+                  selectCity={selectCity}
+                  onCityHover={onCityHover}
+                  onCityUnhover={onCityUnhover}
+                />
               );
             }
-            return (
-              <path
-                d={path(c.geometry)}
-                style={{
-                  fill: c.properties.fill,
-                  fillOpacity: c.properties.fillOpacity,
-                  strokeWidth: 0.7 / scale,
-                  stroke: 'black',
-                  strokeOpacity: c.properties.strokeOpacity,
-                }}
-                className='unselectable'
-                key={c.properties.nhgis_join}
-                ref={countyRefs[c.properties.nhgis_join]} 
-              />
-            );
           })}
-          {states.map(st => {
-            if (mapView === 'national' || (mapView === 'state' && st.properties.abbr !== placeId)) {
-              return (
-                <Link
-                  to={`/state/${st.properties.abbr}`}
-                  key={st.properties.name}
-                >
-                  <path
-                    d={path(st.geometry)}
-                    className='stateBoundary'
-                    ref={stateRefs[st.properties.abbr]}
-                    id={st.properties.abbr}
-                    style={{
-                      fill: 'white',
-                      fillOpacity: 0,
-                      strokeWidth: 0.7 / scale,
-                    }}
-                    onMouseEnter={onStateHover}
-                    onMouseLeave={onStateOut}
-                  />
-                </Link>
-              );
-            }
-            return (
-              <path
-                d={path(st.geometry)}
-                className='stateBoundary unselectable'
-                style={{
-                  fill: 'white',
-                  fillOpacity: 0,
-                  strokeWidth: 0.7 / scale,
-                }}
-                ref={stateRefs[st.properties.abbr]}
-                key={st.properties.name}
-              />
-            );
-          })}
+          {States.filter(s => s.bounds && s.bounds[0] && s.d && s.abbr).map(state => (
+            <State
+              {...state}
+              //fillOpacity={(hoveredState && state.abbr !== hoveredState.abbr) ? 0.4 : 0}
+              fillOpacity={0}
+              linkActive={(mapScale === 'national' || (selectedState !== state.abbr))}
+              scale={mapParameters.scale}
+              // onHover={onStateHover}
+              // onUnhover={onStateUnhover}
+              key={state.abbr}
+            />
+          ))}
+
+          {(hoveredCity) && (
+            <MapLabel 
+              x={hoveredCity.center[0]}
+              y={hoveredCity.center[1] - Math.sqrt(hoveredCity.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale}
+              fontSize={12 / scale}
+              label={hoveredCity.city}
+            />
+          )}
+
+          {(hoveredCounty) && (
+            <MapLabel 
+              x={hoveredCounty.center[0]}
+              y={hoveredCounty.center[1]}
+              fontSize={16 / mapParameters.scale}
+              label={hoveredCounty.name}
+            />
+          )}
+
+
+          {(mapLabelParams.label) && (
+            <MapLabel 
+              x={mapLabelParams.x}
+              y={mapLabelParams.y}
+              fontSize={16 / mapParameters.scale}
+              label={mapLabelParams.label}
+            />
+          )}
+
+        {/* JSX Comment 
+          { cities.filter(c => mapScale === 'state' && c.center && c.center[0]).map(city => (
+            <MapLabel 
+              x={city.center[0]}
+              y={city.center[1] - Math.sqrt(city.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale}
+              fontSize={12 / scale}
+              label={city.city}
+              key={`cityLabelFor${city.state} ${city.city}`}
+            />
+          ))} */}
+
         </g>
       </svg>
     </React.Fragment>
@@ -242,10 +291,7 @@ export default Map;
 
 Map.propTypes = {
   counties: PropTypes.array.isRequired,
-  states: PropTypes.array.isRequired,
   selectCounty: PropTypes.func,
-  scale: PropTypes.number.isRequired,
-  mapDimensions: PropTypes.object.isRequired,
 };
 
 Map.defaultProps = {

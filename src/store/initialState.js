@@ -1,7 +1,12 @@
-// const { hash } = window.location;
-// hash.replace(/^#\/?|\/$/g, '').split('&').forEach((pair) => {
-//   const [key, value] = pair.split('=');
-// });
+let selectedMapView = 'counties';
+
+const { hash } = window.location;
+hash.replace(/^#\/?|\/$/g, '').split('&').forEach((pair) => {
+  const [key, value] = pair.split('=');
+  if (key === 'mapview') {
+    selectedMapView = 'cities';
+  }
+});
 
 const numsToGenerate = 1000;
 const totalRecords = 176212;
@@ -16,17 +21,15 @@ while (randomPhotoNumbers.length < numsToGenerate) {
 export default {
   selectedPhotographer: null,
   selectedCounty: null,
+  selectedCity: null,
   selectedState: null,
+  selectedMapView,
   sidebarPhotosOffset: 0,
   countiesData: [],
+  citiesData: [],
   timelineCells: [],
   selectedPhotoData: null,
   timeRange: [193501, 194504],
-  mapPosition: {
-    x: 0,
-    y: 0,
-    z: 1,
-  },
   randomPhotoNumbers,
   isWelcomeOpen: false,
   dimensions: {
@@ -34,6 +37,12 @@ export default {
     vizCanvas: {
       height: '90%',
       width: '60%',
+    },
+    sidebar: {
+      width: 200,
+      height: 600,
+      headerHeight: 70,
+      photosHeight: 530,
     },
     map: {
       height: 500,
@@ -46,6 +55,11 @@ export default {
     },
     photoCards: {
       displayableCards: 6,
-    }
+    },
+    timelineHeatmap: {
+      height: 250,
+      width: 960,
+      leftAxisWidth: 120,
+    },
   },
 };

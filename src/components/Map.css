@@ -1,11 +1,11 @@
-path.stateBoundary {
-  stroke: #444;
+/* path.stateBoundary {
+  stroke: #999;
   fill: transparent;
 }
 
 path.stateBoundary:hover {
   stroke: black;
-}
+} */
 
 .mapControls {
   width: 50px;

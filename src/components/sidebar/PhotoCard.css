@@ -1,17 +1,18 @@
 .photoCard {
-  height: 350px;
-  border: 0px solid pink;
+  border: 0px solid transparent;
   border-radius: 10px;
   margin: 0px;
   padding: 0px;
+  position: relative;
 }
 
-.photoCard.selected {
+.photoCard.selected,
+.photoCard:hover {
   border-color: grey;
 }
 
 .photoCard .thumbnail {
-  height: 175px;
+  height: 50%;
   border: none;
   vertical-align: bottom;
   position: relative;
@@ -37,14 +38,14 @@
 
 
 .photoCard .post-entry-caption {
-  height: 50px;
+  height: 14%;
   font-weight: 700;
   line-height: 1.2;
   overflow: hidden;
 }
 
 .photoCard .post-entry-location {
-  height: 50px;
+  height: 14%;
   font-weight: 700;
   line-height: 1.2;
   overflow: hidden;
@@ -53,7 +54,7 @@
 
 .photoCard .post-entry-photographer,
 .photoCard .post-entry-date {
-  height: 20px;
+  height: 6%;
   line-height: 1.2;
   overflow: hidden;
   margin-top: 5px;
@@ -61,6 +62,7 @@
 
 .photoCard a {
   color: #777;
+  text-decoration: none;
 }
 
 .photoCard .post-entry a {

@@ -3,6 +3,7 @@ import App from './App.jsx';
 import { initializeData, windowResized } from './store/actions';
 
 const mapStateToProps = state => ({
+  dimensions: state.dimensions,
 });
 
 const mapDispatchToProps = {

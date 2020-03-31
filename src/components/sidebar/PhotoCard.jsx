@@ -3,47 +3,81 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './PhotoCard.css';
 
-const PhotoCard = ({ photo, selectedPhotograph, width, interiorWidth, margin, padding, borderWidth }) => {
+const PhotoCard = ({ photo, selectedPhotograph, width, height, interiorWidth, interiorHeight, margin, padding, borderWidth, scale, selectedMapView }) => {
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
+  const {
+    img_thumb_img,
+    loc_item_link,
+    caption,
+    city,
+    county,
+    state,
+    photographer_name,
+    month,
+    year
+  } = photo;
+
+  let location = state || '';
+  if (selectedMapView === 'counties' && county && state) {
+    location = `${county}, ${state}`
+  }
+  if (selectedMapView === 'cities' && city && state) {
+    location = `${city}, ${state}`
+  }
+
   return (
     <div
-      key={photo.loc_item_link}
-      className={`photoCard ${(selectedPhotograph === photo.loc_item_link) ? 'selected' : 'notSelected'}`}
+      key={loc_item_link}
+      className={`photoCard ${(selectedPhotograph === loc_item_link) ? 'selected' : 'notSelected'}`}
       style={{
-        width: interiorWidth,
-        padding: padding,
-        margin: margin,
+        width: width,
+        height: height,
+        padding: 0,
         borderWidth: borderWidth,
+        //transform: `scale(${scale})`,
       }}
     >
       <Link
-        to={`/photo/${encodeURIComponent(photo.loc_item_link)}`}
+        to={`/photo/${encodeURIComponent(loc_item_link)}`}
       >
-        <div>
-          <div className="thumbnail">
-            {(photo.img_thumb_img) ? (
+        <div
+          style={{
+            height: interiorHeight,
+            padding: padding,
+            width: interiorWidth,
+            fontSize: interiorHeight * 0.06,
+          }}
+        >
+          <div
+            className="thumbnail"
+          >
+            {(img_thumb_img) ? (
               <img
-                src={`http://photogrammar.yale.edu/photos/service/pnp/${photo.img_thumb_img}`}
-                alt={photo.caption}
+                src={`http://photogrammar.yale.edu/photos/service/pnp/${img_thumb_img}`}
+                alt={caption}
+                style={{
+                  maxHeight: interiorHeight * 0.4,
+                  maxWidth: interiorWidth,
+                }}
               />
             ) : (
               <div className='noimage'>no image</div>
             )}
           </div>
           <div className="post-entry-caption">
-            {photo.caption}
+            {caption}
           </div>
           <div className="post-entry-location">
-            {(photo.county && photo.state) ? `${photo.county}, ${photo.state}` : null}
+            {location}
           </div>
           <div className="post-entry-photographer">
-            {photo.photographer_name}
+            {photographer_name}
           </div>
           <div className="post-entry-date">
-            {`${(photo.month) ? monthNames[parseInt(photo.month, 10) - 1] : ''} ${(photo.year) ? photo.year : ''}`}
+            {`${(month) ? monthNames[parseInt(month, 10) - 1] : ''} ${(year) ? year : ''}`}
           </div>
         </div>
       </Link>

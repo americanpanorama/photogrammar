@@ -18,9 +18,16 @@ const countiesData = (state = initialState, action) => (
     ? action.payload.counties : state
 );
 
+const citiesData = (state = initialState, action) => (
+  (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
+    || action.type === A.LOAD_CITIES)
+    ? action.payload.cities : state
+);
+
 const timelineCells = (state = initialState, action) => (
   (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
-    || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS)
+    || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS
+    || action.type === A.SELECT_CITY)
     ? action.payload.timelineCells : state
 );
 
@@ -28,14 +35,24 @@ const selectedCounty = (state = initialState, action) => {
   if (action.type === A.SELECT_COUNTY) {
     return action.payload.county;
   }
-  if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
+  if (action.type === A.SELECT_CITY || action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
     return null;
   }
-  return state
+  return state;
+};
+
+const selectedCity = (state = initialState, action) => {
+  if (action.type === A.SELECT_CITY) {
+    return action.payload.city;
+  }
+  if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION || action.type === A.SELECT_COUNTY) {
+    return null;
+  }
+  return state;
 };
 
 const selectedState = (state = initialState, action) => {
-  if (action.type === A.SELECT_STATE) {
+  if (action.type === A.SELECT_STATE || action.type === A.SELECT_CITY) {
     return action.payload.state;
   }
   if (action.type === A.SELECT_NATION) {
@@ -51,7 +68,7 @@ const selectedPhotoData = (state = initialState, action) => {
   if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
     return null;
   }
-  return state
+  return state;
 };
 
 const sidebarPhotosOffset = (state = initialState, action) => {
@@ -73,10 +90,6 @@ const timeRange = (state = initialState, action) => {
   return state;
 }
 
-const mapPosition = (state = initialState, action) => (
-  (action.type === A.MAP_MOVED) ? action.payload : state
-);
-
 const randomPhotoNumbers = (state = initialState, action) => (
   (action.type === A.GENERATE_RANDOM_PHOTO_NUMBERS) ? action.payload : state
 );
@@ -89,21 +102,31 @@ const isWelcomeOpen = (state = initialState, action) => (
   (action.type === A.CLOSE_WELCOME) ? false : state
 );
 
-
+const selectedMapView = (state = initialState, action) => {
+  if (action.type === A.SELECT_MAP_VIEW) {
+    return action.payload;
+  }
+  if (action.type === A.SELECT_CITY) {
+    return 'cities';
+  } 
+  return state;
+};
 
 const combinedReducer = combineReducers({
   selectedPhotographer,
   selectedCounty,
+  selectedCity,
   selectedState,
   selectedPhotoData,
   timeRange,
   countiesData,
+  citiesData,
   timelineCells,
   sidebarPhotosOffset,
-  mapPosition,
   randomPhotoNumbers,
   dimensions,
   isWelcomeOpen,
+  selectedMapView,
 });
 
 export default combinedReducer;

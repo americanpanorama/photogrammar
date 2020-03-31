@@ -12,7 +12,8 @@ const TimelineHeatmap = (props) => {
     timeRange,
     width,
     height,
-    leftAxisWidth
+    leftAxisWidth,
+    baseColor,
   } = props;
 
   const photographerRefs = {};
@@ -64,7 +65,7 @@ const TimelineHeatmap = (props) => {
             width={monthWidth}
             height={height / photographers.length - 4}
             fillOpacity={(tc.count > 0) ? 0.05 + 0.95 * tc.count / opacityDenominator : 0}
-            fill={(!(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (!selectedPhotographer || selectedPhotographer === tc.photographer)) ? '#6a1b9a' : '#aaaaaa'}
+            fill={(!(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (!selectedPhotographer || selectedPhotographer === tc.photographer)) ? baseColor : '#aaaaaa'}
             stroke='#aaa'
             strokeWidth={0}
           />

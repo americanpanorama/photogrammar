@@ -1,27 +1,25 @@
 import { connect } from 'react-redux';
 import Map from './Map.jsx';
-import States from '../../public/data/states.json';
-import { setXYZ, selectCounty, selectState, selectNation } from '../store/actions';
-import { getCounties } from '../store/selectors';
+import { selectCounty, selectCity, selectState, selectNation } from '../store/actions';
+import { getSelectedCityMetadata, getCounties, getCities, getMapParameters, getLinkUp } from '../store/selectors';
 
 const mapStateToProps = state => {
-  const { mapPosition, dimensions } = state;
-  const { x, y, z } = mapPosition;
+  const { mapPosition, dimensions, selectedMapView } = state;
   return {
-    counties: getCounties(state),
-    states: States.features,
+    counties: (selectedMapView === 'counties') ? getCounties(state) : [],
+    cities: (selectedMapView === 'cities') ? getCities(state) : [],
     selectedCounty: state.selectedCounty,
+    selectedCity: state.selectedCity,
     selectedState: state.selectedState,
-    scale: z,
-    translateX: x,
-    translateY: y,
-    mapDimensions: dimensions.map,
+    selectedMapView,
+    mapParameters: getMapParameters(state),
+    linkUp: getLinkUp(state),
   };
 }
 
 const mapDispatchToProps = {
-  setXYZ,
   selectCounty,
+  selectCity,
   selectState,
   selectNation,
 };

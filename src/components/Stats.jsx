@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useFetch } from 'react-async';
 import './Stats.css';
 
-const Stats = ({ placeName, numPhotographs, photographers, photoCountQuery, photographersCountQuery }) => {
+const Stats = ({ placeName, numPhotographs, photographers, photoCountQuery, photographersCountQuery, maxHeight }) => {
   if (!placeName && !numPhotographs) {
     return null;
   }
@@ -40,7 +40,12 @@ const Stats = ({ placeName, numPhotographs, photographers, photoCountQuery, phot
   }
 
   return (
-    <div className='placeStats'>
+    <div
+      className='placeStats'
+      style={{
+        height: maxHeight,
+      }}
+    >
       <h4>Location</h4>
       <div>
         {placeName}

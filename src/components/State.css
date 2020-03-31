@@ -1,0 +1,18 @@
+.stateBoundary {
+}
+
+.stateBoundary:hover {
+  stroke: black;
+}
+
+
+.inspected {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.stateBoundary:hover + .inspected {
+  visibility: visible;
+}
+
+
