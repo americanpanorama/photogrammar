@@ -24,7 +24,7 @@ path.stateBoundary:hover {
 }
 
 .map {
-  display: inline-block;
+  position: relative;
 }
 
 .mapControls {

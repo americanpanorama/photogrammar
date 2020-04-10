@@ -3,7 +3,8 @@ import MapControls from './MapControls.jsx';
 import { selectMapView } from '../store/actions';
 
 const mapStateToProps = state => ({
-  selectedMapView: state.selectedMapView
+  selectedMapView: state.selectedMapView,
+  show: !(state.selectedCounty || state.selectedCity),
 });
 
 const mapDispatchToProps = {

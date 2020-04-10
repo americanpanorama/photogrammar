@@ -10,6 +10,7 @@ const mapStateToProps = state => {
     photoMetadata,
     centroid,
     mapLink: getMapLink(state),
+    height: state.dimensions.selectedPhoto.height,
   }
 };
 

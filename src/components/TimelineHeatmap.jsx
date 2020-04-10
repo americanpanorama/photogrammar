@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 
@@ -11,10 +11,14 @@ const TimelineHeatmap = (props) => {
     clearPhotographer,
     timeRange,
     width,
-    height,
+    translateY,
     leftAxisWidth,
     baseColor,
   } = props;
+
+  const [showOthers, setShowOthers] = useState(false);
+
+  const height = props.height - translateY;
 
   const photographerRefs = {};
   photographers.forEach(p => {
@@ -51,99 +55,122 @@ const TimelineHeatmap = (props) => {
   }
 
   return (
-    <svg
-      width={width}
-      height={height}
+    <div
+      style={{
+        overflowY: (showOthers) ? 'visible' : 'hidden',
+        height: props.height,
+      }}
     >
-      {timelineCells.map(tc => (
-        <React.Fragment
-          key={`${tc.year}-${tc.month}-${tc.photographer}`}
+      <div
+        style={{
+          transform: `translateY(${translateY}px)`,
+          backgroundColor: 'rgba(255, 255, 255, 0.97)',
+        }}
+      >
+        <svg
+          width={width}
+          height={height}
         >
-          <rect
-            x={x(tc.year + monthNum(tc.month))}
-            y={y(photographers.findIndex(p => p.key === tc.photographer)) + 2}
-            width={monthWidth}
-            height={height / photographers.length - 4}
-            fillOpacity={(tc.count > 0) ? 0.05 + 0.95 * tc.count / opacityDenominator : 0}
-            fill={(!(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (!selectedPhotographer || selectedPhotographer === tc.photographer)) ? baseColor : '#aaaaaa'}
-            stroke='#aaa'
-            strokeWidth={0}
-          />
-          {(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (
-            <rect
-              x={x(tc.year + monthNum(tc.month))}
-              y={y(photographers.findIndex(p => p.key === tc.photographer)) + 2}
-              width={monthWidth}
-              height={height / photographers.length - 4}
-              fillOpacity={0.9}
-              fill='white'
-            />
-          )}
-        </React.Fragment>
-      ))}
-
-      {[1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945].map(y => (
-        <line
-          x1={x(y) - 0.25}
-          x2={x(y) - 0.25}
-          y1={0}
-          y2={height}
-          strokeWidth={(getTimeCode(y, 0) >= timeRange[0] && getTimeCode(y, 0) <= timeRange[1]) ? 0.5 : 0}
-          stroke={(y >= 1942) ? 'black': '#ddd'}
-          key={`lineFor${y}`}
-        />
-      ))}
-
-      {photographers.map((p, i) => {
-        return (
-          <g key={p.key}>
-            <line
-              x1={Math.max(x(Math.floor(p.firstDate / 100)), x(timeCodeToNum(timeRange[0])))}
-              x2={Math.max(x(Math.floor(p.firstDate / 100)), x(timeCodeToNum(timeRange[0])))}
-              y1={0}
-              y2={y(i + 1)}
-              strokeWidth={0.5}
-              stroke={(Math.floor(p.firstDate / 100) * 100 >= timeRange[0] && Math.floor(p.firstDate / 100) * 100 <= timeRange[1]) ? 'black': '#ddd'}
-            />
-            <text
-              x={x(Math.floor(p.firstDate / 100)) - 5}
-              y={y(i) + height / photographers.length - 2}
-              fontSize={height / photographers.length * 0.9}
-              textAnchor='end'
-              fill={(p.active) ? "#555" : "#ddd"}
+          {timelineCells.map(tc => (
+            <React.Fragment
+              key={`${tc.year}-${tc.month}-${tc.photographer}`}
             >
-              {`${p.firstname} ${p.lastname}`}
-            </text>
-            <rect
-              x={x(p.firstDate / 100 - 3)}
-              y={y(i)}
-              width={width + leftAxisWidth}
-              height={height / photographers.length}
-              fill='white'
-              fillOpacity={(!selectedPhotographer || selectedPhotographer === p.key) ? 0 : 0.7}
-              onClick={(p.active) ? selectPhotographer : () => false}
-              onMouseEnter={onHover}
-              onMouseLeave={onOut}
-              id={p.key}
-              ref={photographerRefs[p.key]}
-            />
-          </g>
-        );
-      })}
+              <rect
+                x={x(tc.year + monthNum(tc.month))}
+                y={Math.max((!showOthers) ? translateY * -1 : 2, y(photographers.findIndex(p => p.key === tc.photographer)) + 2)}
+                width={monthWidth}
+                height={height / photographers.length - 4}
+                fillOpacity={(tc.count > 0) ? 0.05 + 0.95 * tc.count / opacityDenominator : 0}
+                fill={(!(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (!selectedPhotographer || selectedPhotographer === tc.photographer)) ? baseColor : '#aaaaaa'}
+                stroke='#aaa'
+                strokeWidth={0}
+              />
+              {(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (
+                <rect
+                  x={x(tc.year + monthNum(tc.month))}
+                  y={Math.max((!showOthers) ? translateY * -1 : 2, y(photographers.findIndex(p => p.key === tc.photographer)) + 2)}
+                  width={monthWidth}
+                  height={height / photographers.length - 4}
+                  fillOpacity={0.9}
+                  fill='white'
+                />
+              )}
+            </React.Fragment>
+          ))}
 
-      {(selectedPhotographer) && (
-        <text
-          x={x(1937.5)}
-          y={y(15)}
-          textAnchor='end'
-          onClick={clearPhotographer}
-          fontSize={height / photographers.length * 1.5}
-          fill="#6a1b9a"
-        >
-          clear selected photographer
-        </text>
-      )}
-    </svg>
+          {[1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945].map(y => (
+            <line
+              x1={x(y) - 0.25}
+              x2={x(y) - 0.25}
+              y1={0}
+              y2={height}
+              strokeWidth={(getTimeCode(y, 0) >= timeRange[0] && getTimeCode(y, 0) <= timeRange[1]) ? 0.5 : 0}
+              stroke={(y >= 1942) ? 'black': '#ddd'}
+              key={`lineFor${y}`}
+            />
+          ))}
+
+          {photographers.map((p, i) => {
+            let onClick = () => false;
+            if (p.key === 'others') {
+              onClick = () => setShowOthers(!showOthers);
+            } else if (p.active) {
+              onClick = (e) => {
+                setShowOthers(false);
+                selectPhotographer(e);
+              };
+            }
+            return (
+              <g key={p.key}>
+                <line
+                  x1={Math.max(x(Math.floor(p.firstDate / 100)), x(timeCodeToNum(timeRange[0])))}
+                  x2={Math.max(x(Math.floor(p.firstDate / 100)), x(timeCodeToNum(timeRange[0])))}
+                  y1={y(i)}
+                  y2={y(i + 1)}
+                  strokeWidth={0.5}
+                  stroke={(Math.floor(p.firstDate / 100) * 100 >= timeRange[0] && Math.floor(p.firstDate / 100) * 100 <= timeRange[1]) ? 'black': '#ddd'}
+                />
+                <text
+                  x={x(Math.floor(p.firstDate / 100)) - 5}
+                  y={y(i) + height / photographers.length - 2}
+                  fontSize={height / photographers.length * 0.9}
+                  textAnchor='end'
+                  fill={(p.active) ? "#555" : "#ddd"}
+                >
+                  {`${p.firstname} ${p.lastname}`}
+                </text>
+                <rect
+                  x={x(p.firstDate / 100 - 3)}
+                  y={y(i)}
+                  width={width + leftAxisWidth}
+                  height={height / photographers.length}
+                  fill='white'
+                  fillOpacity={(!selectedPhotographer || selectedPhotographer === p.key) ? 0 : 0.7}
+                  onClick={onClick}
+                  // onMouseEnter={onHover}
+                  // onMouseLeave={onOut}
+                  id={p.key}
+                  ref={photographerRefs[p.key]}
+                />
+              </g>
+            );
+          })}
+
+          {(selectedPhotographer) && (
+            <text
+              x={x(1937.5)}
+              y={y(photographers.length * 0.9)}
+              textAnchor='end'
+              onClick={clearPhotographer}
+              fontSize={height / photographers.length * 1.5}
+              fill="#6a1b9a"
+            >
+              clear selected photographer
+            </text>
+          )}
+        </svg>
+      </div>
+    </div>
   );
 };
 

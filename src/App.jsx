@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,16 +13,18 @@ import Map from './components/Map.js';
 import MapControls from './components/MapControls.js';
 import Stats from './components/Stats.js';
 import Photo from './components/Photo.js';
-import TimelineHeatmap from './components/TimelineHeatmap.js';
+import TimelineHeatmap from './components/Timeline.js';
 import TimelineSlider from './components/TimelineSlider.js';
+import Treemap from './components/Treemap.js';
 
-const App = ({ dimensions, initializeData, windowResized }) => {
+const App = ({ dimensions, isInitialized, initializeData, windowResized }) => {
+
   useEffect(() => {
     window.addEventListener('resize', windowResized);
     initializeData();
   }, []);
 
-  if (!dimensions.calculated) {
+  if (!isInitialized) {
     return null;
   }
 
@@ -42,7 +44,7 @@ const App = ({ dimensions, initializeData, windowResized }) => {
           <ul className="nav navbar-nav navbar-right">
             <li><a href="#hero" className="section-scroll">Search</a></li>
             <li><a href="#about" className="section-scroll">Photographers</a></li>
-            <li><a href="#news" className="section-scroll">Themes</a></li>
+            <li><Link to={`/themes`}>Themes</Link></li>
             <li>
               <Link to={`/maps`}>Maps</Link>
             </li>
@@ -62,13 +64,19 @@ const App = ({ dimensions, initializeData, windowResized }) => {
             <Route path={`/photo/:id`}>
               <Photo />
             </Route>
-            <Route path={['/city/:placeId', `/county/:placeId`, `/city/:placeId`, `/state/:placeId`, `/`]}>
-              <Stats />
-              <MapControls />
-              <Map />
+            <Route path={'/themes'}>
+              <Treemap />
               <TimelineHeatmap />
               <TimelineSlider />
             </Route>
+            <Route path={['/city/:placeId', `/county/:placeId`, `/city/:placeId`, `/state/:placeId`, `/`]}>
+              <Map />
+              <Stats />
+              <MapControls />
+              <TimelineHeatmap />
+              <TimelineSlider />
+            </Route>
+
             <Route>
               <div>not found</div>
             </Route>

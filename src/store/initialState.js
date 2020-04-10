@@ -19,14 +19,18 @@ while (randomPhotoNumbers.length < numsToGenerate) {
 }
 
 export default {
+  isInitialized: false,
   selectedPhotographer: null,
   selectedCounty: null,
   selectedCity: null,
   selectedState: null,
   selectedMapView,
+  selectedViz: 'themes',
+  selectedTheme: 'root',
   sidebarPhotosOffset: 0,
   countiesData: [],
   citiesData: [],
+  themesData: {},
   timelineCells: [],
   selectedPhotoData: null,
   timeRange: [193501, 194504],

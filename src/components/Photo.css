@@ -1,6 +1,8 @@
 .selectedPhoto {
   display: grid;
-  grid-template-columns: 50px 300px auto;
+  grid-template-columns: 50px 1fr minmax(60%,2fr);
+  grid-template-rows: 2fr 50px 1fr;
+  overflow: visible;
 }
 
 .selectedPhoto .img img {
@@ -9,32 +11,40 @@
   max-height: calc(100vh - 101px -  325px);
 }
 
-.similarPhotos h2 {
+
+.similarPhotosHeader {
+  margin: 0;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  width: 100%;
   font-size: 1.4em;
   text-align: center;
-  border-bottom: 1px solid black;
+  border-top: 1px solid black;
   width: calc(100% - 20px);
 }
 
 .similarPhotos {
   grid-column-start: 1;
   grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
   overflow-x: scroll;
 }
 
 .similarPhotos .cards {
   width: 6000px;
-  height: 250px;
 }
 
+
+
 .caption-text p {
-  font-size: 1.2em;
   color: #111;
   margin-bottom: 5px;
 }
 
 .caption-text-description p {
-  font-size: 1.2em;
   color: #555;
 }
 
@@ -42,4 +52,8 @@
   margin-top: 35px;
 }
 
+.selectedPhoto .metadata {
+  overflow-y: scroll;
+  text-align: right;
+}
 

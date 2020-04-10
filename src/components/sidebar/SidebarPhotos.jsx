@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import PhotoCard from './PhotoCard.js';
 import './SidebarPhotos.css';
 
-const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset, nextOffset, displayableCards, sidebarWidth, setPhotoOffset }) => {
+const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset, nextOffset, displayableCards, sidebarWidth, setPhotoOffset, blankCardWidth, blankCardHeight }) => {
   const newPhotoSet = {
     photos,
     setId: photoSetId,
@@ -79,6 +79,10 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
           {blankCardsCount.map(idx => (
             <div 
               className='blankCard' 
+              style={{
+                height: blankCardHeight,
+                width: blankCardWidth,
+              }}
               key={`blankCard${idx}`}
             />
           ))}

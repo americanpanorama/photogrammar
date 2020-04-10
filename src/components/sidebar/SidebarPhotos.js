@@ -11,7 +11,7 @@ const mapStateToProps = state => {
     selectedPhotoData,
     dimensions,
   } = state;
-  const { displayableCards } = dimensions.photoCards;
+  const { displayableCards, width: blankCardWidth, height: blankCardHeight } = dimensions.photoCards;
   const { width: sidebarWidth } = dimensions.sidebar;
   let nextOffset = sidebarPhotosOffset + displayableCards;
   let previousOffset = (sidebarPhotosOffset - displayableCards >= 0) ? sidebarPhotosOffset - displayableCards : -1;
@@ -25,6 +25,8 @@ const mapStateToProps = state => {
     selectedPhotoCallNumber: (selectedPhotoData && selectedPhotoData.call_number)
       ? selectedPhotoData.call_number : null,
     sidebarWidth,
+    blankCardHeight,
+    blankCardWidth,
   };
 };
 

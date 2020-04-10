@@ -3,38 +3,39 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './SimilarPhotoCard.css';
 
-const SimilarPhotoCard = ({ photo }) => {
+const SimilarPhotoCard = ({ photo, height, width }) => {
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
+  console.log(height);
+
   return (
-    <div
-      className="similarPhotoCard"
+    <Link
+      to={`/photo/${encodeURIComponent(photo.loc_item_link)}`}
+      className='similarPhotoCardLink'
     >
-      <Link
-        to={`/photo/${encodeURIComponent(photo.loc_item_link)}`}
+      <div
+        className="similarPhotoCard"
+        style={{
+          height,
+          width,
+        }}
       >
-        <h4>
-          {`${(photo.photographer_name) ? `${photo.photographer_name},` : ''} ${(photo.month) ? monthNames[parseInt(photo.month, 10) - 1] : ''} ${(photo.year) ? photo.year : ''}`}
-        </h4>
-        <div>
-          <div className="thumbnail">
-            {(photo.img_thumb_img) ? (
-              <img
-                src={`http://photogrammar.yale.edu/photos/service/pnp/${photo.img_thumb_img}`}
-                alt={photo.caption}
-              />
-            ) : (
-              <div className='noimage'>no image</div>
-            )}
-          </div>
-          <div className='captions'>
+        <div className='captions'>
             {photo.caption}
-          </div>
         </div>
-      </Link>
-    </div>
+        <div className='photographerPlace'>
+          {`${(photo.photographer_name) ? `${photo.photographer_name},` : ''} ${(photo.month) ? monthNames[parseInt(photo.month, 10) - 1] : ''} ${(photo.year) ? photo.year : ''}`}
+        </div>
+        <div className="thumbnail">
+          <img
+            src={`http://photogrammar.yale.edu/photos/service/pnp/${photo.img_thumb_img}`}
+            alt={photo.caption}
+          />
+        </div>
+      </div>
+    </Link>
   );
 };
 

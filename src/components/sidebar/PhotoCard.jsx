@@ -3,7 +3,21 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './PhotoCard.css';
 
-const PhotoCard = ({ photo, selectedPhotograph, width, height, interiorWidth, interiorHeight, margin, padding, borderWidth, scale, selectedMapView }) => {
+const PhotoCard = (props) => {
+  const {
+    photo,
+    selectedPhotograph,
+    width,
+    height,
+    interiorWidth,
+    interiorHeight,
+    margin,
+    padding,
+    borderWidth,
+    scale,
+    selectedMapView
+  } = props;
+
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
@@ -28,6 +42,7 @@ const PhotoCard = ({ photo, selectedPhotograph, width, height, interiorWidth, in
     location = `${city}, ${state}`
   }
 
+
   return (
     <div
       key={loc_item_link}
@@ -37,7 +52,7 @@ const PhotoCard = ({ photo, selectedPhotograph, width, height, interiorWidth, in
         height: height,
         padding: 0,
         borderWidth: borderWidth,
-        //transform: `scale(${scale})`,
+        transform: `scale(${scale})`,
       }}
     >
       <Link
@@ -90,8 +105,10 @@ export default PhotoCard;
 PhotoCard.propTypes = {
   photo: PropTypes.object,
   selectedPhotograph: PropTypes.string,
+  scale: PropTypes.number,
 };
 
 PhotoCard.defaultProps = {
   selectedPhotograph: null,
+  scale: 1,
 };

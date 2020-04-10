@@ -1,12 +1,11 @@
 import React from 'react';
-import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 import { Link, useParams } from "react-router-dom";
-import SimilarPhotoCard from './SimilarPhotoCard.jsx';
+import SimilarPhotoCard from './sidebar/PhotoCardSimilar.js';
 import USOutline from '../../public/data/us_outline.json';
 import './Photo.css';
 
-const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotographer }) => {
+const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotographer, height }) => {
   const { id: loc_item_link } = useParams();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   if (!photoMetadata || photoMetadata.loc_item_link !== decodeURIComponent(loc_item_link)) {
@@ -18,7 +17,7 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
     caption,
     year,
     month,
-    // city,
+    city,
     county,
     state,
     // longitude,
@@ -26,10 +25,6 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
     img_large_path,
   } = photoMetadata;
 
-  const projection = d3.geoAlbersUsa()
-    .translate([150, 500 * 300 / 960 / 2])
-    .scale(350);
-  const path = d3.geoPath(projection); 
 
   let date = 'N/A';
   if (month && year) {
@@ -39,7 +34,12 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
   }
 
   return (
-    <div className="selectedPhoto">
+    <div
+      className="selectedPhoto"
+      style={{
+        maxHeight: height,
+      }}
+    >
       <div className='close'>
         <Link to={`/${mapLink}`}>
           <button>
@@ -55,27 +55,30 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
           <p>{caption}</p>
         </div>
 
+      {/* JSX Comment 
         <div className="caption-text">
           <p>Photographer</p>
-        </div>
+        </div> */}
         <div className="caption-text-description">
           <p>{photographer_name}</p>
         </div>
 
+      {/* JSX Comment 
         <div className="caption-text">
           <p>Created</p>
-        </div>
+        </div>*/}
         <div className="caption-text-description">
           <p>{date}</p>
         </div>
 
+      {/* JSX Comment 
         <div className="caption-text">
           <p>Location</p>
-        </div>
+        </div>*/}
         <div className="caption-text-description">
           {(county && state) ? (
             <React.Fragment>
-              <p>{`${county}, ${state}`}</p>
+              <p>{`${city || county}, ${state}`}</p>
               <svg
                 width={300}
                 height={500 * 300 / 960}
@@ -90,10 +93,10 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
                       strokeWidth: 0.5,
                     }}
                   />
-                  {(centroid) && (
+                  {(centroid.center && centroid.center[0]) && (
                     <circle
-                      cx={projection(centroid)[0]}
-                      cy={projection(centroid)[1]}
+                      cx={300 * centroid.center[0]}
+                      cy={500 * 300 / 960 * centroid.center[1]}
                       r={4}
                       fill='lime'
                     />
@@ -101,7 +104,7 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
                 </g>
               </svg>
             </React.Fragment>
-          ) : <p>unspecified</p>
+          ) : <p>location unspecified</p>
           }
         </div>
       </div>
@@ -109,17 +112,19 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
         <img src={`http://photogrammar.yale.edu/photos/service/pnp/${img_large_path}`} alt="" />
       </div>
       {(photoMetadata.similarPhotos.length > 0) && (
-        <div className='similarPhotos'>
-          <h2>Similar Photos</h2>
-          <div className='cards'>
-            {photoMetadata.similarPhotos.map(sp => (
-              <SimilarPhotoCard
-                photo={sp}
-                key={sp.loc_item_link}
-              />
-            ))}
+        <React.Fragment>
+          <h2 className='similarPhotosHeader'>Similar Photos</h2>
+          <div className='similarPhotos'>
+            <div className='cards'>
+              {photoMetadata.similarPhotos.map(sp => (
+                <SimilarPhotoCard
+                  photo={sp}
+                  key={sp.loc_item_link}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </React.Fragment>
       )}
     </div>
 

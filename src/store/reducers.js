@@ -14,20 +14,25 @@ const selectedPhotographer = (state = initialState, action) => {
 
 const countiesData = (state = initialState, action) => (
   (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-    || action.type === A.LOAD_COUNTIES)
+    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_COUNTIES)
     ? action.payload.counties : state
 );
 
 const citiesData = (state = initialState, action) => (
   (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-    || action.type === A.LOAD_CITIES)
+    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_CITIES)
     ? action.payload.cities : state
+);
+
+const themesData = (state = initialState, action) => (
+  (action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.SELECT_PHOTOGRAPHER)
+    ? action.payload.themes : state
 );
 
 const timelineCells = (state = initialState, action) => (
   (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
     || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS
-    || action.type === A.SELECT_CITY)
+    || action.type === A.SELECT_CITY || action.type === A.SELECT_THEME)
     ? action.payload.timelineCells : state
 );
 
@@ -52,7 +57,7 @@ const selectedCity = (state = initialState, action) => {
 };
 
 const selectedState = (state = initialState, action) => {
-  if (action.type === A.SELECT_STATE || action.type === A.SELECT_CITY) {
+  if (action.type === A.SELECT_STATE || action.type === A.SELECT_CITY || action.type === A.SELECT_COUNTY) {
     return action.payload.state;
   }
   if (action.type === A.SELECT_NATION) {
@@ -102,6 +107,10 @@ const isWelcomeOpen = (state = initialState, action) => (
   (action.type === A.CLOSE_WELCOME) ? false : state
 );
 
+const isInitialized = (state = initialState, action) => (
+  (action.type === A.INITIALIZED) ? true : state
+);
+
 const selectedMapView = (state = initialState, action) => {
   if (action.type === A.SELECT_MAP_VIEW) {
     return action.payload;
@@ -112,6 +121,15 @@ const selectedMapView = (state = initialState, action) => {
   return state;
 };
 
+const selectedTheme = (state = initialState, action) => (
+  (action.type === A.SELECT_THEME) ? action.payload.theme : state
+);
+
+const selectedViz = (state = initialState, action) => (
+  (action.type === A.SELECT_VIZ) ? action.payload : state
+);
+
+
 const combinedReducer = combineReducers({
   selectedPhotographer,
   selectedCounty,
@@ -121,12 +139,16 @@ const combinedReducer = combineReducers({
   timeRange,
   countiesData,
   citiesData,
+  themesData,
   timelineCells,
   sidebarPhotosOffset,
   randomPhotoNumbers,
   dimensions,
   isWelcomeOpen,
   selectedMapView,
+  isInitialized,
+  selectedTheme,
+  selectedViz,
 });
 
 export default combinedReducer;

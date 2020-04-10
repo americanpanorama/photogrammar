@@ -23,9 +23,10 @@ const Map = (props) => {
     selectNation,
     mapParameters,
     linkUp,
- } = props;
+  } = props;
 
   const ref = useRef(null);
+  const isMounting = useRef(true);
   const isRetrievingData = useRef(false);
   const [ hoveredCounty, setHoveredCounty ] = useState(null);
   const [ hoveredCity, setHoveredCity ] = useState(null);
@@ -45,37 +46,44 @@ const Map = (props) => {
     if (placeId !== selectedCounty && !isRetrievingData.current) {
       selectCounty(placeId);
       isRetrievingData.current = true;
-    } else if(placeId === selectedCounty && isRetrievingData.current) {
+    } else if (placeId === selectedCounty && isRetrievingData.current) {
       isRetrievingData.current = false;
     }
   }
   if (mapScale === 'city' && placeId !== selectedCity) {
     selectCity(placeId);
   }
-  if (mapScale === 'state' && (placeId !== selectedState || selectedCounty || selectedCity)) {
-    selectState(placeId);
+  if (mapScale === 'state') {
+    if (!isRetrievingData.current && (placeId !== selectedState || selectedCounty || selectedCity)) {
+      selectState(placeId);
+      isRetrievingData.current = true;
+    } else if (placeId === selectedState && isRetrievingData.current) {
+      isRetrievingData.current = false;
+    }
   }
-  if (mapScale === 'national' && (selectedState || selectedCounty)) {
-    if (!isRetrievingData.current) {
+  if (mapScale === 'national') {
+    if (!isRetrievingData.current && (selectedState || selectedCounty || selectedCity)) {
       selectNation();
-      isRetrievingData.current == true;
+      isRetrievingData.current = true;
     } else {
-      isRetrievingData.current == false;
+      isRetrievingData.current = false;
     }
   }
 
   const mapLabelParams = {};
   if (selectedCity) {
     const selectedCityMetadata = cities.find(c => c.key === selectedCity);
-    mapLabelParams.label = selectedCityMetadata.city;
-    mapLabelParams.x = selectedCityMetadata.center[0]
-    mapLabelParams.y = selectedCityMetadata.center[1] - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
+    if (selectedCityMetadata) {
+      mapLabelParams.label = selectedCityMetadata.city;
+      mapLabelParams.x = selectedCityMetadata.center[0]
+      mapLabelParams.y = selectedCityMetadata.center[1] - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
+    }
   } else if (selectedCounty) {
     const selectedCountyMetadata = counties.find(c => c.nhgis_join === selectedCounty);
     if (selectedCountyMetadata) {
       mapLabelParams.label = selectedCountyMetadata.name;
-      mapLabelParams.x = selectedCountyMetadata.center[0]
-      mapLabelParams.y = selectedCountyMetadata.center[1]
+      mapLabelParams.x = selectedCountyMetadata.labelCoords[0]
+      mapLabelParams.y = selectedCountyMetadata.labelCoords[1]
     }
   }
 
@@ -86,16 +94,18 @@ const Map = (props) => {
 
   useEffect(
     () => {
-      d3.select(ref.current)
-        .transition()
-        .duration(1000)
-        .attr("transform", `translate(${mapParameters.translateX} ${mapParameters.translateY}) scale(${mapParameters.scale})`)
-        .on("end", () => {
-          setTranslateX(mapParameters.translateX);
-          setTranslateY(mapParameters.translateY);
-          setScale(mapParameters.scale);
-        });
-    }, [mapParameters]
+      if (!isMounting.current) {
+        d3.select(ref.current)
+          .transition()
+          .duration(1000)
+          .attr("transform", `translate(${mapParameters.translateX} ${mapParameters.translateY}) scale(${mapParameters.scale})`)
+          .on("end", () => {
+            setTranslateX(mapParameters.translateX);
+            setTranslateY(mapParameters.translateY);
+            setScale(mapParameters.scale);
+          });
+      }
+    }, [mapParameters.x, mapParameters.y, mapParameters.scale]
   );
 
   // useEffect(
@@ -161,6 +171,31 @@ const Map = (props) => {
     setHoveredCounty(null);
   }
 
+  // prevent render on initial load until map parameters have been calculated
+  if (isMounting.current) {
+    // update the transform if it's changed
+    if (mapParameters.translateX !== translateX || mapParameters.translateY !== translateY
+      || mapParameters.scale !== scale ) {
+      setTranslateX(mapParameters.translateX);
+      setTranslateY(mapParameters.translateY);
+      setScale(mapParameters.scale);
+    }
+
+    // return placeholding div until the map parameters have been calculated
+    if (mapParameters.basedOn === placeId || !placeId) {
+      isMounting.current = false;
+    } else {
+      return (
+        <div
+          style={{
+            width: mapParameters.width,
+            height: mapParameters.height,
+          }}
+        />
+      );
+    }
+  }
+
   return (
     <React.Fragment>
       <div
@@ -199,13 +234,13 @@ const Map = (props) => {
           { cities.map(city => {
             if (city.center && city.center[0]) {
               const { key } = city;
-              let fillOpacity = 0.25;
+              let fillOpacity = 0.33;
               let stroke='#289261';
               if (hoveredCity || selectedCity) {
                 if ((hoveredCity && key === hoveredCity.key )|| key === selectedCity) {
-                  fillOpacity = 0.7;
+                  fillOpacity = 0.9;
                 } else {
-                  fillOpacity = 0.1;
+                  fillOpacity = 0.2;
                   stroke='transparent';
                 }
               }
@@ -253,8 +288,8 @@ const Map = (props) => {
 
           {(hoveredCounty) && (
             <MapLabel 
-              x={hoveredCounty.center[0]}
-              y={hoveredCounty.center[1]}
+              x={hoveredCounty.labelCoords[0]}
+              y={hoveredCounty.labelCoords[1]}
               fontSize={16 / mapParameters.scale}
               label={hoveredCounty.name}
             />
@@ -287,7 +322,7 @@ const Map = (props) => {
   );
 };
 
-export default Map;
+export default React.memo(Map);
 
 Map.propTypes = {
   counties: PropTypes.array.isRequired,

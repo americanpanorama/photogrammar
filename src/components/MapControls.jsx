@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './MapControls.css';
 
-const MapControls = ({ selectedMapView, selectMapView }) => {
+const CityCountyToggle = ({ selectedMapView, selectMapView, show }) => {
+  if (!show) {
+    return null;
+  }
   return (
-    <ul id='mapControls'>
+    <ul id='cityCountyToggle'>
       <li
         onClick={selectMapView}
         id={(selectedMapView === 'counties') ? 'cities' : 'counties'}
@@ -15,13 +18,13 @@ const MapControls = ({ selectedMapView, selectMapView }) => {
   );
 };
 
-export default MapControls;
+export default CityCountyToggle;
 
-MapControls.propTypes = {
+CityCountyToggle.propTypes = {
   selectedMapView: PropTypes.string.isRequired,
   selectMapView: PropTypes.func.isRequired,
 };
 
-MapControls.defaultProps = {
+CityCountyToggle.defaultProps = {
   
 };

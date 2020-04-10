@@ -20,25 +20,36 @@ const City = (props) => {
   } = props;
 
   const ref = useRef(false);
+  const isInitialMount = useRef(true);
 
   const [r, setR] = useState(props.r);
   const [strokeWidth, setStrokeWidth] = useState(props.strokeWidth);
 
-
   useEffect(() => {
-    if (name === 'Herrin') {
-      console.log('updating', props.r);
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (props.r === 0) {
+        d3.select(ref.current)
+          .attr("r", props.r)
+          .style("stroke-width", props.strokeWidth)
+          .on("end", () => {
+            setR(props.r);
+            setStrokeWidth(props.strokeWidth)
+          });
+      } else {
+        d3.select(ref.current)
+          .transition()
+          .duration(1000)
+          .attr("r", props.r)
+          .style("stroke-width", props.strokeWidth)
+          .on("end", () => {
+            setR(props.r);
+            setStrokeWidth(props.strokeWidth)
+          });
+      }
     }
-    d3.select(ref.current)
-      .transition()
-      .duration(1000)
-      .attr("r", props.r)
-      .style("stroke-width", props.strokeWidth)
-      .on("end", () => {
-        setR(props.r);
-        setStrokeWidth(props.strokeWidth)
-      });
-  }, [props.r]);
+  }, [props.r, props.strokeWidth]);
 
   const onHover = (e) => {
     onCityHover(id);

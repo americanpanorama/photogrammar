@@ -4,6 +4,7 @@
   margin: 0px;
   padding: 0px;
   position: relative;
+  display: inline-block;
 }
 
 .photoCard.selected,
