@@ -24,8 +24,9 @@ const getDimensions = state => state.dimensions;
 const getRandomPhotoNumbers = state => state.randomPhotoNumbers;
 const getMapDimensions = state => state.dimensions.map;
 const getTimelineCells = state => state.timelineCells;
+const getFilterTerms = state => state.filterTerms;
 
-export const getPhotographers = (min = 0, max = 20000) => (
+export const getPhotographers = (min = 0, max = 50000) => (
   Photographers.filter(p => p.count >= min && p.count <= max)
 );
 export const getCentroidForCounty = (nhgis_join) => Centroids.counties[nhgis_join];
@@ -62,7 +63,7 @@ export const getCounties = createSelector(
         const [startTime, endTime] = timeRange;
         if (!countiesData[nhgis_join]) {
           photoCount = 0;
-        } else if (startTime > 193501 || endTime < 193504) {
+        } else if (startTime > 193501 || endTime < 194504) {
           photoCount = Object
             .keys(countiesData[nhgis_join])
             .filter(k => {
@@ -152,62 +153,121 @@ export const getThemes = createSelector(
     const { height, width } = dimensions.map;
 
     const x = d3.scaleLinear().range([0, width]);
-    const y = d3.scaleLinear().range([0, height]);
+    const y = d3.scaleLinear().range([20, height]);
 
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
+    const color = d3.scaleOrdinal(d3.schemeTableau10);
 
     const wheres = ['img_large_path != \'\''];
     if (selectedPhotographerName) {
       wheres.push(`photographer_name = '${selectedPhotographerName}'`);
     }
     const themesPaths = selectedTheme.split('|').slice(1);
+    const name = themesPaths[themesPaths.length - 1];
     let rawThemes;
     if (themesPaths.length === 0) {
       rawThemes = themesData.children;
     } else if (themesPaths.length === 1) {
       rawThemes = themesData.children[themesPaths[0]].children;
       wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
-    } else if (themesPaths.length === 2) {
+    } else if (themesPaths.length >= 2 ) {
       rawThemes = themesData.children[themesPaths[0]].children[themesPaths[1]].children;
       wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
       wheres.push([`vanderbilt_level2 = '${themesPaths[1]}'`]);
     }
 
+    const [startTime, endTime] = timeRange;
+
+    if (startTime > 193501) {
+      const startYear = Math.floor(startTime / 100);
+      const startMonth = startTime % 100;
+      wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+    }
+    if (endTime < 194504) {
+      const endYear = Math.floor(endTime / 100);
+      const endMonth = endTime % 100;
+      wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+    }
+
     // organize the data for d3
     const organizedThemeData = {
       name: selectedTheme,
-      children: Object.keys(rawThemes).map(theme => ({
-        name: theme,
-        key: `${selectedTheme}|${theme}`,
-        value: rawThemes[theme].total,
-      })),
+      children: Object.keys(rawThemes).map(theme => {
+        let photoCount = rawThemes[theme].total;
+        if (startTime > 193501 || endTime < 194504) {
+          photoCount = Object
+            .keys(rawThemes[theme])
+            .filter(k => {
+              if (k === 'total' || k === 'photographers') {
+                return false;
+              }
+              return k.substring(1) >= startTime && k.substring(1) <= endTime;
+            })
+            .reduce((accumulator, k) => {
+              return rawThemes[theme][k] + accumulator;
+            }, 0);
+        }
+        return {
+          name: theme,
+          key: `${selectedTheme}|${theme}`,
+          value: photoCount,
+        };
+      })
     };
     const themesHierarchy = d3.hierarchy(organizedThemeData)
       .sum(d => d.value)
-      .sort((a, b) => b.value - a.value);
+      .sort((a, b) => {
+        let order;
+        if (selectedTheme === 'root') {
+          order = ["Work", "People As Such", "Homes and Living Conditions", "Cities and Towns", "Social and Personal Activity", "The Land", "Transportation", "War", "Organized Society", "Religion", "Medicine and Health", "Itellectual and Creative Activity", "Alphabetical Section"];
+          return order.indexOf(a.data.name) - order.indexOf(b.data.name);
+        }
+        return b.value - a.value
+      });
     const treemap = d3.treemap().tile(d3.treemapSquarify.ratio(1))(themesHierarchy);
 
     const themesCoords = treemap.children.map((child, idx) => {
+      // make the id--those on the bottom of the hierarchy need to be adjusted if they're selected to be their immediate ancestor
+      const id = (themesPaths.length <= 2) ? `${selectedTheme}|${child.data.name}` : `root|${themesPaths.slice(0, themesPaths.length - 1).join('|')}|${child.data.name}`;
+
+      // style for selection at the bottom level
+      let strokeWidth = width / 200;
+      let fontColor = 'white';
+      let fillOpacity = 0.11;
+      let link = id;
+      let fill = color(child.data.name);
+      if (themesPaths.length === 3 && selectedTheme && selectedTheme !== id) {
+        fontColor = '#aaa';
+        fill = '#888';
+        fillOpacity = 0.22;
+      }
+      if (themesPaths.length === 3 && selectedTheme && selectedTheme === id) {
+        link = id.substring(0, id.lastIndexOf('|'));
+      }
       return {
         name: child.data.name,
-        query: child.data.query,
         transformX: x(child.x0),
         transformY: y(child.y0),
         width: x(child.x1) - x(child.x0),
         height: y(child.y1) - y(child.y0),
-        fill: color(idx),
+        fill,
+        fillOpacity,
+        id,
+        link,
+        strokeWidth,
+        fontColor,
       };
     });
 
     // make the query 
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
-    const query = `SELECT pp.vanderbilt_level${themesPaths.length + 1} as theme, (SELECT p.img_large_path FROM photogrammar_photos as p where ${wheres.join(' and ')} and pp.vanderbilt_level${themesPaths.length + 1} = p.vanderbilt_level${themesPaths.length + 1} order by random() limit 1) as img FROM digitalscholarshiplab.photogrammar_photos as pp where ${wheres.join(' and ')} group by vanderbilt_level${themesPaths.length + 1}`;
+    const topLevel = Math.min(themesPaths.length + 1, 3);
+    const query = `SELECT pp.vanderbilt_level${topLevel} as theme, (SELECT p.img_medium_path FROM photogrammar_photos as p where ${wheres.join(' and ')} and pp.vanderbilt_level${topLevel} = p.vanderbilt_level${topLevel} order by random() limit 1) as img FROM digitalscholarshiplab.photogrammar_photos as pp where ${wheres.join(' and ')} group by vanderbilt_level${topLevel}`;
 
-    console.log(themesPaths);
     return {
+      name,
       themes: themesCoords,
       query: encodeURI(`${cartoURLBase}${query}`),
-      ancestors: themesPaths.slice(0, themesPaths.length - 1).map((theme, idx) => ({
+      ancestors: themesPaths.slice(0, topLevel - 1).map((theme, idx) => ({
           name: theme,
           key: ['root'].concat(themesPaths.slice(0, idx + 1)).join('|'),
         })),
@@ -356,60 +416,79 @@ export const getWheresForCityQuery = createSelector(
   }
 );
 
+export const makeWheres = (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, wheresForCityQuery, selectedViz, selectedTheme, selectedMapView, filterTerms) => {
+  let wheres = [];
+  const [startTime, endTime] = timeRange;
+  if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501
+      || endTime < 194504 || (selectedTheme && selectedTheme !== 'root')
+      || (filterTerms && filterTerms.length > 0)) {
+    if (selectedPhotographer) {
+      const photographer = Photographers.find(p => p.key === selectedPhotographer);
+      let name;
+      if (photographer) {
+        const { firstname, lastname } = photographer;
+        name = `${firstname} ${lastname}`;
+      }
+      wheres.push(`photographer_name = '${name}'`);
+    }
+    if (selectedMapView === 'cities' && !selectedCity) {
+      wheres.push('city is not null');
+      wheres.push('city != \'\'');
+    }
+    if (selectedCounty) {
+      wheres.push(`nhgis_join = '${selectedCounty}'`);
+    } else if (selectedCity) {
+      wheres = wheres.concat(wheresForCityQuery);
+    } else if (selectedState) {
+      wheres.push(`state = '${stateabbrs[selectedState]}'`)
+    }
+
+    if (selectedViz === 'themes' && selectedTheme) {
+      const themesPaths = selectedTheme.split('|').slice(1);
+      if (themesPaths.length >= 1) {
+        wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
+      } 
+      if (themesPaths.length >= 2) {
+        wheres.push([`vanderbilt_level2 = '${themesPaths[1]}'`]);
+      } 
+      if (themesPaths.length === 3) {
+        wheres.push([`vanderbilt_level3 = '${themesPaths[2]}'`]);
+      }
+    }
+
+    if (startTime > 193501) {
+      const startYear = Math.floor(startTime / 100);
+      const startMonth = startTime % 100;
+      wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+    }
+    if (endTime < 194504) {
+      const endYear = Math.floor(endTime / 100);
+      const endMonth = endTime % 100;
+      wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+    }
+
+    if (filterTerms && filterTerms.length > 0) {
+      filterTerms.forEach(filterTerm => {
+         wheres.push(`caption ~* '\\m${filterTerm}'`);
+      });
+    }
+  }
+  return wheres;
+}
+
+export const getSidebarPhotosWheres = createSelector(
+  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getWheresForCityQuery, getSelectedViz, getSelectedTheme, getSelectedMapView, getFilterTerms],
+  makeWheres,
+);
+
 export const getSidebarPhotosQuery = createSelector(
-  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers, getSelectedMapView, getWheresForCityQuery, getSelectedViz, getSelectedTheme],
-  (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, offset, dimensions, randomPhotoNumbers, selectedMapView, wheresForCityQuery, selectedViz, selectedTheme) => {
+  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers, getSelectedMapView, getWheresForCityQuery, getSelectedViz, getSelectedTheme, getSidebarPhotosWheres],
+  (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, offset, dimensions, randomPhotoNumbers, selectedMapView, wheresForCityQuery, selectedViz, selectedTheme, wheres) => {
     let query;
     const { displayableCards } = dimensions.photoCards;
-    const [startTime, endTime] = timeRange;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const sqlQueryBase = 'SELECT * FROM photogrammar_photos';
-    let wheres = [];
-    if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501 || endTime < 194504 || (selectedTheme && selectedTheme !== 'root')) {
-      if (selectedPhotographer) {
-        const photographer = Photographers.find(p => p.key === selectedPhotographer);
-        let name;
-        if (photographer) {
-          const { firstname, lastname } = photographer;
-          name = `${firstname} ${lastname}`;
-        }
-        wheres.push(`photographer_name = '${name}'`);
-      }
-      if (selectedMapView === 'cities' && !selectedCity) {
-        wheres.push('city is not null');
-        wheres.push('city != \'\'');
-      }
-      if (selectedCounty) {
-        wheres.push(`nhgis_join = '${selectedCounty}'`);
-      } else if (selectedCity) {
-        wheres = wheres.concat(wheresForCityQuery);
-      } else if (selectedState) {
-        wheres.push(`state = '${stateabbrs[selectedState]}'`)
-      }
-
-      if (selectedViz === 'themes' && selectedTheme) {
-        const themesPaths = selectedTheme.split('|').slice(1);
-        if (themesPaths.length >= 1) {
-          wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
-        } 
-        if (themesPaths.length >= 2) {
-          wheres.push([`vanderbilt_level2 = '${themesPaths[1]}'`]);
-        } 
-        if (themesPaths.length === 3) {
-          wheres.push([`vanderbilt_level3 = '${themesPaths[2]}'`]);
-        }
-      }
-
-      if (startTime > 193501) {
-        const startYear = Math.floor(startTime / 100);
-        const startMonth = startTime % 100;
-        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
-      }
-      if (endTime < 194504) {
-        const endYear = Math.floor(endTime / 100);
-        const endMonth = endTime % 100;
-        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
-      }
+    if (wheres.length > 0) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where} order by year, month limit ${displayableCards} offset ${offset}`;
     } else {
@@ -425,50 +504,12 @@ export const getSidebarPhotosQuery = createSelector(
 );
 
 export const getSidebarPhotoCountQuery = createSelector(
-  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getSelectedMapView],
-  (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, selectedMapView) => {
+  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getSelectedMapView, getSidebarPhotosWheres],
+  (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, selectedMapView, wheres) => {
     let query;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const sqlQueryBase = 'SELECT count(cartodb_id) FROM photogrammar_photos';
-    const [startTime, endTime] = timeRange;
-    const wheres = [];
-    if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501 || endTime < 194504) {
-      if (selectedPhotographer) {
-        const photographer = Photographers.find(p => p.key === selectedPhotographer);
-        let name;
-        if (photographer) {
-          const { firstname, lastname } = photographer;
-          name = `${firstname} ${lastname}`;
-        }
-        wheres.push(`photographer_name = '${name}'`);
-      }
-      if (selectedCounty) {
-        wheres.push(`nhgis_join = '${selectedCounty}'`);
-      } else if (selectedCity) {
-        wheres.push(`state = '${stateabbrs[selectedState]}'`)
-        const city = Cities.find(cc => cc.key === selectedCity);
-        const cityNames = [city.city];
-        if (city.otherPlaces) {
-          city.otherPlaces.forEach(op => {
-            cityNames.push(op.city);
-          });
-        }
-        const cityWheres = cityNames.map(cityName => `city = '${cityName}'`);
-        wheres.push(`(${cityWheres.join(' or ')})`);
-      } else if (selectedState) {
-        wheres.push(`state = '${stateabbrs[selectedState]}'`)
-      }
-
-      if (startTime > 193501) {
-        const startYear = Math.floor(startTime / 100);
-        const startMonth = startTime % 100;
-        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
-      }
-      if (endTime < 194504) {
-        const endYear = Math.floor(endTime / 100);
-        const endMonth = endTime % 100;
-        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
-      }
+    if (wheres.length > 0) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where}`;
       return encodeURI(`${cartoURLBase}${query} `);
@@ -582,12 +623,12 @@ export const getMapParameters = createSelector(
     }
 
     // for everything other than national you offset the translateX by 125 to account or the 
-    const statsOffset = (selectedState) ? 125 : 0;
+    //const statsOffset = (selectedState) ? 125 : 0;
 
     // calculate the scale
     const scale = (width / height > dx / dy) ? yGutter * height / dy : xGutter * width / dx;
 
-    const translateX = width / 2 - scale * center[0] + statsOffset;
+    const translateX = width / 2 - scale * center[0];
     const translateY = height / 2 - scale * center[1];
 
     return {
@@ -663,7 +704,7 @@ export const getTimelineHeatmapRows = createSelector(
 
     const x = d3.scaleLinear()
       .domain([1935, 1944 + monthNum(6)])
-      .range([leftAxisWidth, width]);
+      .range([leftAxisWidth, width + leftAxisWidth]);
     const monthWidth = x(1935 + monthNum(2)) - x(1935);
 
     // add the timeline cells to each photographer

@@ -76,7 +76,7 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
           <p>Location</p>
         </div>*/}
         <div className="caption-text-description">
-          {(county && state) ? (
+          {(county && state && centroid && centroid.center && centroid.center[0]) ? (
             <React.Fragment>
               <p>{`${city || county}, ${state}`}</p>
               <svg

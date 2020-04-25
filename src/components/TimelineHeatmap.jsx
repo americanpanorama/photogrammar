@@ -30,7 +30,7 @@ const TimelineHeatmap = (props) => {
   const timeCodeToNum = timecode => Math.floor(timecode / 100) + monthNum(timecode % 100);
   const x = d3.scaleLinear()
     .domain([1935, 1944 + monthNum(6)])
-    .range([leftAxisWidth, width]);
+    .range([leftAxisWidth, width + leftAxisWidth]);
   const y = d3.scaleLinear()
       .domain([0, photographers.length])
       .range([0, height]);
@@ -68,7 +68,7 @@ const TimelineHeatmap = (props) => {
         }}
       >
         <svg
-          width={width}
+          width={width + leftAxisWidth}
           height={height}
         >
           {timelineCells.map(tc => (

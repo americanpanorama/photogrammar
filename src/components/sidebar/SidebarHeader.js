@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import SidebarHeader from './SidebarHeader.jsx';
-import { setPhotoOffset } from '../../store/actions';
+import { setPhotoOffset, setFilterTerms } from '../../store/actions';
 import { getSelectedCountyMetadata, getSelectedPhotographerName, getSelectedStateName, getDateRangeString } from '../../store/selectors';
 
 const mapStateToProps = state => {
-  const { selectedCounty, sidebarPhotosOffset, dimensions } = state;
+  const { selectedCounty, sidebarPhotosOffset, dimensions, selectedTheme } = state;
   const { displayableCards } = dimensions.photoCards;
   const nextOffset = sidebarPhotosOffset + displayableCards;
   const previousOffset = (sidebarPhotosOffset - displayableCards >= 0) ? sidebarPhotosOffset - displayableCards : -1;
@@ -20,10 +20,17 @@ const mapStateToProps = state => {
     placeName = selectedStateName;
   }
 
-  let label = `${(selectedPhotographerName) ? selectedPhotographerName : ''}${(selectedPhotographerName && placeName) ? ' - ' : ''}${(placeName) ? placeName : ''}`;
-  if (label === '') {
-    label = 'Random selection of photographs';
+  const labelPieces = [];
+  if (selectedPhotographerName) {
+    labelPieces.push(selectedPhotographerName);
   }
+  if (selectedTheme && selectedTheme !== 'root') {
+    labelPieces.push(selectedTheme.substring(selectedTheme.lastIndexOf('|') + 1));
+  }
+  if (placeName) {
+    labelPieces.push(placeName);
+  }
+  let label = (labelPieces.length > 0) ? labelPieces.join(' - ') : 'Random selection of photographs';
 
   return {
     label,
@@ -39,6 +46,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setPhotoOffset,
+  setFilterTerms,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarHeader);

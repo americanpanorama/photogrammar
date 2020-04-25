@@ -58,7 +58,7 @@ Layout
   height: 100vh;
 }
 
-#sidebard {
+#sidebar {
   grid-column-start: 1;
   grid-row-start: 2;
 }
@@ -80,6 +80,10 @@ nav.navbar {
 .navbar a {
   color: black;
   text-decoration: none;
+}
+
+.navbar li.active a {
+  border-bottom: 4px solid silver;
 }
 
 .navbar-header {

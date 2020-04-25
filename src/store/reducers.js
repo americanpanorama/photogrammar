@@ -14,25 +14,29 @@ const selectedPhotographer = (state = initialState, action) => {
 
 const countiesData = (state = initialState, action) => (
   (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_COUNTIES)
+    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_COUNTIES
+    || (action.type === A.SET_FILTER_TERMS && action.payload.counties))
     ? action.payload.counties : state
 );
 
 const citiesData = (state = initialState, action) => (
   (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_CITIES)
+    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_CITIES
+    || (action.type === A.SET_FILTER_TERMS && action.payload.cities))
     ? action.payload.cities : state
 );
 
 const themesData = (state = initialState, action) => (
-  (action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.SELECT_PHOTOGRAPHER)
+  (action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.SELECT_PHOTOGRAPHER
+    || action.type === A.CLEAR_PHOTOGRAPHER)
     ? action.payload.themes : state
 );
 
 const timelineCells = (state = initialState, action) => (
   (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
     || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS
-    || action.type === A.SELECT_CITY || action.type === A.SELECT_THEME)
+    || action.type === A.SELECT_CITY || action.type === A.SELECT_THEME
+    || action.type === A.SET_FILTER_TERMS)
     ? action.payload.timelineCells : state
 );
 
@@ -40,7 +44,9 @@ const selectedCounty = (state = initialState, action) => {
   if (action.type === A.SELECT_COUNTY) {
     return action.payload.county;
   }
-  if (action.type === A.SELECT_CITY || action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
+  if (action.type === A.SELECT_CITY || action.type === A.SELECT_STATE
+    || action.type === A.SELECT_NATION || action.type === A.SELECT_THEME
+    || (action.type === A.SELECT_VIZ && action.payload === 'themes')) {
     return null;
   }
   return state;
@@ -50,7 +56,9 @@ const selectedCity = (state = initialState, action) => {
   if (action.type === A.SELECT_CITY) {
     return action.payload.city;
   }
-  if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION || action.type === A.SELECT_COUNTY) {
+  if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION
+    || action.type === A.SELECT_COUNTY || action.type === A.SELECT_THEME
+    || (action.type === A.SELECT_VIZ && action.payload === 'themes')) {
     return null;
   }
   return state;
@@ -60,7 +68,8 @@ const selectedState = (state = initialState, action) => {
   if (action.type === A.SELECT_STATE || action.type === A.SELECT_CITY || action.type === A.SELECT_COUNTY) {
     return action.payload.state;
   }
-  if (action.type === A.SELECT_NATION) {
+  if (action.type === A.SELECT_NATION || action.type === A.SELECT_THEME
+    || (action.type === A.SELECT_VIZ && action.payload === 'themes')) {
     return null;
   }
   return state;
@@ -81,6 +90,9 @@ const sidebarPhotosOffset = (state = initialState, action) => {
     || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
     || action.type === A.SELECT_NATION || action.type === A.CLEAR_PHOTOGRAPHER) {
     return action.payload.sidebarPhotosOffset;
+  }
+  if (action.type === A.SELECT_THEME) {
+    return 0;
   }
   if (action.type === A.SET_PHOTO_OFFSET) {
     return action.payload;
@@ -129,6 +141,13 @@ const selectedViz = (state = initialState, action) => (
   (action.type === A.SELECT_VIZ) ? action.payload : state
 );
 
+const filterTerms = (state = initialState, action) => {
+  if (action.type === A.SET_FILTER_TERMS) {
+    return action.payload.filterTerms;
+  }
+  return state;
+};
+
 
 const combinedReducer = combineReducers({
   selectedPhotographer,
@@ -149,6 +168,7 @@ const combinedReducer = combineReducers({
   isInitialized,
   selectedTheme,
   selectedViz,
+  filterTerms,
 });
 
 export default combinedReducer;

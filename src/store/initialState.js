@@ -25,7 +25,7 @@ export default {
   selectedCity: null,
   selectedState: null,
   selectedMapView,
-  selectedViz: 'themes',
+  selectedViz: 'map',
   selectedTheme: 'root',
   sidebarPhotosOffset: 0,
   countiesData: [],
@@ -66,4 +66,5 @@ export default {
       leftAxisWidth: 120,
     },
   },
+  filterTerms: [],
 };

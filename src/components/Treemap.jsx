@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
+import { Link, useParams } from "react-router-dom";
 //import { useFetch } from 'react-async';
 import PropTypes from 'prop-types';
+import TreemapTheme from './TreemapTheme.jsx';
 import './Treemap.css';
 
 const useFetch = (url, options) => {
@@ -28,139 +30,105 @@ const useFetch = (url, options) => {
   return { response, error, isLoading };
 };
 
-const Treemap = ({ themes, ancestors, height, width, selectedTheme, selectTheme }) => {
+const Treemap = ({ themes, name, ancestors, height, width, selectedTheme, selectedViz, selectTheme, selectViz }) => {
   const ref = useRef();
 
-  console.log(ancestors);
+  let { themeKey } = useParams();
+  if (!themeKey) {
+    themeKey = 'root';
+  }
 
-  const estimateWidth = (str, fontSize) => str.length * fontSize * 0.5;
+  if (selectedViz !== 'themes') {
+    selectViz('themes');
+  }
 
-  const strokeWidth = 5;
+  if (themeKey && themeKey !== selectedTheme) {
+    selectTheme(themeKey);
+  }
 
   return (
-    <React.Fragment>
-      <ul>
+    <svg
+      width={width}
+      height={height}
+      className='treemap'
+    >
+      <text
+        x={width - 5}
+        y={16}
+        textAnchor='end'
+      >
+        1942 Classification System
+        <title>
+          Visualization of the classification system designed by Paul Vanderbilt in 1942. It is a three-tier classification starting with 12 main subject headings (ex. THE LAND), then 1300 sub-headings (ex. Mountains, Deserts, Foothills, Plains) and then sub-sub headings. 88,000 photographs were assigned classifications.
+        </title>
+      </text>
+      <text
+        x={5}
+        y={16}
+        className='treePath'
+      >
         {(selectedTheme !== 'root') &&
-          <li
-            onClick={selectTheme}
-            id={'root'}
+          <Link
+            to={`/themes`}
           >
-            Top
-          </li>
+            <tspan>
+              Top
+            </tspan>
+          </Link>
         }
         {ancestors.map(ancestor => (
-          <li
-            onClick={selectTheme}
-            id={ancestor.key}
+          <React.Fragment
             key={ancestor.key}
           >
-            {ancestor.name}
-          </li>
-        ))}
-      </ul>
-      <svg
-        width={width}
-        height={height}
-        className='treemap'
-      >
-        <g>
-          {themes.map(cat => {
-            const { name } = cat;
-            const fontSize = Math.max(10, Math.min(20, 20 * cat.width / 200));
-            let tspans = [cat.name];
-            if (estimateWidth(name, fontSize) > cat.width * 0.8) {
-              // how many words
-              const words = name.split(' ');
-              if (words.length > 1) {
-                // 
-                tspans = [words[0]];
-                words.slice(1).forEach(word => {
-                  const lengthIfAdded = estimateWidth(`${tspans[tspans.length -1 ]} ${word}`, fontSize);
-                  if (lengthIfAdded < cat.width * 0.8) {
-                    tspans[tspans.length -1] = `${tspans[tspans.length -1]} ${word}`;
-                  } else {
-                    tspans.push(word);
-                  }
-                });
-              }
-            }
-            return (
-              <g 
-                transform={`translate(${cat.transformX} ${cat.transformY})`}
-                key={`${selectedTheme}|${name}`}
-                onClick={selectTheme}
-                id={`${selectedTheme}|${name}`}
-                ref={ref}
+            <tspan
+              dx={10}
+            >
+              /
+            </tspan>
+            <Link
+              to={`/themes/${ancestor.key}`}
+            >
+              <tspan
+                dx={10}
+                //onClick={selectTheme}
+                id={ancestor.key}
+                
               >
-                {(cat.imgSrc) && (
-                  <image
-                    xlinkHref={`http://photogrammar.yale.edu/photos/service/pnp/${cat.imgSrc}`}
-                    width={cat.width}
-                    height={cat.height}
-                    x={0}
-                    y={0}
-                    preserveAspectRatio='xMidYMid slice'
-                  />
-                )}
-                <rect
-                  x={strokeWidth / 2}
-                  y={strokeWidth / 2}
-                  width={cat.width - strokeWidth}
-                  height={cat.height - strokeWidth}
-                  fill={cat.fill}
-                  fillOpacity='0.11'
-                  stroke={cat.fill}
-                  strokeWidth={strokeWidth}
-                  
-                />
-                <g transform={`translate(${cat.width / 2} ${cat.height * 0.7 - fontSize * 1.1 * (tspans.length - 1)})`}>
-                  <text
-                    x={0}
-                    y={0}
-                    fontSize={fontSize}
-                    textAnchor='middle'
-                    fill='white'
-                    stroke={'black'}
-                    strokeWidth={4}
-                    strokeOpacity={0.6}
-                  >
-                    {(tspans.map((labelPart, i) => (
-                      <tspan
-                        x="0"
-                        textAnchor="middle"
-                        dy={fontSize * 1.1}
-                        key={labelPart}
-                      >
-                        {labelPart}
-                      </tspan>
-                    )))}
-                  </text>
-                  <text
-                    x={0}
-                    y={0}
-                    fontSize={fontSize}
-                    textAnchor='middle'
-                    fill='white'
-                    
-                  >
-                    {(tspans.map((labelPart, i) => (
-                      <tspan
-                        x="0"
-                        textAnchor="middle"
-                        dy={fontSize * 1.1}
-                        key={labelPart}
-                      >
-                        {labelPart}
-                      </tspan>
-                    )))}
-                  </text>
-                </g>
-              </g>
-            );
-          })}
-        </g>
-      </svg>
-    </React.Fragment>
+                {ancestor.name}
+              </tspan>
+            </Link>
+          </React.Fragment>
+        ))}
+        {(false && selectedTheme !== 'root') &&
+          <Fragment>
+            <tspan
+              dx={10}
+            >
+              /
+            </tspan>
+            <tspan
+              dx={10}
+            >
+              {name}
+            </tspan>
+          </Fragment>
+        }
+      </text>
+      <rect
+        y={20}
+        width={width}
+        height={height - 20}
+        fill='#999'
+      />
+      <g>
+        {themes.map(cat => (
+          <TreemapTheme
+            {...cat}
+            key={cat.id}
+          />
+        ))}
+      </g>
+    </svg>
   );
 };
 

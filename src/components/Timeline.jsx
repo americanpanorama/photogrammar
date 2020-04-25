@@ -63,7 +63,7 @@ const TimelineHeatmap = (props) => {
         }}
       >
         <svg
-          width={width}
+          width={width + leftAxisWidth}
           height={height}
         >
           <filter id="grayscale">

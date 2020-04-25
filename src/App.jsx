@@ -17,7 +17,7 @@ import TimelineHeatmap from './components/Timeline.js';
 import TimelineSlider from './components/TimelineSlider.js';
 import Treemap from './components/Treemap.js';
 
-const App = ({ dimensions, isInitialized, initializeData, windowResized }) => {
+const App = ({ selectedViz, dimensions, isInitialized, initializeData, windowResized }) => {
 
   useEffect(() => {
     window.addEventListener('resize', windowResized);
@@ -42,14 +42,16 @@ const App = ({ dimensions, isInitialized, initializeData, windowResized }) => {
         </header>
         <nav className="navbar">
           <ul className="nav navbar-nav navbar-right">
-            <li><a href="#hero" className="section-scroll">Search</a></li>
             <li><a href="#about" className="section-scroll">Photographers</a></li>
-            <li><Link to={`/themes`}>Themes</Link></li>
-            <li>
+            <li className={(selectedViz === 'themes') ? 'active' : ''}>
+              <Link to={`/themes`}>Themes</Link>
+            </li>
+            <li className={(selectedViz === 'map') ? 'active' : ''}>
               <Link to={`/maps`}>Maps</Link>
             </li>
             <li><a href="#latest-maps" className="section-scroll">Labs</a></li>
             <li><a href="#projects" className="section-scroll">About</a></li>
+            <li><a href="https://dsl.richmond.edu/panorama#maps" className="section-scroll" target='_blank'>American Panorama</a></li>
           </ul>
         </nav>
 
@@ -64,14 +66,13 @@ const App = ({ dimensions, isInitialized, initializeData, windowResized }) => {
             <Route path={`/photo/:id`}>
               <Photo />
             </Route>
-            <Route path={'/themes'}>
+            <Route path={['/themes/:themeKey', '/themes']}>
               <Treemap />
               <TimelineHeatmap />
               <TimelineSlider />
             </Route>
             <Route path={['/city/:placeId', `/county/:placeId`, `/city/:placeId`, `/state/:placeId`, `/`]}>
               <Map />
-              <Stats />
               <MapControls />
               <TimelineHeatmap />
               <TimelineSlider />

@@ -17,10 +17,12 @@ const Map = (props) => {
     selectedCity,
     selectedState,
     selectedMapView,
+    selectedViz,
     selectCounty,
     selectCity,
     selectState,
     selectNation,
+    selectViz,
     mapParameters,
     linkUp,
   } = props;
@@ -50,6 +52,11 @@ const Map = (props) => {
       isRetrievingData.current = false;
     }
   }
+
+  if (selectedViz !== 'map') {
+    selectViz('map');
+  }
+
   if (mapScale === 'city' && placeId !== selectedCity) {
     selectCity(placeId);
   }

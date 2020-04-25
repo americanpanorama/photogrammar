@@ -2,6 +2,9 @@ import he from 'he';
 import A from './actionTypes';
 import Photographers from '../../public/data/photographers.json';
 import Counties from '../../data/svgs/counties.json';
+import Cities from '../../public/data/citiesCounts.json';
+import { makeWheres } from './selectors';
+
 const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
 const sqlQueryBase = 'SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos';
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
@@ -120,12 +123,13 @@ export function selectPhotographer(eOrId) {
 export function clearPhotographer() {
   return async (dispatch, getState) => {
     const { selectedMapView } = getState();
-    const { counties, cities } = await fetchJSON(`${basename}/data/photographers/all.json`);
+    const { counties, cities, themes } = await fetchJSON(`${basename}/data/photographers/all.json`);
     dispatch({
       type: A.CLEAR_PHOTOGRAPHER,
       payload: {
         counties,
         cities,
+        themes,
         sidebarPhotosOffset: 0,
       }
     });
@@ -181,6 +185,7 @@ export function selectTheme(eOrId) {
   return async (dispatch, getState) => {
     const selectedTheme = getEventId(eOrId);
     const { selectedPhotographer } = getState();
+    console.log(encodeURI(selectedTheme));
     dispatch({
       type: A.SELECT_THEME,
       payload: {
@@ -198,24 +203,34 @@ export function setPhotoOffset(eOrId) {
   };
 }
 
+export function selectViz(eOrId) {
+  return {
+    type: A.SELECT_VIZ,
+    payload: getEventId(eOrId)
+  };
+}
+
 export function selectPhoto(eOrId) {
   return async (dispatch, getState) => {
     const id = decodeURIComponent(getEventId(eOrId));
     const { selectedPhotoData } = getState();
     if (!selectedPhotoData || selectedPhotoData.loc_item_link !== id) {
+      // create the queries to get the photo data and similar photo data
       const query = `${sqlQueryBase} where loc_item_link = '${id}' `;
-      const { rows } = await fetchJSON(`${cartoURLBase}${encodeURIComponent(query)}`);
-      const photoData = rows[0];
-      photoData.caption = he.decode(photoData.caption);
-
-      // get the similar photos
-      const { loc_item_link } = photoData;
       const queries = [...Array(14).keys()].map(n => n+1).map(x => {
-        return `SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos where loc_item_link = (select nn${x} from similarphotos where source = '${loc_item_link}')`
+        return `SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos where loc_item_link = (select nn${x} from similarphotos where source = '${id}')`
       });
       const similarPhotosQuery = queries.join(' union ');
-      const { rows: similarPhotoRows } = await fetchJSON(`${cartoURLBase}${encodeURIComponent(similarPhotosQuery)}`);
-      photoData.similarPhotos = similarPhotoRows.map(sp => ({
+
+      // retrieve results from carto and organize
+      const [photoDataResults, similarPhotosData] = await Promise.all([
+        fetchJSON(`${cartoURLBase}${encodeURIComponent(query)}`),
+        fetchJSON(`${cartoURLBase}${encodeURIComponent(similarPhotosQuery)}`),
+      ]);
+      const photoData = photoDataResults.rows[0];
+      photoData.caption = he.decode(photoData.caption);
+
+      photoData.similarPhotos = similarPhotosData.rows.map(sp => ({
         ...sp,
         caption: he.decode(sp.caption),
       }));
@@ -282,6 +297,98 @@ export function selectMapView(eOrId) {
   }
 }
 
+export function setFilterTerms(terms) {
+  return async (dispatch, getState) => {
+      const {
+      selectedPhotographer,
+      selectedCounty,
+      selectedCity,
+      selectedState,
+      timeRange,
+      selectedViz,
+      selectedTheme,
+      selectedMapView,
+    } = getState();
+    const filterTerms = terms.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g) || [];
+
+    let counties;
+    let cities;
+    let timelineCells;
+
+    let wheresForCityQuery = [];
+    if (selectedCity) {
+      const selectedCityMetadata = Cities.find(cc => cc.key === selectedCity);
+      if (selectedCityMetadata) {
+        const { state, city, otherPlaces } = selectedCityMetadata;
+        wheres.push(`state = '${stateabbrs[state]}'`);
+        const cityNames = [city];
+        if (otherPlaces) {
+          otherPlaces.forEach(op => {
+            cityNames.push(op.city);
+          });
+        }
+        wheresForCityQuery = cityNames.map(cityName => `city = '${cityName}'`);
+      }
+    }
+
+    const wheres = makeWheres(selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, wheresForCityQuery, selectedViz, selectedTheme, selectedMapView, filterTerms);
+
+    if (wheres.length > 0) {
+      // build the queries to select the counties, cities, and timelinecells
+      const queryCounties = `select nhgis_join, count(img_large_path) as total from photogrammar_photos where nhgis_join is not null and ${wheres.join(' and ')} group by nhgis_join`;
+      const queryCities = `select state, city, count(img_large_path) as total from photogrammar_photos where city is not null and ${wheres.join(' and ')} group by state, city`;
+      const photographers_wheres = Photographers
+        .filter(p => p.count >= 75)
+        .map(p => `photographer_name = '${p.firstname} ${p.lastname}'`);
+      const queryTimelineCells = `SELECT year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g') as photographer, count(img_large_path) as count FROM photogrammar_photos where ${wheres.join(' and ')} and (${photographers_wheres.join( 'or ')}) group by year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g')`;
+
+      // fetch them
+      const [countyResults, cityResults, timelineCellResults] = await Promise.all([
+        fetchJSON(`${cartoURLBase}${encodeURIComponent(queryCounties)}`),
+        fetchJSON(`${cartoURLBase}${encodeURIComponent(queryCities)}`),
+        fetchJSON(`${cartoURLBase}${encodeURIComponent(queryTimelineCells)}`),
+      ]);
+
+      // do some data formatting/organization
+      const { rows: rowsCounties } = countyResults;
+      if (rowsCounties.length > 0) {
+        counties = {};
+        rowsCounties.forEach(county => {
+          counties[county.nhgis_join] = {
+            total: county.total,
+          };
+        });
+      }
+
+      const { rows: rowsCities } = cityResults;
+      if (rowsCities.length > 0) {
+        cities = {};
+        rowsCities.forEach(city => {
+          const abbrIdx = Object.values(stateabbrs).indexOf(city.state);
+          if (abbrIdx !== -1) {
+            const abbr = Object.keys(stateabbrs)[abbrIdx];
+            cities[`${abbr}_${city.city}`] = {
+              total: city.total,
+            };
+          }
+        });
+      }
+
+      ({ rows: timelineCells } = timelineCellResults);
+    }
+
+    dispatch({
+      type: A.SET_FILTER_TERMS,
+      payload: {
+        filterTerms,
+        counties,
+        cities,
+        timelineCells,
+      }
+    });
+  };
+}
+
 export function windowResized() {
   return (dispatch, getState) => {
     const theDimensions = calculateDimensions({ isWelcomeOpen: getState().isWelcomeOpen });
@@ -313,11 +420,10 @@ export function calculateDimensions(options) {
     height: Math.max(600, innerHeight - headerHeight),
   }
 
-  const leftAxisWidth = 120;
   const timelineHeatmap = {
-    width: vizCanvas.width,
+    width: vizCanvas.width * 0.85,
     height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
-    leftAxisWidth,
+    leftAxisWidth: vizCanvas.width * 0.15,
   };
 
   const mapControlsWidth = 50;

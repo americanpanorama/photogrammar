@@ -34,7 +34,7 @@ const TimelineSlider = ({width, leftAxisWidth, setTimeRange}) => {
       <div
         className='timelineSlider'
         style={{
-          width: width - leftAxisWidth,
+          width: width,
           marginLeft: leftAxisWidth,
         }}
       >

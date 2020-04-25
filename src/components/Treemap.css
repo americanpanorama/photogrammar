@@ -1,3 +1,11 @@
 .treemap {
   margin-left: 50px;
 }
+
+.treemap .treePath {
+  fill: #999;
+}
+
+.treemap .treePath tspan:last-child {
+  fill: #222;
+}
