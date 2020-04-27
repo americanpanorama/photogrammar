@@ -1,0 +1,11 @@
+.wrapper.counties .timeline text {
+  fill: var(--map-counties-color);
+}
+
+.wrapper.cities .timeline text {
+  fill: var(--map-cities-color);
+}
+
+.wrapper.themes .timeline text {
+  fill: var(--themes-color);
+}

@@ -145,6 +145,9 @@ const filterTerms = (state = initialState, action) => {
   if (action.type === A.SET_FILTER_TERMS) {
     return action.payload.filterTerms;
   }
+  if (action.type === A.CLEAR_FILTER_TERMS) {
+    return [];
+  }
   return state;
 };
 

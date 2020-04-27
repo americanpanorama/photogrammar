@@ -23,6 +23,7 @@ const actionTypes = {
   SELECT_MAP_VIEW: 'SELECT_MAP_VIEW',
   SET_MAP_SCALE: 'SET_MAP_SCALE',
   SET_FILTER_TERMS: 'SET_FILTER_TERMS',
+  CLEAR_FILTER_TERMS: 'CLEAR_FILTER_TERMS',
 }
 
 export default actionTypes;

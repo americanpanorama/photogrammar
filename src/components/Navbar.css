@@ -1,0 +1,37 @@
+nav.navbar {
+}
+
+.navbar, .navbar a {
+  color: black;
+  text-decoration: none;
+}
+
+.navbar li.active {
+  border-bottom: 4px solid silver;
+}
+
+.navbar li.active.counties {
+  border-bottom: 4px solid var(--map-counties-color);
+}
+
+.navbar li.active.cities {
+  border-bottom: 4px solid var(--map-cities-color);
+}
+
+.navbar li.active.themes {
+  border-bottom: 4px solid var(--themes-color);
+}
+
+
+.navbar ul {
+  list-style: none;
+  max-width: 90%;
+  float: right;
+  margin-right: 40px;
+}
+
+.navbar ul li {
+  display: inline-block;
+  margin: 10px;
+  font-size: 1.2em;
+}

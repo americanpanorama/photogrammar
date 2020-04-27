@@ -31,10 +31,11 @@
   margin: 0 auto;
 }
 
-.photoCard .thumbnail .noimage {
-  bottom: 50px;
+.photoCard .noimage {
+  padding: 25% 0;
   font-style: italic;
   text-align: center;
+  border: 1px solid #eee;
 }
 
 

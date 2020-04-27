@@ -66,22 +66,27 @@ const PhotoCard = (props) => {
             fontSize: interiorHeight * 0.06,
           }}
         >
-          <div
-            className="thumbnail"
-          >
-            {(img_thumb_img) ? (
-              <img
-                src={`http://photogrammar.yale.edu/photos/service/pnp/${img_thumb_img}`}
-                alt={caption}
-                style={{
-                  maxHeight: interiorHeight * 0.4,
-                  maxWidth: interiorWidth,
-                }}
-              />
-            ) : (
-              <div className='noimage'>no image</div>
-            )}
-          </div>
+          {(img_thumb_img) ? (
+            <div
+              className="thumbnail"
+              style={{
+                backgroundImage: `url(http://photogrammar.yale.edu/photos/service/pnp/${img_thumb_img})`,
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
+          ) : (
+            <div
+              className='thumbnail'
+            >
+              <div
+                className='noimage'
+              >
+                no image
+              </div>
+            </div>
+          )}
           <div className="post-entry-caption">
             {caption}
           </div>

@@ -25,6 +25,9 @@ const Map = (props) => {
     selectViz,
     mapParameters,
     linkUp,
+    selectMapView,
+    selectPhoto,
+    selectedPhotoData,
   } = props;
 
   const ref = useRef(null);
@@ -38,6 +41,14 @@ const Map = (props) => {
   const [ scale, setScale ] = useState(mapParameters.scale);
   const { placeId } = useParams();
   const location = useLocation();
+
+  // deselect selectPhoto if necessary--which can happen because of the use of react-router links
+  console.log(selectedPhotoData);
+  if (selectedPhotoData) {
+    selectPhoto(null);
+  }
+
+  // check to see if it's the city view or county view and set if necessary
 
   // set selected place from url if necessary
   const mapScale = (location.pathname.split('/').length > 1

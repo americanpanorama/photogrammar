@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TimelineRow from './TimelineRow.jsx';
+import './Timeline.css';
 
 const TimelineHeatmap = (props) => {
   const {
@@ -50,6 +51,7 @@ const TimelineHeatmap = (props) => {
 
   return (
     <div
+      className='timeline'
       style={{
         overflowY: (showOthers) ? 'visible' : 'hidden',
         height: props.height,
@@ -106,7 +108,6 @@ const TimelineHeatmap = (props) => {
               textAnchor='end'
               onClick={clearPhotographer}
               fontSize={height / photographers.length * 1.5}
-              fill={textColor}
             >
               clear selected photographer
             </text>
@@ -119,7 +120,6 @@ const TimelineHeatmap = (props) => {
               textAnchor='end'
               onClick={() => setShowOthers(true)}
               fontSize={monthHeight * 1.2}
-              fill={textColor}
             >
               other photographers
             </text>
@@ -130,7 +130,6 @@ const TimelineHeatmap = (props) => {
               textAnchor='end'
               onClick={() => setShowOthers(false)}
               fontSize={height / photographers.length * 1.5}
-              fill={textColor}
             >
               collapse photographers with less than 500 photos
             </text>

@@ -35,7 +35,7 @@ export const getSelectedPhotographerMetadata = createSelector(
   [getSelectedPhotographer],
   (selectedPhotographer) => {
     return Photographers.find(p => p.key === selectedPhotographer);
-  },
+  }
 );
 
 export const getSelectedPhotographerName = createSelector(

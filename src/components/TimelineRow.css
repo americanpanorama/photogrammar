@@ -1,0 +1,19 @@
+.wrapper.counties .timelineRow rect.cell {
+  fill: var(--map-counties-color);
+}
+
+.wrapper.cities .timelineRow rect.cell {
+  fill: var(--map-cities-color);
+}
+
+.wrapper.themes .timelineRow rect.cell {
+  fill: var(--themes-color);
+}
+
+.timelineRow text {
+  fill: #ddd !important;
+}
+
+.timelineRow text.active {
+  fill: #555 !important;
+}

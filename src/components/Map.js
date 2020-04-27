@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Map from './Map.jsx';
-import { selectCounty, selectCity, selectState, selectNation, selectViz } from '../store/actions';
+import { selectCounty, selectCity, selectState, selectNation, selectViz, selectMapView, selectPhoto } from '../store/actions';
 import { getSelectedCityMetadata, getCounties, getCities, getMapParameters, getLinkUp } from '../store/selectors';
 
 const mapStateToProps = state => {
@@ -15,6 +15,7 @@ const mapStateToProps = state => {
     selectedViz,
     mapParameters: getMapParameters(state),
     linkUp: getLinkUp(state),
+    selectedPhotoData: state.selectedPhotoData,
   };
 }
 
@@ -23,7 +24,9 @@ const mapDispatchToProps = {
   selectCity,
   selectState,
   selectNation,
-  selectViz
+  selectViz,
+  selectMapView,
+  selectPhoto,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

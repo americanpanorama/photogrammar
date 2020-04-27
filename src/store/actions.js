@@ -11,6 +11,33 @@ const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ
 //const basename = '/panorama/photogrammar';
 const basename = '';
 
+/* 
+  action functions
+    initializeData
+    selectViz
+    selectMapView
+    selectTheme
+    selectNation
+    selectState
+    selectCounty
+    selectCity
+    selectPhoto
+    selectPhotographer
+    clearPhotographer
+    setFilterTerms
+    clearFilterTerms
+    setPhotoOffset
+    setTimeRange
+    closeWelcome
+    windowResized
+    calculateDimensions
+
+  utility functions
+    getEventId
+    fetchJSON
+    getStateNameFromAbbr
+*/
+
 export function initializeData() {
   return async (dispatch, getState) => {
     const {
@@ -211,6 +238,12 @@ export function selectViz(eOrId) {
 }
 
 export function selectPhoto(eOrId) {
+  if (!eOrId) {
+    return {
+      type: A.SELECT_PHOTO,
+      payload: null,
+    };
+  }
   return async (dispatch, getState) => {
     const id = decodeURIComponent(getEventId(eOrId));
     const { selectedPhotoData } = getState();
@@ -296,6 +329,14 @@ export function selectMapView(eOrId) {
     });
   }
 }
+
+export function clearFilterTerms() {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: A.CLEAR_FILTER_TERMS,
+    });
+  };
+};
 
 export function setFilterTerms(terms) {
   return async (dispatch, getState) => {
@@ -443,47 +484,15 @@ export function calculateDimensions(options) {
     scale: Math.min(horizontalScale, verticalScale),
   }
 
-  // calculate the amount of padding either top/bottom or left/right for the map when displayed at zoom 0
-  // the ratio of width to height for albers is 960 / 500 or 1.92
-  const projWxHRatio = 960 / 500;
-  const vpWxHRatio = map.width / map.height;
-  let mapProjectionWidth;
-  let mapProjectionHeight;
-  let mapLRPadding;
-  let mapTBPadding;
-
-  // if viewport wider than map so left/right padding
-  if (vpWxHRatio > projWxHRatio) {
-    mapProjectionWidth = projWxHRatio * map.height;
-    mapProjectionHeight = map.height;
-    mapLRPadding = (map.width - mapProjectionWidth) / 2;
-    mapTBPadding = 0;
-  } else if (vpWxHRatio > projWxHRatio) {
-    mapProjectionWidth = map.width;
-    mapProjectionHeight = map.width / projWxHRatio;
-    mapLRPadding = 0;
-    mapTBPadding = (map.height / mapProjectionHeight) / 2;
-  } else {
-    mapProjectionWidth = map.width;
-    mapProjectionHeight = map.height;
-    mapLRPadding = 0; 
-    mapTBPadding = 0;
-  }
-  const mapProjection = {
-    width: mapProjectionWidth,
-    height: mapProjectionHeight,
-    mapLRPadding,
-    mapTBPadding,
-  };
-
   const sidebarWidth = Math.max(200, windowWidth * 0.33);
   const sidebarHeight = vizCanvas.height - welcomeHeight;
   const sidebarHeaderHeight = 70;
+  const filterHeight = 34;
   const sidebar = {
     width: sidebarWidth,
     height: sidebarHeight,
     headerHeight: sidebarHeaderHeight,
-    photosHeight: sidebarHeight - sidebarHeaderHeight,
+    photosHeight: sidebarHeight - sidebarHeaderHeight - filterHeight,
   }
 
   // the photocard will be scaled to be between 150 and 200px
@@ -526,7 +535,6 @@ export function calculateDimensions(options) {
     calculated: true,
     vizCanvas,
     map,
-    mapProjection,
     mapControls,
     sidebar,
     photoCards,
@@ -545,17 +553,6 @@ function getEventId(eOrId, type = 'string') {
     id = ct.id || ct.options.id;
   }
   return (type === 'number') ? parseInt(id, 10) : id;
-}
-
-export function setXYZ(x, y, z) {
-  return {
-    type: A.MAP_MOVED,
-    payload: {
-      x,
-      y,
-      z,
-    },
-  };
 }
 
 async function fetchJSON(path) {

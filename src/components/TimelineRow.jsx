@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
+import './TimelineRow.css';
 
 const TimelineRow = (props) => {
   const {
@@ -43,6 +44,7 @@ const TimelineRow = (props) => {
     <g
       transform={`translate(0, ${translateY})`}
       ref={ref}
+      className='timelineRow'
     >
       {(showLabel) && (
         <text
@@ -50,8 +52,8 @@ const TimelineRow = (props) => {
           y={monthHeight * 0.9}
           fontSize={monthHeight * 1.1}
           textAnchor='end'
-          fill={(active) ? "#555" : "#ddd"}
           filter={(deemphasize) ? 'url(#grayscale)' : null}
+          className={(active) ? "active" : ""}
         >
           {`${firstname} ${lastname}`}
         </text>
@@ -64,8 +66,9 @@ const TimelineRow = (props) => {
           width={monthWidth}
           height={monthHeight}
           fillOpacity={c.fillOpacity}
-          fill={c.fill}
+          //fill={c.fill}
           strokeWidth={0}
+          className='cell'
           key={`cellFor${c.year}${c.month}`}
           filter={(c.inSelection && !deemphasize) ? null : 'url(#grayscale)'}
         />
