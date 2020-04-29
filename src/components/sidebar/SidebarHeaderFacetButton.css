@@ -1,0 +1,41 @@
+#sidebar header .facets {
+  margin-left: -7px;
+}
+
+#sidebar header .facets button {
+  width: auto;
+  height: 30px;
+  font-weight: normal;
+  box-shadow: none;
+  line-height: 25px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  padding: 1px 7px 2px;
+  background-color: #f5f5f5;
+}
+
+#sidebar header .facets button + button {
+  margin-left: 10px;
+}
+
+#sidebar header .facets span {
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+#sidebar header .facets svg {
+  position: absolute;
+  left: calc(50% - 15px);
+  visibility: hidden
+}
+
+#sidebar header .facets button:hover {
+  color: #dedede;
+  background-color: #eee;
+}
+
+#sidebar header .facets button:hover svg {
+  visibility: visible;
+}

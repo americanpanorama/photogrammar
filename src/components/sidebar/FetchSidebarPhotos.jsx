@@ -20,6 +20,10 @@ const FetchSidebarPhotos = ({ query }) => {
         ...sp,
         caption: he.decode(sp.caption),
       }))
+
+      if (data.rows.length === 0) {
+        return null;
+      }
       return (
         <SidebarPhotos
           photos={data.rows}

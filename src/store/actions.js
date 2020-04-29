@@ -35,6 +35,8 @@ const basename = '';
   utility functions
     getEventId
     fetchJSON
+    fetchCountiesCitiesTheme
+    fetchTimelineCells
     getStateNameFromAbbr
 */
 
@@ -69,41 +71,11 @@ export function initializeData() {
         themes,
       }
     });
-    // if (selectedMapView === 'cities' && citiesData.length === 0) {
-    //   dispatch({
-    //     type: A.LOAD_CITIES,
-    //     payload: {
-    //       cities,
-    //     }
-    //   });
-    // }
     if (timelineCells.length === 0) {
-      let timelineCells = [];
-      if (selectedViz === 'map') {
-        if (selectedMapView === 'counties') {
-          if (selectedCounty) {
-            timelineCells = await fetchJSON(`${basename}/data/photoCounts/counties/${selectedCounty}.json`);
-          } else if (selectedState) {
-            timelineCells = await fetchJSON(`${basename}/data/photoCounts/states/${selectedState}.json`);
-          } else {
-            timelineCells = await fetchJSON(`${basename}/data/photoCounts/national.json`);
-          }
-        } else {
-          if (selectedCity) {
-            timelineCells = await fetchJSON(`${basename}/data/photoCounts/cities/${encodeURI(selectedCity)}.json`)
-          } else if (selectedState) {
-            timelineCells = await fetchJSON(`${basename}/data/photoCounts/statesCities/${selectedState}.json`);
-          } else {
-            timelineCells = await fetchJSON(`${basename}/data/photoCounts/nationalCities.json`);
-          }
-        }
-      } else if (selectedViz === 'themes') {
-        timelineCells = await fetchJSON(`${basename}/data/photoCounts/themes/${encodeURI(selectedTheme)}.json`);
-      }
       dispatch({
         type: A.LOAD_TIMELINE_CELLS,
         payload: {
-          timelineCells,
+          timelineCells: await fetchTimelineCells(getState()),
         }
       });
     }
@@ -131,9 +103,7 @@ export function selectPhotographer(eOrId) {
     const selectedPhotographer = (getState().selectedPhotographer !== clickedPhotographer)
       ? clickedPhotographer : null;
     const { selectedMapView } = getState();
-    const { counties, cities, themes } = (selectedPhotographer)
-      ? await fetchJSON(`${basename}/data/photographers/${selectedPhotographer}.json`)
-      : await fetchJSON(`${basename}/data/photographers/all.json`);
+    const { counties, cities, themes } = await fetchCountiesCitiesThemes(selectedPhotographer);
     dispatch({
       type: A.SELECT_PHOTOGRAPHER,
       payload: {
@@ -211,8 +181,6 @@ export function selectState(eOrId) {
 export function selectTheme(eOrId) {
   return async (dispatch, getState) => {
     const selectedTheme = getEventId(eOrId);
-    const { selectedPhotographer } = getState();
-    console.log(encodeURI(selectedTheme));
     dispatch({
       type: A.SELECT_THEME,
       payload: {
@@ -290,70 +258,77 @@ export function closeWelcome() {
 }
 
 export function setTimeRange(tr) {
-  return {
-    type: A.SET_TIME_RANGE,
-    payload: tr,
-  };
+  return async (dispatch, getState) => {
+    dispatch({
+      type: A.SET_TIME_RANGE,
+      payload: tr,
+    });
+
+    // fetch data if there's a filter selection
+    const { filterTerms } = getState();
+    if (filterTerms.length > 0) {
+      dispatch(setFilterTerms(filterTerms.join(' '), tr));
+    }
+  }
 }
 
 export function selectMapView(eOrId) {
   return async (dispatch, getState) => {
     const selectedMapView = getEventId(eOrId);
-    const { selectedCounty, selectedState } = getState();
-    let timelineCells;
-    if (selectedCounty) {
-      timelineCells = await fetchJSON(`${basename}/data/photoCounts/counties/${selectedCounty}.json`);
-    } else if (selectedState) {
-      if (selectedMapView === 'counties') {
-        timelineCells = await fetchJSON(`${basename}/data/photoCounts/states/${selectedState}.json`);
-      } else {
-        timelineCells = await fetchJSON(`${basename}/data/photoCounts/statesCities/${selectedState}.json`);
-      }
-    } else {
-      if (selectedMapView === 'counties') {
-        timelineCells = await fetchJSON(`${basename}/data/photoCounts/national.json`);
-      } else {
-        timelineCells = await fetchJSON(`${basename}/data/photoCounts/nationalCities.json`);
-      }
-    }
-    dispatch({
-      type: A.LOAD_TIMELINE_CELLS,
-      payload: {
-        timelineCells,
-      }
-    });
 
     dispatch({
       type: A.SELECT_MAP_VIEW,
       payload: selectedMapView,
+    });
+
+    dispatch({
+      type: A.LOAD_TIMELINE_CELLS,
+      payload: {
+        timelineCells: await fetchTimelineCells(getState()),
+      }
     });
   }
 }
 
 export function clearFilterTerms() {
   return async (dispatch, getState) => {
+    // fetch the visualization and timecellData
+    const [vizData, timelineCells] = await Promise.all([
+      fetchCountiesCitiesThemes(getState().selectedPhotographer),
+      fetchTimelineCells(getState()),
+    ]);
+    const { counties, cities, themes } = vizData;
     dispatch({
       type: A.CLEAR_FILTER_TERMS,
+      payload: {
+        counties,
+        cities,
+        themes,
+        timelineCells,
+      }
     });
   };
 };
 
-export function setFilterTerms(terms) {
+export function setFilterTerms(terms, tr) {
   return async (dispatch, getState) => {
       const {
       selectedPhotographer,
       selectedCounty,
       selectedCity,
       selectedState,
-      timeRange,
+      timeRange: stateTimeRange,
       selectedViz,
       selectedTheme,
       selectedMapView,
     } = getState();
+    // use either the user specified time range or state
+    const timeRange = tr || stateTimeRange;
     const filterTerms = terms.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g) || [];
 
     let counties;
     let cities;
+    let themes = { total: 0, children: {} };
     let timelineCells;
 
     let wheresForCityQuery = [];
@@ -378,15 +353,17 @@ export function setFilterTerms(terms) {
       // build the queries to select the counties, cities, and timelinecells
       const queryCounties = `select nhgis_join, count(img_large_path) as total from photogrammar_photos where nhgis_join is not null and ${wheres.join(' and ')} group by nhgis_join`;
       const queryCities = `select state, city, count(img_large_path) as total from photogrammar_photos where city is not null and ${wheres.join(' and ')} group by state, city`;
+      const queryThemes = `select vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, count(img_large_path) as total from photogrammar_photos where vanderbilt_level3 != '' and ${wheres.join(' and ')} group by vanderbilt_level1, vanderbilt_level2, vanderbilt_level3`;
       const photographers_wheres = Photographers
         .filter(p => p.count >= 75)
         .map(p => `photographer_name = '${p.firstname} ${p.lastname}'`);
       const queryTimelineCells = `SELECT year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g') as photographer, count(img_large_path) as count FROM photogrammar_photos where ${wheres.join(' and ')} and (${photographers_wheres.join( 'or ')}) group by year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g')`;
-
-      // fetch them
-      const [countyResults, cityResults, timelineCellResults] = await Promise.all([
+      
+            // fetch them
+      const [countyResults, cityResults, themesResults, timelineCellResults] = await Promise.all([
         fetchJSON(`${cartoURLBase}${encodeURIComponent(queryCounties)}`),
         fetchJSON(`${cartoURLBase}${encodeURIComponent(queryCities)}`),
+        fetchJSON(`${cartoURLBase}${encodeURIComponent(queryThemes)}`),
         fetchJSON(`${cartoURLBase}${encodeURIComponent(queryTimelineCells)}`),
       ]);
 
@@ -415,6 +392,30 @@ export function setFilterTerms(terms) {
         });
       }
 
+      const { rows: rowsThemes } = themesResults;
+      if (rowsThemes.length > 0) {
+        
+        rowsThemes.forEach(theme => {
+          const { vanderbilt_level1: level1, vanderbilt_level2: level2, vanderbilt_level3: level3, total } = theme;
+          themes.children[level1] = themes.children[level1] || {
+            total: 0,
+            children: {},
+          };
+          themes.children[level1].total += total;
+          themes.children[level1].children[level2] = themes.children[level1].children[level2] || {
+            total: 0,
+            children: {},
+          };
+          themes.children[level1].children[level2].children[level3] = themes.children[level1].children[level2].children[level3] || {
+            total: 0,
+          };
+          themes.total += total;
+          themes.children[level1].total += total;
+          themes.children[level1].children[level2].total += total;
+          themes.children[level1].children[level2].children[level3].total += total;
+        });
+      }
+
       ({ rows: timelineCells } = timelineCellResults);
     }
 
@@ -424,6 +425,7 @@ export function setFilterTerms(terms) {
         filterTerms,
         counties,
         cities,
+        themes,
         timelineCells,
       }
     });
@@ -559,6 +561,49 @@ async function fetchJSON(path) {
   const response = await fetch(path);
   const json = await response.json();
   return json;
+}
+
+async function fetchCountiesCitiesThemes(selectedPhotographer) {
+  return (selectedPhotographer)
+    ? await fetchJSON(`${basename}/data/photographers/${selectedPhotographer}.json`)
+    : await fetchJSON(`${basename}/data/photographers/all.json`);
+}
+
+async function fetchTimelineCells(state) {
+    const {
+      selectedViz,
+      selectedMapView,
+      selectedCounty,
+      selectedCity,
+      selectedState,
+      selectedTheme,
+    } = state;
+    let path;
+    if (selectedViz === 'map') {
+      if (selectedMapView === 'counties') {
+        if (selectedCounty) {
+          path = `${basename}/data/photoCounts/counties/${selectedCounty}.json`;
+        } else if (selectedState) {
+          path = `${basename}/data/photoCounts/states/${selectedState}.json`;
+        } else {
+          path = `${basename}/data/photoCounts/national.json`;
+        }
+      } else {
+        if (selectedCity) {
+          path = `${basename}/data/photoCounts/cities/${encodeURI(selectedCity)}.json`;
+        } else if (selectedState) {
+          path = `${basename}/data/photoCounts/statesCities/${selectedState}.json`;
+        } else {
+          path = `${basename}/data/photoCounts/nationalCities.json`;
+        }
+      }
+    } else if (selectedViz === 'themes') {
+      path = `${basename}/data/photoCounts/themes/${encodeURI(selectedTheme)}.json`;
+    }
+    if (path) {
+      return await fetchJSON(path);
+    };
+    return [];
 }
 
 export function getStateNameFromAbbr (abbr) {

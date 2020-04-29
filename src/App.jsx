@@ -38,13 +38,12 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
       <div
         className={`wrapper ${className}`}
       >
-      <header className="navbar-header">
-          <Link to={`/`}>
+        <header className="navbar-header">
+          <Link to={'/'}>
             Photogrammar
           </Link>
         </header>
         <Navbar />
-
 
         <div id="sidebar">
           <Welcome />
@@ -55,7 +54,7 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
 
         <div id="viz-canvas">
           <Switch>
-            <Route path={`/photo/:id`}>
+            <Route path={'/photo/:id'}>
               <Photo />
             </Route>
             <Route path={['/themes/:themeKey', '/themes']}>
@@ -63,7 +62,7 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
               <TimelineHeatmap />
               <TimelineSlider />
             </Route>
-            <Route path={['/city/:placeId', `/county/:placeId`, `/city/:placeId`, `/state/:placeId`, `/`]}>
+            <Route path={['/city/:placeId', '/county/:placeId', '/city/:placeId', '/state/:placeId', '/']}>
               <Map />
               <TimelineHeatmap />
               <TimelineSlider />

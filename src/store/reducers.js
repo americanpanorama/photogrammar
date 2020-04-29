@@ -9,35 +9,36 @@ const selectedPhotographer = (state = initialState, action) => {
   if (action.type === A.CLEAR_PHOTOGRAPHER) {
     return null;
   }
-  return state
+  return state;
 };
 
 const countiesData = (state = initialState, action) => (
-  (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_COUNTIES
-    || (action.type === A.SET_FILTER_TERMS && action.payload.counties))
-    ? action.payload.counties : state
+  // (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
+  //   || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_COUNTIES
+  //   || (action.type === A.SET_FILTER_TERMS && action.payload.counties)
+  //   || action.type === A.)
+  (action.payload && action.payload.counties) ? action.payload.counties : state
 );
 
 const citiesData = (state = initialState, action) => (
-  (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-    || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_CITIES
-    || (action.type === A.SET_FILTER_TERMS && action.payload.cities))
-    ? action.payload.cities : state
+  // (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
+  //   || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_CITIES
+  //   || (action.type === A.SET_FILTER_TERMS && action.payload.cities))
+  (action.payload && action.payload.cities) ? action.payload.cities : state
 );
 
 const themesData = (state = initialState, action) => (
-  (action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.SELECT_PHOTOGRAPHER
-    || action.type === A.CLEAR_PHOTOGRAPHER)
-    ? action.payload.themes : state
+  // (action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.SELECT_PHOTOGRAPHER
+  //   || action.type === A.CLEAR_PHOTOGRAPHER)
+  (action.payload && action.payload.themes) ? action.payload.themes : state
 );
 
 const timelineCells = (state = initialState, action) => (
-  (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
-    || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS
-    || action.type === A.SELECT_CITY || action.type === A.SELECT_THEME
-    || action.type === A.SET_FILTER_TERMS)
-    ? action.payload.timelineCells : state
+  // (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
+  //   || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS
+  //   || action.type === A.SELECT_CITY || action.type === A.SELECT_THEME
+  //   || action.type === A.SET_FILTER_TERMS)
+  (action.payload && action.payload.timelineCells)  ? action.payload.timelineCells : state
 );
 
 const selectedCounty = (state = initialState, action) => {

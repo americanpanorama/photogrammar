@@ -11,6 +11,13 @@
   line-height: 25px;
 }
 
+#sidebar header h3.noPhotos {
+  font-size: 25px;
+  text-align: center;
+  line-height: 35px;
+}
+
+
 #sidebar header .timeAndNav {
   display: grid;
   grid-template-columns: auto auto 40px 40px;
@@ -18,7 +25,7 @@
 }
 
 #sidebar header .timeAndNav h4,
-#sidebar header .timeAndNav counts {
+#sidebar header .timeAndNav .counts {
   line-height: 25px;
   margin: 0;
 }
@@ -29,10 +36,26 @@
 }
 
 #sidebar header .timeAndNav button {
+  padding: 0;
   margin-left: 10px;
   height: 25px;
 }
 
+#sidebar header .timeAndNav button svg line {
+  stroke-width: 2;
+  stroke: black;
+}
+
+#sidebar header .timeAndNav button:disabled svg line {
+  stroke: silver;
+}
+
+
+#sidebar header button.clearSearch {
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
 
 
 

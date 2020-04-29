@@ -5,7 +5,7 @@ import SimilarPhotoCard from './sidebar/PhotoCardSimilar.js';
 import USOutline from '../../public/data/us_outline.json';
 import './Photo.css';
 
-const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotographer, height }) => {
+const Photo = ({ photoMetadata, centroid, vizLink, selectPhoto, selectPhotographer, height }) => {
   const { id: loc_item_link } = useParams();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   if (!photoMetadata || photoMetadata.loc_item_link !== decodeURIComponent(loc_item_link)) {
@@ -41,9 +41,27 @@ const Photo = ({ photoMetadata, centroid, mapLink, selectPhoto, selectPhotograph
       }}
     >
       <div className='close'>
-        <Link to={`/${mapLink}`}>
+        <Link to={`/${vizLink}`}>
           <button>
-            {'<'}
+            <svg
+              width={25}
+              height={25}
+            >
+              <g transform='translate(12.5 12.5)'>
+                <line
+                  x1={-5}
+                  x2={5}
+                  y1={-5}
+                  y2={5}
+                />
+                <line
+                  x1={-5}
+                  x2={5}
+                  y1={5}
+                  y2={-5}
+                />
+              </g>
+            </svg>
           </button>
         </Link>
       </div>

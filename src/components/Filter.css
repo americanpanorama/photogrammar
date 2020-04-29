@@ -14,6 +14,10 @@
   grid-template-columns: auto 40px;
 }
 
+.filter.filtered {
+  grid-template-columns: auto 40px 40px;
+}
+
 .wrapper.counties .filter {
   border-color: var(--map-counties-color);
 }
@@ -34,10 +38,6 @@
   border: 3px solid black;
   background-color: white;
   
-}
-
-.filter.filtered {
-  grid-template-columns: auto 30px 40px;
 }
 
 .filter input[type=text] {

@@ -44,8 +44,8 @@ export const getSelectedPhotographerName = createSelector(
 );
 
 export const getCounties = createSelector(
-  [getCountiesData, getTimeRange, getSelectedCounty, getSelectedState],
-  (countiesData, timeRange, selectedCounty, selectedState) => {
+  [getCountiesData, getTimeRange, getSelectedCounty, getSelectedState, getFilterTerms],
+  (countiesData, timeRange, selectedCounty, selectedState, filterTerms) => {
     return Counties
       .filter(county => {
         const { j: nhgis_join, s: state } = county;
@@ -63,7 +63,9 @@ export const getCounties = createSelector(
         const [startTime, endTime] = timeRange;
         if (!countiesData[nhgis_join]) {
           photoCount = 0;
-        } else if (startTime > 193501 || endTime < 194504) {
+        } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 194504)) {
+          // Only run this conditional logic if there isn't filter terms
+          // If there is, the query to carto filters by time and returns `total`
           photoCount = Object
             .keys(countiesData[nhgis_join])
             .filter(k => {
@@ -101,8 +103,8 @@ export const getCounties = createSelector(
 );
 
 export const getCities = createSelector(
-  [getCitiesData, getTimeRange, getSelectedState],
-  (citiesData, timeRange, selectedState) => {
+  [getCitiesData, getTimeRange, getSelectedState, getFilterTerms],
+  (citiesData, timeRange, selectedState, filterTerms) => {
     if (Object.keys(citiesData).length === 0) {
       return [];
     }
@@ -120,7 +122,9 @@ export const getCities = createSelector(
         //console.log(citiesData[key]);
         if (!citiesData[key]) {
           total = 0;
-        } else if (startTime > 193501 || endTime < 193504) {
+        } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 193504)) {
+          // Only run this conditional logic if there isn't filter terms
+          // If there is, the query to carto filters by time and returns `total`
           total = Object
             .keys(citiesData[key])
             .filter(k => {
@@ -148,8 +152,8 @@ export const getCities = createSelector(
 );
 
 export const getThemes = createSelector(
-  [getThemesData, getTimeRange, getSelectedTheme, getSelectedPhotographerName, getDimensions],
-  (themesData, timeRange, selectedTheme, selectedPhotographerName, dimensions) => {
+  [getThemesData, getTimeRange, getSelectedTheme, getSelectedPhotographerName, getDimensions, getFilterTerms],
+  (themesData, timeRange, selectedTheme, selectedPhotographerName, dimensions, filterTerms) => {
     const { height, width } = dimensions.map;
 
     const x = d3.scaleLinear().range([0, width]);
@@ -188,12 +192,18 @@ export const getThemes = createSelector(
       wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
     }
 
+    if (filterTerms && filterTerms.length > 0) {
+      filterTerms.forEach(filterTerm => {
+         wheres.push(`caption ~* '\\m${filterTerm}'`);
+      });
+    }
+
     // organize the data for d3
     const organizedThemeData = {
       name: selectedTheme,
       children: Object.keys(rawThemes).map(theme => {
         let photoCount = rawThemes[theme].total;
-        if (startTime > 193501 || endTime < 194504) {
+        if ((!filterTerms || filterTerms.length === 0) && (startTime > 193501 || endTime < 194504)) {
           photoCount = Object
             .keys(rawThemes[theme])
             .filter(k => {
@@ -225,7 +235,8 @@ export const getThemes = createSelector(
       });
     const treemap = d3.treemap().tile(d3.treemapSquarify.ratio(1))(themesHierarchy);
 
-    const themesCoords = treemap.children.map((child, idx) => {
+    const themesCoords = (treemap && treemap.children && treemap.children.length > 0)
+      ? treemap.children.map((child, idx) => {
       // make the id--those on the bottom of the hierarchy need to be adjusted if they're selected to be their immediate ancestor
       const id = (themesPaths.length <= 2) ? `${selectedTheme}|${child.data.name}` : `root|${themesPaths.slice(0, themesPaths.length - 1).join('|')}|${child.data.name}`;
 
@@ -256,7 +267,8 @@ export const getThemes = createSelector(
         strokeWidth,
         fontColor,
       };
-    });
+      })
+      : [];
 
     // make the query 
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
@@ -583,9 +595,13 @@ export const getDateRangeString = createSelector(
   }
 );
 
-export const getMapLink = createSelector(
-  [getSelectedCounty, getSelectedState],
-  (selectedCounty, selectedState) => {
+export const getVizLink = createSelector(
+  [getSelectedCounty, getSelectedState, getSelectedViz, getSelectedTheme],
+  (selectedCounty, selectedState, selectedViz, selectedTheme) => {
+    console.log(selectedViz);
+    if (selectedViz === 'themes') {
+      return `themes/${selectedTheme}`;
+    }
     if (selectedCounty) {
       return `county/${selectedCounty}`;
     }

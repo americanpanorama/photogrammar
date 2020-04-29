@@ -43,7 +43,6 @@ const Map = (props) => {
   const location = useLocation();
 
   // deselect selectPhoto if necessary--which can happen because of the use of react-router links
-  console.log(selectedPhotoData);
   if (selectedPhotoData) {
     selectPhoto(null);
   }
@@ -222,7 +221,29 @@ const Map = (props) => {
         {(linkUp) && (
           <Link to={linkUp}>
             <button>
-              {'<'}
+              <svg
+                width={25}
+                height={25}
+              >
+                <g transform='translate(9 12.5)'>
+                  <line
+                    x1={0}
+                    x2={8}
+                    y1={0}
+                    y2={-5}
+                    stroke='black'
+                    strokeWidth={2}
+                  />
+                  <line
+                    x1={0}
+                    x2={8}
+                    y1={0}
+                    y2={5}
+                    stroke='black'
+                    strokeWidth={2}
+                  />
+                </g>
+              </svg>
             </button>
           </Link>
         )}

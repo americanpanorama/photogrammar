@@ -50,7 +50,18 @@
 
 .selectedPhoto .close {
   margin-top: 35px;
+  margin-left: 10px;
 }
+
+.selectedPhoto .close button {
+  padding: 0;
+}
+
+.selectedPhoto .close button svg line {
+  stroke-width: 2;
+  stroke: black;
+}
+
 
 .selectedPhoto .metadata {
   overflow-y: scroll;

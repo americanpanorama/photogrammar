@@ -11,7 +11,13 @@ const Filter = ({ terms, setFilterTerms, clearFilterTerms }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setFilterTerms(filterTermsRef.current.value);
-  }
+  };
+
+  const handleReset = () => {
+    setIsFiltered(false);
+    filterTermsRef.current.value = null;
+    clearFilterTerms();
+  };
 
   let className = 'filter';
   if (isSearching) {
@@ -34,12 +40,13 @@ const Filter = ({ terms, setFilterTerms, clearFilterTerms }) => {
           onChange={() => { setIsFiltered(filterTermsRef.current.value.length > 0)}}
           onFocus={() => { setIsSearching(true) }}
           onBlur={() => { setIsSearching(false) }}
+          value={(!isSearching) ? terms.join(' ') : null}
         />
       </form>
       {(isFiltered > 0) && (
         <button
           type='reset'
-          onClick={clearFilterTerms}
+          onClick={handleReset}
           form='filterForm'
         >
           <svg
@@ -70,10 +77,10 @@ const Filter = ({ terms, setFilterTerms, clearFilterTerms }) => {
         form='filterForm'
       >
         <svg
-          width={26}
+          width={30}
           height={30}
         >
-          <g transform={`translate(${18 / 2 * 1.5} ${18 / 2 * 1.5}) rotate(315)`}>
+          <g transform={`translate(15 18) rotate(315)`}>
             <circle
               cx={0}
               cy={18 * 1.5  * -0.1}
