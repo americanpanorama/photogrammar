@@ -2,10 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams } from "react-router-dom";
 import SimilarPhotoCard from './sidebar/PhotoCardSimilar.js';
-import USOutline from '../../public/data/us_outline.json';
 import './Photo.css';
 
-const Photo = ({ photoMetadata, centroid, vizLink, selectPhoto, selectPhotographer, height }) => {
+const Photo = (props) => {
+  const {
+    photoMetadata,
+    photographerKey,
+    centroid,
+    vizLink,
+    selectPhoto,
+    selectPhotographer,
+    selectedMapView,
+    height
+  } = props;
   const { id: loc_item_link } = useParams();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   if (!photoMetadata || photoMetadata.loc_item_link !== decodeURIComponent(loc_item_link)) {
@@ -20,11 +29,15 @@ const Photo = ({ photoMetadata, centroid, vizLink, selectPhoto, selectPhotograph
     city,
     county,
     state,
+    stateAbbr,
+    nhgis_join,
+    vanderbilt_level1,
+    vanderbilt_level2,
+    vanderbilt_level3,
     // longitude,
     // latitude,
     img_large_path,
   } = photoMetadata;
-
 
   let date = 'N/A';
   if (month && year) {
@@ -66,37 +79,71 @@ const Photo = ({ photoMetadata, centroid, vizLink, selectPhoto, selectPhotograph
         </Link>
       </div>
       <div className="metadata">
-        <div className="caption-text">
-          <p>Caption (Original Description)</p>
-        </div>
-        <div className="caption-text-description">
-          <p>{caption}</p>
+        <h5>Caption (Original Description)</h5>
+        <div className="metadatum">
+          {caption}
         </div>
 
-      {/* JSX Comment 
-        <div className="caption-text">
-          <p>Photographer</p>
-        </div> */}
-        <div className="caption-text-description">
-          <p>{photographer_name}</p>
+        <h5>Photographer</h5>
+        {(photographerKey) ? (
+          <button
+            onClick={selectPhotographer}
+            id={photographerKey}
+          >
+            {photographer_name}
+          </button>
+        ) : (
+          <div
+            className="metadatum"
+          >
+            {photographer_name}
+          </div>
+        )}
+
+        <h5>Created</h5>
+        <div className="metadatum">
+          {date}
         </div>
 
-      {/* JSX Comment 
-        <div className="caption-text">
-          <p>Created</p>
-        </div>*/}
-        <div className="caption-text-description">
-          <p>{date}</p>
-        </div>
+        {(vanderbilt_level3) && (
+          <React.Fragment>
+            <h5>Classification (Original Tagging System)</h5>
+            <Link to={`/themes/${encodeURI(`root|${vanderbilt_level1}`)}`}>
+              <button>
+                {vanderbilt_level1}
+              </button>
+            </Link>
+            <Link to={`/themes/${encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}`)}`}>
+              <button>
+                {vanderbilt_level2}
+              </button>
+            </Link>
+            <Link to={`/themes/${encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}|${vanderbilt_level3}`)}`}>
+              <button>
+                {vanderbilt_level3}
+              </button>
+            </Link>
+          </React.Fragment>
+        )}
 
-      {/* JSX Comment 
-        <div className="caption-text">
-          <p>Location</p>
-        </div>*/}
-        <div className="caption-text-description">
-          {(county && state && centroid && centroid.center && centroid.center[0]) ? (
+        <h5>Location</h5>
+        <div className="metadatum">
+          {((city || county) && state && centroid && centroid.center && centroid.center[0]) ? (
             <React.Fragment>
-              <p>{`${city || county}, ${state}`}</p>
+              {(selectedMapView === 'counties') && (
+                <Link to={`/county/${nhgis_join}`}>
+                  <button>
+                    {`${county}, ${state}`}
+                  </button>
+                </Link>
+              )}
+              {(selectedMapView === 'cities') && (
+                <Link to={`/city/${stateAbbr}_${encodeURI(city)}`}>
+                  <button>
+                    {`${city}, ${state}`}
+                  </button>
+                </Link>
+              )}
               <svg
                 width={300}
                 height={500 * 300 / 960}

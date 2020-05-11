@@ -11,7 +11,8 @@ const config = {
   entry: ['babel-polyfill', './src/index.js'],
   output: {
     path: appDir,
-    filename: 'main.js'
+    filename: 'main.js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx']

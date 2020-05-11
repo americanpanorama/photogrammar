@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Link, useParams, useLocation } from "react-router-dom";
 import * as d3 from 'd3';
 import County from './County.jsx';
 import State from './State.jsx';
 import City from './City.jsx';
 import MapLabel from './MapLabel.jsx';
 import States from '../../data/svgs/states.json';
-import { Link, useParams, useLocation } from "react-router-dom";
 import './Map.css';
 
 const Map = (props) => {
@@ -16,23 +16,13 @@ const Map = (props) => {
     selectedCounty,
     selectedCity,
     selectedState,
-    selectedMapView,
-    selectedViz,
-    selectCounty,
     selectCity,
-    selectState,
-    selectNation,
-    selectViz,
     mapParameters,
     linkUp,
-    selectMapView,
-    selectPhoto,
-    selectedPhotoData,
   } = props;
 
   const ref = useRef(null);
   const isMounting = useRef(true);
-  const isRetrievingData = useRef(false);
   const [ hoveredCounty, setHoveredCounty ] = useState(null);
   const [ hoveredCity, setHoveredCity ] = useState(null);
   // const [ hoveredState, setHoveredState ] = useState(null);
@@ -42,57 +32,48 @@ const Map = (props) => {
   const { placeId } = useParams();
   const location = useLocation();
 
-  // deselect selectPhoto if necessary--which can happen because of the use of react-router links
-  if (selectedPhotoData) {
-    selectPhoto(null);
-  }
-
   // check to see if it's the city view or county view and set if necessary
 
   // set selected place from url if necessary
   const mapScale = (location.pathname.split('/').length > 1
-    && ["state", "county", "city"].includes(location.pathname.split('/')[1]))
+    && ['state', 'county', 'city'].includes(location.pathname.split('/')[1]))
     ? location.pathname.split('/')[1] : 'national';
   const cityDivisor = (mapScale !== 'national') ? 3000 : 6000;
-  if (selectedMapView === 'counties' && mapScale === 'county') {
-    if (placeId !== selectedCounty && !isRetrievingData.current) {
-      selectCounty(placeId);
-      isRetrievingData.current = true;
-    } else if (placeId === selectedCounty && isRetrievingData.current) {
-      isRetrievingData.current = false;
-    }
-  }
+  // if (selectedMapView === 'counties' && mapScale === 'county') {
+  //   if (placeId !== selectedCounty && !isRetrievingData.current) {
+  //     selectCounty(placeId);
+  //     isRetrievingData.current = true;
+  //   } else if (placeId === selectedCounty && isRetrievingData.current) {
+  //     isRetrievingData.current = false;
+  //   }
+  // }
 
-  if (selectedViz !== 'map') {
-    selectViz('map');
-  }
-
-  if (mapScale === 'city' && placeId !== selectedCity) {
-    selectCity(placeId);
-  }
-  if (mapScale === 'state') {
-    if (!isRetrievingData.current && (placeId !== selectedState || selectedCounty || selectedCity)) {
-      selectState(placeId);
-      isRetrievingData.current = true;
-    } else if (placeId === selectedState && isRetrievingData.current) {
-      isRetrievingData.current = false;
-    }
-  }
-  if (mapScale === 'national') {
-    if (!isRetrievingData.current && (selectedState || selectedCounty || selectedCity)) {
-      selectNation();
-      isRetrievingData.current = true;
-    } else {
-      isRetrievingData.current = false;
-    }
-  }
+  // if (mapScale === 'city' && placeId !== selectedCity) {
+  //   selectCity(placeId);
+  // }
+  // if (mapScale === 'state') {
+  //   if (!isRetrievingData.current && (placeId !== selectedState || selectedCounty || selectedCity)) {
+  //     selectState(placeId);
+  //     isRetrievingData.current = true;
+  //   } else if (placeId === selectedState && isRetrievingData.current) {
+  //     isRetrievingData.current = false;
+  //   }
+  // }
+  // if (mapScale === 'national') {
+  //   if (!isRetrievingData.current && (selectedState || selectedCounty || selectedCity)) {
+  //     selectNation();
+  //     isRetrievingData.current = true;
+  //   } else {
+  //     isRetrievingData.current = false;
+  //   }
+  // }
 
   const mapLabelParams = {};
   if (selectedCity) {
     const selectedCityMetadata = cities.find(c => c.key === selectedCity);
     if (selectedCityMetadata) {
       mapLabelParams.label = selectedCityMetadata.city;
-      mapLabelParams.x = selectedCityMetadata.center[0]
+      mapLabelParams.x = selectedCityMetadata.center[0];
       mapLabelParams.y = selectedCityMetadata.center[1] - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
     }
   } else if (selectedCounty) {
@@ -104,10 +85,7 @@ const Map = (props) => {
     }
   }
 
-  const filteredCounties = (mapScale !== 'state') ? counties
-    : counties.filter(c => c.state === placeId);
-
-  const selectedCityMetadata = (selectedCity) ? cities.find(c => c.key === selectedCity) : null;
+  //const selectedCityMetadata = (selectedCity) ? cities.find(c => c.key === selectedCity) : null;
 
   useEffect(
     () => {
@@ -115,8 +93,8 @@ const Map = (props) => {
         d3.select(ref.current)
           .transition()
           .duration(1000)
-          .attr("transform", `translate(${mapParameters.translateX} ${mapParameters.translateY}) scale(${mapParameters.scale})`)
-          .on("end", () => {
+          .attr('transform', `translate(${mapParameters.translateX} ${mapParameters.translateY}) scale(${mapParameters.scale})`)
+          .on('end', () => {
             setTranslateX(mapParameters.translateX);
             setTranslateY(mapParameters.translateY);
             setScale(mapParameters.scale);
@@ -125,68 +103,30 @@ const Map = (props) => {
     }, [mapParameters.x, mapParameters.y, mapParameters.scale]
   );
 
-  // useEffect(
-  //   () => {
-  //     const svg = document.getElementById("map");
-  //     const cityLabels = d3.selectAll('.cityLabel');
-
-  //     cityLabels.nodes().forEach((label, i) => {
-  //       const nodesToCheck = cityLabels.nodes().slice(i + 1, 100);
-  //       const labelBB = label.getBBox();
-  //       const XY = label.transform.baseVal.consolidate();
-  //       labelBB.x += XY.matrix.e;
-  //       labelBB.y += XY.matrix.f;
-
-  //       nodesToCheck.forEach(ntc => {
-  //         const ntcBB = ntc.getBBox();
-  //         console.log(ntc, labelBB, svg.checkIntersection(ntc, labelBB));
-  //         if (svg.checkIntersection(ntc, labelBB)) {
-  //           //console.log(label);
-  //           d3.select(label)
-  //             .style('display', 'none');
-  //         }
-  //       });
-  //       //console.log(label.getBBox());
-
-  //       //d3.select(label).style('display', 'none');
-  //     });
-  //   }
-  // );
-
-
-  // const onStateHover = (abbr) => {
-  //   // find the state
-  //   const hs = States.find(state => state.abbr === abbr);
-  //   console.log('hover');
-  //   setTimeout(() => setHoveredState(hs), 250);
-  // };
-
-  // const onStateUnhover = () => {
-  //   console.log('unhover');
-  //   setHoveredState(null);
-  // }
-
   const onCityHover = (cityKey) => {
     // find the city
     const hoveredCity = cities.find(city => cityKey === city.key);
     setHoveredCity(hoveredCity);
-  }
+  };
 
   const onCityUnhover = () => {
     setHoveredCity(null);
-  }
+  };
 
   const onCountyHover = (nhgis_join) => {
     // find the city
     if (nhgis_join !== selectedCounty) {
       const hoveredCounty = counties.find(counties => nhgis_join === counties.nhgis_join);
-      setHoveredCounty(hoveredCounty);
+      // only hover if it has photos
+      if (hoveredCounty.photoCount > 0) {
+        setHoveredCounty(hoveredCounty);
+      }
     }
-  }
+  };
 
   const onCountyUnhover = () => {
     setHoveredCounty(null);
-  }
+  };
 
   // prevent render on initial load until map parameters have been calculated
   if (isMounting.current) {
@@ -343,18 +283,6 @@ const Map = (props) => {
               label={mapLabelParams.label}
             />
           )}
-
-        {/* JSX Comment 
-          { cities.filter(c => mapScale === 'state' && c.center && c.center[0]).map(city => (
-            <MapLabel 
-              x={city.center[0]}
-              y={city.center[1] - Math.sqrt(city.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale}
-              fontSize={12 / scale}
-              label={city.city}
-              key={`cityLabelFor${city.state} ${city.city}`}
-            />
-          ))} */}
-
         </g>
       </svg>
     </React.Fragment>

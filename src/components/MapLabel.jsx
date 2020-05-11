@@ -10,20 +10,20 @@ const MapLabel = (props) => {
 
   const [fontSize, setFontSize] = useState(props.fontSize);
 
-  useEffect(() => {
-    d3.select(refBackground.current)
-      .transition()
-      .duration(900)
-      .attr("font-size", props.fontSize)
-      .style("stroke-width", props.fontSize / 4);
-    d3.select(refForeground.current)
-      .transition()
-      .duration(900)
-      .attr("font-size", props.fontSize)
-      .on('end', () => {
-        setFontSize(props.fontSize);
-      });
-  }, [props.fontSize]);
+  // useEffect(() => {
+  //   d3.select(refBackground.current)
+  //     .transition()
+  //     .duration(900)
+  //     .attr("font-size", props.fontSize)
+  //     .style("stroke-width", props.fontSize / 4);
+  //   d3.select(refForeground.current)
+  //     .transition()
+  //     .duration(900)
+  //     .attr("font-size", props.fontSize)
+  //     .on('end', () => {
+  //       setFontSize(props.fontSize);
+  //     });
+  // }, [props.fontSize]);
 
   return (
     <g

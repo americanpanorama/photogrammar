@@ -1,15 +1,14 @@
 import he from 'he';
 import A from './actionTypes';
-import Photographers from '../../public/data/photographers.json';
+import Photographers from '../../data/photographers.json';
 import Counties from '../../data/svgs/counties.json';
-import Cities from '../../public/data/citiesCounts.json';
+import Cities from '../../data/citiesCounts.json';
 import { makeWheres } from './selectors';
 
 const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
-const sqlQueryBase = 'SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos';
+const sqlQueryBase = 'SELECT * FROM photogrammar_photos';
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
-//const basename = '/panorama/photogrammar';
-const basename = '';
+const basename = process.env.PUBLIC_URL;
 
 /* 
   action functions
@@ -29,6 +28,7 @@ const basename = '';
     setPhotoOffset
     setTimeRange
     closeWelcome
+    toggleExpandedSidebar
     windowResized
     calculateDimensions
 
@@ -53,9 +53,10 @@ export function initializeData() {
       selectedMapView,
       selectedViz,
       selectedTheme,
-      isWelcomeOpen
+      isWelcomeOpen,
+      expandedSidebar
     } = getState();
-    const theDimensions = calculateDimensions({ isWelcomeOpen });
+    const theDimensions = calculateDimensions({ isWelcomeOpen, expandedSidebar });
     if (!dimensions.calculated) {
       dispatch({
         type: A.DIMENSIONS_CALCULATED,
@@ -231,9 +232,12 @@ export function selectPhoto(eOrId) {
       const photoData = photoDataResults.rows[0];
       photoData.caption = he.decode(photoData.caption);
 
+      photoData.stateAbbr = getStateAbbr(photoData.state);
+
       photoData.similarPhotos = similarPhotosData.rows.map(sp => ({
         ...sp,
         caption: he.decode(sp.caption),
+        stateAbbr: getStateAbbr(photoData.state),
       }));
       
       dispatch({
@@ -257,17 +261,32 @@ export function closeWelcome() {
   }
 }
 
+export function toggleExpandedSidebar() {
+  return async (dispatch, getState) => {
+    const theDimensions = calculateDimensions({ isWelcomeOpen: false, expandedSidebar: !getState().expandedSidebar });
+    dispatch({
+      type: A.DIMENSIONS_CALCULATED,
+      payload: theDimensions,
+    });
+    dispatch({
+      type: A.TOGGLE_EXPANDED_SIDEBAR,
+    });
+  }
+}
+
 export function setTimeRange(tr) {
   return async (dispatch, getState) => {
+    // if time range isn't set, reset it to the full view
+    const timeRange = (tr && Array.isArray(tr) && tr.length === 2) ? tr : [193501, 194406];
     dispatch({
       type: A.SET_TIME_RANGE,
-      payload: tr,
+      payload: timeRange,
     });
 
     // fetch data if there's a filter selection
     const { filterTerms } = getState();
     if (filterTerms.length > 0) {
-      dispatch(setFilterTerms(filterTerms.join(' '), tr));
+      dispatch(setFilterTerms(filterTerms.join(' '), timeRange));
     }
   }
 }
@@ -453,10 +472,14 @@ export function calculateDimensions(options) {
   const windowWidth = Math.max(800, innerWidth);
 
   let welcomeHeight = (options && options.isWelcomeOpen) ? 0 : 0;
+  const expandedSidebar = (options && options.expandedSidebar);
 
+  const vizCanvasWidth =  (!expandedSidebar)
+    ? Math.min(windowWidth * 0.66, windowWidth - 200) - padding * 2
+    : Math.min(windowWidth * 0.33, windowWidth - 200) - padding * 2
   const vizCanvas = {
     height: Math.max(600, innerHeight - headerHeight - padding * 4  - timelineSliderHeight),
-    width: Math.min(windowWidth * 0.66, windowWidth - 200) - padding * 2,
+    width: vizCanvasWidth,
   }
 
   const selectedPhoto = {
@@ -486,7 +509,9 @@ export function calculateDimensions(options) {
     scale: Math.min(horizontalScale, verticalScale),
   }
 
-  const sidebarWidth = Math.max(200, windowWidth * 0.33);
+  const sidebarWidth = (!expandedSidebar)
+    ? Math.max(200, windowWidth * 0.33)
+    : Math.max(200, windowWidth * 0.66);
   const sidebarHeight = vizCanvas.height - welcomeHeight;
   const sidebarHeaderHeight = 70;
   const filterHeight = 34;
@@ -498,16 +523,25 @@ export function calculateDimensions(options) {
   }
 
   // the photocard will be scaled to be between 150 and 200px
-  const photoCardMinWidth = 160;
-  const photoCardMaxWidth = 220;
-  const cols = Math.floor(sidebarWidth / photoCardMinWidth);
-  const photoCardWidth = sidebarWidth / cols * 0.96;
+  const photoCardMinWidth = (expandedSidebar) ? 250 : 160;
+  const photoCardMaxWidth = 300;
+  const maxCols = Math.floor(sidebarWidth / photoCardMinWidth);
+  let cols = Math.floor(sidebarWidth / photoCardMinWidth);
+  let photoCardWidth = sidebarWidth / cols * 0.96;
+
+  // if the maxCols is three or greater, increase the size to make them more visible--shooting for 250 give or take
+  for (let potentialCols = cols - 1; potentialCols >= 3 && photoCardWidth < 220; potentialCols -= 1) {
+    cols = potentialCols;
+    photoCardWidth = sidebarWidth / potentialCols * 0.96
+  }
+  //const cols = Math.floor(sidebarWidth / photoCardMinWidth);
+  //const photoCardWidth = sidebarWidth / cols * 0.96;
   const photoCardScale = photoCardWidth / photoCardMaxWidth;
-  const photoCardHeight = 350 * photoCardScale;
+  const photoCardHeight = 400 * photoCardScale;
   const rows = Math.max(1, Math.floor(sidebarHeight / photoCardHeight));
   //const photoCardWidth = Math.min(200, sidebarWidth / 2);
   const photoCardPaddingMargin = Math.min(5, photoCardWidth * 0.25);
-  const photoCardBorderWidth = Math.max(3, photoCardWidth * 0.015);
+  const photoCardBorderWidth = Math.max(2, photoCardWidth * 0.01);
   const interiorWidth = photoCardWidth - photoCardPaddingMargin * 2 - photoCardBorderWidth * 2;
   const interiorHeight = photoCardHeight - photoCardPaddingMargin * 2 - photoCardBorderWidth * 2;
   //const photoCardHeight = 350;
@@ -609,3 +643,11 @@ async function fetchTimelineCells(state) {
 export function getStateNameFromAbbr (abbr) {
   return stateabbrs[abbr];
 }
+
+export const getStateAbbr = (name) => {
+  const stIndex = Object.values(stateabbrs)
+    .findIndex(stateName => stateName.toLowerCase() === name.toLowerCase());
+  const abbr = Object.keys(stateabbrs)[stIndex];
+
+  return abbr;
+};

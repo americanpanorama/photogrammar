@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 import * as d3 from 'd3';
-import counties from '../../public/data/counties.json';
 import Counties from '../../data/svgs/counties.json';
-import Photographers from '../../public/data/photographers.json';
-import StateCounts from '../../public/data/stateCounts.json';
-import Cities from '../../public/data/citiesCounts.json';
+import Photographers from '../../data/photographers.json';
+import PhotographersMetadata from '../../data/photographersMetadata.json';
+import StateCounts from '../../data/stateCounts.json';
+import Cities from '../../data/citiesCounts.json';
 import Centroids from '../../data/centroids.json';
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
 
@@ -27,14 +27,37 @@ const getTimelineCells = state => state.timelineCells;
 const getFilterTerms = state => state.filterTerms;
 
 export const getPhotographers = (min = 0, max = 50000) => (
-  Photographers.filter(p => p.count >= min && p.count <= max)
+  Photographers
+    .filter(p => p.count >= min && p.count <= max)
+    .map(p => {
+      const additionalMetadata = PhotographersMetadata.find(pm => p.key === pm.key);
+      if (additionalMetadata) {
+        return ({
+          ...p,
+          ...additionalMetadata,
+        });
+      }
+      return p;
+    })
 );
+
 export const getCentroidForCounty = (nhgis_join) => Centroids.counties[nhgis_join];
 
 export const getSelectedPhotographerMetadata = createSelector(
   [getSelectedPhotographer],
   (selectedPhotographer) => {
-    return Photographers.find(p => p.key === selectedPhotographer);
+    const photographer =  Photographers.find(p => p.key === selectedPhotographer)
+    if (photographer) {
+      const additionalMetadata = PhotographersMetadata.find(pm => photographer.key === pm.key);
+      if (additionalMetadata) {
+        return ({
+          ...photographer,
+          ...additionalMetadata,
+        });
+      }
+      return photographer;
+    }
+    return null;
   }
 );
 
@@ -290,12 +313,14 @@ export const getThemes = createSelector(
 export const getSelectedCountyMetadata = createSelector(
   [getSelectedCounty, getCountiesData],
   (selectedCounty, countiesData) => {
-    const county = counties.features.find(c => c.properties.nhgis_join === selectedCounty);
-    if (county && county.properties) {
-      const photoCount = (countiesData[county.properties.nhgis_join]) ? countiesData[county.properties.nhgis_join].total : 0;
+    const county = Counties.find(c => c.j === selectedCounty);
+    if (county) {
       return {
-        ...county.properties,
-        photoCount,
+        state_terr: county.s,
+        name: county.n,
+        photoCount: county.c,
+        area_sqmi: county.a,
+        nhgis_join: county.j,
       };
     }
     return null;
@@ -362,6 +387,15 @@ export const getSelectedStateName = createSelector(
   [getSelectedState],
   (selectedState) => stateabbrs[selectedState]
 );
+
+export const getStateAbbr = (name) => {
+  const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
+  const stIndex = Object.values(stateabbrs)
+    .findIndex(stateName => stateName.toLowerCase() === name.toLowerCase());
+  const abbr = Object.keys(stateabbrs)[stIndex];
+
+  return abbr;
+};
 
 export const getSelectedStatePhotoCount = createSelector(
   [getSelectedState],
@@ -494,12 +528,12 @@ export const getSidebarPhotosWheres = createSelector(
 );
 
 export const getSidebarPhotosQuery = createSelector(
-  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers, getSelectedMapView, getWheresForCityQuery, getSelectedViz, getSelectedTheme, getSidebarPhotosWheres],
-  (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, offset, dimensions, randomPhotoNumbers, selectedMapView, wheresForCityQuery, selectedViz, selectedTheme, wheres) => {
+  [getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers, getSidebarPhotosWheres],
+  (offset, dimensions, randomPhotoNumbers, wheres) => {
     let query;
     const { displayableCards } = dimensions.photoCards;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
-    const sqlQueryBase = 'SELECT * FROM photogrammar_photos';
+    const sqlQueryBase = 'SELECT loc_item_link, photographer_name, caption, year, month, vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, city, county, state, img_thumb_img FROM photogrammar_photos';
     if (wheres.length > 0) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where} order by year, month limit ${displayableCards} offset ${offset}`;
@@ -589,8 +623,8 @@ export const getDateRangeString = createSelector(
       year: Math.floor(tr / 100),
       month: tr % 100,
     }));
-    const startString = `${monthNames[yearMonths[0].month]} ${yearMonths[0].year}`;
-    const endString = `${monthNames[yearMonths[1].month]} ${yearMonths[1].year}`;
+    const startString = `${monthNames[yearMonths[0].month - 1]} ${yearMonths[0].year}`;
+    const endString = `${monthNames[yearMonths[1].month - 1]} ${yearMonths[1].year}`;
     return `${startString}-${endString}`;
   }
 );
@@ -659,17 +693,22 @@ export const getMapParameters = createSelector(
 );
 
 export const getLinkUp = createSelector(
-  [getSelectedCounty, getSelectedCityMetadata, getSelectedState, getCounties],
-  (selectedCounty, selectedCityMetadata, selectedState, counties) => {
-    if (selectedCounty) {
-      return `/state/${counties.find(c => c.nhgis_join === selectedCounty).state}`;
-    }
-    if (selectedCityMetadata) {
-      console.log(selectedCityMetadata);
-      return `/state/${selectedCityMetadata.state}`;
-    }
-    if (selectedState) {
-      return '/'
+  [getSelectedCounty, getSelectedCityMetadata, getSelectedState, getCounties, getSelectedMapView],
+  (selectedCounty, selectedCityMetadata, selectedState, counties, selectedMapView) => {
+    if (selectedMapView === 'counties') {
+      if (selectedCounty) {
+        return `/state/${counties.find(c => c.nhgis_join === selectedCounty).state}`;
+      }
+      if (selectedState) {
+        return '/'
+      }
+    } else {
+      if (selectedCityMetadata) {
+        return `/state/${selectedCityMetadata.state}#mapview=cities`;
+      }
+      if (selectedState) {
+        return '/maps#mapview=cities'
+      }
     }
   }
 );
@@ -685,7 +724,8 @@ export const getTimelineHeatmapRows = createSelector(
     const baseColor = (selectedMapView === 'counties') ? '#6a1b9a' : '#289261';
 
     // create the basic photographers data
-    const filteredCells = timelineCells.filter(tc => tc.year < 1944 || tc.month <= 6);
+    const filteredCells = timelineCells
+      .filter(tc => tc.month && tc.year < 1944 || tc.month <= 6);
     const activePhotographers = filteredCells.map(tc => tc.photographer);
     const opacityDenominator = Math.min(200, Math.max(...filteredCells.map(tc => tc.count)));
     const threshold = 500;

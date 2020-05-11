@@ -6,6 +6,10 @@ nav.navbar {
   text-decoration: none;
 }
 
+.navbar li span {
+  cursor: pointer;
+}
+
 .navbar li.active {
   border-bottom: 4px solid silver;
 }
@@ -20,6 +24,10 @@ nav.navbar {
 
 .navbar li.active.themes {
   border-bottom: 4px solid var(--themes-color);
+}
+
+.navbar li.active.photographerslink {
+  border-bottom: 4px solid var(--photographers-color);
 }
 
 

@@ -29,19 +29,19 @@ const PhotoCard = (props) => {
     city,
     county,
     state,
+    stateAbbr,
     photographer_name,
     month,
     year
   } = photo;
 
   let location = state || '';
-  if (selectedMapView === 'counties' && county && state) {
-    location = `${county}, ${state}`
+  if (selectedMapView === 'counties' && county && stateAbbr) {
+    location = `${county}, ${stateAbbr}`;
   }
-  if (selectedMapView === 'cities' && city && state) {
-    location = `${city}, ${state}`
+  if (selectedMapView === 'cities' && city && stateAbbr) {
+    location = `${city}, ${stateAbbr}`;
   }
-
 
   return (
     <div
@@ -71,9 +71,6 @@ const PhotoCard = (props) => {
               className="thumbnail"
               style={{
                 backgroundImage: `url(http://photogrammar.yale.edu/photos/service/pnp/${img_thumb_img})`,
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
               }}
             />
           ) : (
@@ -87,7 +84,12 @@ const PhotoCard = (props) => {
               </div>
             </div>
           )}
-          <div className="post-entry-caption">
+          <div
+            className="post-entry-caption"
+            style={{
+              maxWidth: interiorWidth,
+            }}
+          >
             {caption}
           </div>
           <div className="post-entry-location">

@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ConditionalWrapper from '../ConditionalWrapper.jsx';
 import './SidebarHeaderFacetButton.css';
 
-const ConditionalWrapper = ({ condition, wrapper, children }) => (
-  condition ? wrapper(children) : children
-);
-
-const SidebarHeaderFacetButton = ({ label, onClick, link }) => {
+const SidebarHeaderFacetButton = ({ label, onClick, link, disabled}) => {
   if (!label) {
     return null;
   }
@@ -18,6 +15,7 @@ const SidebarHeaderFacetButton = ({ label, onClick, link }) => {
     >
       <button
         onClick={onClick}
+        disabled={disabled}
       >
         {label}
         <svg
@@ -54,10 +52,12 @@ SidebarHeaderFacetButton.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
   link: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 SidebarHeaderFacetButton.defaultProps = {
   label: null,
   onClick: () => false,
   link: null,
+  disabled: false,
 };

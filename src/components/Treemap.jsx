@@ -30,21 +30,8 @@ const useFetch = (url, options) => {
   return { response, error, isLoading };
 };
 
-const Treemap = ({ themes, name, ancestors, height, width, selectedTheme, selectedViz, selectTheme, selectViz }) => {
+const Treemap = ({ themes, name, ancestors, height, width, selectedTheme}) => {
   const ref = useRef();
-
-  let { themeKey } = useParams();
-  if (!themeKey) {
-    themeKey = 'root';
-  }
-
-  if (selectedViz !== 'themes') {
-    selectViz('themes');
-  }
-
-  if (themeKey && themeKey !== selectedTheme) {
-    selectTheme(themeKey);
-  }
 
   return (
     <svg
@@ -54,7 +41,7 @@ const Treemap = ({ themes, name, ancestors, height, width, selectedTheme, select
     >
       <text
         x={width - 5}
-        y={16}
+      y={16}
         textAnchor='end'
       >
         1942 Classification System
@@ -90,9 +77,7 @@ const Treemap = ({ themes, name, ancestors, height, width, selectedTheme, select
             >
               <tspan
                 dx={10}
-                //onClick={selectTheme}
                 id={ancestor.key}
-                
               >
                 {ancestor.name}
               </tspan>
@@ -114,12 +99,6 @@ const Treemap = ({ themes, name, ancestors, height, width, selectedTheme, select
           </Fragment>
         }
       </text>
-      <rect
-        y={20}
-        width={width}
-        height={height - 20}
-        fill='#999'
-      />
       <g>
         {themes.map(cat => (
           <TreemapTheme

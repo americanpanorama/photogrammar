@@ -1,6 +1,6 @@
 .selectedPhoto {
   display: grid;
-  grid-template-columns: 50px 1fr minmax(60%,2fr);
+  grid-template-columns: 50px 1fr minmax(60%, 2fr);
   grid-template-rows: 2fr 50px 1fr;
   overflow: visible;
 }
@@ -11,37 +11,46 @@
   max-height: calc(100vh - 101px -  325px);
 }
 
-
 .similarPhotosHeader {
   margin: 0;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  width: 100%;
+  grid-column: 1  / span 3;
+  grid-row: 2 / span 1;
   font-size: 1.4em;
   text-align: center;
   border-top: 1px solid black;
-  width: calc(100% - 20px);
 }
 
 .similarPhotos {
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 4;
+  grid-column: 1 / span 3;
+  grid-row: 3 / span 1;
   overflow-x: scroll;
 }
 
 .similarPhotos .cards {
-  width: 6000px;
+  white-space: nowrap;
+  padding: 0 20px;
 }
 
+.selectedPhoto .metadata {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+  overflow-x: hidden;
+}
 
+.selectedPhoto .metadata * {
+  font-size: 1em;
+  overflow-y: scroll;
+  overflow-x: visible;
+  text-align: right;
+  margin-right: 7px;
+  clear: both;
+}
 
-.caption-text p {
+.selectedPhoto .metadata h5 {
   color: #111;
-  margin-bottom: 5px;
+  margin: 10px 0 0 0;
+  font-size: 1em;
+  color: #555;
 }
 
 .caption-text-description p {
@@ -51,6 +60,8 @@
 .selectedPhoto .close {
   margin-top: 35px;
   margin-left: 10px;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
 }
 
 .selectedPhoto .close button {
@@ -62,9 +73,25 @@
   stroke: black;
 }
 
+.selectedPhoto .metadata button {
+  width: auto;
+  height: 30px;
+  font-weight: normal;
+  font-size: 14px;
+  box-shadow: none;
+  line-height: 25px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  padding: 1px 7px 2px;
+  background-color: #f5f5f5;
+  color: #222;
+  margin: 4px 0 4px -7px;
+  float: right;
+}
 
-.selectedPhoto .metadata {
-  overflow-y: scroll;
-  text-align: right;
+.selectedPhoto .metadata button:hover {
+  background-color: #ddd;
+  color: black;
 }
 

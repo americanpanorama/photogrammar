@@ -53,23 +53,24 @@ const TreemapTheme = (props) => {
         {(imgSrc) && (
           <image
             xlinkHref={`http://photogrammar.yale.edu/photos/service/pnp/${imgSrc}`}
-            x={0}
-            y={0}
-            width={width - strokeWidth}
-            height={height - strokeWidth}
+            x={strokeWidth / 2}
+            y={strokeWidth}
+            width={width - strokeWidth * 2}
+            height={height - strokeWidth * 2}
             preserveAspectRatio='xMidYMid slice'
             className='rectangular'
           />
         )}
-        <rect
-          x={strokeWidth / 2}
-          y={strokeWidth / 2}
-          width={width - strokeWidth}
-          height={height - strokeWidth}
+
+        <line
+          x1={strokeWidth * 1.5}
+          y1={strokeWidth}
+          x2={strokeWidth * 1.5}
+          y2={height - strokeWidth}
           fill={fill}
-          fillOpacity={fillOpacity}
+          fillOpacity={1}
           stroke={fill}
-          strokeWidth={strokeWidth}
+          strokeWidth={strokeWidth * 3 }
           className='rectangular'
         />
         <g transform={`translate(${width / 2} ${height * 0.8 + fontSize * 1.1})`}>

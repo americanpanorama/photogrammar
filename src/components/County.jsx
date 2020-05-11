@@ -46,9 +46,8 @@ const County = (props) => {
           fill: fill,
           fillOpacity: fillOpacity,
           strokeWidth: strokeWidth, //(nhgis_join === selectedCounty) ?  3 / scale : 0.2 / scale,
-          stroke: 'white',
-          strokeOpacity: 1,
         }}
+        className='countyPolygon'
         ref={ref} 
         id={nhgis_join}
         className={'countyBoundary'}

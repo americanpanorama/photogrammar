@@ -47,7 +47,7 @@ const TimelineHeatmap = (props) => {
     if (hoveredPhotographer) {
       setHoveredPhotographer(null);
     }
-  }
+  };
 
   return (
     <div
@@ -74,31 +74,45 @@ const TimelineHeatmap = (props) => {
               <feFuncA type="table" tableValues="0 0.3"/>
             </feComponentTransfer>
           </filter>
-          {photographers.map(p => {
-            let y = p.y;
-            // the other photographers cells are overlayed on one another when they're not individually shown
-            if (p.isOther && !showOthers) {
-              y = translateY * -1 + 1 + monthHeight / 2;
-            }
-            // with one exception: if the photographer is selected
-            if (!showOthers && p.isOther && selectedPhotographer === p.key) {
-              y = translateY * -1 + 1 + monthHeight * 2;
-            }
-            return (
-              <TimelineRow
-                {...p}
-                y={y}
-                showLabel={(!p.isOther || selectedPhotographer === p.key || showOthers)}
-                deemphasize={(hoveredPhotographer && hoveredPhotographer != p.key)}
-                photographerKey={p.key}
-                monthWidth={monthWidth}
-                monthHeight={monthHeight}
-                key={`timelineRowFor${p.key}`}
-                onHover={onHover}
-                onUnhover={onUnhover}
-                onClick={selectPhotographer}
-              />
-            );
+          {photographers
+            .sort((a, b) =>  {
+              if (!hoveredPhotographer) {
+                return 0;
+              }
+              if (hoveredPhotographer === a.key) {
+                return -1;
+              }
+              if (hoveredPhotographer === b.key) {
+                return 1;
+              }
+              return 0;
+            })
+            .map(p => {
+              let y = p.y;
+              // the other photographers cells are overlayed on one another when they're not individually shown
+              if (p.isOther && !showOthers) {
+                y = translateY * -1 + 1 + monthHeight / 2;
+              }
+              // with one exception: if the photographer is selected
+              if (!showOthers && p.isOther && selectedPhotographer === p.key) {
+                y = translateY * -1 + 1 + monthHeight * 2;
+              }
+              return (
+                <TimelineRow
+                  {...p}
+                  y={y}
+                  showLabel={(!p.isOther || selectedPhotographer === p.key || showOthers)}
+                  deemphasize={(hoveredPhotographer && hoveredPhotographer !== p.key)}
+                  emphasize={(hoveredPhotographer && hoveredPhotographer === p.key)}
+                  photographerKey={p.key}
+                  monthWidth={monthWidth}
+                  monthHeight={monthHeight}
+                  key={`timelineRowFor${p.key}`}
+                  onHover={onHover}
+                  onUnhover={onUnhover}
+                  onClick={selectPhotographer}
+                />
+              );
           })}
 
           {(selectedPhotographer) && (

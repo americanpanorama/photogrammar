@@ -1,0 +1,137 @@
+.photographer {
+  display: grid;
+  grid-template-columns: 50px 1fr 2fr;
+  grid-template-rows: 50px calc(100vh - 150px);
+  height: calc(100vh - 100px);
+  overflow-y: hidden;
+}
+
+.photographer > *{
+  padding: 0 10px;
+}
+
+.photographer .close {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 2;
+}
+
+.photographer h2 {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+  text-align: right;
+}
+
+.photographer .photoAndBio {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+  overflow-y: scroll;
+  font-size: 1.1em;
+  text-align: right;
+  padding-bottom: 20px;
+}
+
+.photographer .photoAndBio h2 {
+  text-align: center;
+  margin: 0;
+}
+
+.photographer .interviews {
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 2;
+}
+
+.photographer .interviews button {
+  width: auto;
+  margin: 10px 5px;
+  font-size: 12px;
+  height: 30px;
+  font-weight: 300;
+  border-radius: 15px;
+  box-shadow: none;
+  border: 1px solid var(--photographers-color);
+}
+
+.photographer .interviews button.partsButton {
+  width: 30px;
+}
+
+.photographer .interviews button.partsButton.active {
+  background-color: #666;
+  color: white;
+  font-weight: 700;
+}
+
+.photographer .interviews button.disableScrolling {
+  margin-left: 30px;
+}
+
+
+.photographer .interviews h4 {
+  height: 50px;
+  font-size: 1.1em;
+  vertical-align: baseline;
+  margin: 0;
+}
+
+.photographer .interviews .controls_nav {
+  height: 50px;
+  font-size: 1.1em;
+}
+
+.photographer figure {
+  margin-right: 0;
+}
+
+.photographer figure img {
+  max-width: 100%;
+}
+
+.photographer .transcript {
+  max-width: 600px;
+  max-height: calc(100vh - 100px - 150px);
+  overflow-y: scroll;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.photographer .close button {
+  padding: 0;
+  margin: 10px;
+}
+
+.photographer .close button svg line {
+  stroke-width: 2;
+  stroke: black;
+}
+
+.expandedSidebar .photographer {
+  grid-template-columns: 50px auto;
+  grid-template-rows: 50px calc(100vh - 150px);
+  overflow-y: scroll;
+}
+
+.expandedSidebar .photographer h2 {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+  text-align: center;
+}
+
+.expandedSidebar .photographer .photographerData {
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+  overflow-y: scroll;
+}
+
+.expandedSidebar .photographer .photographerData > * {
+  grid-column: auto;
+  grid-row: auto;
+  overflow-y: auto;
+  margin-right: 30px;
+}
+
+.expandedSidebar .photographer .photoAndBio img {
+  max-width: 300px;
+}
+
+
+

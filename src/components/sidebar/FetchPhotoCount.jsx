@@ -13,8 +13,6 @@ const FetchPhotoCount = ({ query, nationalCount, filterTerms, clearFilterTerms }
       return null;
     }
 
-    console.log(data, query);
-
     // if (error) return error.message
     if (data) {
       if (data.rows[0].count === 0) {

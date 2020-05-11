@@ -152,6 +152,10 @@ const filterTerms = (state = initialState, action) => {
   return state;
 };
 
+const expandedSidebar = (state = initialState, action) => (
+  (action.type === A.TOGGLE_EXPANDED_SIDEBAR) ? !state : state
+);
+
 
 const combinedReducer = combineReducers({
   selectedPhotographer,
@@ -173,6 +177,7 @@ const combinedReducer = combineReducers({
   selectedTheme,
   selectedViz,
   filterTerms,
+  expandedSidebar,
 });
 
 export default combinedReducer;

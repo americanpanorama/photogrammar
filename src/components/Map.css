@@ -34,6 +34,11 @@ path.stateBoundary:hover {
   position: relative;
 }
 
+#map * {
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+}
+
 .mapControls {
   display: inline-block;
   

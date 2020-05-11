@@ -5,19 +5,26 @@ import { setPhotoOffset } from '../../store/actions';
 const mapStateToProps = state => {
   const { 
     selectedPhotographer,
+    selectedCity,
     selectedCounty,
     selectedState,
+    selectedTheme,
     sidebarPhotosOffset,
     selectedPhotoData,
     dimensions,
+    expandedSidebar,
   } = state;
   const { displayableCards, width: blankCardWidth, height: blankCardHeight } = dimensions.photoCards;
   const { width: sidebarWidth } = dimensions.sidebar;
   let nextOffset = sidebarPhotosOffset + displayableCards;
   let previousOffset = (sidebarPhotosOffset - displayableCards >= 0) ? sidebarPhotosOffset - displayableCards : -1;
 
+  const photoSetId = [selectedPhotographer, selectedCounty, selectedCity, selectedState, selectedTheme, (expandedSidebar) ? 'expandedSidebar' : '']
+    .filter(facet => facet)
+    .join(' ');
+
   return {
-    photoSetId: `${(selectedPhotographer) ? selectedPhotographer : ''}${(selectedCounty) ? selectedCounty : ''}${(selectedState) ? selectedState : ''}`,
+    photoSetId,
     displayableCards,
     sidebarPhotosOffset,
     previousOffset,

@@ -1,0 +1,8 @@
+.transcriptSection {
+  display: grid;
+  grid-template-columns: 100px auto;
+}
+
+.transcriptSection .section p:first-child {
+  margin-top: 0;
+}

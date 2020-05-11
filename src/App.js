@@ -3,13 +3,18 @@ import App from './App.jsx';
 import { initializeData, windowResized, selectMapView} from './store/actions';
 
 const mapStateToProps = state => {
-  const { selectedViz, selectedMapView, dimensions, isInitialized } = state;
+  const { selectedViz, selectedMapView, dimensions, isInitialized, expandedSidebar } = state;
   let className = '';
   if (selectedViz === 'themes') {
     className = 'themes';
   } else if (selectedViz === 'map') {
     className = selectedMapView;
   }
+
+  if (expandedSidebar) {
+    className = `${className} expandedSidebar`;
+  }
+
   return {
     dimensions,
     isInitialized,

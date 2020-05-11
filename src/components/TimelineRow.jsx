@@ -20,6 +20,7 @@ const TimelineRow = (props) => {
     onHover,
     onUnhover,
     deemphasize,
+    emphasize,
   } = props;
 
   const [translateY, setTranslateY] = useState(y);
@@ -46,11 +47,37 @@ const TimelineRow = (props) => {
       ref={ref}
       className='timelineRow'
     >
+      {yearTicks.map(yt => (
+        <line
+          x1={yt.x}
+          x2={yt.x}
+          y1={0}
+          y2={monthHeight + 2}
+          stroke={yt.stroke}
+          key={`lineFor${yt.x}`}
+        />
+      ))}
+
+      {(showLabel && emphasize) && (
+        <text
+          x={labelX}
+          y={monthHeight * 1.2}
+          fontSize={monthHeight * 2}
+          textAnchor='end'
+          className={(active) ? "active" : ""}
+          strokeWidth={3}
+          stroke='white'
+          strokeOpacity={0.5}
+        >
+          {`${firstname} ${lastname}`}
+        </text>
+      )}
+
       {(showLabel) && (
         <text
           x={labelX}
-          y={monthHeight * 0.9}
-          fontSize={monthHeight * 1.1}
+          y={(emphasize) ? monthHeight * 1.2 : monthHeight * 0.9}
+          fontSize={(emphasize) ? monthHeight * 2 : monthHeight * 1.4}
           textAnchor='end'
           filter={(deemphasize) ? 'url(#grayscale)' : null}
           className={(active) ? "active" : ""}
@@ -58,6 +85,7 @@ const TimelineRow = (props) => {
           {`${firstname} ${lastname}`}
         </text>
       )}
+
 
       {months.map(c => (
         <rect
@@ -74,23 +102,12 @@ const TimelineRow = (props) => {
         />
       ))}
 
-      {yearTicks.map(yt => (
-        <line
-          x1={yt.x}
-          x2={yt.x}
-          y1={0}
-          y2={monthHeight + 2}
-          stroke={yt.stroke}
-          key={`lineFor${yt.x}`}
-        />
-      ))}
-
       {/* a transparent hoverable and selectable rect that covers the whole element */}
       <rect
         x={labelX - monthWidth * 12}
-        y={0}
+        y={-1.5}
         width={monthWidth * 150}
-        height={monthHeight}
+        height={monthHeight + 3}
         fill={'transparent'}
         id={photographerKey}
         onClick={onClick}

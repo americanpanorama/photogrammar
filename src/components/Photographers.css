@@ -1,0 +1,36 @@
+.photographers {
+  overflow-y: scroll;
+}
+
+.photographers .photographerCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+.photographers .photographerCard {
+  width: 240px;
+}
+
+.photographers a {
+  text-decoration: none;
+}
+
+.photographers a .photographerCard figcaption {
+  color: #777 !important;
+  font-weight: 700;
+  text-align: left;
+
+}
+
+.photographers p {
+  max-width: 600px;
+  margin: 20px auto;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+.photographers .photographerCard .count {
+  float: right;
+  font-weight: 300;
+}

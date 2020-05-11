@@ -20,7 +20,7 @@
 
 #sidebar header .timeAndNav {
   display: grid;
-  grid-template-columns: auto auto 40px 40px;
+  grid-template-columns: auto auto 40px 40px 40px;
   height: 25px;
 }
 

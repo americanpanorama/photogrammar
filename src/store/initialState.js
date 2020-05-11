@@ -33,7 +33,7 @@ export default {
   themesData: {},
   timelineCells: [],
   selectedPhotoData: null,
-  timeRange: [193501, 194504],
+  timeRange: [193501, 194406],
   randomPhotoNumbers,
   isWelcomeOpen: false,
   dimensions: {
@@ -67,4 +67,5 @@ export default {
     },
   },
   filterTerms: [],
+  expandedSidebar: false,
 };

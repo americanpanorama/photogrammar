@@ -6,6 +6,9 @@ import { selectMapView } from '../store/actions';
 const mapStateToProps = state => ({
   selectedViz: state.selectedViz,
   selectedMapView: state.selectedMapView,
+  selectedCity: state.selectedCity,
+  selectedCounty: state.selectedCounty,
+  selectedState: state.selectedState,
 });
 
 const mapDispatchToProps = {

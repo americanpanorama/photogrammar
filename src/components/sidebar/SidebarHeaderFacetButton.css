@@ -39,3 +39,24 @@
 #sidebar header .facets button:hover svg {
   visibility: visible;
 }
+
+/* styling for the timerange button */
+#sidebar header .timeAndNav .facets button {
+  height: 25px;
+  font-size: 14px;
+  text-align: left;
+  color: #777;
+  padding: 1px 7px 2px;
+  margin: 0;
+}
+
+#sidebar header .facets button:disabled {
+  color: black;
+  background-color: transparent;
+}
+
+#sidebar header .facets button:disabled:hover svg {
+  visibility: hidden;
+}
+
+

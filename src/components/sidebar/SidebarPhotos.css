@@ -7,7 +7,7 @@
   /* the sidebar header is 70px in height) */
   height: calc(100% - 70px);
   display: flex;
-  width: 100vw;
+  width: 134vw;
 }
 
 #sidebar-photos .photoPage {
@@ -19,6 +19,10 @@
   height: 100%;
   width: max(33vw, 200px);
   margin: 0;
+}
+
+.expandedSidebar #sidebar-photos .photoPage {
+  width: max(66vw, 200px);
 }
 
 .blankCard {

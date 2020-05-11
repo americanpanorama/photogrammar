@@ -1,44 +1,32 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 
-const Navbar = ({ selectedViz, selectedMapView, selectMapView }) => {
+const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, selectMapView }) => {
+  let countiesLink = (selectedCity || selectedState) ? `/state/${selectedState}` :'/maps';
+  let citiesLink = (selectedCounty || selectedState) ? `/state/${selectedState}#mapview=cities` : '/maps#mapview=cities';
+
   return (
     <nav className="navbar">
       <ul className="nav navbar-nav navbar-right">
-        <li><a href="#about" className="section-scroll">Photographers</a></li>
+        <li className={(selectedViz === 'photographers') ? 'active photographerslink' : 'photographerslink'}>
+          <Link to='/photographers'>
+            Photographers
+          </Link>
+        </li>
         <li className={(selectedViz === 'themes') ? 'active themes' : 'themes'}>
-          <Link to={`/themes`}>Themes</Link>
+          <Link to={'/themes'}>Themes</Link>
         </li>
         <li className={(selectedViz === 'map' && selectedMapView === 'counties') ? 'active counties' : 'counties'}>
-          {(selectedViz === 'map' && selectedMapView !== 'counties') ? (
-            <span 
-              onClick={selectMapView}
-              id='counties'
-            >
-              Map: Counties
-            </span>
-          ) : (
-            <Link to={`/maps`}>
-              Map: Counties
-            </Link>
-          )}
+          <Link to={countiesLink}>
+            Map: Counties
+          </Link>
         </li>
         <li className={(selectedViz === 'map' && selectedMapView === 'cities') ? 'active cities' : 'cities'}>
-          {(selectedViz === 'map' && selectedMapView !== 'cities') ? (
-            <span 
-              onClick={selectMapView}
-              id='cities'
-            >
-              Map: Cities & Towns
-            </span>
-          ) : (
-            <Link to={`/maps#mapview=cities`}>
-              Map: Cities & Towns
-            </Link>
-          )}
+          <Link to={citiesLink}>
+            Map: Cities & Towns
+          </Link>
         </li>
         <li><a href="#projects" className="section-scroll">About</a></li>
         <li><a href="https://dsl.richmond.edu/panorama#maps" className="section-scroll" target='_blank'>American Panorama</a></li>

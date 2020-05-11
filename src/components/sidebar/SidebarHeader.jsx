@@ -5,6 +5,7 @@ import SidebarHeaderStateButton from './SidebarHeaderStateButton.js';
 import SidebarHeaderCityCountyButton from './SidebarHeaderCityCountyButton.js';
 import SidebarHeaderThemeButton from './SidebarHeaderThemeButton.js';
 import SidebarHeaderFilterButton from './SidebarHeaderFilterButton.js';
+import SidebarHeaderTimeRangeButton from './SidebarHeaderTimeRangeButton.js';
 import './SidebarHeader.css';
 
 const SidebarPhotosHeader = (props) => {
@@ -16,7 +17,9 @@ const SidebarPhotosHeader = (props) => {
     previousOffset,
     nextOffset,
     setPhotoOffset,
+    toggleExpandedSidebar,
     count,
+    expandedSidebar,
   } = props;
   const from = sidebarPhotosOffset + 1;
   const to = (count) ? Math.min(sidebarPhotosOffset + displayableCards, count)
@@ -38,9 +41,9 @@ const SidebarPhotosHeader = (props) => {
         </h3>
       )}
       <div className='timeAndNav'>
-        <h4>
-          {dateStr}
-        </h4>
+        <div className='facets'>
+          <SidebarHeaderTimeRangeButton />
+        </div>
         <h4 className='counts'>
           {`${from}-${to} of `}
           <strong>
@@ -93,6 +96,43 @@ const SidebarPhotosHeader = (props) => {
                 x2={-8}
                 y1={0}
                 y2={5}
+              />
+            </g>
+          </svg>
+        </button>
+        <button
+          onClick={toggleExpandedSidebar}
+        >
+          <svg
+            width={25}
+            height={25}
+          >
+            <defs>
+              <marker
+                id="arrow"
+                viewBox="0 0 10 10"
+                refX="5"
+                refY="5"
+                markerWidth="2.5"
+                markerHeight="2.5"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" />
+              </marker>
+            </defs>
+            <g transform={`translate(0 12.5) ${(expandedSidebar) ? 'rotate(180 12.5 0)' : ''}`}>
+              <line
+                x1={8}
+                x2={8}
+                y1={-8}
+                y2={8}
+              />
+              <line
+                x1={12}
+                x2={20}
+                y1={0}
+                y2={0}
+                markerEnd="url(#arrow)"
               />
             </g>
           </svg>

@@ -5,6 +5,7 @@
   padding: 0px;
   position: relative;
   display: inline-block;
+  font-weight: 300;
 }
 
 .photoCard.selected,
@@ -13,11 +14,15 @@
 }
 
 .photoCard .thumbnail {
-  height: 50%;
+  height: 65%;
   border: none;
   vertical-align: bottom;
   position: relative;
   margin: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
 
 .photoCard .thumbnail * {
@@ -41,25 +46,23 @@
 
 .photoCard .post-entry-caption {
   height: 14%;
-  font-weight: 700;
+  width: 100%;
   line-height: 1.2;
   overflow: hidden;
-}
-
-.photoCard .post-entry-location {
-  height: 14%;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   font-weight: 700;
-  line-height: 1.2;
-  overflow: hidden;
-  margin-top: 5px;
+  white-space: normal;
 }
 
+.photoCard .post-entry-location,
 .photoCard .post-entry-photographer,
 .photoCard .post-entry-date {
-  height: 6%;
+  height: 7%;
   line-height: 1.2;
   overflow: hidden;
-  margin-top: 5px;
 }
 
 .photoCard a {
@@ -73,6 +76,20 @@
 
 .photoCard .notSelected {
   color: silver;
+}
+
+.photoCard .post-entry-date,
+.photoCard .post-entry-photographer {
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: visible;
+  text-overflow: ellipsis;
+}
+
+/* Hacky. This keeps the photoCards property vertically aligned if there isn't a date. */
+.photoCard .post-entry-date:after {
+  content: '.';
+  color: transparent;
 }
 
 

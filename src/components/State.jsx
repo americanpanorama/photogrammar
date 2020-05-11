@@ -45,7 +45,7 @@ const State = ({ abbr, name, nhgis_join, d, scale, labelCoords, fillOpacity, lin
             d={d}
             fill='transparent'
             stroke='#999'
-            strokeWidth={4 / scale}
+            strokeWidth={3 / scale}
           />
           <text
             x={labelCoords[0]}

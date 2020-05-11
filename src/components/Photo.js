@@ -6,11 +6,14 @@ import { getCentroidForCounty, getVizLink } from '../store/selectors';
 const mapStateToProps = state => {
   const photoMetadata = state.selectedPhotoData;
   const centroid = (photoMetadata) ? getCentroidForCounty(photoMetadata.nhgis_join) : null;
+  const photographerKey = (photoMetadata && photoMetadata.photographer_name) ? photoMetadata.photographer_name.replace(/[\s\.]/g, '') : null;
   return {
     photoMetadata,
+    photographerKey,
     centroid,
     vizLink: getVizLink(state),
     height: state.dimensions.selectedPhoto.height,
+    selectedMapView: state.selectedMapView,
   };
 };
 

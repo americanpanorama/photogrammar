@@ -9,6 +9,7 @@ General Styles
   --map-counties-color: #6a1b9a;
   --map-cities-color: #289261;
   --themes-color: #F78154;
+  --photographers-color: #297373;
 }
 
 body {
@@ -39,11 +40,13 @@ button {
   width: 25px;
   line-height: 25px;
   color: black;
+  cursor: pointer;
 }
 
 button:disabled {
   color: #ddd;
   box-shadow: 0 0 4px #ddd;
+  cursor: auto;
 }
 
 button:focus {
@@ -59,21 +62,41 @@ Layout
 
 .wrapper {
   display: grid;
-  grid-template-columns: minmax(200px, 1fr) 2fr;
+  grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
   grid-template-rows: 100px auto;
   height: 100vh;
+  width: 100vw;
+}
+
+header.navbar-header {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
 }
 
 #sidebar {
-  grid-column-start: 1;
-  grid-row-start: 2;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
 }
 
 #viz-canvas {
-  grid-column-start: 2;
+  grid-column: 2 / span 2;
   grid-row-start: 2;
   border-left: 1px solid black;
   position: relative;
+  
+}
+
+.navbar {
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 1;
+}
+
+.expandedSidebar #sidebar {
+  grid-column: 1 / span 2;
+}
+
+.expandedSidebar #viz-canvas {
+  grid-column: 3 / span 1;
 }
 
 /* ------------------------------------------------------------------
@@ -106,6 +129,8 @@ Navigation
 /* Push search */
 
 #viz-canvas {
+  height: calc(100vh - 100px);
+  overflow-y: scroll;
 
   /*position: fixed;
   right: 0;

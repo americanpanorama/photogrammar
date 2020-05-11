@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
+import ActionsFromURL from './components/ActionsFromURL.js';
 import Navbar from './components/Navbar.js';
 import Filter from './components/Filter.js';
 import FetchSidebarPhotos from './components/sidebar/FetchSidebarPhotos.js';
@@ -18,9 +19,10 @@ import Photo from './components/Photo.js';
 import TimelineHeatmap from './components/Timeline.js';
 import TimelineSlider from './components/TimelineSlider.js';
 import Treemap from './components/Treemap.js';
+import Photographers from './components/Photographers.js';
+import Photographer from './components/Photographer.js';
 
 const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapView, isInitialized, initializeData, windowResized }) => {
-
   useEffect(() => {
     window.addEventListener('resize', windowResized);
     initializeData();
@@ -30,14 +32,12 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
     return null;
   }
 
-  //const basename = '/panorama/photogrammar';
-  const basename = '';
-
   return (
-    <Router basename={basename}>
+    <Router basename={process.env.PUBLIC_URL}>
       <div
         className={`wrapper ${className}`}
       >
+        <ActionsFromURL />
         <header className="navbar-header">
           <Link to={'/'}>
             Photogrammar
@@ -56,6 +56,12 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
           <Switch>
             <Route path={'/photo/:id'}>
               <Photo />
+            </Route>
+            <Route path={'/photographers/:photographerKey'}>
+              <Photographer />
+            </Route>
+            <Route path={'/photographers/'}>
+              <Photographers />
             </Route>
             <Route path={['/themes/:themeKey', '/themes']}>
               <Treemap />

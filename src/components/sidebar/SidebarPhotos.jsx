@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import PhotoCard from './PhotoCard.js';
 import './SidebarPhotos.css';
 
-const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset, nextOffset, displayableCards, sidebarWidth, setPhotoOffset, blankCardWidth, blankCardHeight }) => {
+const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, displayableCards, sidebarWidth, blankCardWidth, blankCardHeight }) => {
   const newPhotoSet = {
     photos,
     setId: photoSetId,
@@ -15,22 +15,21 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
 
   // if the next or previous set of photos are passed in, add a new set, slide right or left to show it, and update the state with the new set
   useEffect((() => {
-    const photoContainer = d3
-      .select(sidebarPhotosRef.current)
+    const photoContainer = d3.select(sidebarPhotosRef.current);
     if (photoContainer.selectAll('.photoPage').size() === 2) {
       const newMarginLeft = (photoSet.offset < sidebarPhotosOffset) ? sidebarWidth * -1 : 0;
       photoContainer
         .transition()
         .duration(750)
         .style('margin-left', `${newMarginLeft}px`)
-        .on("end", () => {
+        .on('end', () => {
           const newPhotoSet = {
             photos,
             setId: photoSetId,
             offset: sidebarPhotosOffset,
           };
           setPhotoSet(newPhotoSet);
-          photoContainer.style('margin-left', 0)
+          photoContainer.style('margin-left', 0);
         });
     }
   }));
@@ -52,7 +51,7 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
   }
 
   const blankCardsCount = (photoSets.length >= 1 && photoSets[photoSets.length - 1].photos)
-  ? [...Array(Math.max(0, displayableCards - photoSets[photoSets.length - 1].photos.length)).keys()] : [];
+    ? [...Array(Math.max(0, displayableCards - photoSets[photoSets.length - 1].photos.length)).keys()] : [];
 
   return (
     <div
@@ -62,7 +61,7 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
         marginLeft,
       }}
     >
-      {photoSets.map(ps => (
+      {photoSets.map((ps, idx) => (
         <div
           className='photoPage'
           key={`${ps.setId}-${ps.offset}`}
@@ -87,13 +86,9 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, previousOffset
             />
           ))}
         </div>
-
-
-
       ))}
-      </div>
+    </div>
   );
-
 };
 
 export default SidebarPhotos;
