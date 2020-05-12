@@ -654,9 +654,9 @@ export const getMapParameters = createSelector(
     let yGutter = 1;
     let xGutter = 1;
     // get the centroid based on the selectedGeographicUnit
-    let center = [0.5, 0.5];
-    let dx = 1;
-    let dy = 500 / 960;
+    let center = [500, 500];
+    let dx = 1000;
+    let dy = 500 / 960 * 1000;
     if (selectedCounty) {
       yGutter = 0.33;
       xGutter = 0.33;

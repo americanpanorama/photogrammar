@@ -45,6 +45,8 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
     interview,
   } = selectedPhotographerData;
 
+  const hasInterview = interview && interview.files && interview.files.length > 0;
+
   const syncTranscript = (e) => {
     const { playedSeconds } = e;
     const timeIndexes = Object.keys(transcript);
@@ -55,9 +57,6 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
     }
   };
 
-  const hasInterview = interview && interview.files && interview.files.length > 0;
-
-  console.log(selectedInterview);
 
   return (
     <div className='photographer'>
@@ -93,10 +92,11 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
         condition={expandedSidebar}
         wrapper={children => <div className='photographerData'>{children}</div>}
       >
-        <div className='photoAndBio'>
-          <figure>
-            <img src={`${process.env.PUBLIC_URL}/static/photographerPhotos/${img}`} />
-          </figure>
+        <figure>
+          <img src={`${process.env.PUBLIC_URL}/static/photographerPhotos/${img}`} />
+        </figure>
+
+        <div className='bioAndInterviews'>
           {(bio) && (
             <div>
               {bio.map((p) => (
@@ -106,75 +106,78 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
               ))}
             </div>
           )}
-        </div>
-        {(hasInterview) && (
-          <div className='interviews'>
-            <h4>
-              {interview.name}
-            </h4>
+          {(hasInterview) && (
+            <div className='interviews'>
 
-            <div className='controls_nav'>
-              {(interview.files.length > 1) && (
+              <h4>
+                {interview.name}
+              </h4>
+
+
+              {(recording) && (
+              <div className='controls_nav'>
+                {(interview.files.length > 1) && (
+                  <React.Fragment>
+                    Parts 
+                    {interview.files.map((files, idx) => (
+                      <button
+                        onClick={() => { loadInterview(idx) }}
+                        className={(idx === selectedInterview) ? 'active partsButton' : 'partsButton'}
+                        key={`controlForInterview${idx}`}
+                      >
+                        {idx}
+                      </button>
+                    ))}
+                  </React.Fragment>
+                )}
+                <button
+                  onClick={() => { 
+                    if (autoScroll) {
+                      setSectionPlaying(null);
+                    }
+                    setAutoScroll(!autoScroll);
+                  }}
+                  className='disableScrolling'
+                >
+                  {(autoScroll) ? 'disable auto scrolling' : 'enable auto scrolling'}
+                </button>
+                
+                <div key={interview.file}>
+                  <ReactPlayer
+                    url={recording}
+                    playing={isPlaying}
+                    onProgress={(autoScroll) ? syncTranscript : () => false}
+                    ref={ref}
+                    width='90%'
+                    height='50px'
+                    controls={true}
+                  />
+                </div>
+              </div>
+              )}
+
+
+              {(transcript) && (
                 <React.Fragment>
-                  Parts 
-                  {interview.files.map((files, idx) => (
-                    <button
-                      onClick={() => { loadInterview(idx) }}
-                      className={(idx === selectedInterview) ? 'active partsButton' : 'partsButton'}
-                    >
-                      {idx}
-                    </button>
-                  ))}
+
+                  <div className='transcript'>
+
+                    {Object.keys(transcript).map(timestamp => (
+                      <InterviewTimestamp
+                        timestamp={timestamp}
+                        paragraphs={transcript[timestamp]}
+                        isPlaying={sectionPlaying === timestamp}
+                        autoScroll={autoScroll}
+                        key={timestamp}
+                      />
+                    ))}
+                  </div>
                 </React.Fragment>
               )}
-              <button
-                onClick={() => { 
-                  if (autoScroll) {
-                    setSectionPlaying(null);
-                  }
-                  setAutoScroll(!autoScroll);
-                }}
-                className='disableScrolling'
-              >
-                {(autoScroll) ? 'disable auto scrolling' : 'enable auto scrolling'}
-              </button>
             </div>
+          )}
+        </div>
 
-
-            {(recording) && (
-              <div key={interview.file}>
-                <ReactPlayer
-                  url={recording}
-                  playing={isPlaying}
-                  onProgress={(autoScroll) ? syncTranscript : () => false}
-                  ref={ref}
-                  width='90%'
-                  height='50px'
-                  controls={true}
-                />
-              </div>
-            )}
-
-
-            {(transcript) && (
-              <React.Fragment>
-
-                <div className='transcript'>
-
-                  {Object.keys(transcript).map(timestamp => (
-                    <InterviewTimestamp
-                      timestamp={timestamp}
-                      paragraphs={transcript[timestamp]}
-                      isPlaying={sectionPlaying === timestamp}
-                      autoScroll={autoScroll}
-                      key={timestamp}
-                    />
-                  ))}
-                </div>
-              </React.Fragment>
-            )}
-          </div>
-        )}
       </ConditionalWrapper>
     </div>
   );

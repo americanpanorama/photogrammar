@@ -1,6 +1,9 @@
 .transcriptSection {
   display: grid;
   grid-template-columns: 100px auto;
+  /* the following is necesary so the transcript can correctly scroll into view offset correctly below the sticky controls above it. */
+  padding-top: 105px;
+  margin-top: -105px;
 }
 
 .transcriptSection .section p:first-child {

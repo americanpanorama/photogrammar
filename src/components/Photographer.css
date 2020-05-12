@@ -21,7 +21,7 @@
   text-align: right;
 }
 
-.photographer .photoAndBio {
+.photographer figure {
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;
   overflow-y: scroll;
@@ -30,14 +30,15 @@
   padding-bottom: 20px;
 }
 
-.photographer .photoAndBio h2 {
-  text-align: center;
-  margin: 0;
+.photographer .bioAndInterviews {
+  grid-column: 3 / span 1;
+  grid-row: 2 / span 1;
+  overflow-y: scroll;
 }
 
-.photographer .interviews {
-  grid-column: 3 / span 1;
-  grid-row: 1 / span 2;
+.photographer .interviews h4 {
+  font-size: 1.2em;
+  margin-bottom: 0px;
 }
 
 .photographer .interviews button {
@@ -66,16 +67,13 @@
 }
 
 
-.photographer .interviews h4 {
-  height: 50px;
-  font-size: 1.1em;
-  vertical-align: baseline;
-  margin: 0;
-}
-
 .photographer .interviews .controls_nav {
-  height: 50px;
+  height: 100px;
   font-size: 1.1em;
+  background-color: white;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0px;
 }
 
 .photographer figure {
@@ -87,10 +85,10 @@
 }
 
 .photographer .transcript {
-  max-width: 600px;
+/*  max-width: 600px;
   max-height: calc(100vh - 100px - 150px);
   overflow-y: scroll;
-  text-align: left;
+  text-align: left;*/
   font-size: 1.1em;
 }
 
@@ -106,8 +104,7 @@
 
 .expandedSidebar .photographer {
   grid-template-columns: 50px auto;
-  grid-template-rows: 50px calc(100vh - 150px);
-  overflow-y: scroll;
+  grid-template-rows: 50px auto;
 }
 
 .expandedSidebar .photographer h2 {
@@ -125,12 +122,20 @@
 .expandedSidebar .photographer .photographerData > * {
   grid-column: auto;
   grid-row: auto;
-  overflow-y: auto;
   margin-right: 30px;
 }
 
-.expandedSidebar .photographer .photoAndBio img {
+.expandedSidebar .photographer .photographerData * {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.expandedSidebar .photographer figure {
   max-width: 300px;
+}
+
+.expandedSidebar .photographer .interviews .controls_nav {
+  top: 100px;
 }
 
 

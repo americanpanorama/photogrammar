@@ -87,9 +87,11 @@ const Map = (props) => {
 
   //const selectedCityMetadata = (selectedCity) ? cities.find(c => c.key === selectedCity) : null;
 
+
   useEffect(
     () => {
       if (!isMounting.current) {
+        console.log(mapParameters);
         d3.select(ref.current)
           .transition()
           .duration(1000)

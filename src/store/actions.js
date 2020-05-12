@@ -506,7 +506,7 @@ export function calculateDimensions(options) {
   const map = {
     height: mapHeight,
     width: mapWidth,
-    scale: Math.min(horizontalScale, verticalScale),
+    scale: Math.min(horizontalScale, verticalScale) / 1000,
   }
 
   const sidebarWidth = (!expandedSidebar)

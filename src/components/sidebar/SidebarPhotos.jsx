@@ -65,6 +65,11 @@ const SidebarPhotos = ({ photos, sidebarPhotosOffset, photoSetId, displayableCar
         <div
           className='photoPage'
           key={`${ps.setId}-${ps.offset}`}
+          // this is necessary to be hardcoded at least in firefox as the flex spec requires a definitive width
+          // https://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
+          style={{
+            width: sidebarWidth,
+          }}
         >
           {ps.photos.map(photo => (
             <PhotoCard
