@@ -1,6 +1,7 @@
 .transcriptSection {
   display: grid;
   grid-template-columns: 100px auto;
+  grid-gap: 20px;
   /* the following is necesary so the transcript can correctly scroll into view offset correctly below the sticky controls above it. */
   padding-top: 105px;
   margin-top: -105px;
@@ -8,4 +9,9 @@
 
 .transcriptSection .section p:first-child {
   margin-top: 0;
+}
+
+.transcriptSection .timestamp {
+  color: #999;
+  text-align: right;;
 }

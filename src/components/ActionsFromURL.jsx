@@ -21,12 +21,16 @@ const ActionsFromURL = (props) => {
     selectCity,
     selectCounty,
     selectPhotographer,
+    selectedPhoto,
   } = props;
 
   const {
     pathname,
     hash,
   } = useLocation();
+
+  // remove the basename from the pathPieces
+  const pathPieces = pathname.replace(`${process.env.PUBLIC_URL}`, '').split('/');
 
   const isRetrievingData = useRef(false);
   
@@ -43,7 +47,8 @@ const ActionsFromURL = (props) => {
     exact: true,
   }); 
   const isPhoto = matchPath(pathname, {
-    path: 'photo/:id',
+    path: '/photo/:id+',
+    exact: false,
   });
   let urlViz;
   if (isPhotographersView) {
@@ -55,7 +60,12 @@ const ActionsFromURL = (props) => {
   }
 
   // deselect photo if the photodata exists but the view isn't photo
-  if (!isPhoto === null && selectedPhotoData) {
+  if (isPhoto) {
+    const photoId = (pathPieces.length === 4) ? `${pathPieces[2]}/${pathPieces[3]}` : pathPieces[2];
+    if (!selectedPhotoData || selectedPhotoData.loc_item_link !== photoId) {
+      selectPhoto(photoId);
+    }
+  } else if (selectedPhotoData) {
     selectPhoto(null);
   }
 
@@ -76,19 +86,20 @@ const ActionsFromURL = (props) => {
 
     // retrieve map data if necessary
     // set selected place from url
-    const mapScale = (pathname.split('/').length > 1
-      && ['state', 'county', 'city'].includes(pathname.split('/')[1]))
-      ? location.pathname.split('/')[1] : 'national';
+    const mapScale = (pathPieces.length > 1
+      && ['state', 'county', 'city'].includes(pathPieces[1]))
+      ? pathPieces[1] : 'national';
+
 
     if (mapScale === 'national') {
       if (!isRetrievingData.current && (selectedState || selectedCounty || selectedCity)) {
-        selectNation();
         isRetrievingData.current = true;
+        selectNation();
       } else {
         isRetrievingData.current = false;
       }
     } else {
-      const placeId = pathname.split('/')[2];
+      const placeId = pathPieces[2];
       if (mapScale === 'state') {
         if (!isRetrievingData.current && (placeId !== selectedState || selectedCounty || selectedCity)) {
           selectState(placeId);
@@ -118,7 +129,7 @@ const ActionsFromURL = (props) => {
 
   // retrieve themes data if necessary
   if (urlViz === 'themes') {
-    const themeKey = pathname.split('/')[2] || 'root';
+    const themeKey = pathPieces[2] || 'root';
 
     if (themeKey !== selectedTheme) {
       selectTheme(themeKey);
@@ -127,9 +138,10 @@ const ActionsFromURL = (props) => {
 
   // select photographer if necessary
   if (urlViz === 'photographers') {
-    const photographerKey = pathname.split('/')[2];
+    const photographerKey = pathPieces[2];
 
-    if (photographerKey && photographerKey !== selectedPhotographer) {
+    if (photographerKey && photographerKey !== selectedPhotographer
+      && selectedPhotoData !== 'RoyStryker' && selectedPhotographer !== 'AikenAndWool') {
       selectPhotographer(photographerKey);
     }
   }

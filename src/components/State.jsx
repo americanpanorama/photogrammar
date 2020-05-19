@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import * as d3 from 'd3';
 import './State.css';
 
-const State = ({ abbr, name, nhgis_join, d, scale, labelCoords, fillOpacity, linkActive, onHover, onUnhover }) => {
+const State = ({ abbr, name, link, nhgis_join, d, scale, labelCoords, fillOpacity, linkActive, onHover, onUnhover }) => {
   const ref = useRef(null)
 
   // useEffect(() => {
@@ -16,7 +16,7 @@ const State = ({ abbr, name, nhgis_join, d, scale, labelCoords, fillOpacity, lin
 
   return (
     <Link
-      to={`/state/${abbr}`}
+      to={link}
       key={abbr}
       onClick={(!linkActive) ? () => { e.preventDefault() } : () => {}}
       className='statePolygon'

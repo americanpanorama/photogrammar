@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Photographers from './Photographers.jsx';
-import { getPhotographers } from '../store/selectors';
+import { getFeaturedPhotographers } from '../store/selectors';
 
-const mapStateToProps = state => {
-  const photographers = getPhotographers(0)
+const mapStateToProps = (state) => {
+  const photographers = getFeaturedPhotographers()
     .filter(p => p.img)
     .sort((a, b) => {
       if (a.lastname < b.lastname) {
@@ -21,7 +21,9 @@ const mapStateToProps = state => {
       return 0;
     });
   return {
-    photographers,
+    photographersStaff: photographers.filter(p => p.type === 'staff'),
+    photographersNonstaff: photographers.filter(p => p.type === 'nonstaff'),
+    fsaStaff: photographers.filter(p => p.type === 'fsa'),
   };
 };
 

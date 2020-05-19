@@ -21,6 +21,9 @@ import TimelineSlider from './components/TimelineSlider.js';
 import Treemap from './components/Treemap.js';
 import Photographers from './components/Photographers.js';
 import Photographer from './components/Photographer.js';
+import RoyStryker from './components/RoyStryker.js';
+import AikenAndWool from './components/AikenAndWool.js';
+import Lightbox from './components/Lightbox.js';
 
 const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapView, isInitialized, initializeData, windowResized }) => {
   useEffect(() => {
@@ -45,17 +48,21 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
         </header>
         <Navbar />
 
-        <div id="sidebar">
-          <Welcome />
-          <Filter />
-          <FetchPhotoCount />
-          <FetchSidebarPhotos />
-        </div>
+        <Welcome />
+        <Filter />
+        <FetchPhotoCount />
+        <FetchSidebarPhotos />
 
         <div id="viz-canvas">
           <Switch>
-            <Route path={'/photo/:id'}>
+            <Route path={'/photo/:id+'}>
               <Photo />
+            </Route>
+            <Route path={'/photographers/RoyStryker'}>
+              <RoyStryker />
+            </Route>
+            <Route path={'/photographers/AikenAndWool'}>
+              <AikenAndWool />
             </Route>
             <Route path={'/photographers/:photographerKey'}>
               <Photographer />
@@ -80,6 +87,7 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
           </Switch>
         </div>
       </div>
+      <Lightbox />
     </Router>
   );
 }

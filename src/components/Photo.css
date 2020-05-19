@@ -1,40 +1,50 @@
 .selectedPhoto {
   display: grid;
-  grid-template-columns: 50px 1fr minmax(60%, 2fr);
-  grid-template-rows: 2fr 50px 1fr;
+  grid-template-columns: 50px 1fr 2fr;
+  grid-template-rows: calc(100vh - 100px);
   overflow: visible;
 }
 
-.selectedPhoto .img img {
-  padding-left: 20px;
-  max-width: calc(100% - 40px);
+.selectedPhoto .img > * {
+  vertical-align: top;
+}
+
+.selectedPhoto .img img.full {
+  padding: 0 20px;
+  max-width: calc(100% - 80px);
   max-height: calc(100vh - 101px -  325px);
+  display: inline-block;
+
 }
 
-.similarPhotosHeader {
-  margin: 0;
-  grid-column: 1  / span 3;
-  grid-row: 2 / span 1;
-  font-size: 1.4em;
-  text-align: center;
-  border-top: 1px solid black;
+.button[role=expand] {
+  grid-column: 4 / span 1;
+  grid-row: 1 / span 1;
 }
 
+/*
 .similarPhotos {
   grid-column: 1 / span 3;
   grid-row: 3 / span 1;
   overflow-x: scroll;
-}
+} 
 
 .similarPhotos .cards {
   white-space: nowrap;
   padding: 0 20px;
-}
+} */
+
+.similarPhotos .cards {
+  display: inline-block;
+} 
 
 .selectedPhoto .metadata {
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
-  overflow-x: hidden;
+  overflow-x: visible;
+  overflow-y: scroll;
+  z-index: 1000;
+  text-align: right;
 }
 
 .selectedPhoto .metadata * {
@@ -46,11 +56,15 @@
   clear: both;
 }
 
-.selectedPhoto .metadata h5 {
+.selectedPhoto h5 {
   color: #111;
   margin: 10px 0 0 0;
   font-size: 1em;
   color: #555;
+}
+
+.selectedPhoto .img h5 {
+  text-align: center;
 }
 
 .caption-text-description p {
@@ -64,16 +78,17 @@
   grid-row: 1 / span 1;
 }
 
-.selectedPhoto .close button {
+.selectedPhoto button {
   padding: 0;
 }
 
-.selectedPhoto .close button svg line {
+.selectedPhoto button svg line {
   stroke-width: 2;
   stroke: black;
 }
 
-.selectedPhoto .metadata button {
+.selectedPhoto .metadata button,
+.selectedPhoto .tags a {
   width: auto;
   height: 30px;
   font-weight: normal;
@@ -87,11 +102,65 @@
   background-color: #f5f5f5;
   color: #222;
   margin: 4px 0 4px -7px;
-  float: right;
+  text-decoration: none;
 }
 
-.selectedPhoto .metadata button:hover {
+.selectedPhoto .metadata button:hover,
+.selectedPhoto .tags a:hover {
   background-color: #ddd;
   color: black;
 }
+
+.selectedPhoto .tags a {
+  display: inline-block;
+  height: 26px;
+  margin: 0 5px;
+}
+
+.selectedPhoto .strip {
+  width: calc(100% - 80px);
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  background-color: black;
+}
+
+.selectedPhoto .strip a {
+  margin: 0;
+}
+
+.selectedPhoto .strip .stripPhoto {
+  display: inline-block;
+  overflow: visible;
+  border: 3px solid black;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1000;
+}
+
+.selectedPhoto .strip .selected {
+  border-color: #8BB900;
+  border: 5px solid #8BB900;;
+}
+
+.selectedPhoto .strip img {
+  padding: 0;
+  width: 100%;
+  opacity: 0;
+}
+
+
+.selectedPhoto .strip li img {
+  min-width: 150px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.selectedPhoto .similarPhotos,
+.selectedPhoto .similarPhotos * {
+  margin: 0;
+}
+
 

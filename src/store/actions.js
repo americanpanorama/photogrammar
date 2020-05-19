@@ -104,6 +104,8 @@ export function selectPhotographer(eOrId) {
     const selectedPhotographer = (getState().selectedPhotographer !== clickedPhotographer)
       ? clickedPhotographer : null;
     const { selectedMapView } = getState();
+
+    // Roy Strkyer is a singular exception
     const { counties, cities, themes } = await fetchCountiesCitiesThemes(selectedPhotographer);
     dispatch({
       type: A.SELECT_PHOTOGRAPHER,
@@ -239,6 +241,18 @@ export function selectPhoto(eOrId) {
         caption: he.decode(sp.caption),
         stateAbbr: getStateAbbr(photoData.state),
       }));
+
+      // if the photo is part of a strip, retrieve those photos
+      if (photoData.photograph_type) {
+        const stripQuery = `select loc_item_link, img_thumb_img, photograph_type from photogrammar_photos where call_number = '${photoData.call_number}' order by photograph_type`;
+        const responseStripPhotos = await fetchJSON(`${cartoURLBase}${encodeURIComponent(stripQuery)}`);
+        if (responseStripPhotos && responseStripPhotos.rows && responseStripPhotos.rows.length > 0) {
+          photoData.stripPhotos = responseStripPhotos.rows.map(sp => ({
+            ...sp,
+            num: parseInt(sp.photograph_type.substring(1)),
+          }));
+        }
+      }
       
       dispatch({
         type: A.SELECT_PHOTO,
@@ -272,6 +286,12 @@ export function toggleExpandedSidebar() {
       type: A.TOGGLE_EXPANDED_SIDEBAR,
     });
   }
+}
+
+export function toggleLightbox() {
+  return {
+    type: A.TOGGLE_LIGHTBOX,
+  };
 }
 
 export function setTimeRange(tr) {
@@ -512,7 +532,7 @@ export function calculateDimensions(options) {
   const sidebarWidth = (!expandedSidebar)
     ? Math.max(200, windowWidth * 0.33)
     : Math.max(200, windowWidth * 0.66);
-  const sidebarHeight = vizCanvas.height - welcomeHeight;
+  const sidebarHeight = vizCanvas.height - 125 - welcomeHeight;
   const sidebarHeaderHeight = 70;
   const filterHeight = 34;
   const sidebar = {

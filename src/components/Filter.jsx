@@ -28,7 +28,9 @@ const Filter = ({ terms, setFilterTerms, clearFilterTerms }) => {
   }
 
   return (
-    <div className={className}>
+    <div className={className}
+      id='search'
+    >
       <form
         onSubmit={handleSubmit}
         id='filterForm'

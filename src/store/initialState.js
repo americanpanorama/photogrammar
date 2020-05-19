@@ -68,4 +68,5 @@ export default {
   },
   filterTerms: [],
   expandedSidebar: false,
+  lightboxOpen: false,
 };

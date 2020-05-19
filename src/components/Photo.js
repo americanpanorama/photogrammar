@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Photo from './Photo.jsx';
-import { selectPhotographer, selectPhoto } from '../store/actions';
+import { toggleLightbox, selectPhotographer, selectPhoto } from '../store/actions';
 import { getCentroidForCounty, getVizLink } from '../store/selectors';
 
 const mapStateToProps = state => {
@@ -20,6 +20,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   selectPhoto,
   selectPhotographer,
+  toggleLightbox,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Photo);

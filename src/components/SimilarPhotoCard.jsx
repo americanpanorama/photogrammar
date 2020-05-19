@@ -12,7 +12,7 @@ const SimilarPhotoCard = ({ photo, height, width }) => {
 
   return (
     <Link
-      to={`/photo/${encodeURIComponent(photo.loc_item_link)}`}
+      to={`/photo/${photo.loc_item_link}`}
       className='similarPhotoCardLink'
     >
       <div
@@ -23,7 +23,7 @@ const SimilarPhotoCard = ({ photo, height, width }) => {
         }}
       >
         <div className='captions'>
-            {photo.caption}
+          {photo.caption}
         </div>
         <div className='photographerPlace'>
           {`${(photo.photographer_name) ? `${photo.photographer_name},` : ''} ${(photo.month) ? monthNames[parseInt(photo.month, 10) - 1] : ''} ${(photo.year) ? photo.year : ''}`}

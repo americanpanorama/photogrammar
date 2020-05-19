@@ -63,7 +63,7 @@ Layout
 .wrapper {
   display: grid;
   grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 100px 50px 75px calc(100vh - 225px);
   height: 100vh;
   width: 100vw;
 }
@@ -73,17 +73,27 @@ header.navbar-header {
   grid-row: 1 / span 1;
 }
 
-#sidebar {
+#search {
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
 }
 
+#sidebarHeader {
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
+}
+
+#sidebar-photos {
+  grid-column: 1 / span 1;
+  grid-row: 4 / span 1;
+}
+
 #viz-canvas {
   grid-column: 2 / span 2;
-  grid-row-start: 2;
+  grid-row: 2 / span 3;
   border-left: 1px solid black;
   position: relative;
-  
+  background-color: white;
 }
 
 .navbar {

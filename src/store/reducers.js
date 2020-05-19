@@ -47,7 +47,8 @@ const selectedCounty = (state = initialState, action) => {
   }
   if (action.type === A.SELECT_CITY || action.type === A.SELECT_STATE
     || action.type === A.SELECT_NATION || action.type === A.SELECT_THEME
-    || (action.type === A.SELECT_VIZ && action.payload === 'themes')) {
+    || (action.type === A.SELECT_VIZ && action.payload === 'themes')
+    || (action.type === A.SELECT_VIZ && action.payload === 'photographers')) {
     return null;
   }
   return state;
@@ -59,7 +60,8 @@ const selectedCity = (state = initialState, action) => {
   }
   if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION
     || action.type === A.SELECT_COUNTY || action.type === A.SELECT_THEME
-    || (action.type === A.SELECT_VIZ && action.payload === 'themes')) {
+    || (action.type === A.SELECT_VIZ && action.payload === 'themes')
+    || (action.type === A.SELECT_VIZ && action.payload === 'photographers')) {
     return null;
   }
   return state;
@@ -70,7 +72,8 @@ const selectedState = (state = initialState, action) => {
     return action.payload.state;
   }
   if (action.type === A.SELECT_NATION || action.type === A.SELECT_THEME
-    || (action.type === A.SELECT_VIZ && action.payload === 'themes')) {
+    || (action.type === A.SELECT_VIZ && action.payload === 'themes')
+    || (action.type === A.SELECT_VIZ && action.payload === 'photographers')) {
     return null;
   }
   return state;
@@ -106,7 +109,7 @@ const timeRange = (state = initialState, action) => {
     return action.payload;
   }
   return state;
-}
+};
 
 const randomPhotoNumbers = (state = initialState, action) => (
   (action.type === A.GENERATE_RANDOM_PHOTO_NUMBERS) ? action.payload : state
@@ -134,9 +137,16 @@ const selectedMapView = (state = initialState, action) => {
   return state;
 };
 
-const selectedTheme = (state = initialState, action) => (
-  (action.type === A.SELECT_THEME) ? action.payload.theme : state
-);
+const selectedTheme = (state = initialState, action) => {
+  if  (action.type === A.SELECT_THEME) {
+    return action.payload.theme;
+  }
+  if ((action.type === A.SELECT_VIZ && action.payload === 'photographers') || 
+    (action.type === A.SELECT_VIZ && action.payload === 'map')) {
+    return 'root';
+  }
+  return state;
+};
 
 const selectedViz = (state = initialState, action) => (
   (action.type === A.SELECT_VIZ) ? action.payload : state
@@ -154,6 +164,10 @@ const filterTerms = (state = initialState, action) => {
 
 const expandedSidebar = (state = initialState, action) => (
   (action.type === A.TOGGLE_EXPANDED_SIDEBAR) ? !state : state
+);
+
+const lightboxOpen = (state = initialState, action) => (
+  (action.type === A.TOGGLE_LIGHTBOX) ? !state : state
 );
 
 
@@ -178,6 +192,7 @@ const combinedReducer = combineReducers({
   selectedViz,
   filterTerms,
   expandedSidebar,
+  lightboxOpen,
 });
 
 export default combinedReducer;

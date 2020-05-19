@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Map from './Map.jsx';
-import { selectCounty, selectCity, selectState, selectNation } from '../store/actions';
 import { getSelectedCityMetadata, getCounties, getCities, getMapParameters, getLinkUp } from '../store/selectors';
 
 const mapStateToProps = state => {
@@ -17,11 +16,6 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {
-  selectCounty,
-  selectCity,
-  selectState,
-  selectNation,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

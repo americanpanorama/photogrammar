@@ -56,7 +56,7 @@ const PhotoCard = (props) => {
       }}
     >
       <Link
-        to={`/photo/${encodeURIComponent(loc_item_link)}`}
+        to={`/photo/${loc_item_link}`}
       >
         <div
           style={{

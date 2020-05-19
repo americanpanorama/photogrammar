@@ -26,7 +26,10 @@ const SidebarPhotosHeader = (props) => {
     : sidebarPhotosOffset + displayableCards;
 
   return (
-    <header className="highlight-text">
+    <header 
+      id='sidebarHeader'
+      className="highlight-text"
+    >
       {(hasFacet) ? (
         <div className='facets'>
           <SidebarHeaderPhotographerButton />

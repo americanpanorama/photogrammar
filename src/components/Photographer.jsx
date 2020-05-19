@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player'
 import InterviewTimestamp from './InterviewTimestamp.jsx';
 import ConditionalWrapper from './ConditionalWrapper.jsx';
+import CloseButton from './buttons/Close.jsx';
 import './Photographer.css';
 
 const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
@@ -38,6 +39,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
   }
 
   const {
+    key,
     firstname,
     lastname,
     bio,
@@ -52,37 +54,23 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
     const timeIndexes = Object.keys(transcript);
     const selectedTimestamp = timeIndexes.find((ti, idx) => ti <= playedSeconds
         && (timeIndexes[idx + 1] > playedSeconds || idx === timeIndexes.length -1));
-    if (selectedTimestamp && sectionPlaying !== selectedTimestamp) {
+    if (selectedTimestamp && sectionPlaying !== selectedTimestamp && playedSeconds > 0) {
       setSectionPlaying(selectedTimestamp);
     }
   };
 
+  const jumpTo = (seconds) => {
+    ref.current.seekTo(seconds);
+    if (!isPlaying) {
+      setIsPlaying(true);
+    }
+  }
 
   return (
-    <div className='photographer'>
+    <div className={(key !== 'AikenAndWool') ? 'photographer' : 'photographer AikenAndWool'}>
       <div className='close'>
         <Link to={`/photographers`}>
-          <button>
-            <svg
-              width={25}
-              height={25}
-            >
-              <g transform='translate(12.5 12.5)'>
-                <line
-                  x1={-5}
-                  x2={5}
-                  y1={-5}
-                  y2={5}
-                />
-                <line
-                  x1={-5}
-                  x2={5}
-                  y1={5}
-                  y2={-5}
-                />
-              </g>
-            </svg>
-          </button>
+          <CloseButton />
         </Link>
       </div>
       <h2>
@@ -109,9 +97,17 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
           {(hasInterview) && (
             <div className='interviews'>
 
-              <h4>
-                {interview.name}
-              </h4>
+              {(interview.link) ? (
+                <h4>
+                  <a href={interview.link} target='_blank'>
+                    {interview.name}
+                  </a>
+                </h4>
+              ) : (
+                <h4>
+                  {interview.name}
+                </h4>
+              )}
 
 
               {(recording) && (
@@ -125,7 +121,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
                         className={(idx === selectedInterview) ? 'active partsButton' : 'partsButton'}
                         key={`controlForInterview${idx}`}
                       >
-                        {idx}
+                        {idx + 1}
                       </button>
                     ))}
                   </React.Fragment>
@@ -142,37 +138,31 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
                   {(autoScroll) ? 'disable auto scrolling' : 'enable auto scrolling'}
                 </button>
                 
-                <div key={interview.file}>
-                  <ReactPlayer
-                    url={recording}
-                    playing={isPlaying}
-                    onProgress={(autoScroll) ? syncTranscript : () => false}
-                    ref={ref}
-                    width='90%'
-                    height='50px'
-                    controls={true}
-                  />
-                </div>
+                <ReactPlayer
+                  url={recording}
+                  playing={isPlaying}
+                  onProgress={(autoScroll) ? syncTranscript : () => false}
+                  ref={ref}
+                  width='90%'
+                  height='50px'
+                  controls={true}
+                />
               </div>
               )}
 
-
               {(transcript) && (
-                <React.Fragment>
-
-                  <div className='transcript'>
-
-                    {Object.keys(transcript).map(timestamp => (
-                      <InterviewTimestamp
-                        timestamp={timestamp}
-                        paragraphs={transcript[timestamp]}
-                        isPlaying={sectionPlaying === timestamp}
-                        autoScroll={autoScroll}
-                        key={timestamp}
-                      />
-                    ))}
-                  </div>
-                </React.Fragment>
+                <div className='transcript'>
+                  {Object.keys(transcript).map(timestamp => (
+                    <InterviewTimestamp
+                      timestamp={timestamp}
+                      paragraphs={transcript[timestamp]}
+                      isPlaying={sectionPlaying === timestamp}
+                      autoScroll={autoScroll}
+                      key={timestamp}
+                      jumpTo={jumpTo}
+                    />
+                  ))}
+                </div>
               )}
             </div>
           )}

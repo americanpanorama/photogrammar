@@ -27,19 +27,15 @@ const getTimelineCells = state => state.timelineCells;
 const getFilterTerms = state => state.filterTerms;
 
 export const getPhotographers = (min = 0, max = 50000) => (
-  Photographers
-    .filter(p => p.count >= min && p.count <= max)
-    .map(p => {
-      const additionalMetadata = PhotographersMetadata.find(pm => p.key === pm.key);
-      if (additionalMetadata) {
-        return ({
-          ...p,
-          ...additionalMetadata,
-        });
-      }
-      return p;
-    })
+  Photographers.filter(p => p.count >= min && p.count <= max)
 );
+
+export const getFeaturedPhotographers = () => (
+  PhotographersMetadata.map(pm => {
+    const basicData = Photographers.find(p => p.key === pm.key);
+    return (basicData) ? { ...pm, ...basicData} : pm; 
+  })
+)
 
 export const getCentroidForCounty = (nhgis_join) => Centroids.counties[nhgis_join];
 
@@ -463,6 +459,11 @@ export const getWheresForCityQuery = createSelector(
 );
 
 export const makeWheres = (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, wheresForCityQuery, selectedViz, selectedTheme, selectedMapView, filterTerms) => {
+  // RoyStryker is an exeption
+  if (selectedPhotographer === 'RoyStryker' || selectedPhotographer === 'AikenAndWool') {
+    return [];
+  }
+  
   let wheres = [];
   const [startTime, endTime] = timeRange;
   if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501
@@ -534,7 +535,7 @@ export const getSidebarPhotosQuery = createSelector(
     const { displayableCards } = dimensions.photoCards;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const sqlQueryBase = 'SELECT loc_item_link, photographer_name, caption, year, month, vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, city, county, state, img_thumb_img FROM photogrammar_photos';
-    if (wheres.length > 0) {
+    if (wheres.length > 1) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where} order by year, month limit ${displayableCards} offset ${offset}`;
     } else {
@@ -555,7 +556,7 @@ export const getSidebarPhotoCountQuery = createSelector(
     let query;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const sqlQueryBase = 'SELECT count(cartodb_id) FROM photogrammar_photos';
-    if (wheres.length > 0) {
+    if (wheres.length > 1) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where}`;
       return encodeURI(`${cartoURLBase}${query} `);

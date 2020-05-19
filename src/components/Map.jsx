@@ -16,8 +16,8 @@ const Map = (props) => {
     selectedCounty,
     selectedCity,
     selectedState,
-    selectCity,
     mapParameters,
+    selectedMapView,
     linkUp,
   } = props;
 
@@ -38,35 +38,8 @@ const Map = (props) => {
   const mapScale = (location.pathname.split('/').length > 1
     && ['state', 'county', 'city'].includes(location.pathname.split('/')[1]))
     ? location.pathname.split('/')[1] : 'national';
-  const cityDivisor = (mapScale !== 'national') ? 3000 : 6000;
-  // if (selectedMapView === 'counties' && mapScale === 'county') {
-  //   if (placeId !== selectedCounty && !isRetrievingData.current) {
-  //     selectCounty(placeId);
-  //     isRetrievingData.current = true;
-  //   } else if (placeId === selectedCounty && isRetrievingData.current) {
-  //     isRetrievingData.current = false;
-  //   }
-  // }
+  const cityDivisor = (mapScale !== 'national') ? 3 : 6;
 
-  // if (mapScale === 'city' && placeId !== selectedCity) {
-  //   selectCity(placeId);
-  // }
-  // if (mapScale === 'state') {
-  //   if (!isRetrievingData.current && (placeId !== selectedState || selectedCounty || selectedCity)) {
-  //     selectState(placeId);
-  //     isRetrievingData.current = true;
-  //   } else if (placeId === selectedState && isRetrievingData.current) {
-  //     isRetrievingData.current = false;
-  //   }
-  // }
-  // if (mapScale === 'national') {
-  //   if (!isRetrievingData.current && (selectedState || selectedCounty || selectedCity)) {
-  //     selectNation();
-  //     isRetrievingData.current = true;
-  //   } else {
-  //     isRetrievingData.current = false;
-  //   }
-  // }
 
   const mapLabelParams = {};
   if (selectedCity) {
@@ -91,7 +64,6 @@ const Map = (props) => {
   useEffect(
     () => {
       if (!isMounting.current) {
-        console.log(mapParameters);
         d3.select(ref.current)
           .transition()
           .duration(1000)
@@ -238,7 +210,6 @@ const Map = (props) => {
                   id={city.key}
                   key={city.key}
                   linkActive={mapScale !== 'national'}
-                  selectCity={selectCity}
                   onCityHover={onCityHover}
                   onCityUnhover={onCityUnhover}
                 />
@@ -250,6 +221,7 @@ const Map = (props) => {
               {...state}
               //fillOpacity={(hoveredState && state.abbr !== hoveredState.abbr) ? 0.4 : 0}
               fillOpacity={0}
+              link={`/state/${state.abbr}${(selectedMapView === 'cities') ? '#mapview=cities' : ''}`}
               linkActive={(mapScale === 'national' || (selectedState !== state.abbr))}
               scale={mapParameters.scale}
               // onHover={onStateHover}

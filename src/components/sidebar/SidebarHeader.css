@@ -1,57 +1,57 @@
-#sidebar header {
+#sidebarHeader {
   width: 90%;
   height: 75px;
   margin: 10px auto;
 }
 
-#sidebar header h3 {
+#sidebarHeader h3 {
   margin: 0;
   color: black;
   font-size: 1.25em;
   line-height: 25px;
 }
 
-#sidebar header h3.noPhotos {
+#sidebarHeader h3.noPhotos {
   font-size: 25px;
   text-align: center;
   line-height: 35px;
 }
 
 
-#sidebar header .timeAndNav {
+#sidebarHeader .timeAndNav {
   display: grid;
   grid-template-columns: auto auto 40px 40px 40px;
   height: 25px;
 }
 
-#sidebar header .timeAndNav h4,
-#sidebar header .timeAndNav .counts {
+#sidebarHeader .timeAndNav h4,
+#sidebarHeader .timeAndNav .counts {
   line-height: 25px;
   margin: 0;
 }
 
-#sidebar header .timeAndNav .counts,
-#sidebar header .timeAndNav button {
+#sidebarHeader .timeAndNav .counts,
+#sidebarHeader .timeAndNav button {
   justify-self: end;
 }
 
-#sidebar header .timeAndNav button {
+#sidebarHeader .timeAndNav button {
   padding: 0;
   margin-left: 10px;
   height: 25px;
 }
 
-#sidebar header .timeAndNav button svg line {
+#sidebarHeader .timeAndNav button svg line {
   stroke-width: 2;
   stroke: black;
 }
 
-#sidebar header .timeAndNav button:disabled svg line {
+#sidebarHeader .timeAndNav button:disabled svg line {
   stroke: silver;
 }
 
 
-#sidebar header button.clearSearch {
+#sidebarHeader button.clearSearch {
   width: auto;
   margin: 0 auto;
   display: block;

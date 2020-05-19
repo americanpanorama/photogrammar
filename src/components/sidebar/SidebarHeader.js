@@ -10,7 +10,7 @@ const mapStateToProps = state => {
   const previousOffset = (sidebarPhotosOffset - displayableCards >= 0) ? sidebarPhotosOffset - displayableCards : -1;
 
   return {
-    hasFacet: selectedPhotographer || selectedState || filterTerms.length > 0 || selectedTheme !== 'root',
+    hasFacet: !!(selectedPhotographer || selectedState || filterTerms.length > 0 || selectedTheme !== 'root'),
     dateStr: getDateRangeString(state),
     displayableCards,
     sidebarPhotosOffset,

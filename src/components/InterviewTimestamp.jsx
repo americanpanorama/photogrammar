@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './InterviewTimestamp.css';
 
-const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying }) => {
+const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying, jumpTo }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -32,7 +32,10 @@ const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying }) => {
         color: (isPlaying) ? 'black' : '#555',
       }}
     >
-      <div className='timestamp'>
+      <div
+        className='timestamp'
+        onClick={() => jumpTo(timestamp)}
+      >
         {toHHMMSS(timestamp)}
       </div>
       <div className='section'>

@@ -1,0 +1,54 @@
+#lightbox {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(25, 25, 25, 0.95);
+  z-index: 1500;
+  text-align: center;
+}
+
+#lightbox figure {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#lightbox figure img {
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+}
+
+#lightbox figure figcaption {
+  font-weight: 700;
+  color: white;
+  font-size: 1.3em;
+}
+
+#lightbox figure figcaption div {
+  max-width: 600px;
+  margin: 5px auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+#lightbox button[role=close] {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  box-shadow: none;
+  width: 40px;
+  height: 40px;
+}
+
+#lightbox button[role=close] line {
+  stroke: white;
+  stroke-width: 2px;
+}
