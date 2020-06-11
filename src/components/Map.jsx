@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams, useLocation } from "react-router-dom";
 import * as d3 from 'd3';
@@ -19,6 +19,7 @@ const Map = (props) => {
     mapParameters,
     selectedMapView,
     linkUp,
+    isSearching,
   } = props;
 
   const ref = useRef(null);
@@ -38,7 +39,13 @@ const Map = (props) => {
   const mapScale = (location.pathname.split('/').length > 1
     && ['state', 'county', 'city'].includes(location.pathname.split('/')[1]))
     ? location.pathname.split('/')[1] : 'national';
-  const cityDivisor = (mapScale !== 'national') ? 3 : 6;
+  let cityDivisor = (mapScale !== 'national') ? 3 : 6;
+  // calculate the divisor based on the number of photos
+  if (isSearching && cities.length > 0) {
+    // what's the max 
+    const maxCount = Math.max(...cities.map(c => c.total));
+    cityDivisor = (mapScale !== 'national') ? maxCount / 200 : maxCount / 100;
+  }
 
 
   const mapLabelParams = {};
@@ -64,6 +71,7 @@ const Map = (props) => {
   useEffect(
     () => {
       if (!isMounting.current) {
+        console.log(mapParameters);
         d3.select(ref.current)
           .transition()
           .duration(1000)

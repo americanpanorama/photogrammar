@@ -68,10 +68,17 @@ export const getCounties = createSelector(
     return Counties
       .filter(county => {
         const { j: nhgis_join, s: state } = county;
+        if (state === 'AK') {
+          
+        console.log(selectedState, state);
+        }
         if (!nhgis_join || nhgis_join === 'NULL') {
           return false;
         }
         if (selectedState && state !== selectedState) {
+          return false;
+        }
+        if (county.d.includes('-35,221.3542')) {
           return false;
         }
         return true;
@@ -624,9 +631,9 @@ export const getDateRangeString = createSelector(
       year: Math.floor(tr / 100),
       month: tr % 100,
     }));
-    const startString = `${monthNames[yearMonths[0].month - 1]} ${yearMonths[0].year}`;
-    const endString = `${monthNames[yearMonths[1].month - 1]} ${yearMonths[1].year}`;
-    return `${startString}-${endString}`;
+    const startString = `${monthNames[yearMonths[0].month - 1].substring(0, 3)} ${yearMonths[0].year}`;
+    const endString = `${monthNames[yearMonths[1].month - 1].substring(0, 3)} ${yearMonths[1].year}`;
+    return `${startString} - ${endString}`;
   }
 );
 
@@ -662,6 +669,7 @@ export const getMapParameters = createSelector(
       yGutter = 0.33;
       xGutter = 0.33;
       ({center, dx, dy} = Centroids.counties[selectedCounty]);
+      console.log(selectedCounty, center, dx, dy);
     } else if (selectedCity) {
       yGutter = 1.5;
       xGutter = 1.5;

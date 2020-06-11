@@ -232,18 +232,20 @@ export function selectPhoto(eOrId) {
         fetchJSON(`${cartoURLBase}${encodeURIComponent(similarPhotosQuery)}`),
       ]);
       const photoData = photoDataResults.rows[0];
-      photoData.caption = he.decode(photoData.caption);
+      photoData.caption = (photoData.caption) ? he.decode(photoData.caption) : '';
 
       photoData.stateAbbr = getStateAbbr(photoData.state);
 
       photoData.similarPhotos = similarPhotosData.rows.map(sp => ({
         ...sp,
-        caption: he.decode(sp.caption),
+        caption: (sp.cation) ? he.decode(sp.caption) : '',
         stateAbbr: getStateAbbr(photoData.state),
       }));
 
+        console.log(photoData.call_number, photoData.call_number.charAt(-2));
       // if the photo is part of a strip, retrieve those photos
-      if (photoData.photograph_type) {
+      if (photoData.call_number.charAt(-2) === 'M') {
+
         const stripQuery = `select loc_item_link, img_thumb_img, photograph_type from photogrammar_photos where call_number = '${photoData.call_number}' order by photograph_type`;
         const responseStripPhotos = await fetchJSON(`${cartoURLBase}${encodeURIComponent(stripQuery)}`);
         if (responseStripPhotos && responseStripPhotos.rows && responseStripPhotos.rows.length > 0) {
@@ -285,6 +287,12 @@ export function toggleExpandedSidebar() {
     dispatch({
       type: A.TOGGLE_EXPANDED_SIDEBAR,
     });
+  }
+}
+
+export function toggleViz() {
+  return {
+    type: A.TOGGLE_VIZ,
   }
 }
 
@@ -487,7 +495,12 @@ export function calculateDimensions(options) {
   const headerElements = 101;
   // this should be calculated from the DOM--if it's there
   const headerHeight = (headerElements && headerElements.length >= 1) ? headerElements.height : 101;
-  const { innerHeight, innerWidth } = window;
+  const { innerHeight: windowInnerHeight, innerWidth: windowInnerWidth } = window;
+  const { clientWidth, clientHeight } = (document.documentElement) ? document.documentElement : { clientWidth: null, clientHeight: null };
+  const innerWidth = clientWidth || windowInnerWidth;
+  const innerHeight = clientHeight || windowInnerHeight; 
+
+  const isMobile = innerWidth <= 768;
 
   const windowWidth = Math.max(800, innerWidth);
 
@@ -506,7 +519,11 @@ export function calculateDimensions(options) {
     height: Math.max(600, innerHeight - headerHeight),
   }
 
-  const timelineHeatmap = {
+  const timelineHeatmap = (isMobile) ? {
+    width: innerWidth * 0.8,
+    height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
+    leftAxisWidth: innerWidth * 0.15,
+  } : {
     width: vizCanvas.width * 0.85,
     height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
     leftAxisWidth: vizCanvas.width * 0.15,
@@ -519,20 +536,25 @@ export function calculateDimensions(options) {
     height: mapControlsHeight,
   };
 
-  const mapWidth = vizCanvas.width - mapControlsWidth;
-  const mapHeight = vizCanvas.height - timelineHeatmap.height - padding / 2;
+  const mapWidth = (isMobile) ? innerWidth: vizCanvas.width - mapControlsWidth;
+  const mapHeight = (isMobile) ? innerHeight * 0.5 - 70 : vizCanvas.height - timelineHeatmap.height - padding / 2;
   const horizontalScale = mapWidth / 960;
   const verticalScale = mapHeight / 500;
   const map = {
     height: mapHeight,
     width: mapWidth,
     scale: Math.min(horizontalScale, verticalScale) / 1000,
-  }
+  };
 
-  const sidebarWidth = (!expandedSidebar)
-    ? Math.max(200, windowWidth * 0.33)
-    : Math.max(200, windowWidth * 0.66);
-  const sidebarHeight = vizCanvas.height - 125 - welcomeHeight;
+  let sidebarWidth = innerWidth;
+  if (!isMobile) {
+    sidebarWidth = (!expandedSidebar)
+      ? Math.max(200, windowWidth * 0.33)
+      : Math.max(200, windowWidth * 0.66);
+  }
+  const sidebarHeight = (!isMobile)
+    ? vizCanvas.height - 125 - welcomeHeight
+    : innerHeight - 125;
   const sidebarHeaderHeight = 70;
   const filterHeight = 34;
   const sidebar = {
@@ -554,10 +576,14 @@ export function calculateDimensions(options) {
     cols = potentialCols;
     photoCardWidth = sidebarWidth / potentialCols * 0.96
   }
+  if (isMobile) {
+    photoCardWidth = innerWidth * 0.45;
+    cols = 2;
+  }
   //const cols = Math.floor(sidebarWidth / photoCardMinWidth);
   //const photoCardWidth = sidebarWidth / cols * 0.96;
   const photoCardScale = photoCardWidth / photoCardMaxWidth;
-  const photoCardHeight = 400 * photoCardScale;
+  const photoCardHeight = 350 * photoCardScale;
   const rows = Math.max(1, Math.floor(sidebarHeight / photoCardHeight));
   //const photoCardWidth = Math.min(200, sidebarWidth / 2);
   const photoCardPaddingMargin = Math.min(5, photoCardWidth * 0.25);
@@ -581,6 +607,9 @@ export function calculateDimensions(options) {
     scale: photoCardScale,
   };
 
+  console.log(photoCardWidth, photoCardHeight, sidebarHeight, rows, photoCards);
+
+
   const similarPhotos = {};
   const similarPhotosHeaderHeight = 50;
   similarPhotos.height = Math.min(250, (vizCanvas.height - similarPhotosHeaderHeight) / 3);
@@ -597,6 +626,7 @@ export function calculateDimensions(options) {
     timelineHeatmap,
     selectedPhoto,
     similarPhotos,
+    isMobile,
   }
 
   return dimensions;
@@ -665,6 +695,9 @@ export function getStateNameFromAbbr (abbr) {
 }
 
 export const getStateAbbr = (name) => {
+  if (!name) {
+    return '';
+  }
   const stIndex = Object.values(stateabbrs)
     .findIndex(stateName => stateName.toLowerCase() === name.toLowerCase());
   const abbr = Object.keys(stateabbrs)[stIndex];

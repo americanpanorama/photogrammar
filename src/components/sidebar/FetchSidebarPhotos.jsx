@@ -18,7 +18,7 @@ const FetchSidebarPhotos = ({ query, getStateAbbr }) => {
     if (data) {
       data.rows = data.rows.map(sp => ({
         ...sp,
-        caption: he.decode(sp.caption),
+        caption: (sp.caption) ? he.decode(sp.caption) : '',
       }))
 
       if (data.rows.length === 0) {

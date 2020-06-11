@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 @import url('https://fonts.googleapis.com/css?family=EB+Garamond|Open+Sans&display=swap');
 
+
 /* ------------------------------------------------------------------
 General Styles
 ------------------------------------------------------------------ */
@@ -58,55 +59,115 @@ button:focus {
 /* ------------------------------------------------------------------
 Layout
 ------------------------------------------------------------------- */
+/* for mobile */
+ .wrapper {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: 50px 50px 50vh 50px 75px calc(100vh - 125px);
+    width: 100vw;
+    height: 100vh;
+  }
+
+  header.navbar-header {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+
+  .navbar {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+  }
+
+  #viz-canvas {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+    overflow-y: scroll;
+  }
+
+  #search {
+    grid-column: 1 / span 1;
+    grid-row: 4 / span 1;
+  }
+
+  #sidebarHeader {
+    grid-column: 1 / span 1;
+    grid-row: 5 / span 1;
+  }
+
+  #sidebar-photos {
+    grid-column: 1 / span 1;
+    grid-row: 6 / span 1;
+  }
+
+  #vizToggle {
+    grid-column: 1 / span 1;
+    grid-row: 7 / span 1;
+  }
 
 
-.wrapper {
-  display: grid;
-  grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
-  grid-template-rows: 100px 50px 75px calc(100vh - 225px);
-  height: 100vh;
-  width: 100vw;
-}
 
-header.navbar-header {
-  grid-column: 1 / span 1;
-  grid-row: 1 / span 1;
-}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
 
-#search {
-  grid-column: 1 / span 1;
-  grid-row: 2 / span 1;
-}
+  .wrapper {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
+    grid-template-rows: 100px 50px 75px calc(100vh - 225px);
+    height: 100vh;
+    width: 100vw;
+  }
 
-#sidebarHeader {
-  grid-column: 1 / span 1;
-  grid-row: 3 / span 1;
-}
+  header.navbar-header {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
 
-#sidebar-photos {
-  grid-column: 1 / span 1;
-  grid-row: 4 / span 1;
-}
+  #search {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+  }
 
-#viz-canvas {
-  grid-column: 2 / span 2;
-  grid-row: 2 / span 3;
-  border-left: 1px solid black;
-  position: relative;
-  background-color: white;
-}
+  #sidebarHeader {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+  }
 
-.navbar {
-  grid-column: 2 / span 2;
-  grid-row: 1 / span 1;
-}
+  #sidebar-photos {
+    grid-column: 1 / span 1;
+    grid-row: 4 / span 1;
+  }
 
-.expandedSidebar #sidebar {
-  grid-column: 1 / span 2;
-}
+  #viz-canvas {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    grid-column: 2 / span 2;
+    grid-row: 2 / span 3;
+    border-left: 1px solid black;
+    position: relative;
+    background-color: white;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+    z-index: auto;
+  }
 
-.expandedSidebar #viz-canvas {
-  grid-column: 3 / span 1;
+  #vizToggle {
+    display: none;
+  }
+
+  .navbar {
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 1;
+  }
+
+  .expandedSidebar #sidebar {
+    grid-column: 1 / span 2;
+  }
+
+  .expandedSidebar #viz-canvas {
+    grid-column: 3 / span 1;
+  }
+
 }
 
 /* ------------------------------------------------------------------
@@ -116,17 +177,19 @@ Navigation
 
 
 .navbar-header {
-
-  padding: 20px 10px;
+  padding: 5px 10px;
   font-size: 18px;
   line-height: 20px;
   height: 50px;
-  text-align: right;
-  font: 100 28px "Lato", sans-serif;
-  font-style: italic;
+  text-align: center;
   text-transform: none;
   letter-spacing: 0px;
   font-weight: bold;
+}
+
+.navbar-header img {
+  max-width: 90vw;
+  max-height: 40px !important;
 }
 
 .navbar-header a {
@@ -135,12 +198,24 @@ Navigation
 }
 
 
+@media only screen and (min-width: 768px) {
+  .navbar-header {
+    text-align: left;
+  }
+  .navbar-header img {
+    padding: 20px 10px;
+    max-width: calc(30vw - 40px);
+    max-height: 50px !important;
+    margin-left: 20px;
+  }
+}
+
+
+
 
 /* Push search */
 
 #viz-canvas {
-  height: calc(100vh - 100px);
-  overflow-y: scroll;
 
   /*position: fixed;
   right: 0;

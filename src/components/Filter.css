@@ -41,9 +41,9 @@
 }
 
 .filter input[type=text] {
-  height: 22px;
+  height: 36px;
   width: 100%;
-  padding: 4px 0 4px 20px;
+  padding: 0px 0 0px 20px;
   font-size: 18px;
 
   /* border-color: salmon;

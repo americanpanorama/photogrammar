@@ -1,26 +1,150 @@
 .selectedPhoto {
   display: grid;
-  grid-template-columns: 50px 1fr 2fr;
-  grid-template-rows: calc(100vh - 100px);
+  grid-template-columns: 100vw;
+  grid-template-rows: 35px auto auto auto;
   overflow: visible;
+}
+
+button[role=expand] {
+  display: none;
+}
+
+.selectedPhoto .metadata {
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
+  overflow-x: visible;
+  overflow-y: scroll;
+  z-index: 1000;
+}
+
+.selectedPhoto .close {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  text-align: right;
+  margin-right: 5px;
+}
+
+.selectedPhoto .img {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+}
+
+.selectedPhoto .relatedImages {
+  grid-column: 1 / span 1;
+  grid-row: 4 / span 1;
+}
+
+
+.selectedPhoto .img img.full {
+  padding: 0;
+  max-width: calc(100% - 20px);
+  max-height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.metadata {
+  display: grid;
+  grid-template-columns: 40vw auto;
+  grid-gap: 10px;
+}
+
+.metadata li {
+  list-style: none;
+  clear: both;
+}
+
+.metadata h5 {
+  text-align: right;
+  margin: 0;
+}
+
+.metadata .metadatum {
+  max-width: 50vw;
+  text-align: left;
+}
+
+.metadata .map {
+  grid-column: 1 / span 2;
+  margin: 0 auto;
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .selectedPhoto {
+    display: grid;
+    grid-template-columns: 50px 1fr 2fr 45px;
+    grid-template-rows: auto auto;
+    overflow: visible;
+  }
+
+  button[role=expand] {
+    grid-column: 4 / span 1;
+    grid-row: 1 / span 1;
+    display: block;
+    margin-right: 20px;
+  }
+
+  .selectedPhoto .metadata {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+    overflow-x: visible;
+    overflow-y: scroll;
+    z-index: 1000;
+    text-align: right;
+  }
+
+  .selectedPhoto .close {
+    margin-top: 35px;
+    margin-left: 10px;
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+
+  .selectedPhoto .img {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 1;
+  }
+
+  .selectedPhoto .relatedImages {
+    grid-column: 3 / span 1;
+    grid-row: 2 / span 1;
+  }
+
+  .selectedPhoto .img img.full {
+    padding: 0 0 0 20px;
+    max-width: calc(100% - 45px);
+    max-height: calc(100vh - 101px -  325px);
+    display: inline-block;
+
+  }
+
+  .selectedPhoto .metadata {
+    display: block;
+  }
+
+  .selectedPhoto .metadata * {
+    font-size: 1em;
+    overflow-y: scroll;
+    overflow-x: visible;
+    text-align: right;
+    margin-right: 7px;
+    clear: both;
+  }
+
+  .selectedPhoto.metadata .map {
+      margin: 0;
+    }
+
 }
 
 .selectedPhoto .img > * {
   vertical-align: top;
 }
 
-.selectedPhoto .img img.full {
-  padding: 0 20px;
-  max-width: calc(100% - 80px);
-  max-height: calc(100vh - 101px -  325px);
-  display: inline-block;
 
-}
 
-.button[role=expand] {
-  grid-column: 4 / span 1;
-  grid-row: 1 / span 1;
-}
 
 /*
 .similarPhotos {
@@ -38,27 +162,10 @@
   display: inline-block;
 } 
 
-.selectedPhoto .metadata {
-  grid-column: 2 / span 1;
-  grid-row: 1 / span 1;
-  overflow-x: visible;
-  overflow-y: scroll;
-  z-index: 1000;
-  text-align: right;
-}
-
-.selectedPhoto .metadata * {
-  font-size: 1em;
-  overflow-y: scroll;
-  overflow-x: visible;
-  text-align: right;
-  margin-right: 7px;
-  clear: both;
-}
 
 .selectedPhoto h5 {
   color: #111;
-  margin: 10px 0 0 0;
+  margin: 0;
   font-size: 1em;
   color: #555;
 }
@@ -69,13 +176,6 @@
 
 .caption-text-description p {
   color: #555;
-}
-
-.selectedPhoto .close {
-  margin-top: 35px;
-  margin-left: 10px;
-  grid-column: 1 / span 1;
-  grid-row: 1 / span 1;
 }
 
 .selectedPhoto button {
@@ -90,13 +190,12 @@
 .selectedPhoto .metadata button,
 .selectedPhoto .tags a {
   width: auto;
-  height: 30px;
+  min-height: 30px;
   font-weight: normal;
   font-size: 14px;
   box-shadow: none;
   line-height: 25px;
   border-radius: 15px;
-  text-align: center;
   position: relative;
   padding: 1px 7px 2px;
   background-color: #f5f5f5;
@@ -113,7 +212,7 @@
 
 .selectedPhoto .tags a {
   display: inline-block;
-  height: 26px;
+  min-height: 26px;
   margin: 0 5px;
 }
 

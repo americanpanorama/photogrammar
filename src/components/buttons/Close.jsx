@@ -6,7 +6,7 @@ const Close = ({ onClick, className, role }) => {
     <button
       onClick={(onClick) ? onClick : () => false}
       className={`close ${className}`}
-      role={role || false}
+      role={role || null}
     >
       <svg
         width={25}

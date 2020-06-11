@@ -18,11 +18,21 @@
 }
 
 
+/* the empty column hides the expanded sidebar on mobile */
 #sidebarHeader .timeAndNav {
   display: grid;
-  grid-template-columns: auto auto 40px 40px 40px;
+  grid-template-columns: auto auto 40px 40px 0px;
   height: 25px;
 }
+
+@media only screen and (min-width: 768px) {
+  #sidebarHeader .timeAndNav {
+    display: grid;
+    grid-template-columns: auto auto 40px 40px 40px;
+    height: 25px;
+  }
+}
+
 
 #sidebarHeader .timeAndNav h4,
 #sidebarHeader .timeAndNav .counts {

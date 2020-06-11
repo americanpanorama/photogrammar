@@ -5,16 +5,26 @@
 
 #sidebar-photos {
   /* the sidebar header is 70px in height) */
-  height: calc(100% - 70px);
   display: flex;
-  width: 134vw;
+  width: 200vw;
 }
+
+@media only screen and (min-width: 768px) {
+  #sidebar-photos {
+    /* the sidebar header is 70px in height) */
+    height: calc(100% - 70px);
+    display: flex;
+    width: 134vw;
+  }
+}
+
+
 
 #sidebar-photos .photoPage {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: flex-start;
   align-content: flex-start;
   height: 100%;
   width: max(33vw, 200px);

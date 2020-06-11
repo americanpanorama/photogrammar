@@ -5,18 +5,13 @@ import './Timeline.css';
 
 const TimelineHeatmap = (props) => {
   const {
-    timelineCells,
     photographers,
-    selectedState,
-    selectedCounty,
     selectedPhotographer,
-    timeRange,
     width,
     translateY,
     leftAxisWidth,
     monthHeight,
     monthWidth,
-    textColor,
     selectPhotographer,
     clearPhotographer,
   } = props;

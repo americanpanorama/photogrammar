@@ -9,14 +9,11 @@ const mapStateToProps = state => {
     translateY,
     monthWidth,
     monthHeight,
-    baseColor,
   } = getTimelineHeatmapRows(state);
-  const { selectedState, selectedCounty, selectedPhotographer, timeRange, dimensions } = state;
+  const { selectedPhotographer, timeRange, dimensions } = state;
 
   return {
     photographers,
-    selectedState,
-    selectedCounty,
     selectedPhotographer,
     timeRange,
     width: dimensions.timelineHeatmap.width,
@@ -25,8 +22,7 @@ const mapStateToProps = state => {
     leftAxisWidth: dimensions.timelineHeatmap.leftAxisWidth,
     monthHeight,
     monthWidth,
-    textColor: baseColor,
-  }
+  };
 };
 
 const mapDispatchToProps = {

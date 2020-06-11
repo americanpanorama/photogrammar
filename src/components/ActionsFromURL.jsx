@@ -21,6 +21,7 @@ const ActionsFromURL = (props) => {
     selectCity,
     selectCounty,
     selectPhotographer,
+    clearPhotographer,
     selectedPhoto,
   } = props;
 
@@ -143,6 +144,9 @@ const ActionsFromURL = (props) => {
     if (photographerKey && photographerKey !== selectedPhotographer
       && selectedPhotoData !== 'RoyStryker' && selectedPhotographer !== 'AikenAndWool') {
       selectPhotographer(photographerKey);
+    }
+    if (!photographerKey && selectedPhotographer) {
+      clearPhotographer();
     }
   }
 

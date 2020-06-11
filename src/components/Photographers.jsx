@@ -51,6 +51,22 @@ const Photographers = ({ photographersStaff, photographersNonstaff }) => {
               </figcaption>
             </figure>
           </Link>
+
+          <Link
+            to='/photographers/CBBaldwin'
+          >
+            <figure
+              className='photographerCard'
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/static/photographerPhotos/CBBaldwin.jpg`}
+              />
+              <figcaption>
+                <MicrophoneButton />
+                C. B. Baldwin, Administrator of the FSA
+              </figcaption>
+            </figure>
+          </Link>
         </div>
         <h3>Staff Photographers</h3>
         <div className='photographerCards'>
@@ -66,11 +82,13 @@ const Photographers = ({ photographersStaff, photographersNonstaff }) => {
                   src={`${process.env.PUBLIC_URL}/static/photographerPhotos/${photographer.img}`}
                 />
                 <figcaption>
-                  <span
-                    className='count'
-                  >
-                    {`${photographer.count.toLocaleString()} photos`}
-                  </span>
+                  {(photographer.count) && (
+                    <span
+                      className='count'
+                    >
+                      {`${photographer.count.toLocaleString()} photos`}
+                    </span>
+                  )}
                   {(photographer.interview && photographer.interview.files && photographer.interview.files.length > 0) && (
                     <MicrophoneButton />
 

@@ -80,12 +80,11 @@ const TimelineRow = (props) => {
           fontSize={(emphasize) ? monthHeight * 2 : monthHeight * 1.4}
           textAnchor='end'
           filter={(deemphasize) ? 'url(#grayscale)' : null}
-          className={(active) ? "active" : ""}
+          className={(active) ? 'active' : ''}
         >
           {`${firstname} ${lastname}`}
         </text>
       )}
-
 
       {months.map(c => (
         <rect
@@ -103,17 +102,19 @@ const TimelineRow = (props) => {
       ))}
 
       {/* a transparent hoverable and selectable rect that covers the whole element */}
-      <rect
-        x={labelX - monthWidth * 12}
-        y={-1.5}
-        width={monthWidth * 150}
-        height={monthHeight + 3}
-        fill={'transparent'}
-        id={photographerKey}
-        onClick={onClick}
-        onMouseEnter={() => { if (!isAnimating.current) { onHover(photographerKey) }}}
-        onMouseLeave={() => { if (!isAnimating.current) { onUnhover() }}}
-      />
+      {(active) && (
+        <rect
+          x={labelX - monthWidth * 12}
+          y={-1.5}
+          width={monthWidth * 150}
+          height={monthHeight + 3}
+          fill={'transparent'}
+          id={photographerKey}
+          onClick={onClick}
+          onMouseEnter={() => { if (!isAnimating.current) { onHover(photographerKey) }}}
+          onMouseLeave={() => { if (!isAnimating.current) { onUnhover() }}}
+        />
+      )}
     </g>
   );
 };

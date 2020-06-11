@@ -170,6 +170,10 @@ const lightboxOpen = (state = initialState, action) => (
   (action.type === A.TOGGLE_LIGHTBOX) ? !state : state
 );
 
+const vizOpen = (state = initialState, action) => (
+  (action.type === A.TOGGLE_VIZ) ? !state : state
+);
+
 
 const combinedReducer = combineReducers({
   selectedPhotographer,
@@ -193,6 +197,7 @@ const combinedReducer = combineReducers({
   filterTerms,
   expandedSidebar,
   lightboxOpen,
+  vizOpen,
 });
 
 export default combinedReducer;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 
-const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, selectMapView }) => {
+const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, selectMapView, isMobile }) => {
   let countiesLink = (selectedCity || selectedState) ? `/state/${selectedState}` :'/maps';
   let citiesLink = (selectedCounty || selectedState) ? `/state/${selectedState}#mapview=cities` : '/maps#mapview=cities';
 
@@ -20,16 +20,26 @@ const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, se
         </li>
         <li className={(selectedViz === 'map' && selectedMapView === 'counties') ? 'active counties' : 'counties'}>
           <Link to={countiesLink}>
-            Map: Counties
+            {`${(!isMobile) ? 'Map: ' : ''}Counties`}
           </Link>
         </li>
         <li className={(selectedViz === 'map' && selectedMapView === 'cities') ? 'active cities' : 'cities'}>
           <Link to={citiesLink}>
-            Map: Cities & Towns
+            {`${(!isMobile) ? 'Map: ' : ''}Cities & Towns`}
           </Link>
         </li>
-        <li><a href="#projects" className="section-scroll">About</a></li>
-        <li><a href="https://dsl.richmond.edu/panorama#maps" className="section-scroll" target='_blank'>American Panorama</a></li>
+        {(isMobile) ? (
+          <li className={(selectedViz === 'timeline') ? 'active timeline' : 'timeline'}>
+            <Link to={'/timeline'}>
+              Timeline
+            </Link>
+          </li>
+        ) : (
+          <React.Fragment>
+            <li><a href="#projects" className="section-scroll">About</a></li>
+            <li><a href="https://dsl.richmond.edu/panorama#maps" className="section-scroll" target='_blank'>American Panorama</a></li>
+          </React.Fragment>
+        )}
       </ul>
     </nav>
   );

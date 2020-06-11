@@ -23,9 +23,10 @@ import Photographers from './components/Photographers.js';
 import Photographer from './components/Photographer.js';
 import RoyStryker from './components/RoyStryker.js';
 import AikenAndWool from './components/AikenAndWool.js';
+import CBBaldwin from './components/CBBaldwin.js';
 import Lightbox from './components/Lightbox.js';
 
-const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapView, isInitialized, initializeData, windowResized }) => {
+const App = ({ className, isInitialized, initializeData, windowResized, vizOpen, isMobile }) => {
   useEffect(() => {
     window.addEventListener('resize', windowResized);
     initializeData();
@@ -43,7 +44,7 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
         <ActionsFromURL />
         <header className="navbar-header">
           <Link to={'/'}>
-            Photogrammar
+            <img src={`${process.env.PUBLIC_URL}/logo.svg`} />
           </Link>
         </header>
         <Navbar />
@@ -64,6 +65,9 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
             <Route path={'/photographers/AikenAndWool'}>
               <AikenAndWool />
             </Route>
+            <Route path={'/photographers/CBBaldwin'}>
+              <CBBaldwin />
+            </Route>
             <Route path={'/photographers/:photographerKey'}>
               <Photographer />
             </Route>
@@ -72,17 +76,29 @@ const App = ({ selectedViz, selectedMapView, className, dimensions, selectMapVie
             </Route>
             <Route path={['/themes/:themeKey', '/themes']}>
               <Treemap />
-              <TimelineHeatmap />
-              <TimelineSlider />
+              {(!isMobile) && (
+                <React.Fragment>
+                  <TimelineHeatmap />
+                  <TimelineSlider />
+                </React.Fragment>
+              )}
+            </Route>
+            <Route path={['/timeline']}>
+              {(isMobile) && (
+                <React.Fragment>
+                  <TimelineHeatmap />
+                  <TimelineSlider />
+                </React.Fragment>
+              )}
             </Route>
             <Route path={['/city/:placeId', '/county/:placeId', '/city/:placeId', '/state/:placeId', '/']}>
               <Map />
-              <TimelineHeatmap />
-              <TimelineSlider />
-            </Route>
-
-            <Route>
-              <div>not found</div>
+              {(!isMobile) && (
+                <React.Fragment>
+                  <TimelineHeatmap />
+                  <TimelineSlider />
+                </React.Fragment>
+              )}
             </Route>
           </Switch>
         </div>

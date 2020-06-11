@@ -17,6 +17,7 @@ const mapStateToProps = state => {
     previousOffset,
     nextOffset,
     expandedSidebar,
+    isMobile: dimensions.isMobile,
   };
 };
 

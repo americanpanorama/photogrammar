@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ActionsFromURL from './ActionsFromURL.jsx';
-import { selectViz, selectPhoto, selectMapView, selectTheme, selectNation, selectState, selectCounty, selectCity, selectPhotographer } from '../store/actions';
+import { selectViz, selectPhoto, selectMapView, selectTheme, selectNation, selectState, selectCounty, selectCity, selectPhotographer, clearPhotographer } from '../store/actions';
 
 const mapStateToProps = state => ({
   selectedViz: state.selectedViz,
@@ -23,6 +23,7 @@ const mapDispatchToProps = {
   selectCounty,
   selectCity,
   selectPhotographer,
+  clearPhotographer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionsFromURL);

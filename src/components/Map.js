@@ -13,6 +13,7 @@ const mapStateToProps = state => {
     selectedMapView,
     mapParameters: getMapParameters(state),
     linkUp: getLinkUp(state),
+    isSearching: state.filterTerms.length > 0,
   };
 };
 

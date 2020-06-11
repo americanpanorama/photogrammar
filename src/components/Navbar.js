@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
   selectedCity: state.selectedCity,
   selectedCounty: state.selectedCounty,
   selectedState: state.selectedState,
+  isMobile: state.dimensions.isMobile,
 });
 
 const mapDispatchToProps = {

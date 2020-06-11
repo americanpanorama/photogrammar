@@ -1,5 +1,7 @@
-.treemap {
-  margin-left: 50px;
+@media only screen and (min-width: 768px) {
+  .treemap {
+    margin-left: 50px;
+  }
 }
 
 .treemap .treePath {

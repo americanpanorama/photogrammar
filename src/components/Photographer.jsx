@@ -70,7 +70,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
     <div className={(key !== 'AikenAndWool') ? 'photographer' : 'photographer AikenAndWool'}>
       <div className='close'>
         <Link to={`/photographers`}>
-          <CloseButton />
+          <CloseButton role='close' />
         </Link>
       </div>
       <h2>
@@ -87,11 +87,42 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
         <div className='bioAndInterviews'>
           {(bio) && (
             <div>
-              {bio.map((p) => (
-                <p key={p}>
-                  {p}
-                </p>
-              ))}
+              {bio.map((p) => {
+                const mdLinksPattern = new RegExp(/(\[[^\[]+\]\s?\(.+?\))/gm);
+                const mdEmPattern = new RegExp(/(\*[^*]*\*)/gm);
+                const splitPattern = new RegExp(mdEmPattern.source  + "|" + mdLinksPattern.source);
+                return (
+                  <p key={p}>
+                    {p.split(splitPattern).filter(pPart => pPart).map(pPart => {
+                      if (pPart.match(mdLinksPattern)) {
+                        const txt = pPart.match(/\[(.*?)\]/)[1];
+                        const to = pPart.match(/\((.*?)\)/)[1];
+
+                        return (
+                          <Link
+                            to={`${process.env.PUBLIC_URL}${to}`}
+                            key={pPart}
+                          >
+                            {txt}
+                          </Link>
+                        );
+                      }
+                      if (pPart.match(/\*([^*]*)\*/)) {
+                        return (
+                          <em key={pPart}>
+                            {pPart.match(/\*([^*]*)\*/)[1]}
+                          </em>
+                        )
+                      }
+                      return (
+                        <React.Fragment key={pPart}>
+                          {pPart}
+                        </React.Fragment>
+                      );
+                    })}
+                  </p>
+                );
+              })}
             </div>
           )}
           {(hasInterview) && (
