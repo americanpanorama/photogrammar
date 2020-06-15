@@ -109,7 +109,8 @@ export const getCounties = createSelector(
         const fill = (photoCount > 0) ? '#6a1b9a' : 'white'; //'#eceff1';
         const fillOpacity = (photoCount > 0) ? Math.min(1, photoCount * 50 / area_sqmi + 0.1) : 0.75;
         const centroidData = getCentroidForCounty(nhgis_join);
-        const { center } = centroidData;
+        // TO DO: everything should have centroids so this check shouldn't be necessary
+        const { center } = (centroidData) ? centroidData : { center: [0, 0] };
         const strokeOpacity = (photoCount > 0) ? 1 : 0;
         return {
           d,

@@ -18,8 +18,6 @@ body {
   -ms-overflow-style: scrollbar;
   font: 400 14px/1.8 "Lato", sans-serif;
   color: #777;
-  min-width: 800px;
-  min-height: 600px;
 }
 
 img {
@@ -61,48 +59,21 @@ Layout
 ------------------------------------------------------------------- */
 /* for mobile */
  .wrapper {
-    display: grid;
+/*    display: grid;
     grid-template-columns: 100vw;
-    grid-template-rows: 50px 50px 50vh 50px 75px calc(100vh - 125px);
+    grid-template-rows: 50px 50px 50vh 50px 75px calc(100vh - 75px);*/
     width: 100vw;
-    height: 100vh;
-  }
-
-  header.navbar-header {
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 1;
-  }
-
-  .navbar {
-    grid-column: 1 / span 1;
-    grid-row: 2 / span 1;
   }
 
   #viz-canvas {
-    grid-column: 1 / span 1;
-    grid-row: 3 / span 1;
+    height: 50vh;
     overflow-y: scroll;
   }
 
-  #search {
-    grid-column: 1 / span 1;
-    grid-row: 4 / span 1;
-  }
-
-  #sidebarHeader {
-    grid-column: 1 / span 1;
-    grid-row: 5 / span 1;
-  }
-
   #sidebar-photos {
-    grid-column: 1 / span 1;
-    grid-row: 6 / span 1;
+    height: calc(100vh - 75px);
   }
 
-  #vizToggle {
-    grid-column: 1 / span 1;
-    grid-row: 7 / span 1;
-  }
 
 
 
@@ -114,7 +85,6 @@ Layout
     grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
     grid-template-rows: 100px 50px 75px calc(100vh - 225px);
     height: 100vh;
-    width: 100vw;
   }
 
   header.navbar-header {
@@ -138,9 +108,6 @@ Layout
   }
 
   #viz-canvas {
-    position: relative;
-    top: auto;
-    bottom: auto;
     grid-column: 2 / span 2;
     grid-row: 2 / span 3;
     border-left: 1px solid black;

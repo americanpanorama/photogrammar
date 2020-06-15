@@ -554,7 +554,7 @@ export function calculateDimensions(options) {
   }
   const sidebarHeight = (!isMobile)
     ? vizCanvas.height - 125 - welcomeHeight
-    : innerHeight - 125;
+    : innerHeight - 75;
   const sidebarHeaderHeight = 70;
   const filterHeight = 34;
   const sidebar = {
@@ -585,6 +585,7 @@ export function calculateDimensions(options) {
   const photoCardScale = photoCardWidth / photoCardMaxWidth;
   const photoCardHeight = 350 * photoCardScale;
   const rows = Math.max(1, Math.floor(sidebarHeight / photoCardHeight));
+  console.log(cols, rows, photoCardWidth, photoCardHeight);
   //const photoCardWidth = Math.min(200, sidebarWidth / 2);
   const photoCardPaddingMargin = Math.min(5, photoCardWidth * 0.25);
   const photoCardBorderWidth = Math.max(2, photoCardWidth * 0.01);

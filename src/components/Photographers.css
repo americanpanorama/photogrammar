@@ -1,8 +1,20 @@
-.photographers {
-  overflow-y: scroll;
-  display: grid;
-  grid-template-columns: minmax(200px, 1fr) 2fr;
-  grid-template-rows: calc(100vh - 100px);
+.photographers .photographerCard {
+  width: 45vw;
+  margin: 14px 2vw;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+    .photographers {
+      overflow-y: scroll;
+      display: grid;
+      grid-template-columns: minmax(200px, 1fr) 2fr;
+      grid-template-rows: calc(100vh - 100px);
+    }
+
+  .photographers .photographerCard {
+    width: 240px;
+  }
 }
 
 .photographers .explanation {
@@ -23,9 +35,7 @@
   align-items: flex-end;
   align-content: flex-start;
 }
-.photographers .photographerCard {
-  width: 240px;
-}
+
 
 .photographers a {
   text-decoration: none;

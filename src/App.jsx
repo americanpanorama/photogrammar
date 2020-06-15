@@ -48,12 +48,6 @@ const App = ({ className, isInitialized, initializeData, windowResized, vizOpen,
           </Link>
         </header>
         <Navbar />
-
-        <Welcome />
-        <Filter />
-        <FetchPhotoCount />
-        <FetchSidebarPhotos />
-
         <div id="viz-canvas">
           <Switch>
             <Route path={'/photo/:id+'}>
@@ -102,6 +96,12 @@ const App = ({ className, isInitialized, initializeData, windowResized, vizOpen,
             </Route>
           </Switch>
         </div>
+
+        <Welcome />
+        <Filter />
+        <FetchPhotoCount />
+        <FetchSidebarPhotos />
+
       </div>
       <Lightbox />
     </Router>
