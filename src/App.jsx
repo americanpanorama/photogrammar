@@ -21,6 +21,7 @@ import TimelineSlider from './components/TimelineSlider.js';
 import Treemap from './components/Treemap.js';
 import Photographers from './components/Photographers.js';
 import Photographer from './components/Photographer.js';
+import OralHistoriesSearch from './components/OralHistoriesSearch.jsx';
 import RoyStryker from './components/RoyStryker.js';
 import AikenAndWool from './components/AikenAndWool.js';
 import CBBaldwin from './components/CBBaldwin.js';
@@ -67,6 +68,9 @@ const App = ({ className, isInitialized, initializeData, windowResized, vizOpen,
             </Route>
             <Route path={'/photographers/'}>
               <Photographers />
+            </Route>
+            <Route path={'/ohsearch/:searchFor'}>
+              <OralHistoriesSearch />
             </Route>
             <Route path={['/themes/:themeKey', '/themes']}>
               <Treemap />

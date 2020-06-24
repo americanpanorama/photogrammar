@@ -5,13 +5,12 @@ import SidebarHeaderStateButton from './SidebarHeaderStateButton.js';
 import SidebarHeaderCityCountyButton from './SidebarHeaderCityCountyButton.js';
 import SidebarHeaderThemeButton from './SidebarHeaderThemeButton.js';
 import SidebarHeaderFilterButton from './SidebarHeaderFilterButton.js';
-import SidebarHeaderTimeRangeButton from './SidebarHeaderTimeRangeButton.js';
+import SidebarHeaderTimeRangeButton from './SidebarHeaderFacetButton.jsx';
 import './SidebarHeader.css';
 
 const SidebarPhotosHeader = (props) => {
   const {
     hasFacet,
-    dateStr,
     displayableCards,
     sidebarPhotosOffset,
     previousOffset,
@@ -21,10 +20,28 @@ const SidebarPhotosHeader = (props) => {
     count,
     expandedSidebar,
     isMobile,
+    firstDate,
+    lastDate,
+    timeRange,
+    setTimeRange,
   } = props;
+
   const from = sidebarPhotosOffset + 1;
   const to = (count) ? Math.min(sidebarPhotosOffset + displayableCards, count)
     : sidebarPhotosOffset + displayableCards;
+
+  const getDateRangeString = (timeRange) => {
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const yearMonths = timeRange.map(tr => ({
+      year: Math.floor(tr / 100),
+      month: tr % 100,
+    }));
+    const startString = `${monthNames[yearMonths[0].month - 1].substring(0, 3)} ${yearMonths[0].year}`;
+    const endString = `${monthNames[yearMonths[1].month - 1].substring(0, 3)} ${yearMonths[1].year}`;
+    return `${startString} - ${endString}`;
+  };
+
+  const timeRangeDisabled = timeRange[0] === 193501 && timeRange[1] === 194406;
 
   return (
     <header 
@@ -46,7 +63,11 @@ const SidebarPhotosHeader = (props) => {
       )}
       <div className='timeAndNav'>
         <div className='facets'>
-          <SidebarHeaderTimeRangeButton />
+          <SidebarHeaderTimeRangeButton
+            label={getDateRangeString([firstDate || 193501, lastDate || 194406])}
+            disabled={timeRangeDisabled}
+            onClick={setTimeRange}
+          />
         </div>
         <h4 className='counts'>
           {`${from}-${to} of `}

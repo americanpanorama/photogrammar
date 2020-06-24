@@ -511,7 +511,7 @@ export function calculateDimensions(options) {
     ? Math.min(windowWidth * 0.66, windowWidth - 200) - padding * 2
     : Math.min(windowWidth * 0.33, windowWidth - 200) - padding * 2
   const vizCanvas = {
-    height: Math.max(600, innerHeight - headerHeight - padding * 4  - timelineSliderHeight),
+    height: Math.max(600, innerHeight - headerHeight - timelineSliderHeight),
     width: vizCanvasWidth,
   }
 
@@ -524,9 +524,9 @@ export function calculateDimensions(options) {
     height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
     leftAxisWidth: innerWidth * 0.15,
   } : {
-    width: vizCanvas.width * 0.85,
+    width: Math.min(vizCanvas.width * 0.75, vizCanvas.width - 200),
     height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
-    leftAxisWidth: vizCanvas.width * 0.15,
+    leftAxisWidth: Math.max(200, vizCanvas.width * 0.25),
   };
 
   const mapControlsWidth = 50;
@@ -585,7 +585,6 @@ export function calculateDimensions(options) {
   const photoCardScale = photoCardWidth / photoCardMaxWidth;
   const photoCardHeight = 350 * photoCardScale;
   const rows = Math.max(1, Math.floor(sidebarHeight / photoCardHeight));
-  console.log(cols, rows, photoCardWidth, photoCardHeight);
   //const photoCardWidth = Math.min(200, sidebarWidth / 2);
   const photoCardPaddingMargin = Math.min(5, photoCardWidth * 0.25);
   const photoCardBorderWidth = Math.max(2, photoCardWidth * 0.01);
@@ -607,9 +606,6 @@ export function calculateDimensions(options) {
     borderWidth: photoCardBorderWidth,
     scale: photoCardScale,
   };
-
-  console.log(photoCardWidth, photoCardHeight, sidebarHeight, rows, photoCards);
-
 
   const similarPhotos = {};
   const similarPhotosHeaderHeight = 50;

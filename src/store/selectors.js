@@ -26,6 +26,8 @@ const getMapDimensions = state => state.dimensions.map;
 const getTimelineCells = state => state.timelineCells;
 const getFilterTerms = state => state.filterTerms;
 
+
+
 export const getPhotographers = (min = 0, max = 50000) => (
   Photographers.filter(p => p.count >= min && p.count <= max)
 );
@@ -62,6 +64,23 @@ export const getSelectedPhotographerName = createSelector(
   (md) => (md && md.firstname && md.lastname) ? `${md.firstname} ${md.lastname}` : null
 );
 
+// this takes the selected time range and returns the actual time range of the returned photos based on the other criteria
+// export const getTimeRange = createSelector(
+//   [getSelectedTimeRange, getSelectedPhotographerMetadata],
+//   (selectedTimeRange, selectedPhotographerMetadata) => {
+//     const firstDates = [];
+//     const lastDates = [];
+//     if (selectedPhotographerMetadata) {
+//       firstDates.push(selectedPhotographerMetadata.firstDate);
+//       lastDates.push(selectedPhotographerMetadata.lastDate);
+//     }
+//     return [
+//       (firstDates.length > 0) ? Math.min(...firstDates) : selectedTimeRange[0],
+//       (lastDates.length > 0) ?  Math.max(...lastDates) : selectedTimeRange[1]
+//     ];
+//   }
+// );
+
 export const getCounties = createSelector(
   [getCountiesData, getTimeRange, getSelectedCounty, getSelectedState, getFilterTerms],
   (countiesData, timeRange, selectedCounty, selectedState, filterTerms) => {
@@ -69,8 +88,6 @@ export const getCounties = createSelector(
       .filter(county => {
         const { j: nhgis_join, s: state } = county;
         if (state === 'AK') {
-          
-        console.log(selectedState, state);
         }
         if (!nhgis_join || nhgis_join === 'NULL') {
           return false;
@@ -563,11 +580,11 @@ export const getSidebarPhotoCountQuery = createSelector(
   (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, selectedMapView, wheres) => {
     let query;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
-    const sqlQueryBase = 'SELECT count(cartodb_id) FROM photogrammar_photos';
+    const sqlQueryBase = 'SELECT count(cartodb_id), min(year * 100 + month) as minDate, max(year * 100 + month) as maxDate FROM photogrammar_photos';
     if (wheres.length > 1) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where}`;
-      return encodeURI(`${cartoURLBase}${query} `);
+      return `${cartoURLBase}${encodeURIComponent(query)}`;
     } 
     return null;
   }
@@ -737,7 +754,7 @@ export const getTimelineHeatmapRows = createSelector(
     const filteredCells = timelineCells
       .filter(tc => tc.month && tc.year < 1944 || tc.month <= 6);
     const activePhotographers = filteredCells.map(tc => tc.photographer);
-    const opacityDenominator = Math.min(200, Math.max(...filteredCells.map(tc => tc.count)));
+    const opacityDenominator = Math.min(250, Math.max(...filteredCells.map(tc => tc.count)));
     const threshold = 500;
     const photographers = getPhotographers(75)
       .filter(p => p.key !== 'unspecified')

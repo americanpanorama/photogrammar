@@ -183,7 +183,8 @@ Navigation
 /* Push search */
 
 #viz-canvas {
-
+  background-color: white;
+  z-index: 1001;
   /*position: fixed;
   right: 0;
   top: 101px;

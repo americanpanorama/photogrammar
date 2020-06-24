@@ -57,5 +57,6 @@ InterviewTimestamp.propTypes = {
 };
 
 InterviewTimestamp.defaultProps = {
-
+  isPlaying: false,
+  jumpTo: () => false,
 };

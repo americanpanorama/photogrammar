@@ -2,10 +2,37 @@
   fill: var(--map-counties-color);
 }
 
+.wrapper.counties .timeline .legend stop {
+  stop-color: var(--map-counties-color);
+}
+
 .wrapper.cities .timeline text {
   fill: var(--map-cities-color);
+}
+
+.wrapper.cities .timeline .legend stop {
+  stop-color: var(--map-cities-color);
 }
 
 .wrapper.themes .timeline text {
   fill: var(--themes-color);
 }
+
+.wrapper.themes .timeline .legend stop {
+  stop-color: var(--themes-color);
+}
+
+.wrapper .timeline text.tip {
+  font-style: italic;
+  fill: black;
+}
+
+.wrapper .timeline .legend text {
+  fill: black;
+}
+
+.wrapper .timeline .legend .axis text {
+  fill: #555;
+  text-anchor: middle;
+}
+

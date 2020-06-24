@@ -10,11 +10,14 @@ const FetchPhotoCount = ({ query, nationalCount, filterTerms, clearFilterTerms }
     });
 
     if (error) {
+      console.warn(error);
       return null;
+
     }
 
     // if (error) return error.message
     if (data) {
+      console.log(data);
       if (data.rows[0].count === 0) {
         return (
           <header className="highlight-text">
@@ -33,9 +36,13 @@ const FetchPhotoCount = ({ query, nationalCount, filterTerms, clearFilterTerms }
         );
       }
 
+      const { count, mindate, maxdate } = data.rows[0];
+
       return (
         <SidebarHeader
-          count={data.rows[0].count}
+          count={count}
+          firstDate={mindate}
+          lastDate={maxdate}
         />
       );
     }

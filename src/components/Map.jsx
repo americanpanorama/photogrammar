@@ -71,7 +71,6 @@ const Map = (props) => {
   useEffect(
     () => {
       if (!isMounting.current) {
-        console.log(mapParameters);
         d3.select(ref.current)
           .transition()
           .duration(1000)
