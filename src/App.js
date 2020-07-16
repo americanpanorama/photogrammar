@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import App from './App.jsx';
-import { initializeData, windowResized, } from './store/actions';
+import { initializeData, windowResized } from './store/actions';
 
 const mapStateToProps = state => {
-  const { selectedViz, selectedMapView, isInitialized, expandedSidebar, vizOpen, dimensions } = state;
+  const { selectedViz, selectedMapView, isInitialized, hasCompletedFirstLoad, expandedSidebar, dimensions } = state;
   let className = '';
   if (selectedViz === 'themes') {
     className = 'themes';
@@ -17,9 +17,9 @@ const mapStateToProps = state => {
 
   return {
     isInitialized,
+    hasCompletedFirstLoad,
     className,
     isMobile: dimensions.isMobile,
-    vizOpen,
   };
 };
 

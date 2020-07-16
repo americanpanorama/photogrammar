@@ -1,9 +1,8 @@
-
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import './Filter.css';
 
-const Filter = ({ terms, setFilterTerms, clearFilterTerms }) => {
+const Filter = ({ terms, setFilterTerms, clearFilterTerms, toggleSearch }) => {
   const filterTermsRef = useRef();
   const [isSearching, setIsSearching] = useState(false);
   const [isFiltered, setIsFiltered] = useState(terms.length > 0);
@@ -101,6 +100,12 @@ const Filter = ({ terms, setFilterTerms, clearFilterTerms }) => {
           </g>
         </svg>
       </button>
+
+      <div
+        onClick={toggleSearch}
+      >
+        more search options
+      </div>
     </div>
   );
 };

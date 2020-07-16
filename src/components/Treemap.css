@@ -11,3 +11,45 @@
 .treemap .treePath tspan:last-child {
   fill: #222;
 }
+
+.treemap ul.breadcrumbs {
+  padding: 0;
+}
+
+.treemap ul.breadcrumbs li {
+  display: inline-block;
+  margin: 0 3px;
+}
+
+.treemap ul.breadcrumbs li:not(:first-child):before {
+  content: "/ ";
+}
+
+.treemap ul.breadcrumbs li a {
+  color: black;
+  text-decoration: none;
+}
+
+.treemap .box {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.treemap .box label {
+  position: absolute;
+  display: inline-block;
+  width: 95%;
+  bottom: 5%;
+  text-align: center;
+  color: white;
+  line-height: 1.1;
+}
+
+.treemap .explanation {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  z-index: 100;
+}

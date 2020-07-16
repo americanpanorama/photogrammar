@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
+import { buildLink } from '../helpers.js';
 import './TimelineRow.css';
 
 const TimelineRow = (props) => {
@@ -16,7 +18,6 @@ const TimelineRow = (props) => {
     monthHeight,
     yearTicks,
     showLabel,
-    onClick,
     onHover,
     onUnhover,
     deemphasize,
@@ -40,6 +41,15 @@ const TimelineRow = (props) => {
         });
     }, [y]
   );
+
+  const to = buildLink({
+    replaceOrAdd: [{
+      param: 'photographers',
+      value: photographerKey,
+    }],
+  });
+
+ // `${useLocation().pathname.replace(/\/photographers\/[^/]+/, '')}/photographer/${photographerKey}`;
 
   return (
     <g
@@ -103,17 +113,20 @@ const TimelineRow = (props) => {
 
       {/* a transparent hoverable and selectable rect that covers the whole element */}
       {(active) && (
-        <rect
-          x={labelX - monthWidth * 12}
-          y={-1.5}
-          width={monthWidth * 150}
-          height={monthHeight + 3}
-          fill={'transparent'}
-          id={photographerKey}
-          onClick={onClick}
-          onMouseEnter={() => { if (!isAnimating.current) { onHover(photographerKey) }}}
-          onMouseLeave={() => { if (!isAnimating.current) { onUnhover() }}}
-        />
+        <Link
+          to={to}
+        >
+          <rect
+            x={labelX - monthWidth * 12}
+            y={-1.5}
+            width={monthWidth * 150}
+            height={monthHeight + 3}
+            fill={'transparent'}
+            id={photographerKey}
+            onMouseEnter={() => { if (!isAnimating.current) { onHover(photographerKey) }}}
+            onMouseLeave={() => { if (!isAnimating.current) { onUnhover() }}}
+          />
+        </Link>
       )}
     </g>
   );

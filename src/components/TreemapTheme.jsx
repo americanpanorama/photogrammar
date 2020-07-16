@@ -72,6 +72,9 @@ const TreemapTheme = (props) => {
           stroke={fill}
           strokeWidth={strokeWidth * 3 }
           className='rectangular'
+          style={{
+            stroke: fill,
+          }}
         />
         <g transform={`translate(${width / 2} ${height * 0.8 + fontSize * 1.1})`}>
           <text

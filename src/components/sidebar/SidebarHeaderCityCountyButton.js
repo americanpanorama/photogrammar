@@ -6,17 +6,28 @@ const mapStateToProps = state => {
   const { selectedState, selectedCounty, selectedCity } = state;
   let label;
   let link;
+  let replaceInLink;
   if (selectedCounty) {
     label = `${getSelectedCountyMetadata(state).name},`;
-    link = `/state/${selectedState}`;
+    replaceInLink = [{
+      param: 'county',
+      withParam: 'state',
+      value: selectedState,
+    }];
   } else if (selectedCity) {
     label = `${selectedCity},`;
-    link = `/state/${selectedState}#mapview=cities`;
+    replaceInLink = [{
+      param: 'city',
+      withParam: 'state',
+      value: selectedState,
+    }];
   }
 
   return {
     label,
     link,
+    replaceInLink,
+
   };
 };
 

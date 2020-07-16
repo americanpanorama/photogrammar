@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Buttons.css';
 
 const Close = ({ onClick, className, role }) => {
   return (
@@ -38,5 +39,5 @@ Close.propTypes = {
 };
 
 Close.defaultProps = {
-  
+  className: '',
 };

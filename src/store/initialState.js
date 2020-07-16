@@ -20,6 +20,8 @@ while (randomPhotoNumbers.length < numsToGenerate) {
 
 export default {
   isInitialized: false,
+  hasCompletedFirstLoad: false,
+  isLoading: false,
   selectedPhotographer: null,
   selectedCounty: null,
   selectedCity: null,
@@ -69,5 +71,6 @@ export default {
   filterTerms: [],
   expandedSidebar: false,
   lightboxOpen: false,
+  searchOpen: false,
   vizOpen: true,
 };

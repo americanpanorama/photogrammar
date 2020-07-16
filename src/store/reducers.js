@@ -3,7 +3,7 @@ import A from './actionTypes';
 import initialState from './initialState';
 
 const selectedPhotographer = (state = initialState, action) => {
-  if (action.type === A.SELECT_PHOTOGRAPHER) {
+  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.SET_STATE) {
     return action.payload.photographer;
   }  
   if (action.type === A.CLEAR_PHOTOGRAPHER) {
@@ -42,7 +42,7 @@ const timelineCells = (state = initialState, action) => (
 );
 
 const selectedCounty = (state = initialState, action) => {
-  if (action.type === A.SELECT_COUNTY) {
+  if (action.type === A.SELECT_COUNTY || action.type === A.SET_STATE) {
     return action.payload.county;
   }
   if (action.type === A.SELECT_CITY || action.type === A.SELECT_STATE
@@ -55,7 +55,7 @@ const selectedCounty = (state = initialState, action) => {
 };
 
 const selectedCity = (state = initialState, action) => {
-  if (action.type === A.SELECT_CITY) {
+  if (action.type === A.SELECT_CITY || action.type === A.SET_STATE) {
     return action.payload.city;
   }
   if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION
@@ -68,7 +68,7 @@ const selectedCity = (state = initialState, action) => {
 };
 
 const selectedState = (state = initialState, action) => {
-  if (action.type === A.SELECT_STATE || action.type === A.SELECT_CITY || action.type === A.SELECT_COUNTY) {
+  if (action.type === A.SELECT_STATE || action.type === A.SELECT_CITY || action.type === A.SELECT_COUNTY || action.type === A.SET_STATE) {
     return action.payload.state;
   }
   if (action.type === A.SELECT_NATION || action.type === A.SELECT_THEME
@@ -82,6 +82,9 @@ const selectedState = (state = initialState, action) => {
 const selectedPhotoData = (state = initialState, action) => {
   if (action.type === A.SELECT_PHOTO) {
     return action.payload;
+  }
+  if (action.type === A.SET_STATE) {
+    return action.payload.photoData;
   }
   if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
     return null;
@@ -127,9 +130,16 @@ const isInitialized = (state = initialState, action) => (
   (action.type === A.INITIALIZED) ? true : state
 );
 
+const hasCompletedFirstLoad = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? true : state
+);
+
 const selectedMapView = (state = initialState, action) => {
   if (action.type === A.SELECT_MAP_VIEW) {
     return action.payload;
+  }
+  if (action.type === A.SET_STATE) {
+    return action.payload.mapView;
   }
   if (action.type === A.SELECT_CITY) {
     return 'cities';
@@ -138,7 +148,7 @@ const selectedMapView = (state = initialState, action) => {
 };
 
 const selectedTheme = (state = initialState, action) => {
-  if  (action.type === A.SELECT_THEME) {
+  if  (action.type === A.SELECT_THEME || action.type === A.SET_STATE) {
     return action.payload.theme;
   }
   if ((action.type === A.SELECT_VIZ && action.payload === 'photographers') || 
@@ -148,9 +158,15 @@ const selectedTheme = (state = initialState, action) => {
   return state;
 };
 
-const selectedViz = (state = initialState, action) => (
-  (action.type === A.SELECT_VIZ) ? action.payload : state
-);
+const selectedViz = (state = initialState, action) => {
+  if (action.type === A.SELECT_VIZ) {
+    return action.payload;
+  }
+  if (action.type === A.SET_STATE) {
+    return action.payload.viz;
+  }
+  return state;
+};
 
 const filterTerms = (state = initialState, action) => {
   if (action.type === A.SET_FILTER_TERMS) {
@@ -170,9 +186,29 @@ const lightboxOpen = (state = initialState, action) => (
   (action.type === A.TOGGLE_LIGHTBOX) ? !state : state
 );
 
+const searchOpen = (state = initialState, action) => {
+  if (action.type === A.TOGGLE_SEARCH) {
+    return !state;
+  } 
+  if (action.type === A.SET_STATE) {
+    return false;
+  }
+  return state;
+};
+
 const vizOpen = (state = initialState, action) => (
   (action.type === A.TOGGLE_VIZ) ? !state : state
 );
+
+const isLoading = (state = initialState, action) => {
+  if (action.type === A.SET_IS_LOADING) {
+    return action.payload;
+  }
+  if (action.type === A.SET_STATE) {
+    return false;
+  }
+  return state;
+};
 
 
 const combinedReducer = combineReducers({
@@ -192,11 +228,14 @@ const combinedReducer = combineReducers({
   isWelcomeOpen,
   selectedMapView,
   isInitialized,
+  hasCompletedFirstLoad,
+  isLoading,
   selectedTheme,
   selectedViz,
   filterTerms,
   expandedSidebar,
   lightboxOpen,
+  searchOpen,
   vizOpen,
 });
 

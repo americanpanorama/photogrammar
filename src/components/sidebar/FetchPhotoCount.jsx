@@ -17,7 +17,6 @@ const FetchPhotoCount = ({ query, nationalCount, filterTerms, clearFilterTerms }
 
     // if (error) return error.message
     if (data) {
-      console.log(data);
       if (data.rows[0].count === 0) {
         return (
           <header className="highlight-text">

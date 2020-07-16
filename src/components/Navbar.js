@@ -1,7 +1,7 @@
 
 import { connect } from 'react-redux';
 import Navbar from './Navbar.jsx';
-import { selectMapView } from '../store/actions';
+import { selectMapView, toggleSearch } from '../store/actions';
 
 const mapStateToProps = state => ({
   selectedViz: state.selectedViz,
@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   selectMapView,
+  toggleSearch,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

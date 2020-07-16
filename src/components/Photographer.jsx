@@ -8,7 +8,8 @@ import CloseButton from './buttons/Close.jsx';
 import './Photographer.css';
 
 const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
-  const { photographerKey } = useParams();
+  const { photographerKey, interviewKey, timestampKey, highlight } = useParams();
+  console.log(useParams());
   const ref = useRef(null);
 
   const [selectedInterview, setSelectedInterview] = useState(null);
@@ -17,6 +18,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
   const [sectionPlaying, setSectionPlaying] = useState(null);
   const [transcript, setTranscript] = useState(null);
   const [autoScroll, setAutoScroll] = useState(true);
+  const [playerReady, setPlayerReady] = useState(false);
 
   const loadInterview = async (num) => {
     const response = await fetch(`${process.env.PUBLIC_URL}/static/interviews/${interview.files[num].transcript}`);
@@ -30,7 +32,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
 
   useEffect(() => {
     if (interview && !selectedInterview && interview.files && selectedInterview !== 0) {
-      loadInterview(0);
+      loadInterview(interviewKey || 0);
     }
   });
 
@@ -60,9 +62,13 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
   };
 
   const jumpTo = (seconds) => {
+    console.log(seconds);
     ref.current.seekTo(seconds);
-    if (!isPlaying) {
+    // if this is initiated from the url, don't start playing--if from a link do
+    if (playerReady && !isPlaying) {
       setIsPlaying(true);
+    } else {
+      setPlayerReady(true);
     }
   }
 
@@ -140,45 +146,45 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
                 </h4>
               )}
 
-
               {(recording) && (
-              <div className='controls_nav'>
-                {(interview.files.length > 1) && (
-                  <React.Fragment>
-                    Parts 
-                    {interview.files.map((files, idx) => (
-                      <button
-                        onClick={() => { loadInterview(idx) }}
-                        className={(idx === selectedInterview) ? 'active partsButton' : 'partsButton'}
-                        key={`controlForInterview${idx}`}
-                      >
-                        {idx + 1}
-                      </button>
-                    ))}
-                  </React.Fragment>
-                )}
-                <button
-                  onClick={() => { 
-                    if (autoScroll) {
-                      setSectionPlaying(null);
-                    }
-                    setAutoScroll(!autoScroll);
-                  }}
-                  className='disableScrolling'
-                >
-                  {(autoScroll) ? 'disable auto scrolling' : 'enable auto scrolling'}
-                </button>
-                
-                <ReactPlayer
-                  url={recording}
-                  playing={isPlaying}
-                  onProgress={(autoScroll) ? syncTranscript : () => false}
-                  ref={ref}
-                  width='90%'
-                  height='50px'
-                  controls={true}
-                />
-              </div>
+                <div className='controls_nav'>
+                  {(interview.files.length > 1) && (
+                    <React.Fragment>
+                      Parts 
+                      {interview.files.map((files, idx) => (
+                        <button
+                          onClick={() => { loadInterview(idx) }}
+                          className={(idx === selectedInterview) ? 'active partsButton' : 'partsButton'}
+                          key={`controlForInterview${idx}`}
+                        >
+                          {idx + 1}
+                        </button>
+                      ))}
+                    </React.Fragment>
+                  )}
+                  <button
+                    onClick={() => { 
+                      if (autoScroll) {
+                        setSectionPlaying(null);
+                      }
+                      setAutoScroll(!autoScroll);
+                    }}
+                    className='disableScrolling'
+                  >
+                    {(autoScroll) ? 'disable auto scrolling' : 'enable auto scrolling'}
+                  </button>
+                  
+                  <ReactPlayer
+                    url={recording}
+                    playing={isPlaying}
+                    onProgress={(autoScroll) ? syncTranscript : () => false}
+                    onReady={(timestampKey && !playerReady) ? () => jumpTo(timestampKey, false) : () => false}
+                    ref={ref}
+                    width='90%'
+                    height='50px'
+                    controls={true}
+                  />
+                </div>
               )}
 
               {(transcript) && (
@@ -187,6 +193,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }) => {
                     <InterviewTimestamp
                       timestamp={timestamp}
                       paragraphs={transcript[timestamp]}
+                      highlight={[highlight || '']}
                       isPlaying={sectionPlaying === timestamp}
                       autoScroll={autoScroll}
                       key={timestamp}

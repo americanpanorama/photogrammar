@@ -7,15 +7,14 @@ import CloseButton from './buttons/Close.jsx';
 import ExpandButton from './buttons/Expand.jsx';
 import States from '../../data/svgs/states.json';
 import './Photo.css';
+import { buildLink } from '../helpers.js';
 
 const Photo = (props) => {
   const {
     photoMetadata,
     photographerKey,
     centroid,
-    vizLink,
     selectPhoto,
-    selectPhotographer,
     toggleLightbox,
     selectedMapView,
     height
@@ -62,7 +61,46 @@ const Photo = (props) => {
   const stripLength = (stripPhotos && stripPhotos.length > 1) ? stripPhotos[stripPhotos.length -1].num : null;
   const stripNums = (stripPhotos && stripPhotos.length > 1) ? [...Array(stripLength).keys()].map(n => n + 1) : null;
   const selectedPhotoStripNum = (stripPhotos && stripPhotos.length > 1) ? parseInt(photoMetadata.photograph_type.substring(1)) : null;
-  const stripPhotoWidth = (stripPhotos && stripPhotos.length > 1) ? `min(calc(${100 / (stripLength + 0.5)}%  - 6px), 650px)` : null;
+
+  const closeLink = buildLink({});
+  const photographerLink = (photographerKey) ? buildLink({
+    replaceOrAdd: [{
+      param: 'photographers',
+      value: photographerKey,
+    }],
+  }) : null;
+  const vl1Link = (vanderbilt_level1) ? buildLink({
+    replaceOrAdd: [{
+      param: 'themes',
+      value: encodeURI(`root|${vanderbilt_level1}`),
+    }],
+    remove: ['maps', 'city', 'county', 'state'],
+    viz: 'themes',
+  }) : null;
+  const vl2Link = (vanderbilt_level2) ? buildLink({
+    replaceOrAdd: [{
+      param: 'themes',
+      value: encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}`),
+    }],
+    remove: ['maps', 'city', 'county', 'state'],
+    viz: 'themes',
+  }) : null;
+  const vl3Link = (vanderbilt_level3) ? buildLink({
+    replaceOrAdd: [{
+      param: 'themes',
+      value: encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}|${vanderbilt_level3}`),
+    }],
+    remove: ['maps', 'city', 'county', 'state'],
+    viz: 'themes',
+  }) : null;
+  const placeLink =  buildLink({
+    replaceOrAdd: [{
+      param: (selectedMapView === 'counties') ? 'county' : 'city',
+      value: (selectedMapView === 'counties') ? nhgis_join : city,
+    }],
+    viz: (selectedMapView === 'counties') ? 'county' : 'city'
+  });
+
 
   return (
     <div
@@ -72,7 +110,7 @@ const Photo = (props) => {
       }}
     >
       <div className='close'>
-        <Link to={`/${vizLink}`}>
+        <Link to={closeLink}>
           <CloseButton />
         </Link>
       </div>
@@ -84,16 +122,13 @@ const Photo = (props) => {
 
         <h5>Photographer</h5>
         {(photographerKey) ? (
-          <div
-            className="metadatum"
+          <Link
+            to={photographerLink}
           >
-            <button
-              onClick={selectPhotographer}
-              id={photographerKey}
-            >
+            <button>
               {photographer_name}
             </button>
-          </div>
+          </Link>
         ) : (
           <div
             className="metadatum"
@@ -111,13 +146,13 @@ const Photo = (props) => {
           <React.Fragment>
             <h5>Classification (Original Tagging System)</h5>
             <div className='tags'>
-              <Link to={`/themes/${encodeURI(`root|${vanderbilt_level1}`)}`}>
+              <Link to={vl1Link}>
                 {vanderbilt_level1}
               </Link>
-              <Link to={`/themes/${encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}`)}`}>
+              <Link to={vl2Link}>
                 {vanderbilt_level2}
               </Link>
-              <Link to={`/themes/${encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}|${vanderbilt_level3}`)}`}>
+              <Link to={vl3Link}>
                 {vanderbilt_level3}
               </Link>
             </div>
@@ -127,22 +162,11 @@ const Photo = (props) => {
         <h5>Location</h5>
         <div className="metadatum">
           {((city || county) && state && centroid && centroid.center && centroid.center[0]) ? (
-            <React.Fragment>
-              {(selectedMapView === 'counties') && (
-                <Link to={`/county/${nhgis_join}`}>
-                  <button>
-                    {`${county}, ${state}`}
-                  </button>
-                </Link>
-              )}
-              {(selectedMapView === 'cities') && (
-                <Link to={`/city/${stateAbbr}_${encodeURI(city)}`}>
-                  <button>
-                    {`${city}, ${state}`}
-                  </button>
-                </Link>
-              )}
-            </React.Fragment>
+            <Link to={placeLink}>
+              <button>
+                {`${county || city}, ${state}`}
+              </button>
+            </Link>
           ) : (
             <span>location unspecified</span>
           )}
@@ -163,15 +187,15 @@ const Photo = (props) => {
                   key={state.abbr}
                 />
               ))}
-            {(centroid.center && centroid.center[0]) && (
-              <circle
-                cx={300 * centroid.center[0] / 1000 / 0.3}
-                cy={300 * centroid.center[1] / 1000 / 0.3}
-                //cy={centroid.center[1] / 1000 * (500 * 300 / 960)}
-                r={12}
-                fill='lime'
-              />
-            )}
+              {(centroid.center && centroid.center[0]) && (
+                <circle
+                  cx={300 * centroid.center[0] / 1000 / 0.3}
+                  cy={300 * centroid.center[1] / 1000 / 0.3}
+                  //cy={centroid.center[1] / 1000 * (500 * 300 / 960)}
+                  r={12}
+                  fill='lime'
+                />
+              )}
             </g>
           </svg>
         )}
@@ -243,9 +267,6 @@ const Photo = (props) => {
 
     </div>
 
-    
-
-
   );
 };
 
@@ -254,7 +275,6 @@ export default Photo;
 Photo.propTypes = {
   photoMetadata: PropTypes.object,
   selectPhoto: PropTypes.func.isRequired,
-  selectPhotographer: PropTypes.func.isRequired,
 };
 
 Photo.defaultProps = {

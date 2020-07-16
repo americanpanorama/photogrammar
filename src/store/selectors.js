@@ -6,7 +6,7 @@ import PhotographersMetadata from '../../data/photographersMetadata.json';
 import StateCounts from '../../data/stateCounts.json';
 import Cities from '../../data/citiesCounts.json';
 import Centroids from '../../data/centroids.json';
-const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
+const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
 
 const getSelectedPhotographer = state => state.selectedPhotographer;
 const getSelectedCounty = state => state.selectedCounty;
@@ -25,8 +25,6 @@ const getRandomPhotoNumbers = state => state.randomPhotoNumbers;
 const getMapDimensions = state => state.dimensions.map;
 const getTimelineCells = state => state.timelineCells;
 const getFilterTerms = state => state.filterTerms;
-
-
 
 export const getPhotographers = (min = 0, max = 50000) => (
   Photographers.filter(p => p.count >= min && p.count <= max)
@@ -154,13 +152,13 @@ export const getCities = createSelector(
     }
     return Cities
       .filter(cd => {
-        if (selectedState && cd.state !== selectedState) {
+        if (selectedState && cd.s !== selectedState) {
           return false;
         }
         return true;
       })
       .map(cd => {
-        const { key, city, state } = cd;
+        const { k: key, c: city, s: state } = cd;
         let total;
         const [startTime, endTime] = timeRange;
         //console.log(citiesData[key]);
@@ -175,7 +173,7 @@ export const getCities = createSelector(
               if (k === 'total' || k === 'photographers') {
                 return false;
               }
-              return k.substring(1) >= startTime && k.substring(1) <= endTime;
+              return parseInt(k.substring(1)) >= startTime && parseInt(k.substring(1)) <= endTime;
             })
             .reduce((accumulator, k) => {
               return citiesData[key][k] + accumulator;
@@ -198,6 +196,9 @@ export const getCities = createSelector(
 export const getThemes = createSelector(
   [getThemesData, getTimeRange, getSelectedTheme, getSelectedPhotographerName, getDimensions, getFilterTerms],
   (themesData, timeRange, selectedTheme, selectedPhotographerName, dimensions, filterTerms) => {
+    if (Object.keys(themesData).length === 0) {
+      return { themes: [], ancestors: [] };
+    }
     const { height, width } = dimensions.map;
 
     const x = d3.scaleLinear().range([0, width]);
@@ -292,7 +293,6 @@ export const getThemes = createSelector(
       let fill = color(child.data.name);
       if (themesPaths.length === 3 && selectedTheme && selectedTheme !== id) {
         fontColor = '#aaa';
-        fill = '#888';
         fillOpacity = 0.22;
       }
       if (themesPaths.length === 3 && selectedTheme && selectedTheme === id) {
@@ -868,5 +868,115 @@ export const getTimelineHeatmapRows = createSelector(
 
   }
 );
+
+export const getStateSearchOptions = () => {
+  return Object.keys(stateabbrs).map(abbr => ({
+    value: abbr,
+    label: stateabbrs[abbr],
+  }));
+};
+
+export const getCountiesSearchOptions = () => {
+  const abbrs = Object.keys(stateabbrs);
+  const countyOptions = {};
+  Object.keys(stateabbrs).forEach(abbr => {
+    countyOptions[abbr] = [];
+  });
+
+  Counties.forEach(c => {
+    countyOptions[c.s].push({
+      value: c.j,
+      label: `${c.n}`,
+    });
+  });
+
+  Object.keys(countyOptions).forEach(state => {
+    countyOptions[state] = countyOptions[state].sort((a, b) => {
+      if (b.label < a.label) {
+        return 1;
+      }
+      if (b.label > a.label) {
+        return -1;
+      }
+      return 0;
+    })
+  });
+
+  return countyOptions;
+};
+
+export const getCitiesSearchOptions = () => {
+  const abbrs = Object.keys(stateabbrs);
+
+  const citiesOptions = {};
+  Cities.forEach(city => {
+    citiesOptions[city.s] = citiesOptions[city.s] || [];
+    citiesOptions[city.s].push({
+      value: city.k,
+      label: city.c,
+    });
+
+    if (city.otherPlaces) {
+      city.otherPlaces.forEach(otherCity => {
+        citiesOptions[city.s].push({
+          value: city.k,
+          label: otherCity.c.c,
+        });
+      });
+    }
+  });
+
+  Object.keys(citiesOptions).forEach(state => {
+    citiesOptions[state] = citiesOptions[state].sort((a, b) => (a.label > b.label) ? -1 : 1);
+  });
+
+  return citiesOptions;
+};
+
+export const getCountiesOrCitiesOptions = createSelector(
+  [getSelectedMapView],
+  (selectedMapView) => ({
+    cities: getCitiesSearchOptions(),
+    counties: getCountiesSearchOptions(),
+  }),
+);
+
+export const getThemesSearchOptions = createSelector(
+  [getThemesData],
+  (themesData) => {
+    if (!themesData.children) {
+      return null;
+    }
+    const options = [];
+    Object.keys(themesData.children).forEach(level1 => {
+      options.push({
+        label: level1,
+        value: `root|${level1}`,
+      });
+      Object.keys(themesData.children[level1].children).forEach(level2 => {
+        options.push({
+          label: `${level1} / ${level2}`,
+          value: `root|${level1}|${level2}`,
+        });
+        Object.keys(themesData.children[level1].children[level2].children).forEach(level3 => {
+          options.push({
+            label: `${level1} / ${level2} / ${level3}`,
+            value: `root|${level1}|${level2}|${level3}`,
+          });
+        });
+      });
+    });
+    return options.sort((a, b) => {
+      if (a.label > b.label) {
+        return 1;
+      }
+      if (a.label < b.label) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+);
+
 
 

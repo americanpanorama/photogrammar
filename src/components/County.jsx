@@ -1,26 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import * as d3 from 'd3';
+import { buildLink } from '../helpers.js';
 import './County.css';
 
 const County = (props) => {
   const {
     d,
     name,
-    photoCount,
     nhgis_join,
     labelCoords,
     fill,
     fillOpacity,
-    strokeOpacity,
     scale,
-    selectedCounty,
     linkActive,
     onCountyHover,
     onCountyUnhover,
   } = props;
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   const [ strokeWidth, setStrokeWidth] = useState(props.strokeWidth);
 
@@ -34,9 +32,17 @@ const County = (props) => {
       });
   });
 
+  const link = buildLink({
+    replace: [{
+      param: 'state',
+      withParam: 'county',
+      value: nhgis_join,
+    }],
+  });
+
   return (
     <Link
-      to={`/county/${nhgis_join}`}
+      to={link}
       onClick={(!linkActive) ? e => e.preventDefault() : () => {}}
       key={nhgis_join}
     >

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Photo from './Photo.jsx';
-import { toggleLightbox, selectPhotographer, selectPhoto } from '../store/actions';
-import { getCentroidForCounty, getVizLink } from '../store/selectors';
+import { toggleLightbox, selectPhoto } from '../store/actions';
+import { getCentroidForCounty} from '../store/selectors';
 
 const mapStateToProps = state => {
   const photoMetadata = state.selectedPhotoData;
@@ -11,7 +11,6 @@ const mapStateToProps = state => {
     photoMetadata,
     photographerKey,
     centroid,
-    vizLink: getVizLink(state),
     height: state.dimensions.selectedPhoto.height,
     selectedMapView: state.selectedMapView,
   };
@@ -19,7 +18,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   selectPhoto,
-  selectPhotographer,
   toggleLightbox,
 };
 

@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TimelineRow from './TimelineRow.jsx';
 import './Timeline.css';
+import { buildLink } from '../helpers.js';
 
 const TimelineHeatmap = (props) => {
   const {
@@ -12,12 +14,12 @@ const TimelineHeatmap = (props) => {
     leftAxisWidth,
     monthHeight,
     monthWidth,
-    selectPhotographer,
-    clearPhotographer,
   } = props;
 
   const [showOthers, setShowOthers] = useState(false);
   const [hoveredPhotographer, setHoveredPhotographer] = useState(null);
+
+  const clearLink = buildLink({ remove: ['photographers']});
 
   // this will close the other photographers if one is selected
   const otherPhotographerSelected = useRef(selectedPhotographer);
@@ -43,7 +45,7 @@ const TimelineHeatmap = (props) => {
       setHoveredPhotographer(null);
     }
   };
-
+  
   return (
     <div
       className='timeline'
@@ -111,7 +113,6 @@ const TimelineHeatmap = (props) => {
                   key={`timelineRowFor${p.key}`}
                   onHover={onHover}
                   onUnhover={onUnhover}
-                  onClick={selectPhotographer}
                 />
               );
           })}
@@ -120,8 +121,8 @@ const TimelineHeatmap = (props) => {
             transform={`translate(${leftAxisWidth - 10} ${height - monthHeight * 13})`}
           >
             {(selectedPhotographer) ? (
-              <g
-                onClick={clearPhotographer}
+              <Link
+                to={clearLink}
               >
                 <g transform={'translate(-15 0)'}>
                   <line
@@ -157,7 +158,7 @@ const TimelineHeatmap = (props) => {
                     photographer
                   </tspan>
                 </text>
-              </g>
+              </Link>
             ) : (
               <React.Fragment>
                 <g transform={'translate(-15 0) rotate(315)'}>

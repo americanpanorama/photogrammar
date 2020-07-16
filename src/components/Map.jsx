@@ -7,6 +7,7 @@ import State from './State.jsx';
 import City from './City.jsx';
 import MapLabel from './MapLabel.jsx';
 import States from '../../data/svgs/states.json';
+import { buildLink } from '../helpers.js';
 import './Map.css';
 
 const Map = (props) => {
@@ -18,7 +19,6 @@ const Map = (props) => {
     selectedState,
     mapParameters,
     selectedMapView,
-    linkUp,
     isSearching,
   } = props;
 
@@ -31,14 +31,43 @@ const Map = (props) => {
   const [ translateY, setTranslateY ] = useState(mapParameters.translateY);
   const [ scale, setScale ] = useState(mapParameters.scale);
   const { placeId } = useParams();
-  const location = useLocation();
+  const { pathname } = useLocation();
+
+  useEffect(
+    () => {
+      console.log('map called');
+      d3.select(ref.current)
+        .transition()
+        .duration((isMounting.current) ? 0 : 1000)
+        .attr('transform', `translate(${mapParameters.translateX} ${mapParameters.translateY}) scale(${mapParameters.scale})`)
+        .on('end', () => {
+          setTranslateX(mapParameters.translateX);
+          setTranslateY(mapParameters.translateY);
+          setScale(mapParameters.scale);
+          isMounting.current = false;
+        });
+    }, [mapParameters.x, mapParameters.y, mapParameters.scale]
+  );
+
+  let linkUp;
+  if (selectedCity || selectedCounty) {
+    linkUp = buildLink({
+      replace: [{
+        param: (selectedCity) ? 'city' : 'county',
+        withParam: 'state',
+        value: selectedState,
+      }], 
+    });
+  } else if (selectedState) {
+    linkUp = buildLink({ remove: ['state'] });
+  }
 
   // check to see if it's the city view or county view and set if necessary
 
   // set selected place from url if necessary
-  const mapScale = (location.pathname.split('/').length > 1
-    && ['state', 'county', 'city'].includes(location.pathname.split('/')[1]))
-    ? location.pathname.split('/')[1] : 'national';
+  const mapScale = (pathname.split('/').length > 1
+    && ['state', 'county', 'city'].includes(pathname.split('/')[1]))
+    ? pathname.split('/')[1] : 'national';
   let cityDivisor = (mapScale !== 'national') ? 3 : 6;
   // calculate the divisor based on the number of photos
   if (isSearching && cities.length > 0) {
@@ -68,21 +97,7 @@ const Map = (props) => {
   //const selectedCityMetadata = (selectedCity) ? cities.find(c => c.key === selectedCity) : null;
 
 
-  useEffect(
-    () => {
-      if (!isMounting.current) {
-        d3.select(ref.current)
-          .transition()
-          .duration(1000)
-          .attr('transform', `translate(${mapParameters.translateX} ${mapParameters.translateY}) scale(${mapParameters.scale})`)
-          .on('end', () => {
-            setTranslateX(mapParameters.translateX);
-            setTranslateY(mapParameters.translateY);
-            setScale(mapParameters.scale);
-          });
-      }
-    }, [mapParameters.x, mapParameters.y, mapParameters.scale]
-  );
+
 
   const onCityHover = (cityKey) => {
     // find the city
@@ -108,31 +123,6 @@ const Map = (props) => {
   const onCountyUnhover = () => {
     setHoveredCounty(null);
   };
-
-  // prevent render on initial load until map parameters have been calculated
-  if (isMounting.current) {
-    // update the transform if it's changed
-    if (mapParameters.translateX !== translateX || mapParameters.translateY !== translateY
-      || mapParameters.scale !== scale ) {
-      setTranslateX(mapParameters.translateX);
-      setTranslateY(mapParameters.translateY);
-      setScale(mapParameters.scale);
-    }
-
-    // return placeholding div until the map parameters have been calculated
-    if (mapParameters.basedOn === placeId || !placeId) {
-      isMounting.current = false;
-    } else {
-      return (
-        <div
-          style={{
-            width: mapParameters.width,
-            height: mapParameters.height,
-          }}
-        />
-      );
-    }
-  }
 
   return (
     <React.Fragment>
@@ -223,19 +213,39 @@ const Map = (props) => {
               );
             }
           })}
-          {States.filter(s => s.bounds && s.bounds[0] && s.d && s.abbr).map(state => (
-            <State
-              {...state}
-              //fillOpacity={(hoveredState && state.abbr !== hoveredState.abbr) ? 0.4 : 0}
-              fillOpacity={0}
-              link={`/state/${state.abbr}${(selectedMapView === 'cities') ? '#mapview=cities' : ''}`}
-              linkActive={(mapScale === 'national' || (selectedState !== state.abbr))}
-              scale={mapParameters.scale}
-              // onHover={onStateHover}
-              // onUnhover={onStateUnhover}
-              key={state.abbr}
-            />
-          ))}
+          {States.filter(s => s.bounds && s.bounds[0] && s.d && s.abbr).map(state => {
+            const stateLink = buildLink({
+              replace: [
+                {
+                  param: 'maps',
+                  withParam: 'state',
+                  value: state.abbr,
+                },
+                {
+                  param: 'state',
+                  value: state.abbr,
+                },
+                {
+                  param: 'county',
+                  withParam: 'state',
+                  value: state.abbr,
+                }
+              ],
+            });
+            return (
+              <State
+                {...state}
+                //fillOpacity={(hoveredState && state.abbr !== hoveredState.abbr) ? 0.4 : 0}
+                fillOpacity={0}
+                link={stateLink}
+                linkActive={(mapScale === 'national' || (selectedState !== state.abbr))}
+                scale={mapParameters.scale}
+                // onHover={onStateHover}
+                // onUnhover={onStateUnhover}
+                key={state.abbr}
+              />
+            );
+          })}
 
           {(hoveredCity) && (
             <MapLabel 

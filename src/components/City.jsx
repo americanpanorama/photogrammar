@@ -62,7 +62,7 @@ const City = (props) => {
   return (
     <Link
       to={`/city/${id}`}
-      onClick={(!linkActive) ? e => e.preventDefault() : selectCity}
+      onClick={(!linkActive) ? e => e.preventDefault() : () => {}}
       id={id}
     >
       <circle

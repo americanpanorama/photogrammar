@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Map from './Map.jsx';
-import { getSelectedCityMetadata, getCounties, getCities, getMapParameters, getLinkUp } from '../store/selectors';
+import { getCounties, getCities, getMapParameters, getLinkUp } from '../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedMapView} = state;

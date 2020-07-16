@@ -11,7 +11,10 @@ const mapStateToProps = state => {
 
   return {
     label,
-    link,
+    replaceInLink: [{
+      param: 'themes',
+      value: selectedTheme.substring(0, selectedTheme.lastIndexOf('|')),
+    }],
   };
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './PhotoCard.css';
+import { buildLink } from '../../helpers.js';
 
 const PhotoCard = (props) => {
   const {
@@ -43,6 +44,13 @@ const PhotoCard = (props) => {
     location = `${city}, ${stateAbbr}`;
   }
 
+  const linkTo = buildLink({
+    replaceOrAdd: [{
+      param: 'photo',
+      value: loc_item_link,
+    }],
+  });
+
   return (
     <div
       key={loc_item_link}
@@ -56,7 +64,7 @@ const PhotoCard = (props) => {
       }}
     >
       <Link
-        to={`/photo/${loc_item_link}`}
+        to={linkTo}
       >
         <div
           style={{

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import OralHistoriesSearchForm from './OralHistoriesSearchForm.jsx';
 import MicrophoneButton from './buttons/Microphone.jsx';
 import './Photographers.css';
 
@@ -23,6 +24,7 @@ const Photographers = ({ photographersStaff, photographersNonstaff }) => {
         </p>
       </div>
       <div className='photographersGroups'>
+        <OralHistoriesSearchForm />
         <div className='photographerCards'>
           <Link
             to='/photographers/RoyStryker'

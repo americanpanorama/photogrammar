@@ -9,6 +9,7 @@ const mapStateToProps = state => {
   return {
     label,
     link,
+    removeFromLink: ['state', 'county'],
   };
 };
 

@@ -1,154 +1,46 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useLocation, matchPath } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import { parsePathname } from '../helpers.js';
 
-const ActionsFromURL = (props) => {
-  const {
-    selectedViz,
-    selectedMapView,
-    selectedState,
-    selectedCounty,
-    selectedCity,
-    selectedTheme,
-    selectedPhotoData,
-    selectedPhotographer,
-    selectViz,
-    selectPhoto,
-    selectMapView,
-    selectTheme,
-    selectNation,
-    selectState,
-    selectCity,
-    selectCounty,
-    selectPhotographer,
-    clearPhotographer,
-    selectedPhoto,
-  } = props;
+const ActionsFromURL = ({ setState, isLoading }) => {
+  const [pathLoaded, setPathLoaded] = useState(null);
 
-  const {
-    pathname,
-    hash,
-  } = useLocation();
+  const { pathname, hash } = useLocation();
 
-  // remove the basename from the pathPieces
-  const pathPieces = pathname.replace(`${process.env.PUBLIC_URL}`, '').split('/');
+  useEffect(() => {
+    const firstPathPiece = pathname
+      .replace(`${process.env.PUBLIC_URL}`, '')
+      .split('/')
+      .filter(param => param)[0];
+    // get the view
+    const getViz = () => ({
+      photographers: 'photographer',
+      ohsearch: 'photographer',
+      themes: 'themes',
+      timeline: 'timeline',
+      city: 'map',
+      county: 'map',
+      state: 'map',
+      maps: 'map',
+      photo: 'photo',
+    }[firstPathPiece]);
+    const urlViz = getViz() || 'map';
 
-  const isRetrievingData = useRef(false);
-  
-  // determine the view from the url
-  const isPhotographersView = matchPath(pathname, {
-    path: ['/photographers', '/photographer/:photographerKey']
-  }); 
-  const isMapsView = matchPath(pathname, {
-    path: ['/maps', '/city/:placeId', '/county/:placeId', '/city/:placeId', '/state/:placeId', '/'],
-    exact: true,
-  }); 
-  const isThemesView = matchPath(pathname, {
-    path: ['/themes/:themeKey', '/themes'],
-    exact: true,
-  }); 
-  const isPhoto = matchPath(pathname, {
-    path: '/photo/:id+',
-    exact: false,
-  });
-  let urlViz;
-  if (isPhotographersView) {
-    urlViz = 'photographers';
-  } else if (isMapsView) {
-    urlViz = 'map';
-  } else if (isThemesView) {
-    urlViz = 'themes';
-  }
+    // remove the basename from the pathPieces and build an object with state parameters
+    const stateParams = parsePathname(pathname.replace(`${process.env.PUBLIC_URL}`, ''));
+    //console.log(pathLoaded, stateParams);
+    const mapView = (stateParams.city || hash === '#mapview=cities') ? 'cities' : 'counties';
 
-  // deselect photo if the photodata exists but the view isn't photo
-  if (isPhoto) {
-    const photoId = (pathPieces.length === 4) ? `${pathPieces[2]}/${pathPieces[3]}` : pathPieces[2];
-    if (!selectedPhotoData || selectedPhotoData.loc_item_link !== photoId) {
-      selectPhoto(photoId);
-    }
-  } else if (selectedPhotoData) {
-    selectPhoto(null);
-  }
-
-  // select the viz if necessary
-  if (urlViz && urlViz !== selectedViz) {
-    selectViz(urlViz);
-  }
-
-  // select the mapview if necessary
-  if (urlViz === 'map') {
-    let urlMapView = 'counties';
-    if (hash === '#mapview=cities' || matchPath(pathname, { path: '/city/:placeId' })) {
-      urlMapView = 'cities';
-    }
-    if (urlMapView !== selectedMapView) {
-      selectMapView(urlMapView);
-    } 
-
-    // retrieve map data if necessary
-    // set selected place from url
-    const mapScale = (pathPieces.length > 1
-      && ['state', 'county', 'city'].includes(pathPieces[1]))
-      ? pathPieces[1] : 'national';
-
-
-    if (mapScale === 'national') {
-      if (!isRetrievingData.current && (selectedState || selectedCounty || selectedCity)) {
-        isRetrievingData.current = true;
-        selectNation();
+    if (`${pathname}${hash}` !== pathLoaded) {
+      if (!isLoading) {
+        console.log(`setting params for ${pathname}`);
+        setState(stateParams, urlViz, mapView);
       } else {
-        isRetrievingData.current = false;
-      }
-    } else {
-      const placeId = pathPieces[2];
-      if (mapScale === 'state') {
-        if (!isRetrievingData.current && (placeId !== selectedState || selectedCounty || selectedCity)) {
-          selectState(placeId);
-          isRetrievingData.current = true;
-        } else if (placeId === selectedState && isRetrievingData.current) {
-          isRetrievingData.current = false;
-        }
-      }
-      if (mapScale === 'city' && selectedMapView === 'cities') {
-        if (placeId !== selectedCity && !isRetrievingData.current) {
-          selectCity(placeId);
-          isRetrievingData.current = true;
-        } else if (placeId === selectedCounty && isRetrievingData.current) {
-          isRetrievingData.current = false;
-        }
-      }
-      if (mapScale === 'county' && selectedMapView === 'counties') {
-        if (placeId !== selectedCounty && !isRetrievingData.current) {
-          selectCounty(placeId);
-          isRetrievingData.current = true;
-        } else if (placeId === selectedCounty && isRetrievingData.current) {
-          isRetrievingData.current = false;
-        }
+        setPathLoaded(`${pathname}${hash}`);
       }
     }
-  }
-
-  // retrieve themes data if necessary
-  if (urlViz === 'themes') {
-    const themeKey = pathPieces[2] || 'root';
-
-    if (themeKey !== selectedTheme) {
-      selectTheme(themeKey);
-    }
-  }
-
-  // select photographer if necessary
-  if (urlViz === 'photographers') {
-    const photographerKey = pathPieces[2];
-
-    if (photographerKey && photographerKey !== selectedPhotographer
-      && selectedPhotoData !== 'RoyStryker' && selectedPhotographer !== 'AikenAndWool') {
-      selectPhotographer(photographerKey);
-    }
-    if (!photographerKey && selectedPhotographer) {
-      clearPhotographer();
-    }
-  }
+  });
 
   return null;
 };
@@ -156,7 +48,7 @@ const ActionsFromURL = (props) => {
 export default ActionsFromURL;
 
 ActionsFromURL.propTypes = {
-  selectedViz: PropTypes.string,
+
 };
 
 ActionsFromURL.defaultProps = {

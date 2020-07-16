@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import { useFetch } from 'react-async';
 import PropTypes from 'prop-types';
-import TreemapTheme from './TreemapTheme.jsx';
+import TreemapTheme from './TreemapTheme2.jsx';
 import { buildLink } from '../helpers.js';
 import './Treemap.css';
 
@@ -18,7 +18,7 @@ const useFetch = (url, options) => {
         const res = await fetch(url, options);
         const json = await res.json();
         setResponse(json);
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (error) {
         setError(error);
       }
@@ -35,80 +35,51 @@ const Treemap = ({ themes, name, ancestors, height, width, selectedTheme}) => {
   const ref = useRef();
 
   return (
-    <svg
-      width={width}
-      height={height}
+    <div
       className='treemap'
+      style={{
+        width: width,
+        height: height,
+        position: 'relative'
+      }}
     >
-      <text
-        x={width - 5}
-      y={16}
-        textAnchor='end'
-      >
-        1942 Classification System
-        <title>
-          Visualization of the classification system designed by Paul Vanderbilt in 1942. It is a three-tier classification starting with 12 main subject headings (ex. THE LAND), then 1300 sub-headings (ex. Mountains, Deserts, Foothills, Plains) and then sub-sub headings. 88,000 photographs were assigned classifications.
-        </title>
-      </text>
-      <text
-        x={5}
-        y={16}
-        className='treePath'
-      >
+      <ul className='breadcrumbs'>
         {(selectedTheme !== 'root') &&
-          <Link
-            to={`/themes`}
-          >
-            <tspan>
+          <li>
+            <Link
+              to={`/themes`}
+            >
               Top
-            </tspan>
-          </Link>
+            </Link>
+          </li>
         }
         {ancestors.map(ancestor => (
-          <React.Fragment
+          <li
             key={ancestor.key}
           >
-            <tspan
-              dx={10}
-            >
-              /
-            </tspan>
             <Link
               to={`/themes/${ancestor.key}`}
             >
-              <tspan
-                dx={10}
-                id={ancestor.key}
-              >
-                {ancestor.name}
-              </tspan>
+              {ancestor.name}
             </Link>
-          </React.Fragment>
+          </li>
         ))}
-        {(false && selectedTheme !== 'root') &&
-          <Fragment>
-            <tspan
-              dx={10}
-            >
-              /
-            </tspan>
-            <tspan
-              dx={10}
-            >
-              {name}
-            </tspan>
-          </Fragment>
-        }
-      </text>
-      <g>
-        {themes.map(cat => (
+      </ul>
+      {themes.map(cat => (
           <TreemapTheme
             {...cat}
             key={cat.id}
           />
-        ))}
-      </g>
-    </svg>
+      ))}
+
+      <label
+        className='explanation'
+        title='Visualization of the classification system designed by Paul Vanderbilt in 1942. It is a three-tier classification starting with 12 main subject headings (ex. THE LAND), then 1300 sub-headings (ex. Mountains, Deserts, Foothills, Plains) and then sub-sub headings. 88,000 photographs were assigned classifications.'
+      >
+        1942 Classification System
+      </label>
+
+    </div>
   );
 };
 
@@ -124,6 +95,7 @@ const FetchTreemapImages = (props) => {
       return (
         <Treemap
           {...props}
+          themes={themes}
         />
       );
     }

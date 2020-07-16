@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './InterviewTimestamp.css';
+import Highlighter from 'react-highlight-words';
 
-const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying, jumpTo }) => {
+const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying, jumpTo, highlight }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -41,7 +42,11 @@ const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying, jumpTo }) => {
       <div className='section'>
         {paragraphs.map((p, idx) => (
           <p key={`paragraph${idx} ${p.substring(0, 30)}`}>
-            {p}
+            <Highlighter
+              searchWords={[highlight]}
+              textToHighlight={p}
+              key={`paragraph${idx} ${p.substring(0, 30)}`}
+            />
           </p>
         ))}
       </div>
@@ -54,9 +59,11 @@ export default InterviewTimestamp;
 InterviewTimestamp.propTypes = {
   timestamp: PropTypes.string.isRequired,
   paragraphs: PropTypes.array.isRequired,
+  highlight: PropTypes.string,
 };
 
 InterviewTimestamp.defaultProps = {
   isPlaying: false,
   jumpTo: () => false,
+  highlight: '',
 };

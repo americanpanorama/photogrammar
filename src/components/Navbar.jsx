@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 
-const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, selectMapView, isMobile }) => {
+const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, selectMapView, toggleSearch, isMobile }) => {
   let countiesLink = (selectedCity || selectedState) ? `/state/${selectedState}` :'/maps';
   let citiesLink = (selectedCounty || selectedState) ? `/state/${selectedState}#mapview=cities` : '/maps#mapview=cities';
 
   return (
     <nav className="navbar">
       <ul className="nav navbar-nav navbar-right">
+        <li
+          onClick={toggleSearch}
+        >
+          Search
+        </li>
         <li className={(selectedViz === 'photographers') ? 'active photographerslink' : 'photographerslink'}>
           <Link to='/photographers'>
             Photographers

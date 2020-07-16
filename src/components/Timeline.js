@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Timeline from './Timeline.jsx';
-import { selectPhotographer, clearPhotographer } from '../store/actions';
 import { getTimelineHeatmapRows } from '../store/selectors';
 
 const mapStateToProps = state => {
@@ -26,8 +25,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  selectPhotographer,
-  clearPhotographer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timeline);

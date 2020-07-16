@@ -1,0 +1,45 @@
+#ohSearch {
+  max-width: 700px;
+  margin: 10px auto;
+}
+
+#ohSearch a {
+  text-decoration: none;
+}
+
+#ohSearch h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.ohControls {
+  width: 50px;
+}
+
+.ohControls button {
+  margin-top: 35px;
+  margin-left: 10px;
+  padding: 0;
+}
+
+
+#ohSearch #interviewResults h4 {
+  padding-left: 60px;
+  font-size: 1.25em;
+  color: #005B71;
+  margin: 10px 0 0 0;
+}
+
+#ohSearch #interviewResults h5 {
+  padding-left: 60px;
+  font-size: 1em;
+  color: #666;
+  margin: 0 0 10px 0;;
+}
+
+
+
+
+#ohSearch .filter.filtered {
+  grid-template-columns: auto 40px;
+}
