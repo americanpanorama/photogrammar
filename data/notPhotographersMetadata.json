@@ -1,0 +1,89 @@
+[
+  {
+    "key": "AikenAndWool",
+    "img": "HelenWool.jpg",
+    "type": "fsa",
+    "interview": {
+      "name": "Oral history interview with Charlotte Aiken and Helen Wool, 1964 April 17. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-charlotte-aiken-and-helen-wool-11653",
+      "files": [
+        {
+          "recording": "aiken1/recording.mp3",
+          "transcript": "aiken1/transcript.json"
+        },
+        {
+          "recording": "aiken2/recording.mp3",
+          "transcript": "aiken2/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Helen D. Shapiro Wool was born on July 22, 1910 in Russia, she moved to the United States.  At age 19, she was living in Washington D.C. with her uncle’s family and working as a stenographer.  A year later, she married Frank Wool in March 1931.  When her husband planned to sell their grocery store business upon being drafted into World War II, Wool sought employment to support her two young daughters.  A political appointee to the Historic Section in 1940, she worked as a secretary for Roy Stryker.  Her roles included typing and revising letters, printing and pasting photo captions, and coordinating traveling exhibitions.  Among her many contributions was her important role in crafting the letter to President Roosevelt that successfully resulted in transferring and preserving the File. While Stryker tried to convince her to move to New York with him in 1943, she stayed in the D.C. working in similar roles within and outside of government including the Treasury Department and Curtis Circulation Company.  She passed away on December 20, 1998.",
+      "Charlotte Singleton Coker Aiken was born on August 18, 1911 in Hartsville, South Carolina, Coker attended college and graduated as the Great Depression raged. Following a job as a foreman at a nursery school in her home state, she transitioned to office work upon moving to Washington D.C. with her husband. Having taken her husband’s last name of Aiken, she began working in the Payroll Section of the Resettlement Administration. Seeking a more engaging job, she harnessed her network.  Roy Stryker hired her in 1936. While he would lay her off due to financial constraints in 1937, he quickly rehired her in 1938.  Her work keeping the financial books meant Aiken knew the inner workings of the unit, including closely following the travels of the photographers. Like most of the staff, her job was not strictly defined so tasks also included ensuring the negatives were in cold storage, which helped preserve the photographs, as well as creating materials, such as the leaflets dropped in advance of D-Day in France. Following her time at the Historic Division, she worked in the government budget office for several years and would end her career as Executive Librarian for USIA. She passed away on September 28, 1967."
+    ],
+    "firstname": "Charlotte Aiken, Accountant, and",
+    "lastname": "Helen Wool (pictured), Secretary, FSA"
+  },
+  {
+    "key": "RoyStryker",
+    "img": "RoyStryker.jpg",
+    "type": "fsa",
+    "interview": {
+      "name": "Oral history interview with Roy Emerson Stryker, 1963-1965. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-roy-emerson-stryker-12480",
+      "files": [
+        {
+          "recording": "stryker1/recording.mp3",
+          "transcript": "stryker1/transcript.json"
+        },
+        {
+          "recording": "stryker2/recording.mp3",
+          "transcript": "stryker2/transcript.json"
+        },
+        {
+          "recording": "stryker3/recording.mp3",
+          "transcript": "stryker3/transcript.json"
+        },
+        {
+          "recording": "stryker4/recording.mp3",
+          "transcript": "stryker4/transcript.json"
+        },
+        {
+          "recording": "stryker5/recording.mp3",
+          "transcript": "stryker5/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu risus sed lectus venenatis dignissim. Suspendisse in metus ut ex sollicitudin lobortis at a nisi. Nulla nec magna ligula. Mauris porttitor velit sed feugiat ornare. Nulla aliquet urna id tellus pulvinar, quis porta nisl tincidunt. Fusce ut magna ut odio venenatis tempus id sed nisi. Nunc pulvinar auctor erat eu dignissim. Vivamus aliquet pellentesque rhoncus. Praesent consectetur nisl sit amet risus bibendum, at luctus tellus efficitur. Fusce urna felis, interdum vel suscipit venenatis, interdum nec erat. Nulla id ipsum sodales, laoreet odio nec, varius massa. Donec sollicitudin dolor sapien, eu sodales diam tristique a. Nullam laoreet blandit gravida.",
+      "Fusce non commodo arcu, quis iaculis velit. Sed mollis diam lorem, ut eleifend eros dignissim nec. Duis in lacus purus. Integer id aliquam metus, venenatis sollicitudin libero. Donec vel augue dolor. Etiam id maximus sem. Fusce lectus purus, gravida tempor viverra id, dictum ut ex. Praesent semper sit amet odio sit amet dignissim. Proin eu ultricies tellus, et tempor purus. Fusce id neque a dui lacinia interdum vitae porttitor dui. Curabitur nec quam placerat, sagittis magna nec, hendrerit velit. Donec id sapien at erat sodales dignissim. Nunc eu mi eget arcu sollicitudin iaculis ut luctus nulla. In a ultrices elit, vel varius libero."
+    ],
+    "firstname": "Roy",
+    "lastname": "Stryker"
+  },
+  {
+    "key": "CBBaldwin",
+    "img": "CBBaldwin.jpg",
+    "type": "fsa",
+    "interview": {
+      "name": "Oral history interview with C. B. (Calvin Benhan) Baldwin, 1965 February 25. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-c-b-calvin-benhan-baldwin-12303",
+      "files": [
+        {
+          "recording": "baldwinA/recording.mp3",
+          "transcript": "baldwinA/transcript.json"
+        },
+        {
+          "recording": "baldwinB/recording.mp3",
+          "transcript": "baldwinB/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born on August 19, 1902,  he grew up in Radford, Virginia among a family that embraced more progressive politics.  While he never finished his studies at  Virginia Polytechnic Institute (known as Virginia Tech), his education occurred outside the classroom.  He became close friends with Paul Appleby, who moved to town in 1928 to run the local newspapers and solidified Baldwin’s embrace of progessive politics.  When Appleby left for D.C. to work with Secretary of Agriculture Henry A. Wallace, he soon called his friend with an offer to work in the Roosevelt Administration.",
+      "With his family, Baldwin moved to D.C. and took a position working with Wallace. He soon became an assistant to Rexford Tugwell in the Resettlement Administration and then an administrator in the FSA. Along with earning a reputation as a radical due to his work to alleviate poverty, he helped guarantee the long term preservation of the Historic Division. He worked with Roy Stryker to transfer the unit to the OWI and Archibald MacLeish, upon being named the Librarian of Congress, to transfer the File to the Library of Congress. Following the New Deal, Baldwin stayed active in progressive politics working with groups such as the Congress of Industrial Organizations (CIO), Progessive Citizens of America (PCA), and Progresive Party. He settled in Connecticut later in life, where he passed away on May 12, 1975."
+    ],
+    "firstname": "C. B.",
+    "lastname": "Baldwin"
+  }
+]
