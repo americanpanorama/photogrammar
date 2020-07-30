@@ -7,7 +7,8 @@ import StateCounts from '../../data/stateCounts.json';
 import Cities from '../../data/citiesCounts.json';
 import Centroids from '../../data/centroids.json';
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
-
+const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
+    
 const getSelectedPhotographer = state => state.selectedPhotographer;
 const getSelectedCounty = state => state.selectedCounty;
 const getSelectedCity = state => state.selectedCity;
@@ -483,70 +484,87 @@ export const getWheresForCityQuery = createSelector(
   }
 );
 
-export const makeWheres = (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, wheresForCityQuery, selectedViz, selectedTheme, selectedMapView, filterTerms) => {
-  // RoyStryker is an exeption
-  if (selectedPhotographer === 'RoyStryker' || selectedPhotographer === 'AikenAndWool') {
-    return [];
-  }
-  
-  let wheres = [];
-  const [startTime, endTime] = timeRange;
-  if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501
-      || endTime < 194504 || (selectedTheme && selectedTheme !== 'root')
-      || (filterTerms && filterTerms.length > 0)) {
-    if (selectedPhotographer) {
-      const photographer = Photographers.find(p => p.key === selectedPhotographer);
-      let name;
-      if (photographer) {
-        const { firstname, lastname } = photographer;
-        name = `${firstname} ${lastname}`;
+export const makeWheres = createSelector(
+  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getWheresForCityQuery, getSelectedViz, getSelectedTheme, getSelectedMapView, getFilterTerms],
+  (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, wheresForCityQuery, selectedViz, selectedTheme, selectedMapView, filterTerms) => {
+    // RoyStryker is an exeption
+    if (selectedPhotographer === 'RoyStryker' || selectedPhotographer === 'AikenAndWool') {
+      return [];
+    }
+    
+    let wheres = [];
+    const [startTime, endTime] = timeRange;
+    if (selectedPhotographer || selectedCounty || selectedState || startTime > 193501
+        || endTime < 194504 || (selectedTheme && selectedTheme !== 'root')
+        || (filterTerms && filterTerms.length > 0)) {
+      if (selectedPhotographer) {
+        const photographer = Photographers.find(p => p.key === selectedPhotographer);
+        let name;
+        if (photographer) {
+          const { firstname, lastname } = photographer;
+          name = `${firstname} ${lastname}`;
+        }
+        wheres.push(`photographer_name = '${name}'`);
       }
-      wheres.push(`photographer_name = '${name}'`);
-    }
-    if (selectedMapView === 'cities' && !selectedCity) {
-      wheres.push('city is not null');
-      wheres.push('city != \'\'');
-    }
-    if (selectedCounty) {
-      wheres.push(`nhgis_join = '${selectedCounty}'`);
-    } else if (selectedCity) {
-      wheres = wheres.concat(wheresForCityQuery);
-    } else if (selectedState) {
-      wheres.push(`state = '${stateabbrs[selectedState]}'`)
-    }
+      if (selectedMapView === 'cities' && !selectedCity) {
+        wheres.push('city is not null');
+        wheres.push('city != \'\'');
+      }
+      if (selectedCounty) {
+        wheres.push(`nhgis_join = '${selectedCounty}'`);
+      } else if (selectedCity) {
+        wheres = wheres.concat(wheresForCityQuery);
+      } else if (selectedState) {
+        wheres.push(`state = '${stateabbrs[selectedState]}'`)
+      }
 
-    if (selectedViz === 'themes' && selectedTheme) {
-      const themesPaths = selectedTheme.split('|').slice(1);
-      if (themesPaths.length >= 1) {
-        wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
-      } 
-      if (themesPaths.length >= 2) {
-        wheres.push([`vanderbilt_level2 = '${themesPaths[1]}'`]);
-      } 
-      if (themesPaths.length === 3) {
-        wheres.push([`vanderbilt_level3 = '${themesPaths[2]}'`]);
+      if (selectedViz === 'themes' && selectedTheme) {
+        const themesPaths = selectedTheme.split('|').slice(1);
+        if (themesPaths.length >= 1) {
+          wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
+        } 
+        if (themesPaths.length >= 2) {
+          wheres.push([`vanderbilt_level2 = '${themesPaths[1]}'`]);
+        } 
+        if (themesPaths.length === 3) {
+          wheres.push([`vanderbilt_level3 = '${themesPaths[2]}'`]);
+        }
+      }
+
+      if (startTime > 193501) {
+        const startYear = Math.floor(startTime / 100);
+        const startMonth = startTime % 100;
+        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+      }
+      if (endTime < 194504) {
+        const endYear = Math.floor(endTime / 100);
+        const endMonth = endTime % 100;
+        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+      }
+
+      if (filterTerms && filterTerms.length > 0) {
+        filterTerms.forEach(filterTerm => {
+           wheres.push(`caption ~* '\\m${filterTerm}'`);
+        });
       }
     }
-
-    if (startTime > 193501) {
-      const startYear = Math.floor(startTime / 100);
-      const startMonth = startTime % 100;
-      wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
-    }
-    if (endTime < 194504) {
-      const endYear = Math.floor(endTime / 100);
-      const endMonth = endTime % 100;
-      wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
-    }
-
-    if (filterTerms && filterTerms.length > 0) {
-      filterTerms.forEach(filterTerm => {
-         wheres.push(`caption ~* '\\m${filterTerm}'`);
-      });
-    }
+    return wheres;
   }
-  return wheres;
-}
+);
+
+export const getMapFetchPath = createSelector(
+  [getSelectedPhotographer, getSelectedMapView, getFilterTerms, makeWheres],
+  (selectedPhotographer, selectedMapView, filterTerms, wheres) => {
+    if (filterTerms.length === 0) {
+      return (selectedPhotographer)
+        ? `${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`
+        : `${process.env.PUBLIC_URL}/data/photographers/all.json`;
+    }
+    return (selectedMapView === 'counties')
+      ? `${cartoURLBase}${encodeURIComponent(`select nhgis_join, count(img_large_path) as total from photogrammar_photos where nhgis_join is not null and ${wheres.join(' and ')} group by nhgis_join`)}`
+      : `${cartoURLBase}${encodeURIComponent(`select state, city, count(img_large_path) as total from photogrammar_photos where city is not null and ${wheres.join(' and ')} group by state, city`)}`;
+  }
+);
 
 export const getSidebarPhotosWheres = createSelector(
   [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getWheresForCityQuery, getSelectedViz, getSelectedTheme, getSelectedMapView, getFilterTerms],
@@ -554,11 +572,10 @@ export const getSidebarPhotosWheres = createSelector(
 );
 
 export const getSidebarPhotosQuery = createSelector(
-  [getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers, getSidebarPhotosWheres],
+  [getSidebarPhotosOffset, getDimensions, getRandomPhotoNumbers, makeWheres],
   (offset, dimensions, randomPhotoNumbers, wheres) => {
     let query;
     const { displayableCards } = dimensions.photoCards;
-    const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const sqlQueryBase = 'SELECT loc_item_link, photographer_name, caption, year, month, vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, city, county, state, img_thumb_img FROM photogrammar_photos';
     if (wheres.length > 1) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
@@ -576,7 +593,7 @@ export const getSidebarPhotosQuery = createSelector(
 );
 
 export const getSidebarPhotoCountQuery = createSelector(
-  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getSelectedMapView, getSidebarPhotosWheres],
+  [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getSelectedMapView, makeWheres],
   (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, selectedMapView, wheres) => {
     let query;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';

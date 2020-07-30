@@ -68,7 +68,7 @@ export default {
       leftAxisWidth: 120,
     },
   },
-  filterTerms: [],
+  filterTerms: ['cotton'],
   expandedSidebar: false,
   lightboxOpen: false,
   searchOpen: false,

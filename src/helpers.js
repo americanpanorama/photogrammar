@@ -44,6 +44,12 @@ export function buildLink (options) {
       && replace.some(r => ['county', 'city'].includes(r.param) && r.withParam === 'state')) {
       firsts.push('state');
     }
+    if (firstKey === 'state' && replace.some(r => r.param === 'state' && r.withParam === 'county')) {
+      firsts.push('county');
+    }
+    if (firstKey === 'state' && replace.some(r => r.param === 'state' && r.withParam === 'city')) {
+      firsts.push('city');
+    }
     if (['state', 'county', 'city'].includes(firstKey) && remove.includes('state')) {
       params.maps = null;
       firsts.push('maps');

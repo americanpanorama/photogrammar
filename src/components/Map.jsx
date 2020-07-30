@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Async from "react-async";
 import PropTypes from 'prop-types';
 import { Link, useParams, useLocation } from "react-router-dom";
 import * as d3 from 'd3';
+import Counties from '../../data/svgs/counties.json';
+import Cities from '../../data/citiesCounts.json';
+import Centroids from '../../data/centroids.json';
 import County from './County.jsx';
 import State from './State.jsx';
 import City from './City.jsx';
@@ -10,9 +14,154 @@ import States from '../../data/svgs/states.json';
 import { buildLink } from '../helpers.js';
 import './Map.css';
 
+const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
+
+const loadCountiesAndCities = async ({ fetchPath,  selectedMapView, query }, { signal }) => {
+  const res = await fetch(fetchPath, { signal });
+  if (!res.ok) { console.log(res) }
+  return res.json();
+}
+
+const getCentroidForCounty = (nhgis_join) => Centroids.counties[nhgis_join];
+
+const formatCounties = (data, timeRange, filterTerms, selectedState) => {
+  // if the data comes from carto you need to do a bit of reformatting
+  let countiesData = {};
+  if (data.rows) {
+    const { rows } = data;
+    rows.forEach(county => {
+      countiesData[county.nhgis_join] = {
+        total: county.total,
+      };
+    });
+  } else {
+    countiesData = data.counties;
+  }
+  return Counties
+    .filter(county => {
+      const { j: nhgis_join, s: state } = county;
+      if (state === 'AK') {
+      }
+      if (!nhgis_join || nhgis_join === 'NULL') {
+        return false;
+      }
+      if (selectedState && state !== selectedState) {
+        return false;
+      }
+      if (county.d.includes('-35,221.3542')) {
+        return false;
+      }
+      return true;
+    })
+    .map(county => {
+      const { j: nhgis_join, a: area_sqmi, s: state, n: name, d, l: labelCoords } = county;
+      let photoCount;
+      const [startTime, endTime] = timeRange;
+      if (!countiesData[nhgis_join]) {
+        photoCount = 0;
+      } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 194504)) {
+        // Only run this conditional logic if there isn't filter terms
+        // If there is, the query to carto filters by time and returns `total`
+        photoCount = Object
+          .keys(countiesData[nhgis_join])
+          .filter(k => {
+            if (k === 'total' || k === 'photographers') {
+              return false;
+            }
+            return k.substring(1) >= startTime && k.substring(1) <= endTime;
+          })
+          .reduce((accumulator, k) => {
+            return countiesData[nhgis_join][k] + accumulator;
+          }, 0);
+      } else {
+        photoCount = countiesData[nhgis_join].total;
+      }
+      const fill = (photoCount > 0) ? '#6a1b9a' : 'white'; //'#eceff1';
+      const fillOpacity = (photoCount > 0) ? Math.min(1, photoCount * 50 / area_sqmi + 0.1) : 0.75;
+      const centroidData = getCentroidForCounty(nhgis_join);
+      // TO DO: everything should have centroids so this check shouldn't be necessary
+      const { center } = (centroidData) ? centroidData : { center: [0, 0] };
+      const strokeOpacity = (photoCount > 0) ? 1 : 0;
+      return {
+        d,
+        name,
+        state,
+        nhgis_join,
+        area_sqmi,
+        fill,
+        fillOpacity,
+        strokeOpacity,
+        photoCount,
+        center,
+        labelCoords,
+      };
+    });
+};
+
+const formatCities = (data, timeRange, filterTerms, selectedState) => {
+  // if the data comes from carto you need to do a bit of reformatting/organization
+  let citiesData = {};
+  if (data.rows) {
+    const { rows } = data;
+    rows.forEach(city => {
+      const abbrIdx = Object.values(stateabbrs).indexOf(city.state);
+      if (abbrIdx !== -1) {
+        const abbr = Object.keys(stateabbrs)[abbrIdx];
+        citiesData[`${abbr}_${city.city}`] = {
+          total: city.total,
+        };
+      }
+    })
+  } else {
+    citiesData = data.cities;
+  }
+  if (Object.keys(citiesData).length === 0) {
+    return [];
+  }
+  return Cities
+    .filter(cd => {
+      if (selectedState && cd.s !== selectedState) {
+        return false;
+      }
+      return true;
+    })
+    .map(cd => {
+      const { k: key, c: city, s: state } = cd;
+      let total;
+      const [startTime, endTime] = timeRange;
+      //console.log(citiesData[key]);
+      if (!citiesData[key]) {
+        total = 0;
+      } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 193504)) {
+        // Only run this conditional logic if there isn't filter terms
+        // If there is, the query to carto filters by time and returns `total`
+        total = Object
+          .keys(citiesData[key])
+          .filter(k => {
+            if (k === 'total' || k === 'photographers') {
+              return false;
+            }
+            return parseInt(k.substring(1)) >= startTime && parseInt(k.substring(1)) <= endTime;
+          })
+          .reduce((accumulator, k) => {
+            return citiesData[key][k] + accumulator;
+          }, 0);
+      } else {
+        total = citiesData[key].total;
+      }
+      //console.log(key, total);
+      return {
+        key,
+        total,
+        city,
+        state,
+        center: Centroids.cities[key],
+      }
+    });
+};
+
 const Map = (props) => {
   const {
-    counties,
     cities,
     selectedCounty,
     selectedCity,
@@ -20,6 +169,10 @@ const Map = (props) => {
     mapParameters,
     selectedMapView,
     isSearching,
+    selectedPhotographer,
+    timeRange,
+    filterTerms,
+    fetchPath,
   } = props;
 
   const ref = useRef(null);
@@ -35,7 +188,6 @@ const Map = (props) => {
 
   useEffect(
     () => {
-      console.log('map called');
       d3.select(ref.current)
         .transition()
         .duration((isMounting.current) ? 0 : 1000)
@@ -69,12 +221,13 @@ const Map = (props) => {
     && ['state', 'county', 'city'].includes(pathname.split('/')[1]))
     ? pathname.split('/')[1] : 'national';
   let cityDivisor = (mapScale !== 'national') ? 3 : 6;
+  // TODO
   // calculate the divisor based on the number of photos
-  if (isSearching && cities.length > 0) {
-    // what's the max 
-    const maxCount = Math.max(...cities.map(c => c.total));
-    cityDivisor = (mapScale !== 'national') ? maxCount / 200 : maxCount / 100;
-  }
+  // if (isSearching && cities.length > 0) {
+  //   // what's the max 
+  //   const maxCount = Math.max(...cities.map(c => c.total));
+  //   cityDivisor = (mapScale !== 'national') ? maxCount / 200 : maxCount / 100;
+  // }
 
 
   const mapLabelParams = {};
@@ -169,50 +322,80 @@ const Map = (props) => {
           transform={`translate(${translateX} ${translateY}) scale(${scale})`}
           ref={ref}
         >
-          {counties.map(c => (
-            <County
-              {...c}
-              scale={mapParameters.scale}
-              selectedCounty={selectedCounty}
-              strokeWidth={(mapScale === 'national') ?  0 : 0.75 / mapParameters.scale}
-              linkActive={mapScale !== 'national' && c.photoCount > 0}
-              key={c.nhgis_join}
-              onCountyHover={onCountyHover}
-              onCountyUnhover={onCountyUnhover}
-            />
-          ))}
-          { cities.map(city => {
-            if (city.center && city.center[0]) {
-              const { key } = city;
-              let fillOpacity = 0.33;
-              let stroke='#289261';
-              if (hoveredCity || selectedCity) {
-                if ((hoveredCity && key === hoveredCity.key )|| key === selectedCity) {
-                  fillOpacity = 0.9;
+          <Async
+            promiseFn={loadCountiesAndCities}
+            fetchPath={fetchPath}
+            watch={fetchPath}
+          >
+            {({ data, error, isPending }) => {
+              //if (isPending) return "Loading..."
+              if (error) return `Something went wrong: ${error.message}`
+              if (data) {
+                // format the counties
+                if (selectedMapView === 'counties') {
+                  const counties = formatCounties(data, timeRange, filterTerms, selectedState);
+                  return (
+                    <React.Fragment>
+                      {counties.map(c => (
+                        <County
+                          {...c}
+                          scale={mapParameters.scale}
+                          selectedCounty={selectedCounty}
+                          strokeWidth={(mapScale === 'national') ?  0 : 0.75 / mapParameters.scale}
+                          linkActive={mapScale !== 'national' && c.photoCount > 0}
+                          key={c.nhgis_join}
+                          onCountyHover={onCountyHover}
+                          onCountyUnhover={onCountyUnhover}
+                        />
+                      ))}
+                    </React.Fragment>
+                  );
                 } else {
-                  fillOpacity = 0.2;
-                  stroke='transparent';
+                  const cities = formatCities(data, timeRange, filterTerms, selectedState);
+                  return (
+                    <React.Fragment>
+                      { cities.map(city => {
+                        if (city.center && city.center[0]) {
+                          const { key } = city;
+                          let fillOpacity = 0.33;
+                          let stroke='#289261';
+                          if (hoveredCity || selectedCity) {
+                            if ((hoveredCity && key === hoveredCity.key )|| key === selectedCity) {
+                              fillOpacity = 0.9;
+                            } else {
+                              fillOpacity = 0.2;
+                              stroke='transparent';
+                            }
+                          }
+                          return (
+                            <City
+                              cx={city.center[0]}
+                              cy={city.center[1]}
+                              r={Math.sqrt(city.total / (cityDivisor * mapParameters.scale))}
+                              fillOpacity={fillOpacity}
+                              stroke={stroke}
+                              strokeWidth={0.5 / mapParameters.scale}
+                              scale={scale}
+                              name={city.city}
+                              id={city.key}
+                              key={city.key}
+                              linkActive={mapScale !== 'national'}
+                              onCityHover={onCityHover}
+                              onCityUnhover={onCityUnhover}
+                            />
+                          );
+                        }
+                      })}
+                    </React.Fragment>
+                  );
                 }
+                
               }
-              return (
-                <City
-                  cx={city.center[0]}
-                  cy={city.center[1]}
-                  r={Math.sqrt(city.total / (cityDivisor * mapParameters.scale))}
-                  fillOpacity={fillOpacity}
-                  stroke={stroke}
-                  strokeWidth={0.5 / mapParameters.scale}
-                  scale={scale}
-                  name={city.city}
-                  id={city.key}
-                  key={city.key}
-                  linkActive={mapScale !== 'national'}
-                  onCityHover={onCityHover}
-                  onCityUnhover={onCityUnhover}
-                />
-              );
-            }
-          })}
+              return null;
+            }}
+          </Async>
+
+ 
           {States.filter(s => s.bounds && s.bounds[0] && s.d && s.abbr).map(state => {
             const stateLink = buildLink({
               replace: [
@@ -283,7 +466,6 @@ const Map = (props) => {
 export default React.memo(Map);
 
 Map.propTypes = {
-  counties: PropTypes.array.isRequired,
   selectCounty: PropTypes.func,
 };
 

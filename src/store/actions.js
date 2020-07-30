@@ -105,14 +105,11 @@ export function setState(params, viz, mapView) {
     let vizData;
     let timelineCells;
     const photoData = (photo) ? await fetchPhotoData(photo) : null;
-    let counties;
-    let cities;
     let themes = { total: 0, children: {} };
 
     const abortController = new AbortController();
 
     if (filterTerms.length === 0) {
-      console.log('fetching locally');
       ([vizData, timelineCells] = await Promise.all([
         fetchCountiesCitiesThemes(photographers || null, { signal: abortController.signal }),
         fetchTimelineCells({
@@ -124,99 +121,10 @@ export function setState(params, viz, mapView) {
           selectedTheme: theme,
         }, { signal: abortController.signal }),
       ],  { signal: abortController.signal }));
-      ({ counties, cities, themes } = vizData || {});
-    } else {
-      let wheresForCityQuery = [];
-      if (city) {
-        const selectedCityMetadata = Cities.find(cc => cc.k === city);
-        if (selectedCityMetadata) {
-          const { s: state, c: city, otherPlaces } = selectedCityMetadata;
-          wheres.push(`state = '${stateabbrs[state]}'`);
-          const cityNames = [city];
-          if (otherPlaces) {
-            otherPlaces.forEach(op => {
-              cityNames.push(op.c);
-            });
-          }
-          wheresForCityQuery = cityNames.map(cityName => `city = '${cityName}'`);
-        }
-      }
-
-      const wheres = makeWheres(photographers, county, city, state, timeRange, wheresForCityQuery, selectedViz, selectedTheme, selectedMapView, filterTerms);
-
-      if (wheres.length > 0) {
-        // build the queries to select the counties, cities, and timelinecells
-        const queryCounties = `select nhgis_join, count(img_large_path) as total from photogrammar_photos where nhgis_join is not null and ${wheres.join(' and ')} group by nhgis_join`;
-        const queryCities = `select state, city, count(img_large_path) as total from photogrammar_photos where city is not null and ${wheres.join(' and ')} group by state, city`;
-        const queryThemes = `select vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, count(img_large_path) as total from photogrammar_photos where vanderbilt_level3 != '' and ${wheres.join(' and ')} group by vanderbilt_level1, vanderbilt_level2, vanderbilt_level3`;
-        const photographers_wheres = Photographers
-          .filter(p => p.count >= 75)
-          .map(p => `photographer_name = '${p.firstname} ${p.lastname}'`);
-        const queryTimelineCells = `SELECT year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g') as photographer, count(img_large_path) as count FROM photogrammar_photos where ${wheres.join(' and ')} and (${photographers_wheres.join( 'or ')}) group by year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g')`;
-        
-        // fetch them
-        const [countyResults, cityResults, themesResults, timelineCellResults] = await Promise.all([
-          fetchJSON(`${cartoURLBase}${encodeURIComponent(queryCounties)}`, { signal: abortController.signal }),
-          fetchJSON(`${cartoURLBase}${encodeURIComponent(queryCities)}`, { signal: abortController.signal }),
-          fetchJSON(`${cartoURLBase}${encodeURIComponent(queryThemes)}`, { signal: abortController.signal }),
-          fetchJSON(`${cartoURLBase}${encodeURIComponent(queryTimelineCells)}`, { signal: abortController.signal }),
-        ], { signal: abortController.signal });
-
-        // do some data formatting/organization
-        const { rows: rowsCounties } = countyResults;
-        if (rowsCounties.length > 0) {
-          counties = {};
-          rowsCounties.forEach(county => {
-            counties[county.nhgis_join] = {
-              total: county.total,
-            };
-          });
-        }
-
-        const { rows: rowsCities } = cityResults;
-        if (rowsCities.length > 0) {
-          cities = {};
-          rowsCities.forEach(city => {
-            const abbrIdx = Object.values(stateabbrs).indexOf(city.state);
-            if (abbrIdx !== -1) {
-              const abbr = Object.keys(stateabbrs)[abbrIdx];
-              cities[`${abbr}_${city.city}`] = {
-                total: city.total,
-              };
-            }
-          });
-        }
-
-        const { rows: rowsThemes } = themesResults;
-        if (rowsThemes.length > 0) {
-          rowsThemes.forEach(theme => {
-            const { vanderbilt_level1: level1, vanderbilt_level2: level2, vanderbilt_level3: level3, total } = theme;
-            themes.children[level1] = themes.children[level1] || {
-              total: 0,
-              children: {},
-            };
-            themes.children[level1].total += total;
-            themes.children[level1].children[level2] = themes.children[level1].children[level2] || {
-              total: 0,
-              children: {},
-            };
-            themes.children[level1].children[level2].children[level3] = themes.children[level1].children[level2].children[level3] || {
-              total: 0,
-            };
-            themes.total += total;
-            themes.children[level1].total += total;
-            themes.children[level1].children[level2].total += total;
-            themes.children[level1].children[level2].children[level3].total += total;
-          });
-        }
-
-        ({ rows: timelineCells } = timelineCellResults);
-      }
-    }
+      ({ themes } = vizData || {});
+    } 
 
     const payload = {
-      counties,
-      cities,
       themes,
       timelineCells,
       photographer: photographers || null,
