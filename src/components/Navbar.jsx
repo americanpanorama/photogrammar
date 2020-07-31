@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 
-const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, selectMapView, toggleSearch, isMobile }) => {
+const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, toggleSearch, isMobile }) => {
   let countiesLink = (selectedCity || selectedState) ? `/state/${selectedState}` :'/maps';
   let citiesLink = (selectedCounty || selectedState) ? `/state/${selectedState}#mapview=cities` : '/maps#mapview=cities';
 
@@ -55,7 +55,6 @@ export default Navbar;
 Navbar.propTypes = {
   selectedViz: PropTypes.string.isRequired,
   selectedMapView: PropTypes.string.isRequired,
-  selectMapView: PropTypes.func.isRequired,
 };
 
 Navbar.defaultProps = {

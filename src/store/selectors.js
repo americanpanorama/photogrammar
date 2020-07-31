@@ -10,6 +10,7 @@ const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Ark
 const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     
 const getSelectedPhotographer = state => state.selectedPhotographer;
+const getSelectedPhoto = state => state.selectedPhoto;
 const getSelectedCounty = state => state.selectedCounty;
 const getSelectedCity = state => state.selectedCity;
 const getSelectedState = state => state.selectedState;
@@ -79,258 +80,6 @@ export const getSelectedPhotographerName = createSelector(
 //     ];
 //   }
 // );
-
-export const getCounties = createSelector(
-  [getCountiesData, getTimeRange, getSelectedCounty, getSelectedState, getFilterTerms],
-  (countiesData, timeRange, selectedCounty, selectedState, filterTerms) => {
-    return Counties
-      .filter(county => {
-        const { j: nhgis_join, s: state } = county;
-        if (state === 'AK') {
-        }
-        if (!nhgis_join || nhgis_join === 'NULL') {
-          return false;
-        }
-        if (selectedState && state !== selectedState) {
-          return false;
-        }
-        if (county.d.includes('-35,221.3542')) {
-          return false;
-        }
-        return true;
-      })
-      .map(county => {
-        const { j: nhgis_join, a: area_sqmi, s: state, n: name, d, l: labelCoords } = county;
-        let photoCount;
-        const [startTime, endTime] = timeRange;
-        if (!countiesData[nhgis_join]) {
-          photoCount = 0;
-        } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 194504)) {
-          // Only run this conditional logic if there isn't filter terms
-          // If there is, the query to carto filters by time and returns `total`
-          photoCount = Object
-            .keys(countiesData[nhgis_join])
-            .filter(k => {
-              if (k === 'total' || k === 'photographers') {
-                return false;
-              }
-              return k.substring(1) >= startTime && k.substring(1) <= endTime;
-            })
-            .reduce((accumulator, k) => {
-              return countiesData[nhgis_join][k] + accumulator;
-            }, 0);
-        } else {
-          photoCount = countiesData[nhgis_join].total;
-        }
-        const fill = (photoCount > 0) ? '#6a1b9a' : 'white'; //'#eceff1';
-        const fillOpacity = (photoCount > 0) ? Math.min(1, photoCount * 50 / area_sqmi + 0.1) : 0.75;
-        const centroidData = getCentroidForCounty(nhgis_join);
-        // TO DO: everything should have centroids so this check shouldn't be necessary
-        const { center } = (centroidData) ? centroidData : { center: [0, 0] };
-        const strokeOpacity = (photoCount > 0) ? 1 : 0;
-        return {
-          d,
-          name,
-          state,
-          nhgis_join,
-          area_sqmi,
-          fill,
-          fillOpacity,
-          strokeOpacity,
-          photoCount,
-          center,
-          labelCoords,
-        };
-      });
-  }
-);
-
-export const getCities = createSelector(
-  [getCitiesData, getTimeRange, getSelectedState, getFilterTerms],
-  (citiesData, timeRange, selectedState, filterTerms) => {
-    if (Object.keys(citiesData).length === 0) {
-      return [];
-    }
-    return Cities
-      .filter(cd => {
-        if (selectedState && cd.s !== selectedState) {
-          return false;
-        }
-        return true;
-      })
-      .map(cd => {
-        const { k: key, c: city, s: state } = cd;
-        let total;
-        const [startTime, endTime] = timeRange;
-        //console.log(citiesData[key]);
-        if (!citiesData[key]) {
-          total = 0;
-        } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 193504)) {
-          // Only run this conditional logic if there isn't filter terms
-          // If there is, the query to carto filters by time and returns `total`
-          total = Object
-            .keys(citiesData[key])
-            .filter(k => {
-              if (k === 'total' || k === 'photographers') {
-                return false;
-              }
-              return parseInt(k.substring(1)) >= startTime && parseInt(k.substring(1)) <= endTime;
-            })
-            .reduce((accumulator, k) => {
-              return citiesData[key][k] + accumulator;
-            }, 0);
-        } else {
-          total = citiesData[key].total;
-        }
-        //console.log(key, total);
-        return {
-          key,
-          total,
-          city,
-          state,
-          center: Centroids.cities[key],
-        }
-      });
-  }
-);
-
-export const getThemes = createSelector(
-  [getThemesData, getTimeRange, getSelectedTheme, getSelectedPhotographerName, getDimensions, getFilterTerms],
-  (themesData, timeRange, selectedTheme, selectedPhotographerName, dimensions, filterTerms) => {
-    if (Object.keys(themesData).length === 0) {
-      return { themes: [], ancestors: [] };
-    }
-    const { height, width } = dimensions.map;
-
-    const x = d3.scaleLinear().range([0, width]);
-    const y = d3.scaleLinear().range([20, height]);
-
-    const color = d3.scaleOrdinal(d3.schemeTableau10);
-
-    const wheres = ['img_large_path != \'\''];
-    if (selectedPhotographerName) {
-      wheres.push(`photographer_name = '${selectedPhotographerName}'`);
-    }
-    const themesPaths = selectedTheme.split('|').slice(1);
-    const name = themesPaths[themesPaths.length - 1];
-    let rawThemes;
-    if (themesPaths.length === 0) {
-      rawThemes = themesData.children;
-    } else if (themesPaths.length === 1) {
-      rawThemes = themesData.children[themesPaths[0]].children;
-      wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
-    } else if (themesPaths.length >= 2 ) {
-      rawThemes = themesData.children[themesPaths[0]].children[themesPaths[1]].children;
-      wheres.push([`vanderbilt_level1 = '${themesPaths[0]}'`]);
-      wheres.push([`vanderbilt_level2 = '${themesPaths[1]}'`]);
-    }
-
-    const [startTime, endTime] = timeRange;
-
-    if (startTime > 193501) {
-      const startYear = Math.floor(startTime / 100);
-      const startMonth = startTime % 100;
-      wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
-    }
-    if (endTime < 194504) {
-      const endYear = Math.floor(endTime / 100);
-      const endMonth = endTime % 100;
-      wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
-    }
-
-    if (filterTerms && filterTerms.length > 0) {
-      filterTerms.forEach(filterTerm => {
-         wheres.push(`caption ~* '\\m${filterTerm}'`);
-      });
-    }
-
-    // organize the data for d3
-    const organizedThemeData = {
-      name: selectedTheme,
-      children: Object.keys(rawThemes).map(theme => {
-        let photoCount = rawThemes[theme].total;
-        if ((!filterTerms || filterTerms.length === 0) && (startTime > 193501 || endTime < 194504)) {
-          photoCount = Object
-            .keys(rawThemes[theme])
-            .filter(k => {
-              if (k === 'total' || k === 'photographers') {
-                return false;
-              }
-              return k.substring(1) >= startTime && k.substring(1) <= endTime;
-            })
-            .reduce((accumulator, k) => {
-              return rawThemes[theme][k] + accumulator;
-            }, 0);
-        }
-        return {
-          name: theme,
-          key: `${selectedTheme}|${theme}`,
-          value: photoCount,
-        };
-      })
-    };
-    const themesHierarchy = d3.hierarchy(organizedThemeData)
-      .sum(d => d.value)
-      .sort((a, b) => {
-        let order;
-        if (selectedTheme === 'root') {
-          order = ["Work", "People As Such", "Homes and Living Conditions", "Cities and Towns", "Social and Personal Activity", "The Land", "Transportation", "War", "Organized Society", "Religion", "Medicine and Health", "Itellectual and Creative Activity", "Alphabetical Section"];
-          return order.indexOf(a.data.name) - order.indexOf(b.data.name);
-        }
-        return b.value - a.value
-      });
-    const treemap = d3.treemap().tile(d3.treemapSquarify.ratio(1))(themesHierarchy);
-
-    const themesCoords = (treemap && treemap.children && treemap.children.length > 0)
-      ? treemap.children.map((child, idx) => {
-      // make the id--those on the bottom of the hierarchy need to be adjusted if they're selected to be their immediate ancestor
-      const id = (themesPaths.length <= 2) ? `${selectedTheme}|${child.data.name}` : `root|${themesPaths.slice(0, themesPaths.length - 1).join('|')}|${child.data.name}`;
-
-      // style for selection at the bottom level
-      let strokeWidth = width / 200;
-      let fontColor = 'white';
-      let fillOpacity = 0.11;
-      let link = id;
-      let fill = color(child.data.name);
-      if (themesPaths.length === 3 && selectedTheme && selectedTheme !== id) {
-        fontColor = '#aaa';
-        fillOpacity = 0.22;
-      }
-      if (themesPaths.length === 3 && selectedTheme && selectedTheme === id) {
-        link = id.substring(0, id.lastIndexOf('|'));
-      }
-      return {
-        name: child.data.name,
-        transformX: x(child.x0),
-        transformY: y(child.y0),
-        width: x(child.x1) - x(child.x0),
-        height: y(child.y1) - y(child.y0),
-        fill,
-        fillOpacity,
-        id,
-        link,
-        strokeWidth,
-        fontColor,
-      };
-      })
-      : [];
-
-    // make the query 
-    const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
-    const topLevel = Math.min(themesPaths.length + 1, 3);
-    const query = `SELECT pp.vanderbilt_level${topLevel} as theme, (SELECT p.img_medium_path FROM photogrammar_photos as p where ${wheres.join(' and ')} and pp.vanderbilt_level${topLevel} = p.vanderbilt_level${topLevel} order by random() limit 1) as img FROM digitalscholarshiplab.photogrammar_photos as pp where ${wheres.join(' and ')} group by vanderbilt_level${topLevel}`;
-
-    return {
-      name,
-      themes: themesCoords,
-      query: encodeURI(`${cartoURLBase}${query}`),
-      ancestors: themesPaths.slice(0, topLevel - 1).map((theme, idx) => ({
-          name: theme,
-          key: ['root'].concat(themesPaths.slice(0, idx + 1)).join('|'),
-        })),
-    };
-  }
-);
 
 export const getSelectedCountyMetadata = createSelector(
   [getSelectedCounty, getCountiesData],
@@ -566,6 +315,63 @@ export const getMapFetchPath = createSelector(
   }
 );
 
+export const getThemesFetchPath = createSelector(
+  [getSelectedPhotographer, getSelectedMapView, getFilterTerms, makeWheres],
+  (selectedPhotographer, selectedMapView, filterTerms, wheres) => {
+    if (filterTerms.length === 0) {
+      return (selectedPhotographer)
+        ? `${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`
+        : `${process.env.PUBLIC_URL}/data/photographers/all.json`;
+    }
+    return `${cartoURLBase}${encodeURIComponent(`select vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, count(img_large_path) as total from photogrammar_photos where vanderbilt_level3 != '' and ${wheres.join(' and ')} group by vanderbilt_level1, vanderbilt_level2, vanderbilt_level3`)}`;
+  }
+);
+
+export const getThemesBackgroundPhotosQuery = createSelector(
+  [getSelectedTheme, makeWheres],
+  (selectedTheme, wheres) => {
+    const themesPaths = selectedTheme.split('|').slice(1);
+    const topLevel = Math.min(themesPaths.length + 1, 3);
+    return `${cartoURLBase}${encodeURIComponent(`SELECT pp.vanderbilt_level${topLevel} as theme, (SELECT p.img_medium_path FROM photogrammar_photos as p where ${wheres.join(' and ')} and pp.vanderbilt_level${topLevel} = p.vanderbilt_level${topLevel} order by random() limit 1) as img FROM digitalscholarshiplab.photogrammar_photos as pp where ${wheres.join(' and ')} group by vanderbilt_level${topLevel}`)}`;
+  }
+);
+
+export const getTimelineCellsFetchPath = createSelector(
+  [getSelectedViz, getSelectedMapView, getSelectedCounty, getSelectedCity, getSelectedState, getSelectedTheme, getFilterTerms, makeWheres],
+  (selectedViz, selectedMapView, selectedCounty, selectedCity, selectedState, selectedTheme, filterTerms, wheres) => {
+    if (filterTerms.length === 0) {
+      let path;
+      if (selectedViz === 'map') {
+        if (selectedMapView === 'counties') {
+          if (selectedCounty) {
+            path = `${process.env.PUBLIC_URL}/data/photoCounts/counties/${selectedCounty}.json`;
+          } else if (selectedState) {
+            path = `${process.env.PUBLIC_URL}/data/photoCounts/states/${selectedState}.json`;
+          } else {
+            path = `${process.env.PUBLIC_URL}/data/photoCounts/national.json`;
+          }
+        } else {
+          if (selectedCity) {
+            path = `${process.env.PUBLIC_URL}/data/photoCounts/cities/${encodeURI(selectedCity)}.json`;
+          } else if (selectedState) {
+            path = `${process.env.PUBLIC_URL}/data/photoCounts/statesCities/${selectedState}.json`;
+          } else {
+            path = `${process.env.PUBLIC_URL}/data/photoCounts/nationalCities.json`;
+          }
+        }
+      } else if (selectedViz === 'themes') {
+        path = `${process.env.PUBLIC_URL}/data/photoCounts/themes/${encodeURI(selectedTheme || 'root')}.json`;
+      }
+      return path;
+    }
+    // build the queries to select the counties, cities, and timelinecells
+    const photographers_wheres = Photographers
+      .filter(p => p.count >= 75)
+      .map(p => `photographer_name = '${p.firstname} ${p.lastname}'`);
+    return `${cartoURLBase}${encodeURIComponent(`SELECT year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g') as photographer, count(img_large_path) as count FROM photogrammar_photos where ${wheres.join(' and ')} and (${photographers_wheres.join( 'or ')}) group by year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g')`)}`;
+  }
+);
+
 export const getSidebarPhotosWheres = createSelector(
   [getSelectedPhotographer, getSelectedCounty, getSelectedCity, getSelectedState, getTimeRange, getWheresForCityQuery, getSelectedViz, getSelectedTheme, getSelectedMapView, getFilterTerms],
   makeWheres,
@@ -737,11 +543,11 @@ export const getMapParameters = createSelector(
 );
 
 export const getLinkUp = createSelector(
-  [getSelectedCounty, getSelectedCityMetadata, getSelectedState, getCounties, getSelectedMapView],
-  (selectedCounty, selectedCityMetadata, selectedState, counties, selectedMapView) => {
+  [getSelectedCounty, getSelectedCityMetadata, getSelectedState, getSelectedMapView],
+  (selectedCounty, selectedCityMetadata, selectedState, selectedMapView) => {
     if (selectedMapView === 'counties') {
       if (selectedCounty) {
-        return `/state/${counties.find(c => c.nhgis_join === selectedCounty).state}`;
+        return `/state/${Counties.find(c => c.j === selectedCounty).s}`;
       }
       if (selectedState) {
         return '/'
@@ -754,135 +560,6 @@ export const getLinkUp = createSelector(
         return '/maps#mapview=cities'
       }
     }
-  }
-);
-
-export const getTimelineHeatmapRows = createSelector(
-  [getTimelineCells, getTimeRange, getSelectedPhotographer, getDimensions, getSelectedMapView],
-  (timelineCells, timeRange, selectedPhotographer, dimensions, selectedMapView) => {
-    // convenience functions for dates
-    const monthNum = m => (m - 1) / 12;
-    const getTimeCode = (year, month) => year * 100 + month;
-    const timeCodeToNum = timecode => Math.floor(timecode / 100) + monthNum(timecode % 100);
-  
-    const baseColor = (selectedMapView === 'counties') ? '#6a1b9a' : '#289261';
-
-    // create the basic photographers data
-    const filteredCells = timelineCells
-      .filter(tc => tc.month && tc.year < 1944 || tc.month <= 6);
-    const activePhotographers = filteredCells.map(tc => tc.photographer);
-    const opacityDenominator = Math.min(250, Math.max(...filteredCells.map(tc => tc.count)));
-    const threshold = 500;
-    const photographers = getPhotographers(75)
-      .filter(p => p.key !== 'unspecified')
-      .sort((a, b) => {
-        if (a.count < threshold && b.count >= threshold) {
-          return -1;
-        }
-        if (a.count >= threshold && b.count < threshold) {
-          return 1;
-        }
-        if (a.firstDate !== b.firstDate) {
-          return (a.count >= 500) ? a.firstDate - b.firstDate : b.firstDate - a.firstDate;
-        }
-        if (a.lastDate != b.lastDate) {
-          return (a.count >= 500) ? a.lastDate - b.lastDate : b.lastDate - a.lastDate;
-        }
-        return 0;
-      })
-      .map(p => {
-        p.active = (activePhotographers.includes(p.key)
-          && timeRange[1] > p.firstDate && timeRange[0] < p.lastDate);
-        p.fill = (p.active) ? 'black' : 'silver';
-        p.months = [];
-        p.isOther = p.count < 500;
-        return p;
-      });
-
-    // use the number above threshold and number below to calculate height and translateY offset
-    const { leftAxisWidth, width, height } = dimensions.timelineHeatmap;
-
-    const x = d3.scaleLinear()
-      .domain([1935, 1944 + monthNum(6)])
-      .range([leftAxisWidth, width + leftAxisWidth]);
-    const monthWidth = x(1935 + monthNum(2)) - x(1935);
-
-    // add the timeline cells to each photographer
-    filteredCells.forEach(tc => {
-      const idx = photographers.findIndex(p => p.key === tc.photographer);
-      if (idx !== -1) {
-        const cell = {
-          year: tc.year,
-          month: tc.month,
-          count: tc.count,
-          x: x(tc.year + monthNum(tc.month)),
-          fill: baseColor,
-          inSelection: (!(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (!selectedPhotographer || selectedPhotographer === tc.photographer)),
-          fillOpacity: (tc.count > 0) ? 0.05 + 0.95 * tc.count / opacityDenominator : 0
-        }
-        photographers[idx].months.push(cell);
-      }
-    });
-
-    // drop any photographers without month data
-    // photographers.forEach((p, i) => {
-    //   if (p.months.length === 0) {
-    //     photographers.splice(i, 1);
-    //   }
-    // });
-    // drop BarbaraEvans, who uniquely has more than 75 photos but none with a month
-    const beIdx = photographers.findIndex(p => p.key === "BarbaraWright");
-    photographers.splice(beIdx, 1);
-
-    // sort the cells in chronological order
-    photographers.forEach(p => {
-      p.months = p.months.sort((a, b) => getTimeCode(a.year, a.month) - getTimeCode(b.year, b.month));
-    });
-
-    const numberAboveThreshold = photographers.filter(p => !p.isOther).length;
-    const numberBelowThreshold = photographers.filter(p => p.isOther).length;
-    // the +/-1 here are to leave room for the collective "other photographers" when they aren't individual shown
-    const rowHeight = height / (numberAboveThreshold + 2);
-    const translateY = -1 * rowHeight * (numberBelowThreshold);
-    const monthHeight = rowHeight - 2;
-
-    // the +1 here is for an empty row for the "other photographers" to separate the two visually
-    const y = d3.scaleLinear()
-        .domain([0, photographers.length + 1])
-        .range([0, height - translateY]);
-
-    // add the y, labelX, and yeartick values for each photographer
-    photographers.forEach((p, i) => {
-      photographers[i].y = (p.isOther) ? y(i) + 1 : y(i + 2) + 1;
-      photographers[i].labelX = x(Math.floor(p.firstDate / 100)) - 5;
-      photographers[i].yearTicks = [];
-      [1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945].forEach(y => {
-        if (!p.isOther || y >= Math.floor(p.firstDate / 100)) {
-          let stroke = 'black';
-          // lighten if it's before photographers first data
-          if (y < Math.floor(p.firstDate / 100)) {
-            stroke = '#ddd';
-          }
-          // or if it's not within the time range
-          if (y * 100 < timeRange[0] || y * 100 > timeRange[1]) {
-            stroke = '#ddd';
-          }
-          photographers[i].yearTicks.push({
-            x: x(y) - 0.25,
-            stroke,
-          });
-        }
-      });
-    });
-
-    return {
-      photographers,
-      translateY,
-      monthWidth,
-      monthHeight,
-      baseColor,
-    }
-
   }
 );
 
@@ -961,7 +638,8 @@ export const getCountiesOrCitiesOptions = createSelector(
 export const getThemesSearchOptions = createSelector(
   [getThemesData],
   (themesData) => {
-    if (!themesData.children) {
+    // todo: this is broken now that you don't have the themes in state;
+    if (!themesData || !themesData.children) {
       return null;
     }
     const options = [];
@@ -995,5 +673,19 @@ export const getThemesSearchOptions = createSelector(
   }
 );
 
+export const getPhotoFetchQueries = createSelector(
+  [getSelectedPhoto],
+  (id) => {
+    // create the queries to get the photo data and similar photo data
+    const query = `SELECT * FROM photogrammar_photos where loc_item_link = '${id}' `;
+    const queries = [...Array(14).keys()].map(n => n+1).map(x => {
+      return `SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos where loc_item_link = (select nn${x} from similarphotos where source = '${id}')`
+    });
+    const similarPhotosQuery = queries.join(' union ');
 
-
+    return {
+      photoMetadataQuery: `${cartoURLBase}${encodeURIComponent(query)}`,
+      similarPhotosQuery: `${cartoURLBase}${encodeURIComponent(similarPhotosQuery)}`
+    };
+  }
+);

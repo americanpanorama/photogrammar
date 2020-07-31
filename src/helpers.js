@@ -1,11 +1,15 @@
 import { useLocation } from 'react-router-dom';
+import Centroids from '../data/centroids.json';
 
-export function buildLink (options) {
-  const { pathname, hash } = useLocation();
+export function buildLink (options, location) {
+  const pathname = (location) ? location.pathname : useLocation().pathname;
+  const hash = (location) ? location.hash : useLocation().hash;
+
   const replaceOrAdd = options.replaceOrAdd || [];
   const replace = options.replace || [];
   const keep = options.keep || [];
   const params = parsePathname(pathname);
+
   const remove = options.remove || []; 
 
   if (!keep.includes('photo')) {
@@ -122,3 +126,5 @@ export function parsePathname(pathname) {
   stateParams.themes = stateParams.themes || 'root';
   return stateParams;
 }
+
+export const getCentroidForCounty = (nhgis_join) => Centroids.counties[nhgis_join];

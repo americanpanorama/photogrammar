@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { parsePathname } from '../helpers.js';
 
-const ActionsFromURL = ({ setState, isLoading }) => {
+const ActionsFromURL = ({ setState }) => {
   const [pathLoaded, setPathLoaded] = useState(null);
-
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
@@ -33,12 +32,8 @@ const ActionsFromURL = ({ setState, isLoading }) => {
     const mapView = (stateParams.city || hash === '#mapview=cities') ? 'cities' : 'counties';
 
     if (`${pathname}${hash}` !== pathLoaded) {
-      if (!isLoading) {
-        console.log(`setting params for ${pathname}`);
-        setState(stateParams, urlViz, mapView);
-      } else {
-        setPathLoaded(`${pathname}${hash}`);
-      }
+      setState(stateParams, urlViz, mapView);
+      setPathLoaded(`${pathname}${hash}`); 
     }
   });
 

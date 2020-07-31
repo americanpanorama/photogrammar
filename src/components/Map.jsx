@@ -16,7 +16,7 @@ import './Map.css';
 
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
 
-const loadCountiesAndCities = async ({ fetchPath,  selectedMapView, query }, { signal }) => {
+const loadCountiesAndCities = async ({ fetchPath }, { signal }) => {
   const res = await fetch(fetchPath, { signal });
   if (!res.ok) { console.log(res) }
   return res.json();
@@ -232,18 +232,18 @@ const Map = (props) => {
 
   const mapLabelParams = {};
   if (selectedCity) {
-    const selectedCityMetadata = cities.find(c => c.key === selectedCity);
+    const selectedCityMetadata = Cities.find(c => c.k === selectedCity);
     if (selectedCityMetadata) {
       mapLabelParams.label = selectedCityMetadata.city;
       mapLabelParams.x = selectedCityMetadata.center[0];
       mapLabelParams.y = selectedCityMetadata.center[1] - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
     }
   } else if (selectedCounty) {
-    const selectedCountyMetadata = counties.find(c => c.nhgis_join === selectedCounty);
+    const selectedCountyMetadata = Counties.find(c => c.j === selectedCounty);
     if (selectedCountyMetadata) {
-      mapLabelParams.label = selectedCountyMetadata.name;
-      mapLabelParams.x = selectedCountyMetadata.labelCoords[0]
-      mapLabelParams.y = selectedCountyMetadata.labelCoords[1]
+      mapLabelParams.label = selectedCountyMetadata.n;
+      mapLabelParams.x = selectedCountyMetadata.l[0]
+      mapLabelParams.y = selectedCountyMetadata.l[1]
     }
   }
 
@@ -254,7 +254,7 @@ const Map = (props) => {
 
   const onCityHover = (cityKey) => {
     // find the city
-    const hoveredCity = cities.find(city => cityKey === city.key);
+    const hoveredCity = Cities.find(city => cityKey === city.k);
     setHoveredCity(hoveredCity);
   };
 
@@ -265,7 +265,7 @@ const Map = (props) => {
   const onCountyHover = (nhgis_join) => {
     // find the city
     if (nhgis_join !== selectedCounty) {
-      const hoveredCounty = counties.find(counties => nhgis_join === counties.nhgis_join);
+      const hoveredCounty = Counties.find(county => nhgis_join === county.j);
       // only hover if it has photos
       if (hoveredCounty.photoCount > 0) {
         setHoveredCounty(hoveredCounty);
@@ -466,7 +466,7 @@ const Map = (props) => {
 export default React.memo(Map);
 
 Map.propTypes = {
-  selectCounty: PropTypes.func,
+
 };
 
 Map.defaultProps = {

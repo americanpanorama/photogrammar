@@ -2,100 +2,40 @@ import { combineReducers } from 'redux';
 import A from './actionTypes';
 import initialState from './initialState';
 
-const selectedPhotographer = (state = initialState, action) => {
-  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.SET_STATE) {
-    return action.payload.photographer;
-  }  
-  if (action.type === A.CLEAR_PHOTOGRAPHER) {
-    return null;
-  }
-  return state;
-};
-
-const countiesData = (state = initialState, action) => (
-  // (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-  //   || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_COUNTIES
-  //   || (action.type === A.SET_FILTER_TERMS && action.payload.counties)
-  //   || action.type === A.)
-  (action.payload && action.payload.counties) ? action.payload.counties : state
+const selectedPhotographer = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.photographer : state
 );
 
-const citiesData = (state = initialState, action) => (
-  // (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.CLEAR_PHOTOGRAPHER
-  //   || action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.LOAD_CITIES
-  //   || (action.type === A.SET_FILTER_TERMS && action.payload.cities))
-  (action.payload && action.payload.cities) ? action.payload.cities : state
+const selectedPhoto = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.photo : state
 );
 
-const themesData = (state = initialState, action) => (
-  // (action.type === A.LOAD_COUNTIES_AND_CITIES || action.type === A.SELECT_PHOTOGRAPHER
-  //   || action.type === A.CLEAR_PHOTOGRAPHER)
-  (action.payload && action.payload.themes) ? action.payload.themes : state
+const selectedCounty = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.county : state
 );
 
-const timelineCells = (state = initialState, action) => (
-  // (action.type === A.SELECT_STATE || action.type === A.SELECT_COUNTY
-  //   || action.type === A.SELECT_NATION || action.type === A.LOAD_TIMELINE_CELLS
-  //   || action.type === A.SELECT_CITY || action.type === A.SELECT_THEME
-  //   || action.type === A.SET_FILTER_TERMS)
-  (action.payload && action.payload.timelineCells)  ? action.payload.timelineCells : state
+const selectedCity = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.city : state
 );
 
-const selectedCounty = (state = initialState, action) => {
-  if (action.type === A.SELECT_COUNTY || action.type === A.SET_STATE) {
-    return action.payload.county;
-  }
-  if (action.type === A.SELECT_CITY || action.type === A.SELECT_STATE
-    || action.type === A.SELECT_NATION || action.type === A.SELECT_THEME
-    || (action.type === A.SELECT_VIZ && action.payload === 'themes')
-    || (action.type === A.SELECT_VIZ && action.payload === 'photographers')) {
-    return null;
-  }
-  return state;
-};
+const selectedState = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.state : state
+);
 
-const selectedCity = (state = initialState, action) => {
-  if (action.type === A.SELECT_CITY || action.type === A.SET_STATE) {
-    return action.payload.city;
-  }
-  if (action.type === A.SELECT_STATE || action.type === A.SELECT_NATION
-    || action.type === A.SELECT_COUNTY || action.type === A.SELECT_THEME
-    || (action.type === A.SELECT_VIZ && action.payload === 'themes')
-    || (action.type === A.SELECT_VIZ && action.payload === 'photographers')) {
-    return null;
-  }
-  return state;
-};
+const selectedTheme = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.theme : state
+);
 
-const selectedState = (state = initialState, action) => {
-  if (action.type === A.SELECT_STATE || action.type === A.SELECT_CITY || action.type === A.SELECT_COUNTY || action.type === A.SET_STATE) {
-    return action.payload.state;
-  }
-  if (action.type === A.SELECT_NATION || action.type === A.SELECT_THEME
-    || (action.type === A.SELECT_VIZ && action.payload === 'themes')
-    || (action.type === A.SELECT_VIZ && action.payload === 'photographers')) {
-    return null;
-  }
-  return state;
-};
+const selectedViz = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.viz : state
+);
 
-const selectedPhotoData = (state = initialState, action) => {
-  if (action.type === A.SELECT_PHOTO) {
-    return action.payload;
-  }
-  if (action.type === A.SET_STATE) {
-    return action.payload.photoData;
-  }
-  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE || action.type === A.SELECT_NATION) {
-    return null;
-  }
-  return state;
-};
+const selectedMapView = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.mapView : state
+);
 
 const sidebarPhotosOffset = (state = initialState, action) => {
-  if (action.type === A.SELECT_PHOTOGRAPHER || action.type === A.LOAD_SIDEBAR_PHOTOS
-    || action.type === A.SELECT_COUNTY || action.type === A.SELECT_STATE
-    || action.type === A.SELECT_NATION || action.type === A.CLEAR_PHOTOGRAPHER) {
+  if (action.type === A.LOAD_SIDEBAR_PHOTOS) {
     return action.payload.sidebarPhotosOffset;
   }
   if (action.type === A.SELECT_THEME) {
@@ -134,40 +74,6 @@ const hasCompletedFirstLoad = (state = initialState, action) => (
   (action.type === A.SET_STATE) ? true : state
 );
 
-const selectedMapView = (state = initialState, action) => {
-  if (action.type === A.SELECT_MAP_VIEW) {
-    return action.payload;
-  }
-  if (action.type === A.SET_STATE) {
-    return action.payload.mapView;
-  }
-  if (action.type === A.SELECT_CITY) {
-    return 'cities';
-  } 
-  return state;
-};
-
-const selectedTheme = (state = initialState, action) => {
-  if  (action.type === A.SELECT_THEME || action.type === A.SET_STATE) {
-    return action.payload.theme;
-  }
-  if ((action.type === A.SELECT_VIZ && action.payload === 'photographers') || 
-    (action.type === A.SELECT_VIZ && action.payload === 'map')) {
-    return 'root';
-  }
-  return state;
-};
-
-const selectedViz = (state = initialState, action) => {
-  if (action.type === A.SELECT_VIZ) {
-    return action.payload;
-  }
-  if (action.type === A.SET_STATE) {
-    return action.payload.viz;
-  }
-  return state;
-};
-
 const filterTerms = (state = initialState, action) => {
   if (action.type === A.SET_FILTER_TERMS) {
     return action.payload.filterTerms;
@@ -200,28 +106,13 @@ const vizOpen = (state = initialState, action) => (
   (action.type === A.TOGGLE_VIZ) ? !state : state
 );
 
-const isLoading = (state = initialState, action) => {
-  if (action.type === A.SET_IS_LOADING) {
-    return action.payload;
-  }
-  if (action.type === A.SET_STATE) {
-    return false;
-  }
-  return state;
-};
-
-
 const combinedReducer = combineReducers({
   selectedPhotographer,
+  selectedPhoto,
   selectedCounty,
   selectedCity,
   selectedState,
-  selectedPhotoData,
   timeRange,
-  countiesData,
-  citiesData,
-  themesData,
-  timelineCells,
   sidebarPhotosOffset,
   randomPhotoNumbers,
   dimensions,
@@ -229,7 +120,6 @@ const combinedReducer = combineReducers({
   selectedMapView,
   isInitialized,
   hasCompletedFirstLoad,
-  isLoading,
   selectedTheme,
   selectedViz,
   filterTerms,

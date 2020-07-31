@@ -1,27 +1,19 @@
 import { connect } from 'react-redux';
 import Timeline from './Timeline.jsx';
-import { getTimelineHeatmapRows } from '../store/selectors';
+import { getTimelineCellsFetchPath } from '../store/selectors';
 
 const mapStateToProps = state => {
-  const {
-    photographers,
-    translateY,
-    monthWidth,
-    monthHeight,
-  } = getTimelineHeatmapRows(state);
-  const { selectedPhotographer, timeRange, dimensions } = state;
+  const { selectedPhotographer, timeRange, dimensions, selectedMapView } = state;
 
   return {
-    photographers,
+    fetchPath: getTimelineCellsFetchPath(state),
     selectedPhotographer,
     timeRange,
+    dimensions,
+    selectedMapView,
     width: dimensions.timelineHeatmap.width,
     height: dimensions.timelineHeatmap.height,
-    translateY,
-    leftAxisWidth: dimensions.timelineHeatmap.leftAxisWidth,
-    monthHeight,
-    monthWidth,
-  };
+    leftAxisWidth: dimensions.timelineHeatmap.leftAxisWidth,  };
 };
 
 const mapDispatchToProps = {

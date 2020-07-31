@@ -1,23 +1,19 @@
 import { connect } from 'react-redux';
 import Photo from './Photo.jsx';
-import { toggleLightbox, selectPhoto } from '../store/actions';
-import { getCentroidForCounty} from '../store/selectors';
+import { toggleLightbox } from '../store/actions';
+import { getPhotoFetchQueries } from '../store/selectors';
 
 const mapStateToProps = state => {
-  const photoMetadata = state.selectedPhotoData;
-  const centroid = (photoMetadata) ? getCentroidForCounty(photoMetadata.nhgis_join) : null;
-  const photographerKey = (photoMetadata && photoMetadata.photographer_name) ? photoMetadata.photographer_name.replace(/[\s\.]/g, '') : null;
+  const { photoMetadataQuery, similarPhotosQuery } = getPhotoFetchQueries(state);
   return {
-    photoMetadata,
-    photographerKey,
-    centroid,
-    height: state.dimensions.selectedPhoto.height,
+    photoMetadataQuery,
+    similarPhotosQuery,
     selectedMapView: state.selectedMapView,
+    height: state.dimensions.selectedPhoto.height,
   };
 };
 
 const mapDispatchToProps = {
-  selectPhoto,
   toggleLightbox,
 };
 

@@ -15,15 +15,7 @@ const basename = process.env.PUBLIC_URL;
     initializeData
     setState
     selectViz
-    selectMapView
-    selectTheme
-    selectNation
-    selectState
-    selectCounty
-    selectCity
     selectPhoto
-    selectPhotographer
-    clearPhotographer
     setFilterTerms
     clearFilterTerms
     setPhotoOffset
@@ -62,199 +54,41 @@ export function initializeData() {
 }
 
 export function setState(params, viz, mapView) {
-  return async (dispatch, getState) => {
-    dispatch({
-      type: A.SET_IS_LOADING,
-      payload: true,
-    });
-    const {
-      //timelineCells,
-      selectedMapView,
-      selectedViz,
-      selectedPhotographer,
-      countiesData,
-      selectedTheme,
-      timeRange,
-    } = getState();
-    const {
-      ohsearch,
-      themes: theme,
-      timeline,
-      city,
-      county,
-      map,
-      photo,
-      caption,
-    } = params;
+  const {
+    ohsearch,
+    themes: theme,
+    timeline,
+    city,
+    county,
+    map,
+    photo,
+    caption,
+  } = params;
 
-    let { photographers } = params;
-    photographers = photographers || null;
+  // set the state from city or county if necessary;
+  let { state } = params;
+  if (county) {
+     ({ s: state } = Counties.find(c => c.j === county));
+  } else if (city) {
+    state = city.substring(0, 2);
+  } 
 
-    const filterTerms = (caption) ? caption.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g) || [] : [];
-
-    // set the state from city or county if necessary;
-    let { state } = params;
-    if (county) {
-       ({ s: state } = Counties.find(c => c.j === county));
-    } else if (city) {
-      state = city.substring(0, 2);
-    } 
-    // fetch the visualization and timecellData
-    // the vizData only changes if the photographer changes or this is the initial load (determined if there's `countiesData` in state)
-    // if there isn't a search for captions, you can grab the data from the json files; if there querying the database is required.
-    let vizData;
-    let timelineCells;
-    const photoData = (photo) ? await fetchPhotoData(photo) : null;
-    let themes = { total: 0, children: {} };
-
-    const abortController = new AbortController();
-
-    if (filterTerms.length === 0) {
-      ([vizData, timelineCells] = await Promise.all([
-        fetchCountiesCitiesThemes(photographers || null, { signal: abortController.signal }),
-        fetchTimelineCells({
-          selectedViz: (viz !== 'photo') ? viz : selectedViz,
-          selectedMapView: mapView,
-          selectedCounty: county,
-          selectedCity: city,
-          selectedState: state,
-          selectedTheme: theme,
-        }, { signal: abortController.signal }),
-      ],  { signal: abortController.signal }));
-      ({ themes } = vizData || {});
-    } 
-
-    const payload = {
-      themes,
-      timelineCells,
-      photographer: photographers || null,
+  return {
+    type: A.SET_STATE,
+    payload: {
+      photographer: params.photographers || null,
+      photo: params.photo || null,
       state: state || null,
       county: county || null,
       city: city || null,
       theme: theme || 'root',
       viz,
       mapView,
-      photoData,
-      filterTerms,
-
+      filterTerms: (caption) ? caption.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g) || [] : [],
       selectedState: state,
       selectedPhoto: photo,
-    };
-
-    abortController.abort();
-    dispatch({
-      type: A.SET_STATE,
-      payload,
-    });
-  }
-}
-
-export function selectNation() {
-  return async (dispatch, getState) => {
-    dispatch({
-      type: A.SELECT_NATION,
-      payload: {
-        sidebarPhotosOffset: 0,
-        timelineCells: await fetchJSON(`${basename}/data/photoCounts/national.json`),
-      }
-    });
+    }
   };
-}
-
-export function selectPhotographer(eOrId) {
-  return async (dispatch, getState) => {
-    const clickedPhotographer = getEventId(eOrId);
-    const selectedPhotographer = (getState().selectedPhotographer !== clickedPhotographer)
-      ? clickedPhotographer : null;
-    const { selectedMapView } = getState();
-
-    // Roy Strkyer is a singular exception
-    const { counties, cities, themes } = await fetchCountiesCitiesThemes(selectedPhotographer);
-    dispatch({
-      type: A.SELECT_PHOTOGRAPHER,
-      payload: {
-        photographer: selectedPhotographer,
-        counties,
-        cities,
-        themes,
-        sidebarPhotosOffset: 0,
-      }
-    });
-  };
-}
-
-export function clearPhotographer() {
-  return async (dispatch, getState) => {
-    const { selectedMapView } = getState();
-    const { counties, cities, themes } = await fetchJSON(`${basename}/data/photographers/all.json`);
-    dispatch({
-      type: A.CLEAR_PHOTOGRAPHER,
-      payload: {
-        counties,
-        cities,
-        themes,
-        sidebarPhotosOffset: 0,
-      }
-    });
-  };
-}
-
-export function selectCounty(eOrId) {
-  return async (dispatch, getState) => {
-    const county = getEventId(eOrId);
-    const { s: state } = Counties.find(c => c.j === county);
-    dispatch({
-      type: A.SELECT_COUNTY,
-      payload: {
-        county,
-        state,
-        sidebarPhotosOffset: 0,
-        timelineCells: await fetchJSON(`${basename}/data/photoCounts/counties/${county}.json`),
-      }
-    });
-  };
-}
-
-export function selectCity(eOrId) {
-  return async (dispatch, getState) => {
-    const city = getEventId(eOrId);
-    dispatch({
-      type: A.SELECT_CITY,
-      payload: {
-        city,
-        state: city.substring(0, 2),
-        sidebarPhotosOffset: 0,
-        timelineCells: await fetchJSON(`${basename}/data/photoCounts/cities/${encodeURI(city)}.json`),
-      }
-    });
-  };
-}
-
-export function selectState(eOrId) {
-  return async (dispatch, getState) => {
-    const state = getEventId(eOrId);
-    dispatch({
-      type: A.SELECT_STATE,
-      payload: {
-        state,
-        sidebarPhotosOffset: 0,
-        timelineCells: await fetchJSON(`${basename}/data/photoCounts/states/${state}.json`),
-      }
-    });
-  }
-}
-
-export function selectTheme(eOrId) {
-  return async (dispatch, getState) => {
-    const selectedTheme = getEventId(eOrId);
-    dispatch({
-      type: A.SELECT_THEME,
-      payload: {
-        theme: selectedTheme,
-        timelineCells: await fetchJSON(`${basename}/data/photoCounts/themes/${encodeURI(selectedTheme)}.json`),
-      }
-    });
-  }
 }
 
 export function setPhotoOffset(eOrId) {
@@ -262,67 +96,6 @@ export function setPhotoOffset(eOrId) {
     type: A.SET_PHOTO_OFFSET,
     payload: getEventId(eOrId, 'number')
   };
-}
-
-export function selectViz(eOrId) {
-  return {
-    type: A.SELECT_VIZ,
-    payload: getEventId(eOrId)
-  };
-}
-
-export function selectPhoto(eOrId) {
-  if (!eOrId) {
-    return {
-      type: A.SELECT_PHOTO,
-      payload: null,
-    };
-  }
-  return async (dispatch, getState) => {
-    const id = decodeURIComponent(getEventId(eOrId));
-    const { selectedPhotoData } = getState();
-    if (!selectedPhotoData || selectedPhotoData.loc_item_link !== id) {
-      // create the queries to get the photo data and similar photo data
-      const query = `${sqlQueryBase} where loc_item_link = '${id}' `;
-      const queries = [...Array(14).keys()].map(n => n+1).map(x => {
-        return `SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos where loc_item_link = (select nn${x} from similarphotos where source = '${id}')`
-      });
-      const similarPhotosQuery = queries.join(' union ');
-
-      // retrieve results from carto and organize
-      const [photoDataResults, similarPhotosData] = await Promise.all([
-        fetchJSON(`${cartoURLBase}${encodeURIComponent(query)}`),
-        fetchJSON(`${cartoURLBase}${encodeURIComponent(similarPhotosQuery)}`),
-      ]);
-      const photoData = photoDataResults.rows[0];
-      photoData.caption = (photoData.caption) ? he.decode(photoData.caption) : '';
-
-      photoData.stateAbbr = getStateAbbr(photoData.state);
-
-      photoData.similarPhotos = similarPhotosData.rows.map(sp => ({
-        ...sp,
-        caption: (sp.cation) ? he.decode(sp.caption) : '',
-        stateAbbr: getStateAbbr(photoData.state),
-      }));
-
-      // if the photo is part of a strip, retrieve those photos
-      if (photoData.call_number.charAt(-2) === 'M') {
-        const stripQuery = `select loc_item_link, img_thumb_img, photograph_type from photogrammar_photos where call_number = '${photoData.call_number}' order by photograph_type`;
-        const responseStripPhotos = await fetchJSON(`${cartoURLBase}${encodeURIComponent(stripQuery)}`);
-        if (responseStripPhotos && responseStripPhotos.rows && responseStripPhotos.rows.length > 0) {
-          photoData.stripPhotos = responseStripPhotos.rows.map(sp => ({
-            ...sp,
-            num: parseInt(sp.photograph_type.substring(1)),
-          }));
-        }
-      }
-      
-      dispatch({
-        type: A.SELECT_PHOTO,
-        payload: photoData,
-      });
-    }
-  }
 }
 
 export function closeWelcome() {
@@ -390,24 +163,6 @@ export function setTimeRange(tr) {
     if (filterTerms.length > 0) {
       dispatch(setFilterTerms(filterTerms.join(' '), timeRange));
     }
-  }
-}
-
-export function selectMapView(eOrId) {
-  return async (dispatch, getState) => {
-    const selectedMapView = getEventId(eOrId);
-
-    dispatch({
-      type: A.SELECT_MAP_VIEW,
-      payload: selectedMapView,
-    });
-
-    dispatch({
-      type: A.LOAD_TIMELINE_CELLS,
-      payload: {
-        timelineCells: await fetchTimelineCells(getState()),
-      }
-    });
   }
 }
 
@@ -780,41 +535,3 @@ export const getStateAbbr = (name) => {
   return abbr;
 };
 
-export async function fetchPhotoData(id, signal) {
-  // create the queries to get the photo data and similar photo data
-  const query = `${sqlQueryBase} where loc_item_link = '${id}' `;
-  const queries = [...Array(14).keys()].map(n => n+1).map(x => {
-    return `SELECT photographer_name, caption, year, month, city, county, state, nhgis_join, img_thumb_img, img_large_path, loc_item_link, call_number FROM photogrammar_photos where loc_item_link = (select nn${x} from similarphotos where source = '${id}')`
-  });
-  const similarPhotosQuery = queries.join(' union ');
-
-  // retrieve results from carto and organize
-  const [photoDataResults, similarPhotosData] = await Promise.all([
-    fetchJSON(`${cartoURLBase}${encodeURIComponent(query)}`, signal),
-    fetchJSON(`${cartoURLBase}${encodeURIComponent(similarPhotosQuery)}`, signal),
-  ]);
-  const photoData = photoDataResults.rows[0];
-  photoData.caption = (photoData.caption) ? he.decode(photoData.caption) : '';
-
-  photoData.stateAbbr = getStateAbbr(photoData.state);
-
-  photoData.similarPhotos = similarPhotosData.rows.map(sp => ({
-    ...sp,
-    caption: (sp.cation) ? he.decode(sp.caption) : '',
-    stateAbbr: getStateAbbr(photoData.state),
-  }));
-
-  // if the photo is part of a strip, retrieve those photos
-  if (photoData.call_number.charAt(-2) === 'M') {
-    const stripQuery = `select loc_item_link, img_thumb_img, photograph_type from photogrammar_photos where call_number = '${photoData.call_number}' order by photograph_type`;
-    const responseStripPhotos = await fetchJSON(`${cartoURLBase}${encodeURIComponent(stripQuery)}`, signal);
-    if (responseStripPhotos && responseStripPhotos.rows && responseStripPhotos.rows.length > 0) {
-      photoData.stripPhotos = responseStripPhotos.rows.map(sp => ({
-        ...sp,
-        num: parseInt(sp.photograph_type.substring(1)),
-      }));
-    }
-  }
-  
-  return photoData;
-}

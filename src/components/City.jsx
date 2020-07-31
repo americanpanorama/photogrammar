@@ -14,7 +14,6 @@ const City = (props) => {
     scale,
     selectedCity,
     linkActive,
-    selectCity,
     onCityHover,
     onCityUnhover,
   } = props;
