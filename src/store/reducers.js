@@ -3,35 +3,35 @@ import A from './actionTypes';
 import initialState from './initialState';
 
 const selectedPhotographer = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.photographer : state
+  (action.type === A.SET_STATE) ? action.payload.selectedPhotographer : state
 );
 
 const selectedPhoto = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.photo : state
+  (action.type === A.SET_STATE) ? action.payload.selectedPhoto : state
 );
 
 const selectedCounty = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.county : state
+  (action.type === A.SET_STATE) ? action.payload.selectedCounty : state
 );
 
 const selectedCity = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.city : state
+  (action.type === A.SET_STATE) ? action.payload.selectedCity : state
 );
 
 const selectedState = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.state : state
+  (action.type === A.SET_STATE) ? action.payload.selectedState : state
 );
 
 const selectedTheme = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.theme : state
+  (action.type === A.SET_STATE) ? action.payload.selectedTheme : state
 );
 
 const selectedViz = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.viz : state
+  (action.type === A.SET_STATE) ? action.payload.selectedViz : state
 );
 
 const selectedMapView = (state = initialState, action) => (
-  (action.type === A.SET_STATE) ? action.payload.mapView : state
+  (action.type === A.SET_STATE) ? action.payload.selectedMapView : state
 );
 
 const sidebarPhotosOffset = (state = initialState, action) => {
@@ -53,6 +53,14 @@ const timeRange = (state = initialState, action) => {
   }
   return state;
 };
+
+const pathname = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.pathname : state
+);
+
+const hash = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.hash : state
+);
 
 const randomPhotoNumbers = (state = initialState, action) => (
   (action.type === A.GENERATE_RANDOM_PHOTO_NUMBERS) ? action.payload : state
@@ -114,6 +122,8 @@ const combinedReducer = combineReducers({
   selectedState,
   timeRange,
   sidebarPhotosOffset,
+  pathname,
+  hash,
   randomPhotoNumbers,
   dimensions,
   isWelcomeOpen,

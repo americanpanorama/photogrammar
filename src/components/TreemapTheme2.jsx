@@ -16,7 +16,8 @@ const TreemapTheme = (props) => {
     fontColor,
     id,
     link,
-    imgSrc
+    imgSrc,
+    deemphasize,
   } = props;
 
   const estimateWidth = (str, fontSize) => str.length * fontSize * 0.5;
@@ -67,7 +68,8 @@ const TreemapTheme = (props) => {
         <label
           style={{
             fontSize,
-            textShadow: `${textShadowDistance}px ${textShadowDistance}px ${textShadowDistance * 2}px black, -${textShadowDistance}px -${textShadowDistance}px ${textShadowDistance * 2}px black, -${textShadowDistance}px ${textShadowDistance}px ${textShadowDistance * 2}px black, ${textShadowDistance}px -${textShadowDistance}px ${textShadowDistance * 2}px black`,
+            color: fontColor,
+            textShadow: (!deemphasize) ? `${textShadowDistance}px ${textShadowDistance}px ${textShadowDistance * 2}px black, -${textShadowDistance}px -${textShadowDistance}px ${textShadowDistance * 2}px black, -${textShadowDistance}px ${textShadowDistance}px ${textShadowDistance * 2}px black, ${textShadowDistance}px -${textShadowDistance}px ${textShadowDistance * 2}px black` : 'none',
           }}
         >
           {name}

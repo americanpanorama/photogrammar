@@ -5,10 +5,29 @@ import CreatableSelect, { makeCreatableSelect } from 'react-select/creatable';
 import PropTypes from 'prop-types';
 import { Range } from 'rc-slider';
 import * as d3 from 'd3';
+import themes from '../../data/themes.json';
 import CloseButton from './buttons/Close.jsx';
 import './Search.css';
 
-const Search = ({ selectedPhotographer, selectedCounty, selectedCity, selectedState, selectedTheme, terms, selectedMapView, search, photographers, states, countiesOrCities, cities, themes, timeRange, caption,  toggleSearch, open }) => {
+const Search = (props) => {
+  const {
+    selectedPhotographer,
+    selectedCounty,
+    selectedCity,
+    selectedState,
+    selectedTheme,
+    terms,
+    selectedMapView,
+    search,
+    photographers,
+    states,
+    countiesOrCities,
+    cities,
+    timeRange,
+    caption,
+    toggleSearch,
+    open,
+  } = props;
   const [theState, setTheState] = useState(selectedState);
   const [statesOptions, setStatesOptions] = useState(states);
   const [countiesOrCitiesOptions, setCountiesOrCitiesOptions] = useState([]);
@@ -120,8 +139,6 @@ const Search = ({ selectedPhotographer, selectedCounty, selectedCity, selectedSt
       return year * 100 + month;
     });
   }
-
-
 
   const fetchSelectable = async (field) => {
     const wheres = [];

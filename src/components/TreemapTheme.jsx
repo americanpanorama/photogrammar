@@ -19,6 +19,8 @@ const TreemapTheme = (props) => {
     imgSrc
   } = props;
 
+  console.log(fontColor);
+
   const estimateWidth = (str, fontSize) => str.length * fontSize * 0.5;
 
   const fontSize = Math.max(10, Math.min(20, 20 * width / 200));

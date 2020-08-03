@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import SidebarHeader from './SidebarHeader.jsx';
 import { setPhotoOffset, toggleExpandedSidebar, setTimeRange } from '../../store/actions';
+import { getSidebarPhotoCountQuery } from '../../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedPhotographer, selectedState, sidebarPhotosOffset, dimensions, selectedTheme, filterTerms, expandedSidebar } = state;
@@ -10,6 +11,7 @@ const mapStateToProps = state => {
 
   return {
     hasFacet: !!(selectedPhotographer || selectedState || filterTerms.length > 0 || selectedTheme !== 'root'),
+    query: getSidebarPhotoCountQuery(state),
     timeRange: state.timeRange,
     displayableCards,
     sidebarPhotosOffset,

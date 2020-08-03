@@ -4,14 +4,14 @@ import './App.css';
 import ActionsFromURL from './components/ActionsFromURL.js';
 import Navbar from './components/Navbar.js';
 import Filter from './components/Filter.js';
-import FetchSidebarPhotos from './components/sidebar/FetchSidebarPhotos.js';
-import FetchPhotoCount from './components/sidebar/FetchPhotoCount.js';
+import SidebarPhotos from './components/sidebar/SidebarPhotos.js';
+import SidebarHeader from './components/sidebar/SidebarHeader.js';
 import Welcome from './components/Welcome.js';
 import Map from './components/Map.js';
 import Photo from './components/Photo.js';
 import TimelineHeatmap from './components/Timeline.js';
 import TimelineSlider from './components/TimelineSlider.js';
-import Treemap from './components/Treemap2.js';
+import Treemap from './components/Treemap.js';
 import Photographers from './components/Photographers.js';
 import Photographer from './components/Photographer.js';
 import OralHistoriesSearch from './components/OralHistoriesSearch.jsx';
@@ -113,8 +113,8 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
             </div>
 
             <Welcome />
-            <FetchPhotoCount />
-            <FetchSidebarPhotos />
+            <SidebarHeader />
+            <SidebarPhotos />
           </React.Fragment>
         )}
       </div>

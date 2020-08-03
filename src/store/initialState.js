@@ -33,6 +33,8 @@ export default {
   timeRange: [193501, 194406],
   randomPhotoNumbers,
   isWelcomeOpen: false,
+  pathname: '/maps',
+  hash: null,
   dimensions: {
     calculated: false,
     vizCanvas: {
@@ -63,7 +65,7 @@ export default {
       leftAxisWidth: 120,
     },
   },
-  filterTerms: ['cotton'],
+  filterTerms: [],
   expandedSidebar: false,
   lightboxOpen: false,
   searchOpen: false,

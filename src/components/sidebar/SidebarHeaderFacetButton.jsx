@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ConditionalWrapper from '../ConditionalWrapper.jsx';
-import { buildLink } from '../../helpers.js';
 import './SidebarHeaderFacetButton.css';
 
-const SidebarHeaderFacetButton = ({ label, onClick, disabled, removeFromLink, replaceInLink}) => {
+const SidebarHeaderFacetButton = ({ label, onClick, disabled, removeFromLink, replaceInLink, buildLink }) => {
   const link = buildLink({ remove: removeFromLink, replace: replaceInLink });
   if (!label) {
     return null;

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import SidebarPhotos from './SidebarPhotos.jsx';
 import { setPhotoOffset } from '../../store/actions';
+import { getSidebarPhotosQuery, getStateAbbr } from '../../store/selectors';
 
 const mapStateToProps = state => {
   const { 
@@ -24,6 +25,8 @@ const mapStateToProps = state => {
     .join(' ');
 
   return {
+    query: getSidebarPhotosQuery(state),
+    getStateAbbr,
     photoSetId,
     displayableCards,
     sidebarPhotosOffset,

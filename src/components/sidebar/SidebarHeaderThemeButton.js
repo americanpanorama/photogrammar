@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
+import { getBuildLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedTheme, selectedViz } = state;
@@ -15,6 +16,7 @@ const mapStateToProps = state => {
       param: 'themes',
       value: selectedTheme.substring(0, selectedTheme.lastIndexOf('|')),
     }],
+    buildLink: getBuildLinkFunction(state),
   };
 };
 

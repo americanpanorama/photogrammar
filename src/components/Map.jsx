@@ -11,7 +11,6 @@ import State from './State.jsx';
 import City from './City.jsx';
 import MapLabel from './MapLabel.jsx';
 import States from '../../data/svgs/states.json';
-import { buildLink } from '../helpers.js';
 import './Map.css';
 
 const stateabbrs = {"AL": "Alabama", "AK": "Alaska", "AS": "American Samoa", "AZ": "Arizona", "AR": "Arkansas", "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "DC": "District Of Columbia", "FM": "Federated States Of Micronesia", "FL": "Florida", "GA": "Georgia", "GU": "Guam", "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MH": "Marshall Islands", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "MP": "Northern Mariana Islands", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PW": "Palau", "PA": "Pennsylvania", "PR": "Puerto Rico", "RI": "Rhode Island", "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont", "VI": "Virgin Islands", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming"};
@@ -129,7 +128,6 @@ const formatCities = (data, timeRange, filterTerms, selectedState) => {
       const { k: key, c: city, s: state } = cd;
       let total;
       const [startTime, endTime] = timeRange;
-      //console.log(citiesData[key]);
       if (!citiesData[key]) {
         total = 0;
       } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 193504)) {
@@ -149,7 +147,6 @@ const formatCities = (data, timeRange, filterTerms, selectedState) => {
       } else {
         total = citiesData[key].total;
       }
-      //console.log(key, total);
       return {
         key,
         total,
@@ -173,6 +170,7 @@ const Map = (props) => {
     timeRange,
     filterTerms,
     fetchPath,
+    buildLink,
   } = props;
 
   const ref = useRef(null);
@@ -248,9 +246,6 @@ const Map = (props) => {
   }
 
   //const selectedCityMetadata = (selectedCity) ? cities.find(c => c.key === selectedCity) : null;
-
-
-
 
   const onCityHover = (cityKey) => {
     // find the city
@@ -334,6 +329,7 @@ const Map = (props) => {
                 // format the counties
                 if (selectedMapView === 'counties') {
                   const counties = formatCounties(data, timeRange, filterTerms, selectedState);
+
                   return (
                     <React.Fragment>
                       {counties.map(c => (
@@ -343,6 +339,7 @@ const Map = (props) => {
                           selectedCounty={selectedCounty}
                           strokeWidth={(mapScale === 'national') ?  0 : 0.75 / mapParameters.scale}
                           linkActive={mapScale !== 'national' && c.photoCount > 0}
+                          buildLink={buildLink}
                           key={c.nhgis_join}
                           onCountyHover={onCountyHover}
                           onCountyUnhover={onCountyUnhover}

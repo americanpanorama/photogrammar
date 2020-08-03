@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import Centroids from '../data/centroids.json';
 
-export function buildLink (options, location) {
+export function buildLinkREMOVE (options, location) {
   const pathname = (location) ? location.pathname : useLocation().pathname;
   const hash = (location) ? location.hash : useLocation().hash;
 

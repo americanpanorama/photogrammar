@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
+import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.js';
 import { clearFilterTerms } from '../../store/actions';
 
 const mapStateToProps = state => ({

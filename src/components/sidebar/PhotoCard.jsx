@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './PhotoCard.css';
-import { buildLink } from '../../helpers.js';
 
 const PhotoCard = (props) => {
   const {
@@ -16,7 +15,8 @@ const PhotoCard = (props) => {
     padding,
     borderWidth,
     scale,
-    selectedMapView
+    selectedMapView,
+    buildLink,
   } = props;
 
   const monthNames = ["January", "February", "March", "April", "May", "June",

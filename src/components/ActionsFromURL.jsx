@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import Counties from '../../data/svgs/counties.json';
 import { parsePathname } from '../helpers.js';
 
 const ActionsFromURL = ({ setState }) => {
@@ -12,6 +13,7 @@ const ActionsFromURL = ({ setState }) => {
       .replace(`${process.env.PUBLIC_URL}`, '')
       .split('/')
       .filter(param => param)[0];
+
     // get the view
     const getViz = () => ({
       photographers: 'photographer',
@@ -24,15 +26,45 @@ const ActionsFromURL = ({ setState }) => {
       maps: 'map',
       photo: 'photo',
     }[firstPathPiece]);
-    const urlViz = getViz() || 'map';
+    const selectedViz = getViz() || 'map';
 
     // remove the basename from the pathPieces and build an object with state parameters
     const stateParams = parsePathname(pathname.replace(`${process.env.PUBLIC_URL}`, ''));
-    //console.log(pathLoaded, stateParams);
-    const mapView = (stateParams.city || hash === '#mapview=cities') ? 'cities' : 'counties';
+    const selectedMapView = (stateParams.city || hash === '#mapview=cities') ? 'cities' : 'counties';
+
+    const {
+      ohsearch,
+      themes: selectedTheme,
+      timeline,
+      city: selectedCity,
+      county: selectedCounty,
+      photo: selectedPhoto,
+      photographers: selectedPhotographer,
+      caption,
+    } = stateParams;
+
+    // set the state from city or county if necessary;
+    let selectedState = stateParams.state;
+    if (selectedCounty) {
+      ({ s: selectedState } = Counties.find(c => c.j === selectedCounty));
+    } else if (selectedCity) {
+      selectedState = selectedCity.substring(0, 2);
+    } 
 
     if (`${pathname}${hash}` !== pathLoaded) {
-      setState(stateParams, urlViz, mapView);
+      setState({
+        selectedPhotographer: selectedPhotographer || null,
+        selectedPhoto: selectedPhoto || null,
+        selectedState: selectedState || null,
+        selectedCounty: selectedCounty || null,
+        selectedCity: selectedCity || null,
+        selectedTheme: selectedTheme || 'root',
+        selectedViz: selectedViz,
+        selectedMapView: selectedMapView,
+        filterTerms: (caption) ? caption.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g) || [] : [],
+        pathname,
+        hash,
+      });
       setPathLoaded(`${pathname}${hash}`); 
     }
   });
@@ -43,9 +75,5 @@ const ActionsFromURL = ({ setState }) => {
 export default ActionsFromURL;
 
 ActionsFromURL.propTypes = {
-
-};
-
-ActionsFromURL.defaultProps = {
-  
+  setState: PropTypes.func.isRequired,
 };

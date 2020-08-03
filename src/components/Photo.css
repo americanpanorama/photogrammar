@@ -13,7 +13,7 @@ button[role=expand] {
   grid-column: 1 / span 1;
   grid-row: 3 / span 1;
   overflow-x: visible;
-  overflow-y: scroll;
+  overflow-y: visible;
   z-index: 1000;
 }
 
@@ -90,7 +90,7 @@ button[role=expand] {
     grid-column: 2 / span 1;
     grid-row: 1 / span 2;
     overflow-x: visible;
-    overflow-y: scroll;
+    overflow-y: visible;
     z-index: 1000;
     text-align: right;
   }
@@ -126,8 +126,6 @@ button[role=expand] {
 
   .selectedPhoto .metadata * {
     font-size: 1em;
-    overflow-y: scroll;
-    overflow-x: visible;
     text-align: right;
     margin-right: 7px;
     clear: both;

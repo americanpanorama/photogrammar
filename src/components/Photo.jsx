@@ -8,7 +8,7 @@ import CloseButton from './buttons/Close.jsx';
 import ExpandButton from './buttons/Expand.jsx';
 import States from '../../data/svgs/states.json';
 import './Photo.css';
-import { buildLink, getCentroidForCounty } from '../helpers.js';
+import { getCentroidForCounty } from '../helpers.js';
 
 const loadPhotoData = async ({ photoMetadataQuery, similarPhotosQuery }, { signal }) => {
   const responses = await Promise.all([
@@ -29,6 +29,7 @@ const Photo = (props) => {
     selectedMapView,
     height,
     toggleLightbox,
+    buildLink,
   } = props;
 
   const { pathname, hash } = useLocation();

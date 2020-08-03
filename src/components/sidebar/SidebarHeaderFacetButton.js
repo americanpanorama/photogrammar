@@ -1,15 +1,12 @@
-
 import { connect } from 'react-redux';
 import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
-import { onClick } from '../store/actions';
+import { getBuildLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => ({
-    label: ,
-    link: ,
+  buildLink: getBuildLinkFunction(state),
 });
 
 const mapDispatchToProps = {
-    onClick,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarHeaderFacetButton);

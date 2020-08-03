@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Search from './Search.jsx';
-import { search, toggleSearch, setFilterTerms, clearFilterTerms } from '../store/actions';
+import { search, toggleSearch } from '../store/actions';
 import { getPhotographers, getStateSearchOptions, getCountiesOrCitiesOptions, getThemesSearchOptions } from '../store/selectors';
 
 const mapStateToProps = state => {
@@ -47,8 +47,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   search,
   toggleSearch,
-  setFilterTerms,
-  clearFilterTerms,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

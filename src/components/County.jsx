@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link  } from "react-router-dom";
 import * as d3 from 'd3';
-import { buildLink } from '../helpers.js';
 import './County.css';
 
 const County = (props) => {
@@ -10,6 +9,7 @@ const County = (props) => {
     d,
     name,
     nhgis_join,
+    buildLink,
     labelCoords,
     fill,
     fillOpacity,
@@ -17,20 +17,21 @@ const County = (props) => {
     linkActive,
     onCountyHover,
     onCountyUnhover,
+    strokeWidth,
   } = props;
   const ref = useRef(null);
 
-  const [ strokeWidth, setStrokeWidth] = useState(props.strokeWidth);
+  // const [ strokeWidth, setStrokeWidth] = useState(props.strokeWidth);
 
-  useEffect(() => {
-    d3.select(ref.current)
-      .transition()
-      .duration(1000)
-      .style("stroke-width", props.strokeWidth)
-      .on("end", () => {
-        setStrokeWidth(props.strokeWidth);
-      });
-  });
+  // useEffect(() => {
+  //   d3.select(ref.current)
+  //     .transition()
+  //     .duration(1000)
+  //     .style("stroke-width", props.strokeWidth)
+  //     .on("end", () => {
+  //       setStrokeWidth(props.strokeWidth);
+  //     });
+  // });
 
   const link = buildLink({
     replace: [{

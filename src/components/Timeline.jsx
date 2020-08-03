@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Async from "react-async";
 import * as d3 from 'd3';
@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Photographers from '../../data/photographers.json';
 import TimelineRow from './TimelineRow.jsx';
 import './Timeline.css';
-import { buildLink } from '../helpers.js';
 
 const loadTimelineCells = async ({ fetchPath }, { signal }) => {
   const res = await fetch(fetchPath, { signal });
@@ -152,6 +151,7 @@ const TimelineHeatmap = (props) => {
     leftAxisWidth,
     monthHeight,
     monthWidth,
+    buildLink,
   } = props;
 
   const [showOthers, setShowOthers] = useState(false);
@@ -261,6 +261,7 @@ const TimelineHeatmap = (props) => {
                           key={`timelineRowFor${p.key}`}
                           onHover={onHover}
                           onUnhover={onUnhover}
+                          buildLink={buildLink}
                         />
                       );
                   })}
@@ -332,7 +333,7 @@ const TimelineHeatmap = (props) => {
                           x={-30}
                           y={0}
                           textAnchor='end'
-                          fontSize={height / 30 * 1.5}
+                          fontSize={height / photographers.length * 1.5}
                           className='tip'
                         >
                           <tspan>

@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import FetchSidebarPhotos from './FetchSidebarPhotos.jsx';
-import { getSidebarPhotosQuery, getStateAbbr } from '../../store/selectors';
+import { getSidebarPhotosQuery, cartoURLBase, getStateAbbr } from '../../store/selectors';
 
 const mapStateToProps = state => ({
+  cartoURLBase,
   query: getSidebarPhotosQuery(state),
   getStateAbbr,
 });

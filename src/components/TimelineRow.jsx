@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
-import { buildLink } from '../helpers.js';
 import './TimelineRow.css';
 
 const TimelineRow = (props) => {
@@ -22,6 +21,7 @@ const TimelineRow = (props) => {
     onUnhover,
     deemphasize,
     emphasize,
+    buildLink,
   } = props;
 
   const [translateY, setTranslateY] = useState(y);
