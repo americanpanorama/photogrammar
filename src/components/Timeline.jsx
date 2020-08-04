@@ -213,12 +213,14 @@ const TimelineHeatmap = (props) => {
                   width={width + leftAxisWidth}
                   height={height}
                 >
-                  <filter id="grayscale">
-                    <feColorMatrix type="saturate" values="0.1"/>
-                    <feComponentTransfer>
-                      <feFuncA type="table" tableValues="0 0.3"/>
-                    </feComponentTransfer>
-                  </filter>
+                  <defs>
+                    <filter id="grayscale">
+                      <feColorMatrix type="saturate" values="0.1"/>
+                      <feComponentTransfer>
+                        <feFuncA type="table" tableValues="0 0.3"/>
+                      </feComponentTransfer>
+                    </filter>
+                  </defs>
                   {photographers
                     .sort((a, b) =>  {
                       if (!hoveredPhotographer && !selectedPhotographer) {

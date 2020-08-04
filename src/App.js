@@ -19,6 +19,7 @@ const mapStateToProps = state => {
     isInitialized,
     hasCompletedFirstLoad,
     className,
+    searchOpen: state.searchOpen,
     isMobile: dimensions.isMobile,
   };
 };

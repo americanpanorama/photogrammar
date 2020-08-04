@@ -21,7 +21,7 @@ import CBBaldwin from './components/CBBaldwin.js';
 import Search from './components/Search.js';
 import Lightbox from './components/Lightbox.js';
 
-const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, windowResized, isMobile }) => {
+const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, windowResized, searchOpen, isMobile }) => {
   useEffect(() => {
     window.addEventListener('resize', windowResized);
     initializeData();
@@ -113,13 +113,15 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
             </div>
 
             <Welcome />
+
             <SidebarHeader />
             <SidebarPhotos />
           </React.Fragment>
         )}
       </div>
       <Lightbox />
-      <Search />
+      {(searchOpen) && <Search />}
+      
     </Router>
   );
 };

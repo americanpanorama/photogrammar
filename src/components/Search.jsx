@@ -5,53 +5,59 @@ import CreatableSelect, { makeCreatableSelect } from 'react-select/creatable';
 import PropTypes from 'prop-types';
 import { Range } from 'rc-slider';
 import * as d3 from 'd3';
+import PhotographersSelect from './search/PhotographersSelect.js';
+import StateSelect from './search/StateSelect.js';
+import SearchSelect from './search/SearchSelect.jsx';
+import ThemesSelect from './search/ThemesSelect.js';
 import themes from '../../data/themes.json';
 import CloseButton from './buttons/Close.jsx';
 import './Search.css';
 
 const Search = (props) => {
   const {
-    selectedPhotographer,
-    selectedCounty,
-    selectedCity,
-    selectedState,
-    selectedTheme,
+    selectedPhotographerOption,
+    selectedStateOption,
+    selectedThemeOption,
+    selectedCountyOption,
+    selectedCityOption,
     terms,
     selectedMapView,
     search,
-    photographers,
-    states,
-    countiesOrCities,
+    countiesOrCitiesOptions,
     cities,
     timeRange,
     caption,
     toggleSearch,
-    open,
   } = props;
-  const [theState, setTheState] = useState(selectedState);
-  const [statesOptions, setStatesOptions] = useState(states);
-  const [countiesOrCitiesOptions, setCountiesOrCitiesOptions] = useState([]);
-  const [photographerOptions, setPhotographerOptions] = useState(photographers);
-  const [themesOptions, setThemesOptions] = useState(themes);
+
   const [timeRangeOptions, setTimeRangeOptions] = useState(timeRange);
   const [photoCaptionOptions, setPhotoCaptionOptions] = useState([]);
   const [linkTo, setLinkTo] = useState('/');
 
+  const [photographerOption, setPhotographerOption] = useState(selectedPhotographerOption);
+  const [stateOption, setStateOption] = useState(selectedStateOption);
+  const [countyOrCityOption, setCountyOrCityOption] = useState(selectedCountyOption || selectedCityOption);
+  const [themeOption, setThemeOption] = useState(selectedThemeOption);
+
   const formRef = useRef();
-  const photographersRef = useRef();
-  const statesRef = useRef(selectedState);
-  const countiesOrCitiesRef = useRef();
-  const themesRef = useRef();
   const timeRef = useRef();
   const filterTermsRef = useRef();
 
   const getFormOptions = () => {
     let caption;
-    if (filterTermsRef.current.state && filterTermsRef.current.state.inputValue) {
-      caption = filterTermsRef.current.state.inputValue;
-    } else if (filterTermsRef.current.props.value && filterTermsRef.current.props.value.value) {
-      caption = filterTermsRef.current.props.value.value;
-    }
+    // if (filterTermsRef.current.state && filterTermsRef.current.state.inputValue) {
+    //   caption = filterTermsRef.current.state.inputValue;
+    // } else if (filterTermsRef.current.props.value && filterTermsRef.current.props.value.value) {
+    //   caption = filterTermsRef.current.props.value.value;
+    // }
+    return {
+      photographerOption,
+      stateOption,
+      countyOrCityOption: null,
+      themeOption,
+      captionOption: caption,
+      timeRangeOption: [193501, 194406]
+    };
     return {
       photographerOption: photographersRef.current.state.value,
       stateOption: statesRef.current.state.value,
@@ -68,15 +74,10 @@ const Search = (props) => {
     };
   };
 
-
   useEffect(() => {
-    if (!open) {
-      return;
-    }
-
     let path = '';
 
-    const { photographerOption, stateOption, countyOrCityOption, themeOption, captionOption: caption, timeRangeOption } = getFormOptions(); 
+    const { countyOrCityOption, captionOption: caption, timeRangeOption } = getFormOptions(); 
     
     const photographer = photographerOption && photographerOption.value;
     const state = stateOption && stateOption.value;
@@ -101,7 +102,6 @@ const Search = (props) => {
     }
 
     if (path !== linkTo) {
-      console.log(path)
       setLinkTo(path);
     }
   })
@@ -128,7 +128,7 @@ const Search = (props) => {
     x(Math.floor(timeRangeOptions[1] / 100) + monthNum(timeRangeOptions[1] % 100)),
   ];
 
-  const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
+  
 
   const getTimeSliderValues = () => {
     return timeRef.current.state.bounds.map(anX => {
@@ -140,10 +140,11 @@ const Search = (props) => {
     });
   }
 
-  const fetchSelectable = async (field) => {
+  const makeQuery = (field) => {
+    const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const wheres = [];
 
-    const { photographerOption, stateOption, countyOrCityOption, themeOption, captionOption, timeRangeOption } = getFormOptions(); 
+    const { captionOption, timeRangeOption } = getFormOptions(); 
     if (field !== 'photographer_name' && photographerOption && photographerOption.label) {
       wheres.push(`photographer_name = '${photographerOption.label}'`);
     }
@@ -168,9 +169,6 @@ const Search = (props) => {
         wheres.push(`vanderbilt_level1 = '${levels[0]}'`);
       } 
     }
-    if (field === 'theme') {
-      wheres.push('vanderbilt_level1 is not null');
-    }
     if (field !== 'time') {
       const [startTime, endTime] = timeRangeOption;
       if (startTime > 193501) {
@@ -191,39 +189,18 @@ const Search = (props) => {
          wheres.push(`caption ~* '\\m${filterTerm}'`);
       });
     }
+    if (wheres.length > 0 && field === 'theme') {
+      wheres.push('vanderbilt_level1 is not null');
+    }
 
     if (wheres.length > 0) {
       const query = (field !== 'themes')
         ? `select distinct ${field} from photogrammar_photos where ${wheres.join(' and ')}`
         : `select distinct concat(case when vanderbilt_level1 is not null then concat('root|', vanderbilt_level1) else '' end, case when vanderbilt_level2 is not null then concat('|', vanderbilt_level2) else '' end,  case when vanderbilt_level3 is not null then concat ('|', vanderbilt_level3) else '' end) as themes from photogrammar_photos where ${wheres.join(' and ')}`;
-      console.log(query);
-      const response = await fetch(`${cartoURLBase}${encodeURIComponent(query)}`);
-      const json = await response.json();
-      return json.rows.map(d => d[field]);
-    } else {
-      if (field === "photographer_name") {
-        return photographers;
-      }
-      if (field === 'state') {
-        return states;
-      }
-      if (field === 'nhgis_join') {
-        return [];
-      }
-      if (field === 'theme') {
-        return themes;
-      }
-    }
-  };
+      return `${cartoURLBase}${encodeURIComponent(query)}`;
+    } 
 
-  const setPhotographers = async () => {
-    const selectable = await fetchSelectable('photographer_name');
-    setPhotographerOptions(photographers.filter(option => selectable.includes(option.label)));
-  };
-
-  const setStates = async () => {
-    const selectable = await fetchSelectable('state');
-    setStatesOptions(states.filter(option => selectable.includes(option.label)));
+    return null;
   };
 
   const setCountiesOrCities = async () => {
@@ -238,11 +215,6 @@ const Search = (props) => {
       : countiesOrCities.counties[stateAbbr].filter(option => selectable.includes(option.value))
 
     setCountiesOrCitiesOptions(options);
-  };
-
-  const setThemes = async () => {
-    const selectable = await fetchSelectable('themes');
-    setThemesOptions(themes.filter(option => selectable.includes(option.value)));
   };
 
   const updateLink = () => {
@@ -279,37 +251,6 @@ const Search = (props) => {
     //window.location.href = `${process.env.PUBLIC_URL}${path}`;
   };
 
-  const handleStateChange = (e) => {
-    setTheState(e.value);
-  };
-
-  const onPhotographerChange = (inputValue, action) => {
-    // set the value using the input as there seems to be a delay before the component updates it
-    if (action.action === 'select-option') {
-      photographersRef.current.state.value = inputValue;
-    } else if (action.action === 'clear') {
-      photographersRef.current.state.value = null;
-    }
-    setStates(inputValue.label);
-    if (statesRef.current.state && statesRef.current.state.value) {
-      setCountiesOrCities(inputValue.label, inputValue.value);
-    }
-    setThemes();
-  };
-
-
-  const onStateChange = (inputValue, action) => {
-    // set the value using the input as there seems to be a delay before the component updates it
-    if (action.action === 'select-option') {
-      statesRef.current.state.value = inputValue;
-    } else if (action.action === 'clear') {
-      statesRef.current.state.value = null;
-    }
-    setPhotographers();
-    setCountiesOrCities();
-    setThemes();
-  };
-
   const onCountyOrCityChange = (inputValue, action) => {
     // set the value using the input as there seems to be a delay before the component updates it
     if (action.action === 'select-option') {
@@ -317,23 +258,7 @@ const Search = (props) => {
     } else if (action.action === 'clear') {
       countiesOrCitiesRef.current.state.value = null;
     }
-    setPhotographers();
-    setThemes();
   };
-
-  const onThemeChange = (inputValue, action) => {
-    // set the value using the input as there seems to be a delay before the component updates it
-    if (action.action === 'select-option') {
-      themesRef.current.state.value = inputValue;
-    } else if (action.action === 'clear') {
-      themesRef.current.state.value = null;
-    }
-    setPhotographers();
-    setStates();
-    if (statesRef.current.state && statesRef.current.state.value) {
-      setCountiesOrCities();
-    }
-  }
 
   const onTimeChanging = (xs) => {
     const newTimeRange = (xs.map(anX => {
@@ -347,26 +272,17 @@ const Search = (props) => {
   };
 
   const onTimeChange = () => {
-    setPhotographers();
-    setStates();
     if (statesRef.current.state && statesRef.current.state.value) {
       setCountiesOrCities();
     }
-    setThemes();
   };
 
   const onFilterChange = (value) => {
-    setPhotographers();
     setStates();
     if (statesRef.current.state && statesRef.current.state.value) {
       setCountiesOrCities();
     }
-    setThemes();
   }
-
-  const defaultPhotographerIdx = (selectedPhotographer) ? photographers.findIndex(p => p.value === selectedPhotographer) : null;
-
-  const placeholder = 'select or search ...';
 
   const customStyles = {
     control: (provided, state) => {
@@ -419,57 +335,47 @@ const Search = (props) => {
 
         <h2>Search</h2>
 
-        <h4>Photographer</h4>
-        <Select
-          options={photographerOptions}
-          ref={photographersRef}
-          isClearable
-          isSearchable
-          name='photographers'
-          onChange={onPhotographerChange}
-          //defaultInputValue={(selectedPhotographer) ? photographers.find(p => p.value === selectedPhotographer).label : 'no default'}
-          defaultValue={(defaultPhotographerIdx) ? photographerOptions[defaultPhotographerIdx] : ''}
-          className='dropdown'
-          placeholder={placeholder}
-          styles={customStyles}
+        <PhotographersSelect
+          fetchPath={makeQuery('photographer_name')}
+          defaultValue={photographerOption}
+          onChange={(inputValue, action) => { setPhotographerOption(inputValue); }}
+          filterFunction={rows => d => rows.map(p => p.photographer_name).includes(d.label)}
+          label='Photographer'
         />
 
-        <h4>Location</h4>
-
-        <Select
-          defaultValue={(selectedState) ? statesOptions.find(s => s.value === selectedState) : null}
-          options={statesOptions}
-          isClearable
-          onChange={onStateChange}
-          ref={statesRef}
-          className='dropdown'
-          placeholder='select or search state ...'
-          styles={customStyles}
+        <StateSelect
+          fetchPathState={makeQuery('state')}
+          defaultValue={stateOption}
+          onChange={(inputValue, action) => { setStateOption(inputValue); }}
+          filterFunction={rows => d => rows.map(p => p.state).includes(d.label)}
+          label='State'
         />
 
-        <Select
-          options={countiesOrCitiesOptions}
-          isClearable
-          isDisabled={countiesOrCitiesOptions.length === 0}
-          onChange={onCountyOrCityChange}
-          ref={countiesOrCitiesRef}
-          className='dropdown'
-          placeholder={(countiesOrCitiesOptions.length > 0) ? `select or search ${(selectedMapView === 'cities') ? 'city' : 'county'} ...` : 'select state above'}
-          styles={customStyles}
-        />
+        {(selectedMapView === 'counties' && stateOption) && (
+          <SearchSelect
+            fetchPathState={makeQuery('nhgis_join')}
+            defaultValue={countyOrCityOption}
+            onChange={(inputValue, action) => { setCountyOrCityOption(inputValue); }}
+            filterFunction={rows => d => rows.map(p => p.nhgis_join).includes(d.value)}
+            label='County'
+            allOptions={countiesOrCitiesOptions.counties[stateOption.value]}
+          />
+        )}
 
-        <h4>Themes</h4>
+        {(selectedMapView === 'counties' && !stateOption) && (
+          <React.Fragment>
+            <h4>County</h4>
+            <div>Select state above</div>
+          </React.Fragment>
+        )}
 
-        <Select
-          options={themesOptions}
-          isClearable
-          onChange={onThemeChange}
-          ref={themesRef}
-          className='dropdown'
-          placeholder={placeholder}
-          styles={customStyles}
-        />
-
+        <ThemesSelect
+          fetchPath={makeQuery('themes')}
+          defaultValue={themeOption}
+          onChange={(inputValue, action) => { setThemeOption(inputValue); }}
+          filterFunction={rows => d => rows.map(p => p.themes).includes(d.value)}
+          label='Theme'
+         />
 
         <h4>Photo Caption</h4>
 
@@ -548,13 +454,10 @@ const Search = (props) => {
 export default Search;
 
 Search.propTypes = {
-  selectedPhotographer: PropTypes.string,
   selectedCounty: PropTypes.string,
   selectedCity: PropTypes.string,
   selectedState: PropTypes.string,
-  selectedTheme: PropTypes.string,
   search: PropTypes.func,
-  photographers: PropTypes.array,
   states: PropTypes.array,
   counties: PropTypes.object,
   cities: PropTypes.array,

@@ -517,7 +517,6 @@ export const getMapParameters = createSelector(
       yGutter = 0.33;
       xGutter = 0.33;
       ({center, dx, dy} = Centroids.counties[selectedCounty]);
-      console.log(selectedCounty, center, dx, dy);
     } else if (selectedCity) {
       yGutter = 1.5;
       xGutter = 1.5;

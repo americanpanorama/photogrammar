@@ -10,6 +10,10 @@
   fill: var(--themes-color);
 }
 
+.wrapper.themes .timelineRow rect.cell.deemphasize {
+  fill: silver;
+}
+
 .timelineRow text {
   fill: #ddd !important;
 }

@@ -89,7 +89,7 @@ const TimelineRow = (props) => {
           y={(emphasize) ? monthHeight * 1.2 : monthHeight * 0.9}
           fontSize={(emphasize) ? monthHeight * 2 : monthHeight * 1.4}
           textAnchor='end'
-          filter={(deemphasize) ? 'url(#grayscale)' : null}
+          //filter={(deemphasize) ? 'url(#grayscale)' : null}
           className={(active) ? 'active' : ''}
         >
           {`${firstname} ${lastname}`}
@@ -105,9 +105,9 @@ const TimelineRow = (props) => {
           fillOpacity={c.fillOpacity}
           //fill={c.fill}
           strokeWidth={0}
-          className='cell'
+          className={`cell ${!(c.inSelection && !deemphasize) ? 'deemphasize' : ''}`} 
           key={`cellFor${c.year}${c.month}`}
-          filter={(c.inSelection && !deemphasize) ? null : 'url(#grayscale)'}
+          //filter={(c.inSelection && !deemphasize) ? null : 'url(#grayscale)'}
         />
       ))}
 

@@ -7,7 +7,6 @@ import TreemapTheme from './TreemapTheme2.jsx';
 import './Treemap.css';
 
 const loadThemes = async ({ fetchPath, photosQuery }, { signal }) => {
-  console.log(photosQuery);
   const responses = await Promise.all([
     fetch(fetchPath, { signal }),
     fetch(photosQuery, { signal })
@@ -186,7 +185,7 @@ const Treemap = ({ timeRange, filterTerms, dimensions, height, width, selectedTh
       watch={photosQuery}
     >
       {({ data, error, isPending }) => {
-        if (isPending) return "Loading...";
+        //if (isPending) return "Loading...";
         if (error) return `Something went wrong: ${error.message}`;
         if (data) {
           const { themes, name, ancestors } = formatThemes(data, timeRange, selectedTheme, null, dimensions, filterTerms, buildLink);
