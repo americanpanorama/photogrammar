@@ -3,6 +3,7 @@ import { Async } from 'react-async';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import he from 'he';
+import { getStateAbbr } from '../../helpers.js';
 import PhotoCard from './PhotoCard.js';
 import './SidebarPhotos.css';
 
@@ -12,7 +13,7 @@ const loadPhotos = async ({ query }, { signal }) => {
   return response.json();
 };
 
-const formatPhotos = (data, getStateAbbr) => {
+const formatPhotos = (data) => {
   return data.rows.map(sp => ({
     ...sp,
     caption: (sp.caption) ? he.decode(sp.caption) : '',

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Select from 'react-select';
 import CreatableSelect, { makeCreatableSelect } from 'react-select/creatable';
@@ -20,85 +20,56 @@ const Search = (props) => {
     selectedThemeOption,
     selectedCountyOption,
     selectedCityOption,
+    selectedPhotoCaption,
     terms,
-    selectedMapView,
-    search,
-    countiesOrCitiesOptions,
-    cities,
     timeRange,
-    caption,
+    selectedMapView,
+    countiesOrCitiesOptions,
     toggleSearch,
   } = props;
-
-  const [timeRangeOptions, setTimeRangeOptions] = useState(timeRange);
-  const [photoCaptionOptions, setPhotoCaptionOptions] = useState([]);
-  const [linkTo, setLinkTo] = useState('/');
 
   const [photographerOption, setPhotographerOption] = useState(selectedPhotographerOption);
   const [stateOption, setStateOption] = useState(selectedStateOption);
   const [countyOrCityOption, setCountyOrCityOption] = useState(selectedCountyOption || selectedCityOption);
   const [themeOption, setThemeOption] = useState(selectedThemeOption);
-
-  const formRef = useRef();
-  const timeRef = useRef();
-  const filterTermsRef = useRef();
-
-  const getFormOptions = () => {
-    let caption;
-    // if (filterTermsRef.current.state && filterTermsRef.current.state.inputValue) {
-    //   caption = filterTermsRef.current.state.inputValue;
-    // } else if (filterTermsRef.current.props.value && filterTermsRef.current.props.value.value) {
-    //   caption = filterTermsRef.current.props.value.value;
-    // }
-    return {
-      photographerOption,
-      stateOption,
-      countyOrCityOption: null,
-      themeOption,
-      captionOption: caption,
-      timeRangeOption: [193501, 194406]
-    };
-    return {
-      photographerOption: photographersRef.current.state.value,
-      stateOption: statesRef.current.state.value,
-      countyOrCityOption: countiesOrCitiesRef.current.state.value,
-      themeOption: themesRef.current.state.value,
-      captionOption: caption,
-      timeRangeOption: timeRef.current.state.bounds.map(anX => {
-        const dateNum = x.invert(anX);
-        const rawMonth = numToMonth(dateNum % 1);
-        const year = (rawMonth === 13) ? Math.floor(dateNum) + 1 : Math.floor(dateNum);
-        const month = (rawMonth === 13) ? 1 : rawMonth;
-        return year * 100 + month;
-      }),
-    };
-  };
+  const [photoCaptionOption, setPhotoCaptionOption] = useState(terms);
+  const [photoCaptionOptions, setPhotoCaptionOptions] = useState([selectedPhotoCaption]);
+  const [timeRangeOptions, setTimeRangeOptions] = useState(timeRange);
+  const [linkTo, setLinkTo] = useState('/');
 
   useEffect(() => {
     let path = '';
-
-    const { countyOrCityOption, captionOption: caption, timeRangeOption } = getFormOptions(); 
     
     const photographer = photographerOption && photographerOption.value;
     const state = stateOption && stateOption.value;
     const cityOrCounty = countyOrCityOption && countyOrCityOption.value;
     const theme = themeOption && themeOption.value;
+    const filterTerms = photoCaptionOption && photoCaptionOption.value;
 
     if (cityOrCounty) {
       path = `/${(selectedMapView === 'cities') ? 'city' : 'county'}/${cityOrCounty}`;
     } else if (state) {
       path = `/state/${state}`;
+    } else if (theme) {
+      path = `/themes/${theme}`
     } else {
       path = `/maps`;
     }
+
+    if (theme && !path.includes('/themes/')) {
+      path = `/themes/${theme}`
+    }
+
     if (photographer) {
       path = `${path}/photographers/${photographer}`;
     }
-    if (theme) {
-      path = `${path}/themes/${theme}`
+
+    if (filterTerms) {
+      path = `${path}/caption/${filterTerms}`
     }
-    if (caption) {
-      path = `${path}/caption/${caption}`
+
+    if (timeRangeOptions[0] !== 193501 || timeRangeOptions[1] !== 194406) {
+      path = `${path}/timeline/${timeRangeOptions.join('-')}`;
     }
 
     if (path !== linkTo) {
@@ -123,28 +94,15 @@ const Search = (props) => {
   });
   const step = x(1935 + monthNum(2)) - x(1935);
 
-  const defaultValue = [
+  const timeDefaultValue = [
     x(Math.floor(timeRangeOptions[0] / 100) + monthNum(timeRangeOptions[0] % 100)),
     x(Math.floor(timeRangeOptions[1] / 100) + monthNum(timeRangeOptions[1] % 100)),
   ];
-
-  
-
-  const getTimeSliderValues = () => {
-    return timeRef.current.state.bounds.map(anX => {
-      const dateNum = x.invert(anX);
-      const rawMonth = numToMonth(dateNum % 1);
-      const year = (rawMonth === 13) ? Math.floor(dateNum) + 1 : Math.floor(dateNum);
-      const month = (rawMonth === 13) ? 1 : rawMonth;
-      return year * 100 + month;
-    });
-  }
 
   const makeQuery = (field) => {
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const wheres = [];
 
-    const { captionOption, timeRangeOption } = getFormOptions(); 
     if (field !== 'photographer_name' && photographerOption && photographerOption.label) {
       wheres.push(`photographer_name = '${photographerOption.label}'`);
     }
@@ -169,22 +127,21 @@ const Search = (props) => {
         wheres.push(`vanderbilt_level1 = '${levels[0]}'`);
       } 
     }
-    if (field !== 'time') {
-      const [startTime, endTime] = timeRangeOption;
-      if (startTime > 193501) {
-        const startYear = Math.floor(startTime / 100);
-        const startMonth = startTime % 100;
-        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
-      }
-      if (endTime < 194406) {
-        const endYear = Math.floor(endTime / 100);
-        const endMonth = endTime % 100;
-        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
-      }
+    const [startTime, endTime] = timeRangeOptions;
+    if (startTime > 193501) {
+      const startYear = Math.floor(startTime / 100);
+      const startMonth = startTime % 100;
+      wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
     }
+    if (endTime < 194406) {
+      const endYear = Math.floor(endTime / 100);
+      const endMonth = endTime % 100;
+      wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+    }
+
     // the value of the filter term can be in a few places from the creatable component
-    if (captionOption && captionOption.value) {
-      const terms = captionOption.value.split(' ').filter(t => t);
+    if (photoCaptionOption && photoCaptionOption.value) {
+      const terms = photoCaptionOption.value.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g);
       terms.forEach(filterTerm => {
          wheres.push(`caption ~* '\\m${filterTerm}'`);
       });
@@ -203,63 +160,6 @@ const Search = (props) => {
     return null;
   };
 
-  const setCountiesOrCities = async () => {
-    const selectable = (selectedMapView === 'cities')
-      ? await fetchSelectable('city')
-      : await fetchSelectable('nhgis_join');
-    const stateAbbr = statesRef.current.state.value.value;
-    const options = (selectedMapView === 'cities')
-      ? countiesOrCities.cities[stateAbbr]
-        .filter(option => selectable.includes(option.label))
-        .sort((a, b) => (a.label > b.label) -1 : 1)
-      : countiesOrCities.counties[stateAbbr].filter(option => selectable.includes(option.value))
-
-    setCountiesOrCitiesOptions(options);
-  };
-
-  const updateLink = () => {
-    let path = '';
-
-    const { photographerOption, stateOption, countyOrCityOption, themeOption, captionOption: caption, timeRangeOption } = getFormOptions(); 
-    
-    const photographer = photographerOption && photographerOption.value;
-    const state = stateOption && stateOption.value;
-    const cityOrCounty = countyOrCityOption && countyOrCityOption.value;
-    const theme = themeOption && themeOption.value;
-
-    console.log(photographer, state, cityOrCounty, theme, caption);
-
-    if (cityOrCounty) {
-      path = `/${(selectedMapView === 'cities') ? 'city' : 'county'}/${cityOrCounty}`;
-    } else if (state) {
-      path = `/state/${state}`;
-    } else {
-      path = `/maps`;
-    }
-    if (photographer) {
-      path = `${path}/photographers/${photographer}`;
-    }
-    if (theme) {
-      path = `${path}/themes/${theme}`
-    }
-    if (caption) {
-      path = `${path}/caption/${caption}`
-    }
-
-    console.log(path)
-    setLinkTo(path);
-    //window.location.href = `${process.env.PUBLIC_URL}${path}`;
-  };
-
-  const onCountyOrCityChange = (inputValue, action) => {
-    // set the value using the input as there seems to be a delay before the component updates it
-    if (action.action === 'select-option') {
-      countiesOrCitiesRef.current.state.value = inputValue;
-    } else if (action.action === 'clear') {
-      countiesOrCitiesRef.current.state.value = null;
-    }
-  };
-
   const onTimeChanging = (xs) => {
     const newTimeRange = (xs.map(anX => {
       const dateNum = x.invert(anX);
@@ -271,22 +171,8 @@ const Search = (props) => {
     setTimeRangeOptions(newTimeRange);
   };
 
-  const onTimeChange = () => {
-    if (statesRef.current.state && statesRef.current.state.value) {
-      setCountiesOrCities();
-    }
-  };
-
-  const onFilterChange = (value) => {
-    setStates();
-    if (statesRef.current.state && statesRef.current.state.value) {
-      setCountiesOrCities();
-    }
-  }
-
   const customStyles = {
-    control: (provided, state) => {
-      return {
+    control: (provided, state) => ({
       ...provided,
       borderRadius: '19px',
       borderColor: (state.isFocused) ? '#297373' : 'grey',
@@ -296,27 +182,7 @@ const Search = (props) => {
       '&:hover': {
         borderColor: 'pink'
       }
-    }},
-  }
-
-  const inputStyles = {
-    control: (provided, state) => {
-      return {
-      ...provided,
-      borderRadius: '19px',
-      borderColor: (state.isFocused) ? '#297373' : 'grey',
-      backgroundColor: (state.isFocused) ? 'white' : '#fafafa',
-      //boxShadow: (state.isFocused) ? 'px 2px 2px 2px #297373' : 'none',
-      boxShadow: state.isFocused ? "0 0 0 2px #297373" : 0,
-      '&:hover': {
-        borderColor: 'pink'
-      }
-    }},
-    indicatorsContainer: (provided, state) => {
-      return {
-        display: 'none',
-      }
-    }
+    }),
   }
 
   return (
@@ -344,7 +210,7 @@ const Search = (props) => {
         />
 
         <StateSelect
-          fetchPathState={makeQuery('state')}
+          fetchPath={makeQuery('state')}
           defaultValue={stateOption}
           onChange={(inputValue, action) => { setStateOption(inputValue); }}
           filterFunction={rows => d => rows.map(p => p.state).includes(d.label)}
@@ -353,7 +219,7 @@ const Search = (props) => {
 
         {(selectedMapView === 'counties' && stateOption) && (
           <SearchSelect
-            fetchPathState={makeQuery('nhgis_join')}
+            fetchPath={makeQuery('nhgis_join')}
             defaultValue={countyOrCityOption}
             onChange={(inputValue, action) => { setCountyOrCityOption(inputValue); }}
             filterFunction={rows => d => rows.map(p => p.nhgis_join).includes(d.value)}
@@ -365,6 +231,24 @@ const Search = (props) => {
         {(selectedMapView === 'counties' && !stateOption) && (
           <React.Fragment>
             <h4>County</h4>
+            <div>Select state above</div>
+          </React.Fragment>
+        )}
+
+        {(selectedMapView === 'cities' && stateOption) && (
+          <SearchSelect
+            fetchPath={makeQuery('city')}
+            defaultValue={countyOrCityOption}
+            onChange={(inputValue, action) => { setCountyOrCityOption(inputValue); }}
+            filterFunction={rows => d => rows.map(p => p.city).includes(d.label)}
+            label='City'
+            allOptions={countiesOrCitiesOptions.cities[stateOption.value]}
+          />
+        )}
+
+        {(selectedMapView === 'cities' && !stateOption) && (
+          <React.Fragment>
+            <h4>City</h4>
             <div>Select state above</div>
           </React.Fragment>
         )}
@@ -381,22 +265,41 @@ const Search = (props) => {
 
         <CreatableSelect
           styles={customStyles}
-          //onChange={onFilterChange}
+          options={photoCaptionOptions}
+          isClearable
           onCreateOption={(inputValue) => {
-            console.log(inputValue);
             setPhotoCaptionOptions([
               {
                 label: inputValue,
                 value: inputValue,
               },
-              ...photoCaptionOptions,
+              ...photoCaptionOptions.filter(d => d.value),
             ]);
-            onFilterChange();
+            setPhotoCaptionOption({
+              label: inputValue,
+              value: inputValue,
+            });
+          }}
+          onChange={(inputValue, { action }) => {
+            if (action === 'clear') {
+              setPhotoCaptionOptions([
+                {
+                  label: null,
+                  value: null,
+                },
+                ...photoCaptionOptions,
+              ]);
+            }
+            if (action === 'select-option') {
+              setPhotoCaptionOptions([
+                inputValue,
+                ...photoCaptionOptions.filter(d => d.value !== inputValue),
+              ]);
+              setPhotoCaptionOption(inputValue);
+            }
           }}
           formatCreateLabel={(inputValue) => `search captions for "${inputValue}"`}
           createOptionPosition='last'
-          //menuIsOpen={false}
-          ref={filterTermsRef}
           //placeholder={captionInput}
           value={photoCaptionOptions[0]}
           options={photoCaptionOptions}
@@ -413,7 +316,7 @@ const Search = (props) => {
         >
           <Range
             allowCross={false}
-            value={defaultValue}
+            value={timeDefaultValue}
             onChange={onTimeChanging} 
             marks={marks}
             step={step}
@@ -433,18 +336,19 @@ const Search = (props) => {
             activeDotStyle={{
               borderColor: 'black',
             }}
-            ref={timeRef}
-            onAfterChange={onTimeChange}
           />
         </div>
 
-        <Link
-          to={linkTo}
+
+        <button
+          role='submit'
         >
-          <button>
+            <Link
+              to={linkTo}
+            >
             submit
-          </button>
-        </Link>
+          </Link>
+        </button>
 
       </div>
     </div>
@@ -454,16 +358,6 @@ const Search = (props) => {
 export default Search;
 
 Search.propTypes = {
-  selectedCounty: PropTypes.string,
-  selectedCity: PropTypes.string,
-  selectedState: PropTypes.string,
-  search: PropTypes.func,
-  states: PropTypes.array,
-  counties: PropTypes.object,
-  cities: PropTypes.array,
-  themes: PropTypes.array,
-  timeRange: PropTypes.array,
-  caption: PropTypes.string,
 };
 
 Search.defaultProps = {

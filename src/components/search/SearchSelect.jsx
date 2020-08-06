@@ -51,7 +51,14 @@ const SearchSelect = ({ label, defaultValue, onChange, fetchPath, styles, allOpt
       watch={fetchPath}
     >
       {({ data, error, isPending }) => {
-        if (isPending) return "Loading...";
+        if (isPending) {
+          return (
+            <React.Fragment>
+              <h4>{label}</h4>
+              <div>loading options ...</div>
+            </React.Fragment>
+          );
+        }
         if (error) return `Something went wrong: ${error.message}`;
         if (data) {
           const options = allOptions.filter(filterFunction(data.rows));

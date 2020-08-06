@@ -25,18 +25,25 @@ const mapStateToProps = state => {
   const selectedCountyOption = (state.selectedCounty)
     ? countiesOrCitiesOptions.counties[state.selectedState].find(d => d.value === state.selectedCounty) : null;
 
+  const selectedCityOption = (state.selectedCity)
+    ? countiesOrCitiesOptions.cities[state.selectedState].find(d => d.value === state.selectedCity) : null;
+
+
   return {
     selectedPhotographerOption,
     selectedStateOption,
     selectedThemeOption,
     selectedCountyOption,
+    selectedCityOption,
     selectedCity: state.selectedCity,
+    selectedPhotoCaption: {
+      label: state.filterTerms.join(' '),
+      value: state.filterTerms.join(' ')
+    },
+    timeRange: state.timeRange,
     terms: state.filterTerms,
     selectedMapView: state.selectedMapView,
     countiesOrCitiesOptions,
-    cities: [],
-    timeRange: state.timeRange,
-    caption: '',
   };
 };
 

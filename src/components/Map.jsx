@@ -3,6 +3,7 @@ import Async from "react-async";
 import PropTypes from 'prop-types';
 import { Link, useParams, useLocation } from "react-router-dom";
 import * as d3 from 'd3';
+import { getStateAbbr } from '../helpers.js';
 import Counties from '../../data/svgs/counties.json';
 import Cities from '../../data/citiesCounts.json';
 import Centroids from '../../data/centroids.json';
@@ -119,7 +120,7 @@ const formatCities = (data, timeRange, filterTerms, selectedState) => {
   }
   return Cities
     .filter(cd => {
-      if (selectedState && cd.s !== selectedState) {
+      if (selectedState && getStateAbbr(cd.s) !== selectedState) {
         return false;
       }
       return true;

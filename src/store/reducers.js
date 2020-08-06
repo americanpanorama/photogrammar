@@ -26,6 +26,10 @@ const selectedTheme = (state = initialState, action) => (
   (action.type === A.SET_STATE) ? action.payload.selectedTheme : state
 );
 
+const filterTerms = (state = initialState, action) => (
+  (action.type === A.SET_STATE) ? action.payload.filterTerms : state
+);
+
 const selectedViz = (state = initialState, action) => (
   (action.type === A.SET_STATE) ? action.payload.selectedViz : state
 );
@@ -48,6 +52,9 @@ const sidebarPhotosOffset = (state = initialState, action) => {
 };
 
 const timeRange = (state = initialState, action) => {
+  if (action.type === A.SET_STATE) {
+    return action.payload.timeRange;
+  }
   if (action.type === A.SET_TIME_RANGE) {
     return action.payload;
   }
@@ -81,16 +88,6 @@ const isInitialized = (state = initialState, action) => (
 const hasCompletedFirstLoad = (state = initialState, action) => (
   (action.type === A.SET_STATE) ? true : state
 );
-
-const filterTerms = (state = initialState, action) => {
-  if (action.type === A.SET_FILTER_TERMS) {
-    return action.payload.filterTerms;
-  }
-  if (action.type === A.CLEAR_FILTER_TERMS) {
-    return [];
-  }
-  return state;
-};
 
 const expandedSidebar = (state = initialState, action) => (
   (action.type === A.TOGGLE_EXPANDED_SIDEBAR) ? !state : state

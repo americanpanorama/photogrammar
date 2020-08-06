@@ -17,20 +17,23 @@ const County = (props) => {
     linkActive,
     onCountyHover,
     onCountyUnhover,
-    strokeWidth,
   } = props;
   const ref = useRef(null);
 
-  // const [ strokeWidth, setStrokeWidth] = useState(props.strokeWidth);
+  const currentStrokeWidth = useRef(props.strokeWidth);
+
+  const [strokeWidth, setStrokeWidth] = useState(props.strokeWidth);
 
   // useEffect(() => {
-  //   d3.select(ref.current)
-  //     .transition()
-  //     .duration(1000)
-  //     .style("stroke-width", props.strokeWidth)
-  //     .on("end", () => {
-  //       setStrokeWidth(props.strokeWidth);
-  //     });
+  //   if (currentStrokeWidth !== props.strokeWidth) {
+  //     d3.select(ref.current)
+  //       .transition()
+  //       .duration(1000)
+  //       .style("stroke-width", props.strokeWidth)
+  //       .on("end", () => {
+  //         currentStrokeWidth.current = props.strokeWidth;
+  //       });
+  //   }
   // });
 
   const link = buildLink({
@@ -52,7 +55,7 @@ const County = (props) => {
         style={{
           fill: fill,
           fillOpacity: fillOpacity,
-          strokeWidth: strokeWidth, //(nhgis_join === selectedCounty) ?  3 / scale : 0.2 / scale,
+          strokeWidth: 0, //strokeWidth, //(nhgis_join === selectedCounty) ?  3 / scale : 0.2 / scale,
           stroke: '#444',
         }}
         className='countyPolygon'

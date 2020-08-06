@@ -68,16 +68,16 @@ const TimelineRow = (props) => {
         />
       ))}
 
-      {(showLabel && emphasize) && (
+      {(showLabel) && (
         <text
           x={labelX}
-          y={monthHeight * 1.2}
-          fontSize={monthHeight * 2}
+          y={(emphasize) ? monthHeight * 1.2 : monthHeight * 0.9}
+          fontSize={(emphasize) ? monthHeight * 2 : monthHeight * 1.4}
           textAnchor='end'
           className={(active) ? "active" : ""}
           strokeWidth={3}
           stroke='white'
-          strokeOpacity={0.5}
+          strokeOpacity={0.75}
         >
           {`${firstname} ${lastname}`}
         </text>
@@ -103,9 +103,9 @@ const TimelineRow = (props) => {
           width={monthWidth}
           height={monthHeight}
           fillOpacity={c.fillOpacity}
-          //fill={c.fill}
+          fill={c.fill}
           strokeWidth={0}
-          className={`cell ${!(c.inSelection && !deemphasize) ? 'deemphasize' : ''}`} 
+          //className={`cell`} 
           key={`cellFor${c.year}${c.month}`}
           //filter={(c.inSelection && !deemphasize) ? null : 'url(#grayscale)'}
         />

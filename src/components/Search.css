@@ -50,9 +50,19 @@
   grid-column: 2 / span 1;
 }
 
-#advancedSearch .submit {
+#advancedSearch button[role=close] {
+  padding: 0;
+}
+
+#advancedSearch button[role=submit] {
   grid-column: 2 / span 1;
   border-radius: 19px;
+  width: auto;
+}
+
+#advancedSearch button[role=submit] a {
+  color: black;
+  text-decoration: none;
 }
 
 .styled__control-is-focused {

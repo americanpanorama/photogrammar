@@ -170,7 +170,7 @@ export function calculateDimensions(options) {
     leftAxisWidth: innerWidth * 0.15,
   } : {
     width: Math.min(vizCanvas.width * 0.75, vizCanvas.width - 200),
-    height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
+    height: Math.min(Photographers.length * 15, vizCanvas.height * 0.35),
     leftAxisWidth: Math.max(200, vizCanvas.width * 0.25),
   };
 
@@ -198,7 +198,7 @@ export function calculateDimensions(options) {
       : Math.max(200, windowWidth * 0.66);
   }
   const sidebarHeight = (!isMobile)
-    ? vizCanvas.height - 125 - welcomeHeight
+    ? vizCanvas.height - 75 - welcomeHeight
     : innerHeight - 75;
   const sidebarHeaderHeight = 70;
   const filterHeight = 34;

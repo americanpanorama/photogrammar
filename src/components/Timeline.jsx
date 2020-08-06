@@ -13,14 +13,19 @@ const loadTimelineCells = async ({ fetchPath }, { signal }) => {
   return res.json();
 }
 
-const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, selectedMapView) => {
+const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, selectedMapView, selectedViz) => {
   const timelineCells = data.rows || data;
   // convenience functions for dates
   const monthNum = m => (m - 1) / 12;
   const getTimeCode = (year, month) => year * 100 + month;
   const timeCodeToNum = timecode => Math.floor(timecode / 100) + monthNum(timecode % 100);
 
-  const baseColor = (selectedMapView === 'counties') ? '#6a1b9a' : '#289261';
+  let baseColor;
+  if (selectedViz === 'themes') {
+    baseColor = '#F78154';
+  } else {
+    baseColor = (selectedMapView === 'counties') ? '#6a1b9a' : '#289261';
+  }
 
   // create the basic photographers data
   const filteredCells = timelineCells
@@ -29,7 +34,7 @@ const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, 
   const opacityDenominator = Math.min(250, Math.max(...filteredCells.map(tc => tc.count)));
   const threshold = 500;
   const photographers = Photographers
-    .filter(p => p.count >= 75 && p.key !== 'unspecified')
+    .filter(p => p.count >= 75 && p.key && p.key !== 'unspecified' && p.key !== 'NA')
     .sort((a, b) => {
       if (a.count < threshold && b.count >= threshold) {
         return -1;
@@ -38,10 +43,10 @@ const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, 
         return 1;
       }
       if (a.firstDate !== b.firstDate) {
-        return (a.count >= 500) ? a.firstDate - b.firstDate : b.firstDate - a.firstDate;
+        return (a.count >= threshold) ? a.firstDate - b.firstDate : b.firstDate - a.firstDate;
       }
       if (a.lastDate != b.lastDate) {
-        return (a.count >= 500) ? a.lastDate - b.lastDate : b.lastDate - a.lastDate;
+        return (a.count >= threshold) ? a.lastDate - b.lastDate : b.lastDate - a.lastDate;
       }
       return 0;
     })
@@ -50,7 +55,7 @@ const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, 
         && timeRange[1] > p.firstDate && timeRange[0] < p.lastDate);
       p.fill = (p.active) ? 'black' : 'silver';
       p.months = [];
-      p.isOther = p.count < 500;
+      p.isOther = p.count < threshold;
       return p;
     });
 
@@ -65,29 +70,27 @@ const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, 
   // add the timeline cells to each photographer
   filteredCells.forEach(tc => {
     const idx = photographers.findIndex(p => p.key === tc.photographer);
+    const inSelection = (!(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (!selectedPhotographer || selectedPhotographer === tc.photographer));
     if (idx !== -1) {
       const cell = {
         year: tc.year,
         month: tc.month,
         count: tc.count,
         x: x(tc.year + monthNum(tc.month)),
-        fill: baseColor,
-        inSelection: (!(getTimeCode(tc.year, tc.month) < timeRange[0] || getTimeCode(tc.year, tc.month) > timeRange[1]) && (!selectedPhotographer || selectedPhotographer === tc.photographer)),
+        fill: (inSelection) ? baseColor : '#eeeeee',
+        inSelection,
         fillOpacity: (tc.count > 0) ? 0.05 + 0.95 * tc.count / opacityDenominator : 0
       }
       photographers[idx].months.push(cell);
     }
   });
 
-  // drop any photographers without month data
-  // photographers.forEach((p, i) => {
-  //   if (p.months.length === 0) {
-  //     photographers.splice(i, 1);
-  //   }
-  // });
-  // drop BarbaraEvans, who uniquely has more than 75 photos but none with a month
+  // drop BarbaraEvans and OttoGilmore, who uniquely have more than 75 photos but none with a month
   const beIdx = photographers.findIndex(p => p.key === "BarbaraWright");
   photographers.splice(beIdx, 1);
+  const ogIdx = photographers.findIndex(p => p.key === "OttoGilmore");
+  photographers.splice(ogIdx, 1);
+
 
   // sort the cells in chronological order
   photographers.forEach(p => {
@@ -96,14 +99,14 @@ const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, 
 
   const numberAboveThreshold = photographers.filter(p => !p.isOther).length;
   const numberBelowThreshold = photographers.filter(p => p.isOther).length;
-  // the +/-1 here are to leave room for the collective "other photographers" when they aren't individual shown
+  // the +/-2 here are to leave room for the collective "other photographers" when they aren't individual shown
   const rowHeight = height / (numberAboveThreshold + 2);
   const translateY = -1 * rowHeight * (numberBelowThreshold);
   const monthHeight = rowHeight - 2;
 
-  // the +1 here is for an empty row for the "other photographers" to separate the two visually
+  // the +2 here is for an empty row for the "other photographers" to separate the two visually
   const y = d3.scaleLinear()
-      .domain([0, photographers.length + 1])
+      .domain([0, photographers.length + 2])
       .range([0, height - translateY]);
 
   // add the y, labelX, and yeartick values for each photographer
@@ -147,6 +150,7 @@ const TimelineHeatmap = (props) => {
     timeRange,
     dimensions,
     selectedMapView,
+    selectedViz,
     width,
     leftAxisWidth,
     monthHeight,
@@ -192,7 +196,13 @@ const TimelineHeatmap = (props) => {
         //if (isPending) return "Loading..."
         if (error) return `Something went wrong: ${error.message}`
         if (data) {
-          const { photographers, translateY, monthWidth, monthHeight, baseColor } = formatPhotographers(data, timeRange, selectedPhotographer, dimensions, selectedMapView);
+          const {
+            photographers,
+            translateY,
+            monthWidth,
+            monthHeight,
+            baseColor
+          } = formatPhotographers(data, timeRange, selectedPhotographer, dimensions, selectedMapView, selectedViz);
           const height = props.height - translateY;
           return (
             <div
@@ -213,14 +223,7 @@ const TimelineHeatmap = (props) => {
                   width={width + leftAxisWidth}
                   height={height}
                 >
-                  <defs>
-                    <filter id="grayscale">
-                      <feColorMatrix type="saturate" values="0.1"/>
-                      <feComponentTransfer>
-                        <feFuncA type="table" tableValues="0 0.3"/>
-                      </feComponentTransfer>
-                    </filter>
-                  </defs>
+                {/* todo: this does not appear to be sorting properly */}
                   {photographers
                     .sort((a, b) =>  {
                       if (!hoveredPhotographer && !selectedPhotographer) {
@@ -244,11 +247,11 @@ const TimelineHeatmap = (props) => {
                       let y = p.y;
                       // the other photographers cells are overlayed on one another when they're not individually shown
                       if (p.isOther && !showOthers) {
-                        y = translateY * -1 + 1 + monthHeight / 2;
+                        y = translateY * -1;
                       }
                       // with one exception: if the photographer is selected
                       if (!showOthers && p.isOther && selectedPhotographer === p.key) {
-                        y = translateY * -1 + 1 + monthHeight * 2;
+                        y = translateY * -1 + monthHeight;
                       }
                       return (
                         <TimelineRow
@@ -421,7 +424,7 @@ const TimelineHeatmap = (props) => {
                   {(!showOthers) ? (
                     <text
                       x={leftAxisWidth - 2}
-                      y={monthHeight * 1.5 - translateY}
+                      y={monthHeight - translateY}
                       textAnchor='end'
                       onClick={() => setShowOthers(true)}
                       fontSize={monthHeight * 1.2}

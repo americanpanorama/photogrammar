@@ -41,7 +41,7 @@ const SidebarPhotosHeader = (props) => {
       watch={query}
     >
       {({ data, error, isPending }) => {
-        if (isPending) return "Loading..."
+        //if (isPending) return "Loading..."
         if (error) return `Something went wrong: ${error.message}`
         if (data) {
           const count = (data.rows && data.rows[0] && data.rows[0].count) ? data.rows[0].count : 1000;

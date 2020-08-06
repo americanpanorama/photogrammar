@@ -62,6 +62,7 @@ const ActionsFromURL = ({ setState }) => {
         selectedViz: selectedViz,
         selectedMapView: selectedMapView,
         filterTerms: (caption) ? caption.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g) || [] : [],
+        timeRange: (timeline) ? timeline.split('-') : [193501, 194406],
         pathname,
         hash,
       });

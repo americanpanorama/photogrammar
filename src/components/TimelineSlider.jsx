@@ -6,7 +6,7 @@ import './TimelineSlider.css';
 import 'rc-slider/assets/index.css';
 
 
-const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange}) => {
+const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange, buildLink}) => {
   const monthNum = m => (m - 1) / 12;
   const numToMonth = num => Math.round(num * 12) + 1;
   const x = d3.scaleLinear()
@@ -21,14 +21,33 @@ const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange}) => {
   const step = x(1935 + monthNum(2)) - x(1935);
 
   const onRangeChange = (xs) => {
-    setTimeRange(xs.map(anX => {
+    const timeRange = xs.map(anX => {
       const dateNum = x.invert(anX);
       const rawMonth = numToMonth(dateNum % 1);
       const year = (rawMonth === 13) ? Math.floor(dateNum) + 1 : Math.floor(dateNum);
       const month = (rawMonth === 13) ? 1 : rawMonth;
       return year * 100 + month;
-    }));
+    });
+    setTimeRange(timeRange);
   };
+
+  const onAfterChange = (xs) => {
+    const timeRange = xs.map(anX => {
+      const dateNum = x.invert(anX);
+      const rawMonth = numToMonth(dateNum % 1);
+      const year = (rawMonth === 13) ? Math.floor(dateNum) + 1 : Math.floor(dateNum);
+      const month = (rawMonth === 13) ? 1 : rawMonth;
+      return year * 100 + month;
+    });
+    const link = buildLink({
+      replaceOrAdd: [{
+        param: 'timeline',
+        value: timeRange.join('-'),
+      }],
+    });
+    // this updates the url without reloading
+    history.pushState({}, '', `${process.env.PUBLIC_URL}${link}`)
+  }
 
   const defaultValue = [
     x(Math.floor(timeRange[0] / 100) + monthNum(timeRange[0] % 100)),
@@ -47,6 +66,7 @@ const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange}) => {
         allowCross={false}
         value={defaultValue}
         onChange={onRangeChange} 
+        onAfterChange={onAfterChange}
         marks={marks}
         step={step}
         trackStyle={[{
