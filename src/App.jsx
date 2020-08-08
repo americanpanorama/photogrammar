@@ -19,7 +19,6 @@ import RoyStryker from './components/RoyStryker.js';
 import AikenAndWool from './components/AikenAndWool.js';
 import CBBaldwin from './components/CBBaldwin.js';
 import Search from './components/Search.js';
-import Lightbox from './components/Lightbox.js';
 
 const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, windowResized, searchOpen, isMobile }) => {
   useEffect(() => {
@@ -119,7 +118,6 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
           </React.Fragment>
         )}
       </div>
-      <Lightbox />
       {(searchOpen) && <Search />}
       
     </Router>

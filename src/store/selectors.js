@@ -380,19 +380,23 @@ export const getSidebarPhotosQuery = createSelector(
   (offset, dimensions, randomPhotoNumbers, wheres) => {
     let query;
     const { displayableCards } = dimensions.photoCards;
-    const sqlQueryBase = 'SELECT loc_item_link, photographer_name, caption, year, month, vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, city, county, state, img_thumb_img FROM photogrammar_photos';
+    const offsetForQuery = Math.max(0, offset - displayableCards);
+    const limit = (offset === 0) ? displayableCards * 2 : displayableCards * 3;
+    const sqlQueryBase = `SELECT loc_item_link, photographer_name, caption, year, month, vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, city, county, state, img_thumb_img, ${offsetForQuery} as theoffset FROM photogrammar_photos`;
     if (wheres.length > 1) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
-      query = `${sqlQueryBase} ${where} order by year, month limit ${displayableCards} offset ${offset}`;
+      query = `${sqlQueryBase} ${where} order by year, month, loc_item_link limit ${limit} offset ${offsetForQuery}`;
+      return encodeURI(`${cartoURLBase}${query}`);
     } else {
       // it's national
+      const date = new Date().getDate();
+      return `${process.env.PUBLIC_URL}/data/randomPhotos/${date}.json`;
       query = randomPhotoNumbers
-        .slice(offset, displayableCards + offset)
+        .slice(offsetForQuery, limit + offsetForQuery)
         .map(offset => `(${sqlQueryBase} limit 1 offset ${offset})`)
-        .join(' union ');
-      //query = `${sqlQueryBase} TABLESAMPLE BERNOULLI (100 * 60 / 176212.0) limit ${displayableCards}`;
+        .join(' union all ');
     }
-    return encodeURI(`${cartoURLBase}${query}`);
+    
   }
 );
 

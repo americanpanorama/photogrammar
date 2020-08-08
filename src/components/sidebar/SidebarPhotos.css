@@ -6,7 +6,8 @@
 #sidebar-photos {
   /* the sidebar header is 70px in height) */
   display: flex;
-  width: 200vw;
+  width: 300vw;
+  position: relative;
 }
 
 @media only screen and (min-width: 768px) {
@@ -14,13 +15,14 @@
     /* the sidebar header is 70px in height) */
     height: calc(100% - 70px);
     display: flex;
-    width: 134vw;
+    width: max(200vw, 600px);
   }
 }
 
 
 
 #sidebar-photos .photoPage {
+  position: absolute;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

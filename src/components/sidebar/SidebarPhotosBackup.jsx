@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Async, useFetch } from 'react-async';
+import { Async } from 'react-async';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import he from 'he';
@@ -20,11 +20,10 @@ const formatPhotos = (data, offset, displayableCards) => {
   const sliceEnd = sliceStart + photosToGet;
   // console.log(offset, displayableCards, sliceStart, sliceEnd);
   const rows = (data.rows) ? data.rows : data.slice(sliceStart, sliceEnd);
-  return rows.map((sp, idx) => ({
+  return rows.map(sp => ({
     ...sp,
     caption: (sp.caption) ? he.decode(sp.caption) : '',
     stateAbbr: getStateAbbr(sp.state),
-    idx: (sp.theoffset) ? sp.theoffset + idx : sliceStart + idx,
   }));
 };
 
@@ -88,17 +87,17 @@ const SidebarPhotos = (props) => {
         if (move !== 0) {
           prevPage
             .transition()
-            .duration(1000)
+            .duration(3750)
             //.style('margin-left', `${-1 * sidebarWidth}px`)
             .style('transform', `translateX(${-1 * sidebarWidth}px)`);
           currentPage
             .transition()
-            .duration(1000)
+            .duration(3750)
             //.style('margin-left', `${-1 * sidebarWidth}px`)
             .style('transform', `translateX(${0}px)`);
           nextPage
             .transition()
-            .duration(1000)
+            .duration(3750)
             //.style('margin-left', `${-1 * sidebarWidth}px`)
             .style('transform', `translateX(${sidebarWidth}px)`)
             .on('end', () => {
@@ -108,27 +107,59 @@ const SidebarPhotos = (props) => {
           currentOffset.current = sidebarPhotosOffset;
         }
       }
-      })
+      }, [sidebarPhotosOffset])
 
-  const state = useFetch(query, {
-    headers: { accept: "application/json" },
-  });
+  console.log(marginLeft);
+  console.log(decodeURI(query));
 
-  if (state.error) return state.error.message;
-  if (state.data ) {
-          const photos = formatPhotos(state.data, sidebarPhotosOffset, displayableCards);
+  return (
 
-          let movesTo = false;
-          if (sidebarPhotosOffset > currentOffset.current) {
-            movesTo = 'left';
-          } else if (sidebarPhotosOffset < currentOffset.current) {
-            movesTo = 'right';
-          }
+    <Async
+      promiseFn={loadPhotos}
+      query={query}
+      watch={query}
+      // onResolve={(data) => {
+      //   return;
+      //   const photoContainer = d3.select(sidebarPhotosRef.current);
+      //   // correctly set the margin on the page to display the page that will be transitioned from
+      //   const currentMarginLeft = parseInt(sidebarPhotosRef.current.style.transform.match(/\d+/g));
+      //   console.log(currentMarginLeft, sidebarPhotosRef.current.style.transform, sidebarPhotosRef.current.style.transform.match(/\d+/g));
+      //   if (currentMarginLeft !== marginLeft) {
+      //     console.log(currentMarginLeft, marginLeft);
+      //     photoContainer
+      //       .style('transform', `translateX(${marginLeft}px)`)
+      //       //.style('margin-left', `${marginLeft}px`)
+      //   }
+      //   // run the transition to position the middle photoSet in the viewable area
+      //   if (marginLeft !== -1 * sidebarWidth) {
+      //     photoContainer
+      //       .transition()
+      //       .duration(750)
+      //       //.style('margin-left', `${-1 * sidebarWidth}px`)
+      //       .style('transform', `translateX(${-1 * sidebarWidth}px)`)
+      //       .on('end', () => {
+      //         setCurrentOffset(sidebarPhotosOffset);
+      //       });
+      //   } else {
+      //     setCurrentOffset(sidebarPhotosOffset);
+      //   }
+      // }}
+    >
+      {({ data, error, isPending, isFulfilled }) => {
+        console.log(data, error, isPending, isFulfilled);
+        if (isPending) { console.log('isPending') }
+        if (error) return `Something went wrong: ${error.message}`
+        if (isFulfilled ) {
+          console.log('isFulfilled true', sidebarPhotosOffset);
+          const photos = formatPhotos(data, sidebarPhotosOffset, displayableCards);
+
           // split into photoCard sets
           let prevPhotos = [];
           let currentPhotos = [];
           let nextPhotos = [];
-          let currentPhotosIdx = photos[0].idx;
+          let prevPageX = sidebarWidth * -1;
+          let currentPageX = 0;
+          let nextPageX = sidebarWidth;
           if (photos.length <= displayableCards) {
             currentPhotos = photos;
           } else if (photos.length <= displayableCards * 2) {
@@ -138,64 +169,25 @@ const SidebarPhotos = (props) => {
             prevPhotos = photos.slice(0, displayableCards);
             currentPhotos = photos.slice(displayableCards, displayableCards * 2);
             nextPhotos = photos.slice(displayableCards * 2);
-            currentPhotosIdx = photos[displayableCards].idx;
-          }
-
-          // calculate the five possible positions
-          const getTranslateX = (offsetIdx) => {
-            const farLeft = sidebarWidth * -2;
-            const left = sidebarWidth * -1;
-            const center = 0;
-            const right = sidebarWidth;
-            const farRight = sidebarWidth * 2;
-
-            console.log(currentOffset.current, offsetIdx)
-            if (offsetIdx === currentOffset.current) {
-              return center;
-            }
-            if (offsetIdx < currentOffset.current) {
-              if (Math.abs(offsetIdx - currentOffset.current) === displayableCards) {
-                return left;
-              }
-              return farLeft;
-            }
-            if (offsetIdx > currentOffset.current) {
-              if (Math.abs(offsetIdx - currentOffset.current) === displayableCards) {
-                return right;
-              }
-              return farRight;
-            }
-          }
-          let translateX;
-          if (!movesTo) {
-            translateX = 0;
-          } else if (movesTo === 'left') {
-            translateX = sidebarWidth;
-          } else {
-            translateX = sidebarWidth * -1;
-          }
-
+          } 
           const photoSets = [
             {
               photos: prevPhotos,
-              offset: currentPhotosIdx - displayableCards, 
+              offset: sidebarPhotosOffset - displayableCards, 
               setId: photoSetId,
-              ref: prevPageRef,
-              translateX: getTranslateX(currentPhotosIdx - displayableCards),
+              ref: prevPageRef
             },
             {
               photos: currentPhotos,
-              offset: currentPhotosIdx, 
+              offset: sidebarPhotosOffset, 
               setId: photoSetId,
               ref: currentPageRef,
-              translateX: getTranslateX(currentPhotosIdx),
             },
             {
               photos: nextPhotos,
-              offset: currentPhotosIdx + displayableCards, 
+              offset: sidebarPhotosOffset + displayableCards, 
               setId: photoSetId,
               ref: nextPageRef,
-              translateX: getTranslateX(currentPhotosIdx + displayableCards),
             },
           ];
           console.log(photoSets);
@@ -213,54 +205,57 @@ const SidebarPhotos = (props) => {
 
           console.log('ready to return', sidebarPhotosOffset);
 
-    return (
-      <div
-        id="sidebar-photos"
-        ref={sidebarPhotosRef}
-      >
-                {photoSets.map((ps, idx) => {
-                  // const thePhotos = (ps.setId !== photoSet.setId || ps.offset !== photoSet.offset || !photoSet.photos)
-                  //   ? photos : photoSet.photos;
-                  return (
-                    <div
-                      className='photoPage'
-                      key={`${ps.setId}-${ps.offset}`}
-                      // this is necessary to be hardcoded at least in firefox as the flex spec requires a definitive width
-                      // https://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
-                      style={{
-                        width: sidebarWidth,
-                        transform: 'translateX(0)',
-                        transform: `translateX(${ps.translateX}px)`,
-                      }}
-                      ref={ps.ref}
-                    >
-                      {ps.photos.map(photo => (
-                        <PhotoCard
-                          key={photo.loc_item_link}
-                          photo={photo}
-                          //notSelected={selectedPhotoCallNumber && selectedPhotoCallNumber !== photo.call_number}
-                        />
-                      ))}
+          return (
+    <div
+      id="sidebar-photos"
+      ref={sidebarPhotosRef}
+    >
+              {photoSets.map((ps, idx) => {
+                // const thePhotos = (ps.setId !== photoSet.setId || ps.offset !== photoSet.offset || !photoSet.photos)
+                //   ? photos : photoSet.photos;
+                return (
+                  <div
+                    className='photoPage'
+                    key={`${ps.setId}-${ps.offset}`}
+                    // this is necessary to be hardcoded at least in firefox as the flex spec requires a definitive width
+                    // https://stackoverflow.com/questions/27472595/firefox-34-ignoring-max-width-for-flexbox
+                    style={{
+                      width: sidebarWidth,
+                      transform: 'translateX(0)',
+                      transform: `translateX(${currentX - (1 - idx) * sidebarWidth}px)`,
+                    }}
+                    ref={ps.ref}
+                  >
+                    {ps.photos.map(photo => (
+                      <PhotoCard
+                        key={photo.loc_item_link}
+                        photo={photo}
+                        //notSelected={selectedPhotoCallNumber && selectedPhotoCallNumber !== photo.call_number}
+                      />
+                    ))}
 
-                      {/* hacky--uggh--but fill in any blank spots at the end with 'empty cards' to maintain alignment  */}
-                      {blankCardsCount.map(idx => (
-                        <div 
-                          className='blankCard' 
-                          style={{
-                            height: blankCardHeight,
-                            width: blankCardWidth,
-                          }}
-                          key={`blankCard${idx}`}
-                        />
-                      ))}
-                    </div>
-                  )
-                })}
-      </div>
-    );
-        }  
+                    {/* hacky--uggh--but fill in any blank spots at the end with 'empty cards' to maintain alignment  */}
+                    {blankCardsCount.map(idx => (
+                      <div 
+                        className='blankCard' 
+                        style={{
+                          height: blankCardHeight,
+                          width: blankCardWidth,
+                        }}
+                        key={`blankCard${idx}`}
+                      />
+                    ))}
+                  </div>
+                )
+              })}
+</div>
+          );
+        }
+      }}
+    </Async>
+  );
 
-  return null;
+  
 };
 
 export default SidebarPhotos;

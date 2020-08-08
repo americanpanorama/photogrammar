@@ -39,11 +39,11 @@ const selectedMapView = (state = initialState, action) => (
 );
 
 const sidebarPhotosOffset = (state = initialState, action) => {
+  if (action.type === A.SET_STATE) {
+    return 0;
+  }
   if (action.type === A.LOAD_SIDEBAR_PHOTOS) {
     return action.payload.sidebarPhotosOffset;
-  }
-  if (action.type === A.SELECT_THEME) {
-    return 0;
   }
   if (action.type === A.SET_PHOTO_OFFSET) {
     return action.payload;
@@ -93,10 +93,6 @@ const expandedSidebar = (state = initialState, action) => (
   (action.type === A.TOGGLE_EXPANDED_SIDEBAR) ? !state : state
 );
 
-const lightboxOpen = (state = initialState, action) => (
-  (action.type === A.TOGGLE_LIGHTBOX) ? !state : state
-);
-
 const searchOpen = (state = initialState, action) => {
   if (action.type === A.TOGGLE_SEARCH) {
     return !state;
@@ -131,7 +127,6 @@ const combinedReducer = combineReducers({
   selectedViz,
   filterTerms,
   expandedSidebar,
-  lightboxOpen,
   searchOpen,
   vizOpen,
 });

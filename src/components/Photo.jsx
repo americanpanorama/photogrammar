@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Async from "react-async";
 import { Link, useLocation } from "react-router-dom";
+import Lightbox from './Lightbox.jsx';
 import SimilarPhotoCard from './sidebar/PhotoCardSimilar.js';
 import State from './State.jsx';
 import CloseButton from './buttons/Close.jsx';
@@ -28,10 +29,10 @@ const Photo = (props) => {
     similarPhotosQuery,
     selectedMapView,
     height,
-    toggleLightbox,
     buildLink,
   } = props;
 
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const { pathname, hash } = useLocation();
 
   const stripPhotos = [];
@@ -78,8 +79,32 @@ const Photo = (props) => {
             img_large_path,
             //stripPhotos,
           } = photoMetadata;
-          const photographerKey = photographer_name.replace(/[\s\.]/g, '');
+          const photographerKey = (photographer_name) ? photographer_name.replace(/[\s\.]/g, '') : null;
           const centroid = getCentroidForCounty(nhgis_join);
+          
+          const captionLines = [];
+          if (caption) {
+            captionLines.push(`"${caption}"`);
+          }
+          const linePieces = [];
+          if (photographer_name) {
+            linePieces.push(photographer_name);
+          }
+          if (month && year) {
+            linePieces.push(`${monthNames[month]}, ${year}`);
+          } else if (year) {
+            linePieces.push(year);
+          }
+          if (city && state) {
+            linePieces.push(`${city}, ${stateAbbr}`);
+          } else if (county && stateAbbr) {
+            linePieces.push(`${county}, ${stateAbbr}`);
+          } else if (stateAbbr) {
+            linePieces.push(stateAbbr);
+          }
+          if (linePieces.length > 0) {
+            captionLines.push(linePieces.join('; '));
+          }
 
           let date = 'N/A';
           if (month && year) {
@@ -241,7 +266,7 @@ const Photo = (props) => {
                   src={`http://photogrammar.yale.edu/photos/service/pnp/${img_large_path}`}
                   className='full'
                   alt=""
-                  onClick={toggleLightbox}
+                  onClick={() => { setLightboxOpen(true) }}
                 />
               </div>
 
@@ -294,9 +319,17 @@ const Photo = (props) => {
               </div>
 
               <ExpandButton
-                onClick={toggleLightbox}
+                onClick={() => { setLightboxOpen(true) }}
                 role='expand'
               />
+
+              {(lightboxOpen) && (
+                <Lightbox
+                  imgPath={img_large_path}
+                  captionLines={captionLines}
+                  closeLightbox={() => { setLightboxOpen(false) }}
+                />
+              )}
 
             </div>
 

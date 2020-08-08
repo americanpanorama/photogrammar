@@ -1,8 +1,9 @@
 import React from 'react';
+import Async from "react-async";
 import PropTypes from 'prop-types';
 import './Lightbox.css';
 
-const Lightbox = ({ imgPath, captionLines, toggleLightbox }) => {
+const Lightbox = ({ imgPath, captionLines, closeLightbox }) => {
   if (!imgPath) {
     return null;
   }
@@ -10,7 +11,7 @@ const Lightbox = ({ imgPath, captionLines, toggleLightbox }) => {
   return (
     <div id='lightbox'>
       <button
-        onClick={toggleLightbox}
+        onClick={closeLightbox}
         role='close'
       >
         <svg
@@ -58,7 +59,7 @@ export default Lightbox;
 Lightbox.propTypes = {
   imgPath: PropTypes.string,
   captionLines: PropTypes.array,
-  toggleLightbox: PropTypes.func.isRequired,
+  closeLightbox: PropTypes.func.isRequired,
 };
 
 Lightbox.defaultProps = {
