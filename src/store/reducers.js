@@ -69,10 +69,6 @@ const hash = (state = initialState, action) => (
   (action.type === A.SET_STATE) ? action.payload.hash : state
 );
 
-const randomPhotoNumbers = (state = initialState, action) => (
-  (action.type === A.GENERATE_RANDOM_PHOTO_NUMBERS) ? action.payload : state
-);
-
 const dimensions = (state = initialState, action) => (
   (action.type === A.DIMENSIONS_CALCULATED) ? action.payload : state
 );
@@ -117,7 +113,6 @@ const combinedReducer = combineReducers({
   sidebarPhotosOffset,
   pathname,
   hash,
-  randomPhotoNumbers,
   dimensions,
   isWelcomeOpen,
   selectedMapView,

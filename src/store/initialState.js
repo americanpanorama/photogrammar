@@ -8,16 +8,6 @@ hash.replace(/^#\/?|\/$/g, '').split('&').forEach((pair) => {
   }
 });
 
-const numsToGenerate = 1000;
-const totalRecords = 176212;
-const randomPhotoNumbers = [];
-while (randomPhotoNumbers.length < numsToGenerate) {
-  const rn = Math.floor(Math.random() * totalRecords);
-  if (!randomPhotoNumbers.includes(rn)) {
-    randomPhotoNumbers.push(rn);
-  }
-}
-
 export default {
   isInitialized: false,
   hasCompletedFirstLoad: false,
@@ -31,7 +21,6 @@ export default {
   sidebarPhotosOffset: 0,
   selectedPhoto: null,
   timeRange: [193501, 194406],
-  randomPhotoNumbers,
   isWelcomeOpen: false,
   pathname: '/maps',
   hash: null,
