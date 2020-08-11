@@ -200,7 +200,7 @@ export function calculateDimensions(options) {
   const sidebarHeight = (!isMobile)
     ? vizCanvas.height - 75 - welcomeHeight
     : innerHeight - 75;
-  const sidebarHeaderHeight = 70;
+  const sidebarHeaderHeight = 100;
   const filterHeight = 34;
   const sidebar = {
     width: sidebarWidth,

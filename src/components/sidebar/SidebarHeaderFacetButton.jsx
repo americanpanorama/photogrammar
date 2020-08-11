@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ConditionalWrapper from '../ConditionalWrapper.jsx';
 import './SidebarHeaderFacetButton.css';
 
-const SidebarHeaderFacetButton = ({ label, onClick, disabled, removeFromLink, replaceInLink, buildLink }) => {
+const SidebarHeaderFacetButton = ({ label, className, onClick, disabled, removeFromLink, replaceInLink, buildLink }) => {
   const link = buildLink({ remove: removeFromLink, replace: replaceInLink });
   if (!label) {
     return null;
@@ -17,6 +17,7 @@ const SidebarHeaderFacetButton = ({ label, onClick, disabled, removeFromLink, re
       <button
         onClick={onClick}
         disabled={disabled}
+        className={className}
       >
         {label}
         <svg

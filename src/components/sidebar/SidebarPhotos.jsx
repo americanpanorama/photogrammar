@@ -99,6 +99,9 @@ const SidebarPhotos = (props) => {
 
     const photos = formatPhotos(state.data, sidebarPhotosOffset, displayableCards);
 
+    if (photos.length === 0) {
+      return 'no photos available';
+    }
     // assign the retrieved photos to the appropriate set and calculate the offset # of the current set
     let prevPhotos = [];
     let currentPhotos = [];

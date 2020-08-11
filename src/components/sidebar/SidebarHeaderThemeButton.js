@@ -5,7 +5,9 @@ import { getBuildLinkFunction } from '../../store/selectors';
 const mapStateToProps = state => {
   const { selectedTheme, selectedViz } = state;
 
-  const label = (selectedViz === 'themes' && selectedTheme !== 'root')
+  console.log(selectedTheme);
+
+  const label = (selectedTheme !== 'root')
     ? selectedTheme.substring(selectedTheme.lastIndexOf('|') + 1)
     : null;
   const link = `/themes/${selectedTheme.substring(0, selectedTheme.lastIndexOf('|'))}`;
@@ -17,6 +19,7 @@ const mapStateToProps = state => {
       value: selectedTheme.substring(0, selectedTheme.lastIndexOf('|')),
     }],
     buildLink: getBuildLinkFunction(state),
+    className: 'themes',
   };
 };
 

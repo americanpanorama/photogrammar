@@ -11,6 +11,7 @@ const mapStateToProps = state => {
     link,
     removeFromLink: ['state', 'county'],
     buildLink: getBuildLinkFunction(state),
+    className: selectedMapView,
   };
 };
 

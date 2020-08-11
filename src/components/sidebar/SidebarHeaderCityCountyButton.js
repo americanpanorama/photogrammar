@@ -3,7 +3,7 @@ import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.js';
 import { getSelectedCountyMetadata } from '../../store/selectors';
 
 const mapStateToProps = state => {
-  const { selectedState, selectedCounty, selectedCity } = state;
+  const { selectedState, selectedCounty, selectedCity, selectedMapView } = state;
   let label;
   let link;
   let replaceInLink;
@@ -27,7 +27,7 @@ const mapStateToProps = state => {
     label,
     link,
     replaceInLink,
-
+    className: selectedMapView,
   };
 };
 

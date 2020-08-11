@@ -12,7 +12,20 @@
   text-align: center;
   position: relative;
   padding: 1px 7px 2px;
-  background-color: #f5f5f5;
+  background-color: #BFD5D5;
+  margin-left: 2px;
+}
+
+#sidebarHeader .facets button.counties {
+  background-color: var(--map-counties-lightened-color);
+}
+
+#sidebarHeader .facets button.cities {
+  background-color: var(--map-cities-lightened-color);
+}
+
+#sidebarHeader .facets button.themes {
+  background-color: var(--themes-lightened-color);
 }
 
 #sidebarHeader .facets button + button {

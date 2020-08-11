@@ -30,7 +30,7 @@ const mapStateToProps = state => {
     nextOffset: sidebarPhotosOffset + displayableCards,
     selectedPhotoCallNumber: (selectedPhotoData && selectedPhotoData.call_number)
       ? selectedPhotoData.call_number : null,
-    sidebarWidth: dimensions.sidebar,
+    sidebarWidth: dimensions.sidebar.width,
     cardDimensions: dimensions.photoCards,
   };
 };

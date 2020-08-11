@@ -30,6 +30,7 @@ const getTimelineCells = state => state.timelineCells;
 const getFilterTerms = state => state.filterTerms;
 const getPathname = state => state.pathname;
 const getHash = state => state.hash;
+const getHasCompletedFirstLoad = state => state.hasCompletedFirstLoad; 
 
 const getCartoURLBase = () => cartoURLBase;
 
@@ -108,6 +109,10 @@ export const getSelectedCityMetadata = createSelector(
   (selectedCity) => {
     if (selectedCity) {
       const city = Cities.find(cc => cc.key === selectedCity);
+      // get the centroid
+      if (city) {
+        city.center = Centroids.cities[selectedCity] || []
+      }
       return city;
     }
     return null;
@@ -263,7 +268,7 @@ export const makeWheres = createSelector(
         wheres.push(`state = '${stateabbrs[selectedState]}'`)
       }
 
-      if (selectedViz === 'themes' && selectedTheme) {
+      if (selectedTheme && selectedTheme !== 'root') {
         const themesPaths = selectedTheme.split('|').slice(1);
         if (themesPaths.length >= 1) {
           wheres.push(`vanderbilt_level1 = '${themesPaths[0]}'`);
@@ -298,9 +303,9 @@ export const makeWheres = createSelector(
 );
 
 export const getMapFetchPath = createSelector(
-  [getSelectedPhotographer, getSelectedMapView, getFilterTerms, makeWheres],
-  (selectedPhotographer, selectedMapView, filterTerms, wheres) => {
-    if (filterTerms.length === 0) {
+  [getSelectedPhotographer, getSelectedTheme, getSelectedMapView, getFilterTerms, makeWheres],
+  (selectedPhotographer, selectedTheme, selectedMapView, filterTerms, wheres) => {
+    if (filterTerms.length === 0 && !selectedTheme) {
       return (selectedPhotographer)
         ? `${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`
         : `${process.env.PUBLIC_URL}/data/photographers/all.json`;
@@ -312,9 +317,9 @@ export const getMapFetchPath = createSelector(
 );
 
 export const getThemesFetchPath = createSelector(
-  [getSelectedPhotographer, getSelectedMapView, getFilterTerms, makeWheres],
-  (selectedPhotographer, selectedMapView, filterTerms, wheres) => {
-    if (filterTerms.length === 0) {
+  [getSelectedPhotographer, getSelectedState, getSelectedMapView, getFilterTerms, makeWheres],
+  (selectedPhotographer, selectedState, selectedMapView, filterTerms, wheres) => {
+    if (filterTerms.length === 0 && !selectedState) {
       return (selectedPhotographer)
         ? `${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`
         : `${process.env.PUBLIC_URL}/data/photographers/all.json`;
@@ -691,19 +696,47 @@ export const getPhotoFetchQueries = createSelector(
   }
 );
 
+/*
+options params:
+  viz: a string specifying the parameter to place at the beginning of the url to set the selectedViz: i.e. `maps`, `state`, county`, `city`, `theme`, `photographers`, `photo`
+  
+  replace: an object specifying a param to replace and what to replace it with: e.g. a selected county with a selected state to move up the map
+    has properties:
+    param: string of the param to replace
+    withParam: string of the param to replace it with
+    value: string of the value to set the new param to
+
+  replaceOrAdd: an object specifying a new value for a param or it's addition if it does not exist
+    has properties:
+    param: string of the parameter to replace or add
+    value: string of the value of to set the new param to
+
+  remove: an array of parameters to remove from the url
+    NOTE: 'photo' is removed by default unless included in the `keep` param
+
+  keep: an array of parameters to keep in the url
+*/
+
 export const getBuildLinkFunction = createSelector(
-  [getPathname, getHash],
-  (pathname, hash) => {
+  [getHasCompletedFirstLoad, getPathname, getHash],
+  (hasCompletedFirstLoad, pathname, hash) => {
     return (options) => {
+      if (!pathname) {
+        return '/';
+      }
+      const isParamKey = (param) => ['photo', 'photographers', 'ohsearch', 'themes', 'timeline', 'city', 'county', 'state', 'maps', 'caption'].includes(param);
+
       const replaceOrAdd = options.replaceOrAdd || [];
       const replace = options.replace || [];
       const keep = options.keep || [];
+      const remove = options.remove || []; 
+
+      // parse the current url to make an object of it's parts
       const pathPieces = pathname.split('/').filter(param => param);
-      const isParamKey = (param) => ['photo', 'photographers', 'ohsearch', 'themes', 'timeline', 'city', 'county', 'state', 'maps', 'caption'].includes(param);
       const params = {};
       pathPieces.forEach((pathPiece, idx) => {
         if (isParamKey(pathPiece)) {
-          if (pathPiece === 'themes' && isParamKey(pathPieces[idx + 1])) {
+          if (pathPiece === 'themes'  && isParamKey(pathPieces[idx + 1])) {
             params[pathPiece] = 'root';
           } else if (pathPiece === 'photo') { // an exception as the id can contain a slash
             params[pathPiece] = (!isParamKey(pathPieces[idx + 1])) ? `${pathPieces[idx + 1]}${(!isParamKey(pathPieces[idx + 2])) ? `/${pathPieces[idx + 2]}` : '' }` : null;
@@ -713,8 +746,6 @@ export const getBuildLinkFunction = createSelector(
         }
       });
       params.themes = params.themes || 'root';
-
-      const remove = options.remove || []; 
 
       if (!keep.includes('photo')) {
         remove.push('photo');
@@ -741,8 +772,15 @@ export const getBuildLinkFunction = createSelector(
         remove.push('maps');
       }
 
+      if (options.viz === 'themes') {
+        remove.push('maps');
+      }
+
       // order matters for the selected viz, so use the existing link to calculate which param to list first
-      const firstKey = (pathname !== '/') ? pathname.match(/\/([^/]+)/)[1] : 'maps';
+      const firstKey = (pathname !== '/' && !remove.includes(pathname.match(/\/([^/]+)/)[1]))
+        ? pathname.match(/\/([^/]+)/)[1] : 'maps';
+      //let selectedView = (options.viz) ? [options.viz] : [];
+      // if maps is selected look for existing options
       let firsts = (options.viz) ? [options.viz] : [];
       if (firsts.length === 0) {
         if (firstKey === 'themes') {
@@ -801,6 +839,13 @@ export const getBuildLinkFunction = createSelector(
       Object
         .keys(params)
         .filter(paramKey => !firsts.includes(paramKey) && !(paramKey === 'themes' && params[paramKey] === 'root'))
+        // remove photgraphers if it's not first, not set or isn't a real "photographer"
+        .filter(paramKey => {
+          if (paramKey == 'photographers' && (!params[paramKey] || ['RoyStryker', 'AikenAndWool', 'CBBaldwin'].includes(params[paramKey]))) {
+            return false;
+          }
+          return true;
+        })
         .forEach(paramKey => {
           newPath = `${newPath}/${paramKey}${(params[paramKey]) ? `/${params[paramKey]}` : ''}`;
         });
@@ -808,7 +853,16 @@ export const getBuildLinkFunction = createSelector(
       //   newPath = `${newPath}`;
       // }
 
-      return `${newPath}${hash || ''}`;
+      if (newPath === '') {
+        newPath = '/maps/';
+      }
+
+      let newHash = options.hash || hash || '';
+      if (hash && remove.includes('city')) {
+        newHash = '';
+      }
+
+      return `${newPath}${newHash}`;
     }
   }
 );

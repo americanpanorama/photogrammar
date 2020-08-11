@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 
-const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, toggleSearch, isMobile }) => {
-  let countiesLink = (selectedCity || selectedState) ? `/state/${selectedState}` :'/maps';
-  let citiesLink = (selectedCounty || selectedState) ? `/state/${selectedState}#mapview=cities` : '/maps#mapview=cities';
-
+const Navbar = ({ countiesLink, citiesLink, themesLink, selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, buildLink, toggleSearch, isMobile }) => {
   return (
     <nav className="navbar">
       <ul className="nav navbar-nav navbar-right">
@@ -21,7 +18,7 @@ const Navbar = ({ selectedViz, selectedMapView, selectedCity, selectedCounty, se
           </Link>
         </li>
         <li className={(selectedViz === 'themes') ? 'active themes' : 'themes'}>
-          <Link to={'/themes'}>Themes</Link>
+          <Link to={themesLink}>Themes</Link>
         </li>
         <li className={(selectedViz === 'map' && selectedMapView === 'counties') ? 'active counties' : 'counties'}>
           <Link to={countiesLink}>

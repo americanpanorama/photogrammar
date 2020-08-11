@@ -71,6 +71,9 @@ const SidebarPhotosHeader = (props) => {
             >
               {(hasFacet) ? (
                 <div className='facets'>
+                  <div>
+                    Filtered by (click to clear):
+                  </div>
                   <SidebarHeaderPhotographerButton />
                   <SidebarHeaderCityCountyButton />
                   <SidebarHeaderStateButton />

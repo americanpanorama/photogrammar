@@ -24,6 +24,8 @@ const loadCountiesAndCities = async ({ fetchPath }, { signal }) => {
 
 const getCentroidForCounty = (nhgis_join) => Centroids.counties[nhgis_join];
 
+const getCentroidForCity = cityKey => Centroids.cities[cityKey];
+
 const formatCounties = (data, timeRange, filterTerms, selectedState) => {
   // if the data comes from carto you need to do a bit of reformatting
   let countiesData = {};
@@ -37,6 +39,7 @@ const formatCounties = (data, timeRange, filterTerms, selectedState) => {
   } else {
     countiesData = data.counties;
   }
+
   return Counties
     .filter(county => {
       const { j: nhgis_join, s: state } = county;
@@ -59,6 +62,8 @@ const formatCounties = (data, timeRange, filterTerms, selectedState) => {
       const [startTime, endTime] = timeRange;
       if (!countiesData[nhgis_join]) {
         photoCount = 0;
+      } else if (countiesData[nhgis_join].total) {
+        photoCount = countiesData[nhgis_join].total;
       } else if (filterTerms.length === 0 && (startTime > 193501 || endTime < 194504)) {
         // Only run this conditional logic if there isn't filter terms
         // If there is, the query to carto filters by time and returns `total`
@@ -73,9 +78,7 @@ const formatCounties = (data, timeRange, filterTerms, selectedState) => {
           .reduce((accumulator, k) => {
             return countiesData[nhgis_join][k] + accumulator;
           }, 0);
-      } else {
-        photoCount = countiesData[nhgis_join].total;
-      }
+      } 
       const fill = (photoCount > 0) ? '#6a1b9a' : 'white'; //'#eceff1';
       const fillOpacity = (photoCount > 0) ? Math.min(1, photoCount * 50 / area_sqmi + 0.1) : 0.75;
       const centroidData = getCentroidForCounty(nhgis_join);
@@ -233,6 +236,7 @@ const Map = (props) => {
   if (selectedCity) {
     const selectedCityMetadata = Cities.find(c => c.k === selectedCity);
     if (selectedCityMetadata) {
+      selectedCityMetadata.center = getCentroidForCity(selectedCity);
       mapLabelParams.label = selectedCityMetadata.city;
       mapLabelParams.x = selectedCityMetadata.center[0];
       mapLabelParams.y = selectedCityMetadata.center[1] - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
@@ -251,6 +255,10 @@ const Map = (props) => {
   const onCityHover = (cityKey) => {
     // find the city
     const hoveredCity = Cities.find(city => cityKey === city.k);
+    if (hoveredCity) {
+      hoveredCity.center = getCentroidForCity(cityKey);
+    }
+    console.log(hoveredCity);
     setHoveredCity(hoveredCity);
   };
 
@@ -329,8 +337,8 @@ const Map = (props) => {
               if (data) {
                 // format the counties
                 if (selectedMapView === 'counties') {
+                  console.log(data);
                   const counties = formatCounties(data, timeRange, filterTerms, selectedState);
-
                   return (
                     <React.Fragment>
                       {counties.map(c => (
@@ -358,7 +366,7 @@ const Map = (props) => {
                           let fillOpacity = 0.33;
                           let stroke='#289261';
                           if (hoveredCity || selectedCity) {
-                            if ((hoveredCity && key === hoveredCity.key )|| key === selectedCity) {
+                            if ((hoveredCity && key === hoveredCity.k) || key === selectedCity) {
                               fillOpacity = 0.9;
                             } else {
                               fillOpacity = 0.2;
@@ -428,7 +436,7 @@ const Map = (props) => {
             );
           })}
 
-          {(hoveredCity) && (
+          {(hoveredCity && hoveredCity.center) && (
             <MapLabel 
               x={hoveredCity.center[0]}
               y={hoveredCity.center[1] - Math.sqrt(hoveredCity.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale}

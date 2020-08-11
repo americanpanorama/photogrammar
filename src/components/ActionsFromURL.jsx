@@ -16,8 +16,8 @@ const ActionsFromURL = ({ setState }) => {
 
     // get the view
     const getViz = () => ({
-      photographers: 'photographer',
-      ohsearch: 'photographer',
+      photographers: 'photographers',
+      ohsearch: 'photographers',
       themes: 'themes',
       timeline: 'timeline',
       city: 'map',

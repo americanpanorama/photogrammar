@@ -11,6 +11,10 @@ General Styles
   --map-cities-color: #289261;
   --themes-color: #F78154;
   --photographers-color: #297373;
+
+  --map-cities-lightened-color: #BFDED0;
+  --map-counties-lightened-color: #E1D1EB;
+  --themes-lightened-color: #FDD9CC;
 }
 
 body {
@@ -71,7 +75,7 @@ Layout
   }
 
   #sidebar-photos {
-    height: calc(100vh - 75px);
+    height: calc(100vh - 100px);
   }
 
 
@@ -83,7 +87,7 @@ Layout
   .wrapper {
     display: grid;
     grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
-    grid-template-rows: 100px 75px calc(100vh - 175px);
+    grid-template-rows: 100px 100px calc(100vh - 200px);
     height: 100vh;
     overflow-y: hidden;
   }
