@@ -174,7 +174,7 @@ const Map = (props) => {
     timeRange,
     filterTerms,
     fetchPath,
-    buildLink,
+    makeLink,
   } = props;
 
   const ref = useRef(null);
@@ -205,15 +205,9 @@ const Map = (props) => {
 
   let linkUp;
   if (selectedCity || selectedCounty) {
-    linkUp = buildLink({
-      replace: [{
-        param: (selectedCity) ? 'city' : 'county',
-        withParam: 'state',
-        value: selectedState,
-      }], 
-    });
+    linkUp = makeLink([{ type: 'clear_county' }, { type: 'clear_city'}]);
   } else if (selectedState) {
-    linkUp = buildLink({ remove: ['state'] });
+    linkUp = makeLink([{ type: 'clear_state' }]);
   }
 
   // check to see if it's the city view or county view and set if necessary
@@ -222,9 +216,7 @@ const Map = (props) => {
   const mapScale = (pathname.split('/').length > 1
     && ['state', 'county', 'city'].includes(pathname.split('/')[1]))
     ? pathname.split('/')[1] : 'national';
-  let cityDivisor = (mapScale !== 'national') ? 3 : 6;
-  // TODO
-  // calculate the divisor based on the number of photos
+
   // if (isSearching && cities.length > 0) {
   //   // what's the max 
   //   const maxCount = Math.max(...cities.map(c => c.total));
@@ -235,11 +227,12 @@ const Map = (props) => {
   const mapLabelParams = {};
   if (selectedCity) {
     const selectedCityMetadata = Cities.find(c => c.k === selectedCity);
+    // todo: this isn't scrolling
     if (selectedCityMetadata) {
       selectedCityMetadata.center = getCentroidForCity(selectedCity);
       mapLabelParams.label = selectedCityMetadata.city;
       mapLabelParams.x = selectedCityMetadata.center[0];
-      mapLabelParams.y = selectedCityMetadata.center[1] - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
+      mapLabelParams.y = selectedCityMetadata.center[1]; // - Math.sqrt(selectedCityMetadata.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale;
     }
   } else if (selectedCounty) {
     const selectedCountyMetadata = Counties.find(c => c.j === selectedCounty);
@@ -258,7 +251,6 @@ const Map = (props) => {
     if (hoveredCity) {
       hoveredCity.center = getCentroidForCity(cityKey);
     }
-    console.log(hoveredCity);
     setHoveredCity(hoveredCity);
   };
 
@@ -336,8 +328,8 @@ const Map = (props) => {
               if (error) return `Something went wrong: ${error.message}`
               if (data) {
                 // format the counties
+                let cityDivisor = (mapScale !== 'national') ? 3 : 6;
                 if (selectedMapView === 'counties') {
-                  console.log(data);
                   const counties = formatCounties(data, timeRange, filterTerms, selectedState);
                   return (
                     <React.Fragment>
@@ -348,16 +340,28 @@ const Map = (props) => {
                           selectedCounty={selectedCounty}
                           strokeWidth={(mapScale === 'national') ?  0 : 0.75 / mapParameters.scale}
                           linkActive={mapScale !== 'national' && c.photoCount > 0}
-                          buildLink={buildLink}
+                          makeLink={makeLink}
                           key={c.nhgis_join}
                           onCountyHover={onCountyHover}
                           onCountyUnhover={onCountyUnhover}
                         />
                       ))}
+                      {(hoveredCounty) && (
+                        <MapLabel 
+                          x={hoveredCounty.labelCoords[0]}
+                          y={hoveredCounty.labelCoords[1]}
+                          fontSize={16 / mapParameters.scale}
+                          label={hoveredCounty.name}
+                        />
+                      )}
                     </React.Fragment>
                   );
                 } else {
                   const cities = formatCities(data, timeRange, filterTerms, selectedState);
+                  
+                  // calculate the divisor based on the number of photos
+                  const totalCitiesPhotos = cities.reduce((accumulator, city) => accumulator + city.total, 0);
+                  cityDivisor = cityDivisor * (totalCitiesPhotos / 40000 * mapParameters.scale);
                   return (
                     <React.Fragment>
                       { cities.map(city => {
@@ -386,12 +390,21 @@ const Map = (props) => {
                               id={city.key}
                               key={city.key}
                               linkActive={mapScale !== 'national'}
+                              makeLink={makeLink}
                               onCityHover={onCityHover}
                               onCityUnhover={onCityUnhover}
                             />
                           );
                         }
                       })}
+                      {(hoveredCity && hoveredCity.center) && (
+                        <MapLabel 
+                          x={hoveredCity.center[0]}
+                          y={hoveredCity.center[1] - Math.sqrt(hoveredCity.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale}
+                          fontSize={12 / scale}
+                          label={hoveredCity.city}
+                        />
+                      )}
                     </React.Fragment>
                   );
                 }
@@ -403,24 +416,18 @@ const Map = (props) => {
 
  
           {States.filter(s => s.bounds && s.bounds[0] && s.d && s.abbr).map(state => {
-            const stateLink = buildLink({
-              replace: [
-                {
-                  param: 'maps',
-                  withParam: 'state',
-                  value: state.abbr,
-                },
-                {
-                  param: 'state',
-                  value: state.abbr,
-                },
-                {
-                  param: 'county',
-                  withParam: 'state',
-                  value: state.abbr,
-                }
-              ],
-            });
+            const stateLink = makeLink([
+              {
+                type: 'set_state',
+                payload: state.abbr,
+              },
+              {
+                type: 'clear_county',
+              },
+              {
+                type: 'clear_city',
+              },
+            ]);
             return (
               <State
                 {...state}
@@ -436,23 +443,7 @@ const Map = (props) => {
             );
           })}
 
-          {(hoveredCity && hoveredCity.center) && (
-            <MapLabel 
-              x={hoveredCity.center[0]}
-              y={hoveredCity.center[1] - Math.sqrt(hoveredCity.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale}
-              fontSize={12 / scale}
-              label={hoveredCity.city}
-            />
-          )}
-
-          {(hoveredCounty) && (
-            <MapLabel 
-              x={hoveredCounty.labelCoords[0]}
-              y={hoveredCounty.labelCoords[1]}
-              fontSize={16 / mapParameters.scale}
-              label={hoveredCounty.name}
-            />
-          )}
+          
 
 
           {(mapLabelParams.label) && (

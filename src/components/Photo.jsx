@@ -29,7 +29,7 @@ const Photo = (props) => {
     similarPhotosQuery,
     selectedMapView,
     height,
-    buildLink,
+    makeLink,
   } = props;
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -118,47 +118,28 @@ const Photo = (props) => {
           const stripNums = (stripPhotos && stripPhotos.length > 1) ? [...Array(stripLength).keys()].map(n => n + 1) : null;
           const selectedPhotoStripNum = (stripPhotos && stripPhotos.length > 1) ? parseInt(photoMetadata.photograph_type.substring(1)) : null;
 
-          const closeLink = buildLink({}, { pathname, hash });
-          
+          const closeLink = makeLink([{ type: 'set_clear_photo'}]);
 
-          const photographerLink = (photographerKey) ? buildLink({
-            replaceOrAdd: [{
-              param: 'photographers',
-              value: photographerKey,
-            }],
-          }, { pathname, hash }) : null;
-          const vl1Link = (vanderbilt_level1) ? buildLink({
-            replaceOrAdd: [{
-              param: 'themes',
-              value: encodeURI(`root|${vanderbilt_level1}`),
-            }],
-            remove: ['maps', 'city', 'county', 'state'],
-            viz: 'themes',
-          }, { pathname, hash }) : null;
-          const vl2Link = (vanderbilt_level2) ? buildLink({
-            replaceOrAdd: [{
-              param: 'themes',
-              value: encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}`),
-            }],
-            remove: ['maps', 'city', 'county', 'state'],
-            viz: 'themes',
-          }, { pathname, hash }) : null;
-          const vl3Link = (vanderbilt_level3) ? buildLink({
-            replaceOrAdd: [{
-              param: 'themes',
-              value: encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}|${vanderbilt_level3}`),
-            }],
-            remove: ['maps', 'city', 'county', 'state'],
-            viz: 'themes',
-          }, { pathname, hash }) : null;
-          const placeLink =  buildLink({
-            replaceOrAdd: [{
-              param: (selectedMapView === 'counties') ? 'county' : 'city',
-              value: (selectedMapView === 'counties') ? nhgis_join : city,
-            }],
-            viz: (selectedMapView === 'counties') ? 'county' : 'city'
-          }, { pathname, hash });
-
+          const photographerLink = (photographerKey) ? makeLink([{
+            type: 'set_photographer',
+            payload: photographerKey,
+          }]) : null;
+          const vl1Link = (vanderbilt_level1) ? makeLink([{
+            type: 'set_theme',
+            payload: encodeURI(`root|${vanderbilt_level1}`),
+          }]) : null;
+          const vl2Link = (vanderbilt_level2) ? makeLink([{
+            type: 'set_theme',
+            payload: encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}`),
+          }]) : null;
+          const vl3Link = (vanderbilt_level3) ? makeLink([{
+            type: 'set_theme',
+            payload: encodeURI(`root|${vanderbilt_level1}|${vanderbilt_level2}|${vanderbilt_level3}`),
+          }]) : null;
+          const placeLink = (nhgis_join || city) ?  makeLink([{
+            type: (selectedMapView === 'counties') ? 'set_county' : 'set_city',
+            payload: (selectedMapView === 'counties') ? nhgis_join : city,
+          }]) : null;
 
           return (
             <div

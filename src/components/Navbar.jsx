@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import './Navbar.css';
 
-const Navbar = ({ countiesLink, citiesLink, themesLink, selectedViz, selectedMapView, selectedCity, selectedCounty, selectedState, buildLink, toggleSearch, isMobile }) => {
+const Navbar = ({ countiesLink, citiesLink, themesLink, selectedViz, selectedMapView, toggleSearch, isMobile }) => {
   return (
     <nav className="navbar">
       <ul className="nav navbar-nav navbar-right">

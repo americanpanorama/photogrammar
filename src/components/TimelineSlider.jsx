@@ -5,8 +5,7 @@ import * as d3 from 'd3';
 import './TimelineSlider.css';
 import 'rc-slider/assets/index.css';
 
-
-const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange, buildLink}) => {
+const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange, makeLink}) => {
   const monthNum = m => (m - 1) / 12;
   const numToMonth = num => Math.round(num * 12) + 1;
   const x = d3.scaleLinear()
@@ -39,12 +38,10 @@ const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange, buildLin
       const month = (rawMonth === 13) ? 1 : rawMonth;
       return year * 100 + month;
     });
-    const link = buildLink({
-      replaceOrAdd: [{
-        param: 'timeline',
-        value: timeRange.join('-'),
-      }],
-    });
+    const link = makeLink([{
+      type: 'set_time_range',
+      payload: timeRange,
+    }]);
     // this updates the url without reloading
     history.pushState({}, '', `${process.env.PUBLIC_URL}${link}`)
   }

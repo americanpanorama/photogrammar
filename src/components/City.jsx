@@ -14,6 +14,7 @@ const City = (props) => {
     scale,
     selectedCity,
     linkActive,
+    makeLink,
     onCityHover,
     onCityUnhover,
   } = props;
@@ -58,11 +59,15 @@ const City = (props) => {
     onCityUnhover();
   }
 
+  const link = makeLink([{
+    type: 'set_city',
+    payload: id,
+  }]);
+
   return (
     <Link
       to={`/city/${id}`}
       onClick={(!linkActive) ? e => e.preventDefault() : () => {}}
-      id={id}
     >
       <circle
         cx={cx}

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Timeline from './Timeline.jsx';
-import { getTimelineCellsFetchPath, getBuildLinkFunction } from '../store/selectors';
+import { getTimelineCellsFetchPath, getMakeLinkFunction } from '../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedPhotographer, timeRange, dimensions, selectedMapView, selectedViz } = state;
@@ -15,7 +15,7 @@ const mapStateToProps = state => {
     width: dimensions.timelineHeatmap.width,
     height: dimensions.timelineHeatmap.height,
     leftAxisWidth: dimensions.timelineHeatmap.leftAxisWidth,
-    buildLink: getBuildLinkFunction(state),
+    makeLink: getMakeLinkFunction(state),
   };
 };
 

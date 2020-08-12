@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import * as d3 from 'd3';
+import A from './actionTypes';
 import { getStateAbbr } from '../helpers.js';
 import Counties from '../../data/svgs/counties.json';
 import Photographers from '../../data/photographers.json';
@@ -305,7 +306,7 @@ export const makeWheres = createSelector(
 export const getMapFetchPath = createSelector(
   [getSelectedPhotographer, getSelectedTheme, getSelectedMapView, getFilterTerms, makeWheres],
   (selectedPhotographer, selectedTheme, selectedMapView, filterTerms, wheres) => {
-    if (filterTerms.length === 0 && !selectedTheme) {
+    if (filterTerms.length === 0 && selectedTheme === 'root') {
       return (selectedPhotographer)
         ? `${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`
         : `${process.env.PUBLIC_URL}/data/photographers/all.json`;
@@ -324,7 +325,7 @@ export const getThemesFetchPath = createSelector(
         ? `${process.env.PUBLIC_URL}/data/photographers/${selectedPhotographer}.json`
         : `${process.env.PUBLIC_URL}/data/photographers/all.json`;
     }
-    return `${cartoURLBase}${encodeURIComponent(`select vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, count(img_large_path) as total from photogrammar_photos where vanderbilt_level3 != '' and ${wheres.join(' and ')} group by vanderbilt_level1, vanderbilt_level2, vanderbilt_level3`)}`;
+    return `${cartoURLBase}${encodeURIComponent(`select vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, count(img_large_path) as total from photogrammar_photos where vanderbilt_level1 is not null and ${wheres.join(' and ')} group by vanderbilt_level1, vanderbilt_level2, vanderbilt_level3`)}`;
   }
 );
 
@@ -335,7 +336,7 @@ export const getThemesBackgroundPhotosQuery = createSelector(
     const filteredWheres = wheres.filter(w => !w.includes('vanderbilt_level3'));
     const themesPaths = selectedTheme.split('|').slice(1);
     const topLevel = Math.min(themesPaths.length + 1, 3);
-    return `${cartoURLBase}${encodeURIComponent(`SELECT pp.vanderbilt_level${topLevel} as theme, (SELECT p.img_medium_path FROM photogrammar_photos as p where ${filteredWheres.join(' and ')} and pp.vanderbilt_level${topLevel} = p.vanderbilt_level${topLevel} order by random() limit 1) as img FROM digitalscholarshiplab.photogrammar_photos as pp where ${filteredWheres.join(' and ')} group by vanderbilt_level${topLevel}`)}`;
+    return `${cartoURLBase}${encodeURIComponent(`SELECT pp.vanderbilt_level${topLevel} as theme, (SELECT p.img_medium_path FROM photogrammar_photos as p where img_medium_path is not null and ${filteredWheres.join(' and ')} and pp.vanderbilt_level${topLevel} = p.vanderbilt_level${topLevel} order by random() limit 1) as img FROM photogrammar_photos as pp where ${filteredWheres.join(' and ')} group by vanderbilt_level${topLevel}`)}`;
   }
 );
 
@@ -696,175 +697,189 @@ export const getPhotoFetchQueries = createSelector(
   }
 );
 
-/*
-options params:
-  viz: a string specifying the parameter to place at the beginning of the url to set the selectedViz: i.e. `maps`, `state`, county`, `city`, `theme`, `photographers`, `photo`
-  
-  replace: an object specifying a param to replace and what to replace it with: e.g. a selected county with a selected state to move up the map
-    has properties:
-    param: string of the param to replace
-    withParam: string of the param to replace it with
-    value: string of the value to set the new param to
+export const getMakeLinkFunction = createSelector(
+  [getSelectedViz, getSelectedMapView, getSelectedState, getSelectedCounty, getSelectedCity, getSelectedTheme, getSelectedPhotographer, getFilterTerms, getTimeRange],
+  (selectedViz, selectedMapView, selectedState, selectedCounty, selectedCity, selectedTheme, selectedPhotographer, filterTerms, timeRange) => {
+    return (actions) => {
+      const actionTypes = actions.map(a => a.type);
+      //console.log(actions, actionTypes);
+      const getPayloadFor = (type) => (actions.find(a => a.type === type))
+        ? actions.find(a => a.type === type).payload : null;
 
-  replaceOrAdd: an object specifying a new value for a param or it's addition if it does not exist
-    has properties:
-    param: string of the parameter to replace or add
-    value: string of the value of to set the new param to
-
-  remove: an array of parameters to remove from the url
-    NOTE: 'photo' is removed by default unless included in the `keep` param
-
-  keep: an array of parameters to keep in the url
-*/
-
-export const getBuildLinkFunction = createSelector(
-  [getHasCompletedFirstLoad, getPathname, getHash],
-  (hasCompletedFirstLoad, pathname, hash) => {
-    return (options) => {
-      if (!pathname) {
-        return '/';
-      }
-      const isParamKey = (param) => ['photo', 'photographers', 'ohsearch', 'themes', 'timeline', 'city', 'county', 'state', 'maps', 'caption'].includes(param);
-
-      const replaceOrAdd = options.replaceOrAdd || [];
-      const replace = options.replace || [];
-      const keep = options.keep || [];
-      const remove = options.remove || []; 
-
-      // parse the current url to make an object of it's parts
-      const pathPieces = pathname.split('/').filter(param => param);
-      const params = {};
-      pathPieces.forEach((pathPiece, idx) => {
-        if (isParamKey(pathPiece)) {
-          if (pathPiece === 'themes'  && isParamKey(pathPieces[idx + 1])) {
-            params[pathPiece] = 'root';
-          } else if (pathPiece === 'photo') { // an exception as the id can contain a slash
-            params[pathPiece] = (!isParamKey(pathPieces[idx + 1])) ? `${pathPieces[idx + 1]}${(!isParamKey(pathPieces[idx + 2])) ? `/${pathPieces[idx + 2]}` : '' }` : null;
-          } else {
-            params[pathPiece] = (!isParamKey(pathPieces[idx + 1])) ? pathPieces[idx + 1] : null;
-          }
+      const getNextSelectedState = () => {
+        if (actionTypes.includes('set_state')) {
+          return getPayloadFor('set_state');
         }
-      });
-      params.themes = params.themes || 'root';
-
-      if (!keep.includes('photo')) {
-        remove.push('photo');
-      }
-
-      if (replaceOrAdd.map(r => r.param).includes('county')) {
-        remove.push('city');
-        remove.push('state');
-        remove.push('maps');
-      }
-      if (replaceOrAdd.map(r => r.param).includes('city')) {
-        remove.push('county');
-        remove.push('state');
-        remove.push('maps');
-      }
-      if (replaceOrAdd.map(r => r.param).includes('state')) {
-        remove.push('city');
-        remove.push('county');
-        remove.push('maps');
-      }
-      if (replaceOrAdd.map(r => r.param).includes('maps')) {
-        remove.push('city');
-        remove.push('county');
-        remove.push('maps');
-      }
-
-      if (options.viz === 'themes') {
-        remove.push('maps');
-      }
-
-      // order matters for the selected viz, so use the existing link to calculate which param to list first
-      const firstKey = (pathname !== '/' && !remove.includes(pathname.match(/\/([^/]+)/)[1]))
-        ? pathname.match(/\/([^/]+)/)[1] : 'maps';
-      //let selectedView = (options.viz) ? [options.viz] : [];
-      // if maps is selected look for existing options
-      let firsts = (options.viz) ? [options.viz] : [];
-      if (firsts.length === 0) {
-        if (firstKey === 'themes') {
-          firsts.push('themes');
+        if (actionTypes.includes('clear_state')) {
+          return null;
         }
-        if (['county', 'city'].includes(firstKey)
-          && replace.some(r => ['county', 'city'].includes(r.param) && r.withParam === 'state')) {
-          firsts.push('state');
+        return selectedState;
+      };
+
+      const getNextSelectedCounty = () => {
+        if (actionTypes.includes('set_county')) {
+          return getPayloadFor('set_county');
         }
-        if (firstKey === 'state' && replace.some(r => r.param === 'state' && r.withParam === 'county')) {
-          firsts.push('county');
+        if (actionTypes.includes('clear_county') || actionTypes.includes('set_city')
+          || actionTypes.includes('clear_state')) {
+          return null;
         }
-        if (firstKey === 'state' && replace.some(r => r.param === 'state' && r.withParam === 'city')) {
-          firsts.push('city');
+        return selectedCounty;
+      };
+
+      const getNextSelectedCity = () => {
+        if (actionTypes.includes('set_city')) {
+          return getPayloadFor('set_city');
         }
-        if (['state', 'county', 'city'].includes(firstKey) && remove.includes('state')) {
-          params.maps = null;
-          firsts.push('maps');
+        if (actionTypes.includes('clear_city') || actionTypes.includes('set_county')
+          || actionTypes.includes('clear_state')) {
+          return null;
         }
-        if (firstKey === 'maps'
-          && replace.some(r => r.param === 'maps' && ['state', 'county', 'city'].includes(r.withParam))) {
-          firsts.push(replace.find(r => r.param === 'maps').withParam);
+        return selectedCity;
+      };
+
+      const getNextSelectedTheme = () => {
+        if (actionTypes.includes('set_theme')) {
+          return getPayloadFor('set_theme');
+        }
+        if (actionTypes.includes('clear_theme')) {
+          return null;
+        }
+        if (actionTypes.includes('set_selected_viz') && !selectedTheme) {
+          return 'root';
+        }
+        return selectedTheme;
+      };
+
+      const getNextSelectedPhotographer = () => {
+        if (actionTypes.includes('set_photographer')) {
+          return getPayloadFor('set_photographer');
+        }
+        if (actionTypes.includes('clear_photographer')) {
+          return null;
+        }
+        return selectedPhotographer;
+      };
+
+      const getNextFilterTerms = () => {
+        if (actionTypes.includes('set_filter_terms')) {
+          return getPayloadFor('set_photo').split(' ');
+        }
+        if (actionTypes.includes('clear_filter_terms')) {
+          return [];
+        }
+        return filterTerms;
+      };
+
+      const getNextTimeRange = () => {
+        if (actionTypes.includes('set_time_range')) {
+          return getPayloadFor('set_time_range');
+        }
+        if (actionTypes.includes('clear_time_range')) {
+          return [193501, 194406];
+        }
+        return timeRange;
+      };
+
+      const getNextSelectedMapView = () => {
+        if (actionTypes.includes('set_selected_map_view')) {
+          return getPayloadFor('set_selected_map_view');
+        }
+        if (actionTypes.includes('set_county')) {
+          return 'counties';
+        }
+        if (actionTypes.includes('set_city')) {
+          return 'cities';
+        }
+        return selectedMapView;
+      };
+
+      const getNextSelectedViz = () => {
+        if (actionTypes.includes('set_selected_viz')) {
+          return getPayloadFor('set_selected_viz');
+        }
+        if (actionTypes.includes('set_county') || actionTypes.includes('set_city')
+          || actionTypes.includes('set_state')) {
+          return 'map';
+        }
+        if (actionTypes.includes('set_theme')) {
+          return 'themes';
+        }
+        return selectedViz;
+      }
+
+      const getNextSelectedPhoto= () => {
+        if (actionTypes.includes('set_photo')) {
+          return getPayloadFor('set_photo');
+        }
+        if (actionTypes.includes('clear_photo')) {
+          return null;
+        }
+        return null;
+      };
+
+      const nextSelectedViz = getNextSelectedViz();
+      const nextSelectedMapView = getNextSelectedMapView();
+      const nextSelectedState = getNextSelectedState();
+      const nextSelectedCounty = getNextSelectedCounty();
+      const nextSelectedCity = getNextSelectedCity();
+      const nextSelectedTheme = getNextSelectedTheme();
+      const nextSelectedPhotographer = getNextSelectedPhotographer();
+      const nextSelectedPhoto = getNextSelectedPhoto();
+      const nextFilterTerms = getNextFilterTerms();
+      const nextTimeRange = getNextTimeRange();
+
+      // build the pathname
+      let pathname = '';
+      if (nextSelectedPhoto) {
+        pathname = `/photo/${nextSelectedPhoto}`;
+      }
+      if (nextSelectedViz === 'map') {
+        if (nextSelectedCounty) {
+          pathname = `${pathname}/county/${nextSelectedCounty}`;
+        } else if (nextSelectedCity) {
+          pathname = `${pathname}/city/${nextSelectedCity}`;
+        } else if (nextSelectedState) {
+          pathname = `${pathname}/state/${nextSelectedState}`;
+        } else if (!nextSelectedPhoto) {
+          pathname = `${pathname}/maps`;
+        }
+
+        if (nextSelectedPhotographer) {
+          pathname = `${pathname}/photographers/${nextSelectedPhotographer}`;
+        }
+        if (nextSelectedTheme && nextSelectedTheme !== 'root') {
+          pathname = `${pathname}/themes/${nextSelectedTheme}`;
+        }
+        if (nextTimeRange[0] !== 193501 || nextTimeRange[1] !== 194406) {
+          pathname = `${pathname}/timeline/${nextTimeRange.join('-')}`;
+        }
+        if (nextFilterTerms && nextFilterTerms.length > 0) {
+          pathname = `${pathname}/caption/${filterTerms.join(' ')}`;
+        }
+      } else if (nextSelectedViz === 'themes') {
+        pathname = `${pathname}/themes/${nextSelectedTheme}`;
+        if (nextSelectedCounty) {
+          pathname = `${pathname}/county/${nextSelectedCounty}`;
+        } else if (nextSelectedCity) {
+          pathname = `${pathname}/city/${nextSelectedCity}`;
+        } else if (nextSelectedState) {
+          pathname = `${pathname}/state/${nextSelectedState}`;
+        } 
+        if (nextSelectedPhotographer) {
+          pathname = `${pathname}/photographers/${nextSelectedPhotographer}`;
+        }
+        if (nextTimeRange[0] !== 193501 || nextTimeRange[1] !== 194406) {
+          pathname = `${pathname}/timeline/${nextTimeRange.join('-')}`;
+        }
+        if (nextFilterTerms && nextFilterTerms.length > 0) {
+          pathname = `${pathname}/caption/${filterTerms.join(' ')}`;
         }
       }
 
-      remove.forEach(r => {
-        delete params[r || r.param];
-      });
+      const hash = (nextSelectedMapView === 'cities') ? '#mapview=cities' : '';
 
-      replaceOrAdd.forEach(r => {
-        if (r.withParam) {
-          params[r.withParam] = r.value;
-          delete params[r.param];
-        } else if (r.param) {
-          params[r.param] = r.value;
-        }
-      });
-
-      replace.forEach(r => {
-        if (r.withParam && r.param) {
-          params[r.withParam] = r.value;
-          delete params[r.param];
-        } else if (r.param) {
-          params[r.param] = r.value;
-        }
-      });
-
-      if (params.photo) {
-        firsts.unshift('photo');
-      }
-
-      let newPath = '';
-      firsts.forEach(paramKey => {
-        newPath = `${newPath}/${paramKey}${(params[paramKey]) ? `/${params[paramKey]}` : ''}`;
-      });
-      Object
-        .keys(params)
-        .filter(paramKey => !firsts.includes(paramKey) && !(paramKey === 'themes' && params[paramKey] === 'root'))
-        // remove photgraphers if it's not first, not set or isn't a real "photographer"
-        .filter(paramKey => {
-          if (paramKey == 'photographers' && (!params[paramKey] || ['RoyStryker', 'AikenAndWool', 'CBBaldwin'].includes(params[paramKey]))) {
-            return false;
-          }
-          return true;
-        })
-        .forEach(paramKey => {
-          newPath = `${newPath}/${paramKey}${(params[paramKey]) ? `/${params[paramKey]}` : ''}`;
-        });
-      // if (params.photo) {
-      //   newPath = `${newPath}`;
-      // }
-
-      if (newPath === '') {
-        newPath = '/maps/';
-      }
-
-      let newHash = options.hash || hash || '';
-      if (hash && remove.includes('city')) {
-        newHash = '';
-      }
-
-      return `${newPath}${newHash}`;
-    }
+      return `${pathname}${hash}`;
+    };  
   }
 );
-
-

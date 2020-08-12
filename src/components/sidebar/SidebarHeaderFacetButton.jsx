@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import ConditionalWrapper from '../ConditionalWrapper.jsx';
 import './SidebarHeaderFacetButton.css';
 
-const SidebarHeaderFacetButton = ({ label, className, onClick, disabled, removeFromLink, replaceInLink, buildLink }) => {
-  const link = buildLink({ remove: removeFromLink, replace: replaceInLink });
-  if (!label) {
+const SidebarHeaderFacetButton = ({ link, label, className, onClick, disabled }) => {
+  if (!label && label !== '') {
     return null;
   } 
+
   return (
     <ConditionalWrapper
       condition={link}

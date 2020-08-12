@@ -18,7 +18,7 @@ const loadThemes = async ({ fetchPath, photosQuery }, { signal }) => {
   };
 }
 
-const formatThemes = (data, timeRange, selectedTheme, selectedPhotographerName, dimensions, filterTerms, buildLink) => {
+const formatThemes = (data, timeRange, selectedTheme, selectedPhotographerName, dimensions, filterTerms, makeLink) => {
   // if the data comes from carto you need to do a bit of reformatting/organization
   let themesData = { total: 0, children: {} };
   if (data.themes.rows) {
@@ -88,7 +88,10 @@ const formatThemes = (data, timeRange, selectedTheme, selectedPhotographerName, 
     name: selectedTheme,
     children: Object.keys(rawThemes).map(theme => {
       let photoCount = rawThemes[theme].total;
-      if ((!filterTerms || filterTerms.length === 0) && (startTime > 193501 || endTime < 194504)) {
+      // filter if this comes from the preposessed data files, which you can check by looking for a single month variable, e.g. m193506
+      const hasMonthData = Object.keys(rawThemes[theme]).some(key => { return key.match(/m\d{6}/); });
+      if ((!filterTerms || filterTerms.length === 0) && hasMonthData
+        && (startTime > 193501 || endTime < 194504)) {
         photoCount = Object
           .keys(rawThemes[theme])
           .filter(k => {
@@ -129,13 +132,10 @@ const formatThemes = (data, timeRange, selectedTheme, selectedPhotographerName, 
     let strokeWidth = width / 200;
     let fontColor = 'white';
     let fillOpacity = 0.11;
-    let link = buildLink({
-      replaceOrAdd: [{
-        param: 'themes',
-        value: id,
-      }],
-      viz: 'themes',
-    });
+    let link = makeLink([{
+      type: 'set_theme',
+      payload: id,
+    }]);
     let deemphasize = false;
     let fill = color(child.data.name);
     if (themesPaths.length === 3 && selectedTheme && selectedTheme !== id) {
@@ -174,7 +174,7 @@ const formatThemes = (data, timeRange, selectedTheme, selectedPhotographerName, 
   };
 }
 
-const Treemap = ({ timeRange, filterTerms, dimensions, height, width, selectedTheme, fetchPath, photosQuery, buildLink }) => {
+const Treemap = ({ timeRange, filterTerms, dimensions, height, width, selectedTheme, fetchPath, photosQuery, makeLink }) => {
   const ref = useRef();
 
   return (
@@ -188,15 +188,12 @@ const Treemap = ({ timeRange, filterTerms, dimensions, height, width, selectedTh
         //if (isPending) return "Loading...";
         if (error) return `Something went wrong: ${error.message}`;
         if (data) {
-          const { themes, name, ancestors } = formatThemes(data, timeRange, selectedTheme, null, dimensions, filterTerms, buildLink);
+          const { themes, name, ancestors } = formatThemes(data, timeRange, selectedTheme, null, dimensions, filterTerms, makeLink);
 
-          const topLink = buildLink({
-            replaceOrAdd: [{
-              param: 'themes',
-              value: 'root',
-            }],
-            viz: 'themes',
-          });
+          const topLink = makeLink([{
+            type: 'set_theme',
+            payload: 'root',
+          }]);
           return (
             <div
               className='treemap'
@@ -217,13 +214,10 @@ const Treemap = ({ timeRange, filterTerms, dimensions, height, width, selectedTh
                   </li>
                 }
                 {ancestors.map(ancestor => {
-                  const ancestorLink = buildLink({
-                    replaceOrAdd: [{
-                      param: 'themes',
-                      value: ancestor.key,
-                    }],
-                    viz: 'themes',
-                  });
+                  const ancestorLink = makeLink([{
+                    type: 'set_theme',
+                    payload: ancestor.key,
+                  }]);
                   return (
                     <li
                       key={ancestor.key}

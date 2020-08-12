@@ -21,7 +21,7 @@ const TimelineRow = (props) => {
     onUnhover,
     deemphasize,
     emphasize,
-    buildLink,
+    makeLink,
   } = props;
 
   const [translateY, setTranslateY] = useState(y);
@@ -42,14 +42,10 @@ const TimelineRow = (props) => {
     }, [y]
   );
 
-  const to = buildLink({
-    replaceOrAdd: [{
-      param: 'photographers',
-      value: photographerKey,
-    }],
-  });
-
- // `${useLocation().pathname.replace(/\/photographers\/[^/]+/, '')}/photographer/${photographerKey}`;
+  const to = makeLink([{
+    type: 'set_photographer',
+    payload: photographerKey,
+  }]);
 
   return (
     <g

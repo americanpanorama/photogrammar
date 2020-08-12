@@ -1,13 +1,17 @@
 import { connect } from 'react-redux';
 import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
-import { getSelectedPhotographerName, getBuildLinkFunction } from '../../store/selectors';
+import { getSelectedPhotographerName, getMakeLinkFunction } from '../../store/selectors';
 
-const mapStateToProps = state => ({
-  label: getSelectedPhotographerName(state),
-  disabled: state.selectedViz === 'photographers',
-  removeFromLink: ['photographers'],
-  buildLink: getBuildLinkFunction(state),
-});
+const mapStateToProps = state => {
+  const makeLink = getMakeLinkFunction(state);
+  const link = makeLink([{ type: 'clear_photographer'} ]);
+
+  return {
+    label: getSelectedPhotographerName(state),
+    link,
+    viz: (state.selectedViz === 'photographers') ? 'photographers' : undefined,
+  };
+};
 
 const mapDispatchToProps = {};
 

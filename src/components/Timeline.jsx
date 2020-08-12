@@ -155,13 +155,13 @@ const TimelineHeatmap = (props) => {
     leftAxisWidth,
     monthHeight,
     monthWidth,
-    buildLink,
+    makeLink,
   } = props;
 
   const [showOthers, setShowOthers] = useState(false);
   const [hoveredPhotographer, setHoveredPhotographer] = useState(null);
 
-  const clearLink = buildLink({ remove: ['photographers']});
+  const clearLink = makeLink([{ type: 'clear_photographer' }]);
 
   // this will close the other photographers if one is selected
   const otherPhotographerSelected = useRef(selectedPhotographer);
@@ -266,7 +266,7 @@ const TimelineHeatmap = (props) => {
                           key={`timelineRowFor${p.key}`}
                           onHover={onHover}
                           onUnhover={onUnhover}
-                          buildLink={buildLink}
+                          makeLink={makeLink}
                         />
                       );
                   })}

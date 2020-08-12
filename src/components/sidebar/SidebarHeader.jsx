@@ -6,7 +6,7 @@ import SidebarHeaderStateButton from './SidebarHeaderStateButton.js';
 import SidebarHeaderCityCountyButton from './SidebarHeaderCityCountyButton.js';
 import SidebarHeaderThemeButton from './SidebarHeaderThemeButton.js';
 import SidebarHeaderFilterButton from './SidebarHeaderFilterButton.js';
-import SidebarHeaderTimeRangeButton from './SidebarHeaderFacetButton.js';
+import SidebarHeaderTimeRangeButton from './SidebarHeaderTimeRangeButton.js';
 import './SidebarHeader.css';
 
 const loadCounts = async ({ query }, { signal }) => {
@@ -87,11 +87,7 @@ const SidebarPhotosHeader = (props) => {
               )}
               <div className='timeAndNav'>
                 <div className='facets'>
-                  <SidebarHeaderTimeRangeButton
-                    label={getDateRangeString([mindate, maxdate])}
-                    disabled={timeRangeDisabled}
-                    onClick={setTimeRange}
-                  />
+                  <SidebarHeaderTimeRangeButton />
                 </div>
                 <h4 className='counts'>
                   {`${from}-${to} of `}

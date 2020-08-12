@@ -16,7 +16,7 @@ const PhotoCard = (props) => {
     borderWidth,
     scale,
     selectedMapView,
-    buildLink,
+    makeLink,
   } = props;
 
   const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -44,12 +44,10 @@ const PhotoCard = (props) => {
     location = `${city}, ${stateAbbr}`;
   }
 
-  const linkTo = buildLink({
-    replaceOrAdd: [{
-      param: 'photo',
-      value: loc_item_link,
-    }],
-  });
+  const linkTo = makeLink([{
+    type: 'set_photo',
+    payload: loc_item_link,
+  }]);
 
   return (
     <div

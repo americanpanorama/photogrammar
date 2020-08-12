@@ -1,24 +1,23 @@
 import { connect } from 'react-redux';
 import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
-import { getBuildLinkFunction } from '../../store/selectors';
+import { getMakeLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedTheme, selectedViz } = state;
 
-  console.log(selectedTheme);
-
   const label = (selectedTheme !== 'root')
     ? selectedTheme.substring(selectedTheme.lastIndexOf('|') + 1)
     : null;
-  const link = `/themes/${selectedTheme.substring(0, selectedTheme.lastIndexOf('|'))}`;
+  const makeLink = getMakeLinkFunction(state);
+  const parentTheme = selectedTheme.substring(0, selectedTheme.lastIndexOf("|"));
+  const link = makeLink([{
+    type: 'set_theme',
+    payload: parentTheme,
+  }]);
 
   return {
     label,
-    replaceInLink: [{
-      param: 'themes',
-      value: selectedTheme.substring(0, selectedTheme.lastIndexOf('|')),
-    }],
-    buildLink: getBuildLinkFunction(state),
+    link,
     className: 'themes',
   };
 };

@@ -1,16 +1,20 @@
 import { connect } from 'react-redux';
 import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
-import { getSelectedStateName, getBuildLinkFunction } from '../../store/selectors';
+import { getSelectedStateName, getMakeLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedState, selectedMapView, selectedCounty, selectedCity } = state;
-  const label = (selectedCounty || selectedCity) ? selectedState : getSelectedStateName(state);
-  const link = (selectedMapView === 'cities') ? '/#mapview=cities' : '/';
+  let label;
+  if (selectedCounty || selectedCity) {
+    label = selectedState;
+  } else if (selectedState) {
+    label = getSelectedStateName(state);
+  }
+  const makeLink = getMakeLinkFunction(state);
+  const link = makeLink([{ type: 'clear_state'}]);
   return {
     label,
     link,
-    removeFromLink: ['state', 'county'],
-    buildLink: getBuildLinkFunction(state),
     className: selectedMapView,
   };
 };

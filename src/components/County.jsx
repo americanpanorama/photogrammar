@@ -9,7 +9,7 @@ const County = (props) => {
     d,
     name,
     nhgis_join,
-    buildLink,
+    makeLink,
     labelCoords,
     fill,
     fillOpacity,
@@ -36,13 +36,10 @@ const County = (props) => {
   //   }
   // });
 
-  const link = buildLink({
-    replace: [{
-      param: 'state',
-      withParam: 'county',
-      value: nhgis_join,
-    }],
-  });
+  const link = makeLink([{
+    type: 'set_county',
+    payload: nhgis_join,
+  }]);
 
   return (
     <Link

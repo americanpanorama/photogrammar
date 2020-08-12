@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import PhotoCard from './PhotoCard.jsx';
-import { getBuildLinkFunction } from '../../store/selectors';
-
+import { getMakeLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedMapView, dimensions } = state;
@@ -17,7 +16,7 @@ const mapStateToProps = state => {
     margin,
     borderWidth,
     selectedMapView,
-    buildLink: getBuildLinkFunction(state),
+    makeLink: getMakeLinkFunction(state),
   };
 };
 

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Photo from './Photo.jsx';
 import { toggleLightbox } from '../store/actions';
-import { getPhotoFetchQueries, getBuildLinkFunction } from '../store/selectors';
+import { getPhotoFetchQueries, getMakeLinkFunction } from '../store/selectors';
 
 const mapStateToProps = state => {
   const { photoMetadataQuery, similarPhotosQuery } = getPhotoFetchQueries(state);
@@ -10,7 +10,7 @@ const mapStateToProps = state => {
     similarPhotosQuery,
     selectedMapView: state.selectedMapView,
     height: state.dimensions.selectedPhoto.height,
-    buildLink: getBuildLinkFunction(state),
+    makeLink: getMakeLinkFunction(state),
   };
 };
 

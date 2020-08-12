@@ -9,24 +9,34 @@ const ActionsFromURL = ({ setState }) => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    const firstPathPiece = pathname
+    const pathPieces = pathname
       .replace(`${process.env.PUBLIC_URL}`, '')
       .split('/')
-      .filter(param => param)[0];
+      .filter(param => param);
 
     // get the view
-    const getViz = () => ({
-      photographers: 'photographers',
-      ohsearch: 'photographers',
-      themes: 'themes',
-      timeline: 'timeline',
-      city: 'map',
-      county: 'map',
-      state: 'map',
-      maps: 'map',
-      photo: 'photo',
-    }[firstPathPiece]);
-    const selectedViz = getViz() || 'map';
+    const getViz = (idx) => {
+      const paramMap = {
+        photographers: 'photographers',
+        ohsearch: 'photographers',
+        themes: 'themes',
+        timeline: 'timeline',
+        city: 'map',
+        county: 'map',
+        state: 'map',
+        maps: 'map',
+      }
+      // look for the first match
+      if (paramMap[pathPieces[idx]]) {
+        return paramMap[pathPieces[idx]];
+      } else if (idx < pathPieces.length - 1) {
+        return getViz(idx + 1);
+      } else {
+        // return 'map' if there aren't any matches
+        return 'map';
+      }
+    };
+    const selectedViz = getViz(0);
 
     // remove the basename from the pathPieces and build an object with state parameters
     const stateParams = parsePathname(pathname.replace(`${process.env.PUBLIC_URL}`, ''));

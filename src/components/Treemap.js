@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import Treemap from './Treemap.jsx';
-import { getThemesFetchPath, getThemesBackgroundPhotosQuery, getBuildLinkFunction } from '../store/selectors';
+import { getThemesFetchPath, getThemesBackgroundPhotosQuery, getMakeLinkFunction } from '../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedTheme, timeRange, filterTerms, dimensions } = state;
   const { height, width } = dimensions.map;
   return {
+    fetchPath: getThemesFetchPath(state),
     photosQuery: getThemesBackgroundPhotosQuery(state),
     timeRange,
     filterTerms,
@@ -13,8 +14,7 @@ const mapStateToProps = state => {
     height,
     width,
     dimensions,
-    fetchPath: getThemesFetchPath(state),
-    buildLink: getBuildLinkFunction(state),
+    makeLink: getMakeLinkFunction(state),
   };
 };
 
