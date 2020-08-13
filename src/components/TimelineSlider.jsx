@@ -55,8 +55,8 @@ const TimelineSlider = ({timeRange, width, leftAxisWidth, setTimeRange, makeLink
     <div
       className='timelineSlider'
       style={{
-        width: width,
-        marginLeft: leftAxisWidth,
+        width: width - 120,
+        marginLeft: leftAxisWidth + 120,
       }}
     >
       <Range

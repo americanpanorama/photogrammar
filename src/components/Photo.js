@@ -10,6 +10,7 @@ const mapStateToProps = state => {
     similarPhotosQuery,
     selectedMapView: state.selectedMapView,
     height: state.dimensions.selectedPhoto.height,
+    lightboxLink: `/lightbox${state.pathname}`,
     makeLink: getMakeLinkFunction(state),
   };
 };

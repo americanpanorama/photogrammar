@@ -16,7 +16,7 @@ const mapStateToProps = state =>  {
   const countiesLink = makeLink([
     {
       type: 'set_selected_viz',
-      payload: 'maps',
+      payload: 'map',
     },
     {
       type: 'set_selected_map_view',
@@ -26,7 +26,7 @@ const mapStateToProps = state =>  {
   const citiesLink = makeLink([
     {
       type: 'set_selected_viz',
-      payload: 'maps',
+      payload: 'map',
     },
     {
       type: 'set_selected_map_view',

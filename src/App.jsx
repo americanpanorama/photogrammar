@@ -9,6 +9,7 @@ import SidebarHeader from './components/sidebar/SidebarHeader.js';
 import Welcome from './components/Welcome.js';
 import Map from './components/Map.js';
 import Photo from './components/Photo.js';
+import Lightbox from './components/Lightbox.js';
 import TimelineHeatmap from './components/Timeline.js';
 import TimelineSlider from './components/TimelineSlider.js';
 import Treemap from './components/Treemap.js';
@@ -53,8 +54,8 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
 
         {(hasCompletedFirstLoad) && (
           <React.Fragment>
-            <div id="viz-canvas">
-              <Switch>
+              <div id="viz-canvas">
+            <Switch>
                 <Route
                   path='/'
                   exact
@@ -108,13 +109,20 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
                     </React.Fragment>
                   )}
                 </Route>
+                </Switch>
+              </div>
+              <Switch>
+              <Route path={'/lightbox'}>
+                <Lightbox />
+              </Route>
               </Switch>
-            </div>
+
 
             <Welcome />
 
             <SidebarHeader />
             <SidebarPhotos />
+            
           </React.Fragment>
         )}
       </div>

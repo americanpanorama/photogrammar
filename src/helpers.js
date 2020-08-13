@@ -14,7 +14,7 @@ export const getStateAbbr = (name) => {
 export function parsePathname(pathname) {
   // remove the basename from the pathPieces and build an object with state parameters
   const pathPieces = pathname.split('/').filter(param => param);
-  const isParamKey = (param) => ['photo', 'photographers', 'ohsearch', 'themes', 'timeline', 'city', 'county', 'state', 'maps', 'caption'].includes(param);
+  const isParamKey = (param) => ['lightbox', 'photo', 'photographers', 'ohsearch', 'themes', 'timeline', 'city', 'county', 'state', 'maps', 'caption'].includes(param);
   const stateParams = {};
   pathPieces.forEach((pathPiece, idx) => {
     if (isParamKey(pathPiece)) {

@@ -89,7 +89,8 @@ Layout
     grid-template-columns: minmax(200px, 1fr) 1fr 1fr;
     grid-template-rows: 100px 100px calc(100vh - 200px);
     height: 100vh;
-    overflow-y: hidden;
+    width: 100vw;
+    overflow: hidden;
   }
 
   header.navbar-header {

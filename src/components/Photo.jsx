@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Async from "react-async";
-import { Link, useLocation } from "react-router-dom";
-import Lightbox from './Lightbox.jsx';
+import { Link } from "react-router-dom";
 import SimilarPhotoCard from './sidebar/PhotoCardSimilar.js';
 import State from './State.jsx';
 import CloseButton from './buttons/Close.jsx';
@@ -29,11 +28,9 @@ const Photo = (props) => {
     similarPhotosQuery,
     selectedMapView,
     height,
+    lightboxLink,
     makeLink,
   } = props;
-
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const { pathname, hash } = useLocation();
 
   const stripPhotos = [];
 
@@ -243,12 +240,13 @@ const Photo = (props) => {
                 className="img"
 
               >
-                <img 
-                  src={`http://photogrammar.yale.edu/photos/service/pnp/${img_large_path}`}
-                  className='full'
-                  alt=""
-                  onClick={() => { setLightboxOpen(true) }}
-                />
+                <Link to={lightboxLink}>
+                  <img 
+                    src={`http://photogrammar.yale.edu/photos/service/pnp/${img_large_path}`}
+                    className='full'
+                    alt=""
+                  />
+                </Link>
               </div>
 
               <div
@@ -300,20 +298,10 @@ const Photo = (props) => {
               </div>
 
               <ExpandButton
-                onClick={() => { setLightboxOpen(true) }}
+                link={lightboxLink}
                 role='expand'
               />
-
-              {(lightboxOpen) && (
-                <Lightbox
-                  imgPath={img_large_path}
-                  captionLines={captionLines}
-                  closeLightbox={() => { setLightboxOpen(false) }}
-                />
-              )}
-
             </div>
-
           );
         }
       }}

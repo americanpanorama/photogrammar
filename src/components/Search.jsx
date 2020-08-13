@@ -185,6 +185,8 @@ const Search = (props) => {
     }),
   }
 
+  console.log(countyOrCityOption);
+
   return (
     <div
       id='searchWrapper'
@@ -212,7 +214,12 @@ const Search = (props) => {
         <StateSelect
           fetchPath={makeQuery('state')}
           defaultValue={stateOption}
-          onChange={(inputValue, action) => { setStateOption(inputValue); }}
+          onChange={(inputValue, { action }) => { 
+            setStateOption(inputValue); 
+            if (action === 'clear') {
+              setCountyOrCityOption(null);
+            }
+          }}
           filterFunction={rows => d => rows.map(p => p.state).includes(d.label)}
           label='State'
         />

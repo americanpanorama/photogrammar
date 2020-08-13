@@ -171,7 +171,7 @@ export function calculateDimensions(options) {
   } : {
     width: Math.min(vizCanvas.width * 0.75, vizCanvas.width - 200),
     height: Math.min(Photographers.length * 15, vizCanvas.height * 0.35),
-    leftAxisWidth: Math.max(200, vizCanvas.width * 0.25),
+    leftAxisWidth: Math.max(180, vizCanvas.width * 0.2),
   };
 
   const mapControlsWidth = 50;

@@ -64,7 +64,7 @@ const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, 
 
   const x = d3.scaleLinear()
     .domain([1935, 1944 + monthNum(6)])
-    .range([leftAxisWidth, width + leftAxisWidth]);
+    .range([leftAxisWidth + 140, width + leftAxisWidth]);
   const monthWidth = x(1935 + monthNum(2)) - x(1935);
 
   // add the timeline cells to each photographer
@@ -112,7 +112,7 @@ const formatPhotographers = (data, timeRange, selectedPhotographer, dimensions, 
   // add the y, labelX, and yeartick values for each photographer
   photographers.forEach((p, i) => {
     photographers[i].y = (p.isOther) ? y(i) + 1 : y(i + 2) + 1;
-    photographers[i].labelX = x(Math.floor(p.firstDate / 100)) - 5;
+    photographers[i].labelX = x(1935) - 5; //x(Math.floor(p.firstDate / 100)) - 5;
     photographers[i].yearTicks = [];
     [1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945].forEach(y => {
       if (!p.isOther || y >= Math.floor(p.firstDate / 100)) {
@@ -272,7 +272,7 @@ const TimelineHeatmap = (props) => {
                   })}
 
                   <g
-                    transform={`translate(${leftAxisWidth - 10} ${height - monthHeight * 13})`}
+                    transform={`translate(${leftAxisWidth} ${height - monthHeight * 13})`}
                   >
                     {(selectedPhotographer) ? (
                       <Link
@@ -314,44 +314,23 @@ const TimelineHeatmap = (props) => {
                         </text>
                       </Link>
                     ) : (
-                      <React.Fragment>
-                        <g transform={'translate(-15 0) rotate(315)'}>
-                          <circle
-                            cx={0}
-                            cy={18 * 1.5  * -0.1}
-                            r={18  * 1.5  * 0.2}
-                            fill='transparent'
-                            fillOpacity={1}
-                            strokeWidth={18 / 9}
-                            stroke='black'
-                          />
-                          <line
-                            x1={0}
-                            x2={0}
-                            y1={18  * 1.5  * 0.1}
-                            y2={18  * 1.5  * 0.4}
-                            strokeWidth={18 / 7}
-                            stroke='black'
-                          />
-                        </g>
-                        <text
-                          x={-30}
-                          y={0}
-                          textAnchor='end'
-                          fontSize={height / photographers.length * 1.5}
-                          className='tip'
+                      <text
+                        x={0}
+                        y={0}
+                        textAnchor='end'
+                        fontSize={height / photographers.length * 1.25}
+                        className='tip'
+                      >
+                        <tspan>
+                          To select a photographer
+                        </tspan>
+                        <tspan
+                          x={0}
+                          dy={height / photographers.length * 1.75}
                         >
-                          <tspan>
-                            To select a photographer
-                          </tspan>
-                          <tspan
-                            x={-30}
-                            dy={height / photographers.length * 1.75}
-                          >
-                            click on their name
-                          </tspan>
-                        </text>
-                      </React.Fragment>
+                          click on their name
+                        </tspan>
+                      </text>
                     )}
                   </g>
 
@@ -360,6 +339,7 @@ const TimelineHeatmap = (props) => {
                     transform={`translate(${leftAxisWidth * 3/4 - 20} ${height - monthHeight * 7})`}
                     className='legend'
                   >
+                    {/*   
                     <text
                       textAnchor='middle'
                       fontSize={monthHeight * 1.5}
@@ -373,7 +353,16 @@ const TimelineHeatmap = (props) => {
                       >
                         of photos taken that month
                       </tspan>
-                    </text>
+                    </text> */}
+
+                    <text
+                      textAnchor='middle'
+                      fontSize={monthHeight * 1.2}
+                      y={monthHeight * 5.6}
+                      fill='#666'
+                    >
+                      Number of photos taken each month
+                    </text> 
 
                     <defs>
                       <linearGradient id="legendGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -391,7 +380,7 @@ const TimelineHeatmap = (props) => {
 
                     <rect 
                       x={leftAxisWidth * -1 / 4}
-                      y={monthHeight * 2.2}
+                      y={monthHeight * 1}
                       width={leftAxisWidth * 2 / 4}
                       height={monthHeight * 1.5}
                       fill="url(#legendGrad)"
@@ -399,7 +388,7 @@ const TimelineHeatmap = (props) => {
 
                     <g
                       className='axis'
-                      transform={`translate(0 ${monthHeight * 5.2})`}
+                      transform={`translate(0 ${monthHeight * 4.2})`}
                     >
                       <text
                         fontSize={monthHeight * 1.25}
@@ -423,7 +412,7 @@ const TimelineHeatmap = (props) => {
 
                   {(!showOthers) ? (
                     <text
-                      x={leftAxisWidth - 2}
+                      x={leftAxisWidth + 140 - 2}
                       y={monthHeight - translateY}
                       textAnchor='end'
                       onClick={() => setShowOthers(true)}
@@ -433,13 +422,21 @@ const TimelineHeatmap = (props) => {
                     </text>
                   ) : (
                     <text
-                      x={width * 0.5}
-                      y={height * 0.1}
+                      x={leftAxisWidth}
+                      y={height * 0.2}
                       textAnchor='end'
+                      fontSize={height / photographers.length * 1.25}
                       onClick={() => setShowOthers(false)}
-                      fontSize={height / photographers.length * 1.5}
                     >
-                      collapse photographers with less than 500 photos
+                      <tspan>
+                        collapse photographers
+                      </tspan>
+                      <tspan
+                        x={leftAxisWidth}
+                        dy={height / photographers.length * 1.75}
+                      >
+                         with less than 500 photos
+                      </tspan>
                     </text>
                   )}
                 </svg>
