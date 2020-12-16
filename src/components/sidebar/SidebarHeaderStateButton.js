@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
+import SidebarHeaderFacetButton from './SidebarHeaderFacetButton';
 import { getSelectedStateName, getMakeLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {

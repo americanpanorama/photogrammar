@@ -1,6 +1,6 @@
 
 import { connect } from 'react-redux';
-import InterviewTimestamp from './InterviewTimestamp.jsx';
+import InterviewTimestamp from './InterviewTimestamp.tsx';
 import {  } from '../store/actions';
 
 const mapStateToProps = state => ({

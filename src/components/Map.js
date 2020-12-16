@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Map from './Map.jsx';
+import Map from './Map.tsx';
 import { getMapParameters, getLinkUp, getMapFetchPath, getMakeLinkFunction } from '../store/selectors';
 
 const mapStateToProps = state => {

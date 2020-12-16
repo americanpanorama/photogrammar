@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import SidebarHeader from './SidebarHeader.jsx';
-import { setPhotoOffset, toggleExpandedSidebar, setTimeRange } from '../../store/actions';
+import SidebarHeader from './SidebarHeader';
+import { setPhotoOffset, toggleExpandedSidebar } from '../../store/actions';
 import { getSidebarPhotoCountQuery } from '../../store/selectors';
 
 const mapStateToProps = state => {
@@ -25,7 +25,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   setPhotoOffset,
   toggleExpandedSidebar,
-  setTimeRange,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarHeader);

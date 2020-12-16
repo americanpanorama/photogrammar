@@ -13,11 +13,3 @@
 .wrapper.themes .timelineRow rect.cell.deemphasize {
   fill: silver;
 }
-
-.timelineRow text {
-  fill: #ddd !important;
-}
-
-.timelineRow text.active {
-  fill: #555 !important;
-}

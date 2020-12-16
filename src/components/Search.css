@@ -54,15 +54,16 @@
   padding: 0;
 }
 
-#advancedSearch button[role=submit] {
+#advancedSearch a[role=submit] {
   grid-column: 2 / span 1;
   border-radius: 19px;
   width: auto;
 }
 
-#advancedSearch button[role=submit] a {
+#advancedSearch a[role=submit] button[role=submit]{
   color: black;
   text-decoration: none;
+  width: 100%;
 }
 
 .styled__control-is-focused {

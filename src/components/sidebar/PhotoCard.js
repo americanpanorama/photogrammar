@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import PhotoCard from './PhotoCard.jsx';
+import PhotoCard from './PhotoCard';
 import { getMakeLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {

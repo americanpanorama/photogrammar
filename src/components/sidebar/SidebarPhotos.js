@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SidebarPhotos from './SidebarPhotos.jsx';
+import SidebarPhotos from './SidebarPhotos';
 import { setPhotoOffset } from '../../store/actions';
 import { getSidebarPhotosQuery } from '../../store/selectors';
 

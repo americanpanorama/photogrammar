@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
+import SidebarHeaderFacetButton from './SidebarHeaderFacetButton';
 import { getDateRangeString, getMakeLinkFunction } from '../../store/selectors';
 import { setTimeRange } from '../../store/actions';
 
@@ -14,7 +14,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  onClick: setTimeRange,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarHeaderFacetButton);

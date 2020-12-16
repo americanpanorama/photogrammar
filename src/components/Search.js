@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Search from './Search.jsx';
+import Search from './Search';
 import Themes from '../../data/themes.json';
 import { search, toggleSearch } from '../store/actions';
 import { getPhotographers, getStateSearchOptions, getCountiesOrCitiesOptions, getThemesSearchOptions } from '../store/selectors';
@@ -30,7 +30,7 @@ const mapStateToProps = state => {
 
 
   return {
-    selectedPhotographerOption,
+    selectedPhotographerOption: (selectedPhotographerOption) ? selectedPhotographerOption[0] : null,
     selectedStateOption,
     selectedThemeOption,
     selectedCountyOption,

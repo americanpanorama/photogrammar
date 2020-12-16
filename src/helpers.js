@@ -1,6 +1,12 @@
 import { useLocation } from 'react-router-dom';
 import Centroids from '../data/centroids.json';
 
+// convenience functions for dates
+export const monthNum = m => (m - 1) / 12;
+export const getTimeCode = (year, month) => year * 100 + month;
+export const timeCodeToNum = timecode => Math.floor(timecode / 100) + monthNum(timecode % 100);
+
+
 export const getStateAbbr = (name) => {
   if (!name) {
     return null;

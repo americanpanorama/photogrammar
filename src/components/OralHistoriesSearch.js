@@ -1,6 +1,5 @@
-
 import { connect } from 'react-redux';
-import OralHistoriesSearch from './OralHistoriesSearch.jsx';
+import OralHistoriesSearch from './OralHistoriesSearch.tsx';
 import {  } from '../store/actions';
 
 const mapStateToProps = state => ({

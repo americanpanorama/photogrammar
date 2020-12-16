@@ -40,7 +40,7 @@ const selectedMapView = (state = initialState, action) => (
 
 const sidebarPhotosOffset = (state = initialState, action) => {
   if (action.type === A.SET_STATE) {
-    return 0;
+    return action.payload.sidebarPhotosOffset;
   }
   if (action.type === A.LOAD_SIDEBAR_PHOTOS) {
     return action.payload.sidebarPhotosOffset;

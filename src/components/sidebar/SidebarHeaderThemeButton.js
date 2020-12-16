@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
-import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.jsx';
+import SidebarHeaderFacetButton from './SidebarHeaderFacetButton';
 import { getMakeLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {
   const { selectedTheme, selectedViz } = state;
-
   const label = (selectedTheme !== 'root')
     ? selectedTheme.substring(selectedTheme.lastIndexOf('|') + 1)
     : null;

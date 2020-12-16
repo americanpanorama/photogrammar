@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Lightbox from './Lightbox.jsx';
+import Lightbox from './Lightbox.tsx';
 import { toggleLightbox } from '../store/actions';
 import { getPhotoFetchQueries, getMakeLinkFunction } from '../store/selectors';
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SidebarHeaderFacetButton from './SidebarHeaderFacetButton.js';
+import SidebarHeaderFacetButton from './SidebarHeaderFacetButton';
 import { getSelectedCountyMetadata, getMakeLinkFunction } from '../../store/selectors';
 
 const mapStateToProps = state => {
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
     label = `${selectedCity.substring(3)}`;
   }
   const makeLink = getMakeLinkFunction(state);
-  const link = makeLink([{ type: 'clear_county', type: 'clear_city' }]);
+  const link = makeLink([{ type: 'clear_county' }, { type: 'clear_city' }]);
 
   return {
     label,

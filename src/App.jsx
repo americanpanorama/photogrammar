@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import './App.css';
 import ActionsFromURL from './components/ActionsFromURL.js';
 import Navbar from './components/Navbar.js';
-import Filter from './components/Filter.js';
 import SidebarPhotos from './components/sidebar/SidebarPhotos.js';
 import SidebarHeader from './components/sidebar/SidebarHeader.js';
 import Welcome from './components/Welcome.js';
@@ -15,7 +14,7 @@ import TimelineSlider from './components/TimelineSlider.js';
 import Treemap from './components/Treemap.js';
 import Photographers from './components/Photographers.js';
 import Photographer from './components/Photographer.js';
-import OralHistoriesSearch from './components/OralHistoriesSearch.jsx';
+import OralHistoriesSearch from './components/OralHistoriesSearch.tsx';
 import RoyStryker from './components/RoyStryker.js';
 import AikenAndWool from './components/AikenAndWool.js';
 import CBBaldwin from './components/CBBaldwin.js';

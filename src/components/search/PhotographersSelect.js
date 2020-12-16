@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SearchSelect from './SearchSelect.jsx';
+import SearchSelect from './SearchSelect';
 import { getPhotographers } from '../../store/selectors';
 
 const mapStateToProps = state => {

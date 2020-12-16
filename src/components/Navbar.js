@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Navbar from './Navbar.jsx';
+import Navbar from './Navbar.tsx';
 import { toggleSearch } from '../store/actions';
 import { getMakeLinkFunction } from '../store/selectors';
 

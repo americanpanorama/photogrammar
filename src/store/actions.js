@@ -49,10 +49,24 @@ export function initializeData() {
 }
 
 export function setState(payload) {
-  return {
-    type: A.SET_STATE,
-    payload
-  };
+  return (dispatch, getState) => {
+    // if any selection has changed, reset the photooffset
+    const { selectedPhotographer, selectedState, selectedCounty, selectedCity, selectedTheme,
+        selectedViz, selectedMapView, filterTerms, timeRange, sidebarPhotosOffset } = getState();
+
+    payload.sidebarPhotosOffset = (payload.selectedPhotographer !== selectedPhotographer
+      || payload.selectedState !== selectedState || payload.selectedCounty !== selectedCounty
+      || payload.selectedCity !== selectedCity || payload.selectedTheme !== selectedTheme
+      || payload.selectedViz !== selectedViz || payload.selectedMapView !== selectedMapView
+      || payload.timeRange[0] !== timeRange[0] || payload.timeRange[0] !== timeRange[0]
+      || payload.filterTerms.sort().join(',') !== filterTerms.sort().join(','))
+      ? 0 : sidebarPhotosOffset;
+
+    dispatch({
+      type: A.SET_STATE,
+      payload
+    });
+  }
 }
 
 export function setPhotoOffset(eOrId) {
@@ -168,10 +182,12 @@ export function calculateDimensions(options) {
     width: innerWidth * 0.8,
     height: Math.min(Photographers.length * 15, vizCanvas.height / 3),
     leftAxisWidth: innerWidth * 0.15,
+    labelsWidth: 150,
   } : {
     width: Math.min(vizCanvas.width * 0.75, vizCanvas.width - 200),
     height: Math.min(Photographers.length * 15, vizCanvas.height * 0.35),
-    leftAxisWidth: Math.max(180, vizCanvas.width * 0.2),
+    leftAxisWidth: Math.max(225, vizCanvas.width * 0.2),
+    labelsWidth: 150,
   };
 
   const mapControlsWidth = 50;

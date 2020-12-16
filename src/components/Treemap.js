@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Treemap from './Treemap.jsx';
+import Treemap from './Treemap.tsx';
 import { getThemesFetchPath, getThemesBackgroundPhotosQuery, getMakeLinkFunction } from '../store/selectors';
 
 const mapStateToProps = state => {

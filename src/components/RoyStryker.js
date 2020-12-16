@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Photographer from './Photographer.jsx';
+import Photographer from './Photographer.tsx';
 
 const mapStateToProps = state =>  {
   return {

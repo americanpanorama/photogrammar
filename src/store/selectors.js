@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import * as d3 from 'd3';
+import US from 'us';
 import A from './actionTypes';
 import { getStateAbbr } from '../helpers.js';
 import Counties from '../../data/svgs/counties.json';
@@ -109,7 +110,7 @@ export const getSelectedCityMetadata = createSelector(
   [getSelectedCity],
   (selectedCity) => {
     if (selectedCity) {
-      const city = Cities.find(cc => cc.key === selectedCity);
+      const city = Cities.find(cc => cc.k === selectedCity);
       // get the centroid
       if (city) {
         city.center = Centroids.cities[selectedCity] || []
@@ -221,12 +222,12 @@ export const getWheresForCityQuery = createSelector(
       return [];
     }
 
-    const { state, city, otherPlaces } = selectedCityMetadata;
-    const wheres = [(`state = '${stateabbrs[state]}'`)];
+    const { s: state, c: city, otherPlaces } = selectedCityMetadata;
+    const wheres = [(`state = '${US.lookup(state).name}'`)];
     const cityNames = [city];
     if (otherPlaces) {
       otherPlaces.forEach(op => {
-        cityNames.push(op.city);
+        cityNames.push(op.c);
       });
     }
     const cityWheres = cityNames.map(cityName => `city = '${cityName}'`);
@@ -312,8 +313,8 @@ export const getMapFetchPath = createSelector(
         : `${process.env.PUBLIC_URL}/data/photographers/all.json`;
     }
     return (selectedMapView === 'counties')
-      ? `${cartoURLBase}${encodeURIComponent(`select nhgis_join, count(img_large_path) as total from photogrammar_photos where nhgis_join is not null and ${wheres.join(' and ')} group by nhgis_join`)}`
-      : `${cartoURLBase}${encodeURIComponent(`select state, city, count(img_large_path) as total from photogrammar_photos where city is not null and ${wheres.join(' and ')} group by state, city`)}`;
+      ? `${cartoURLBase}${encodeURIComponent(`select nhgis_join as k, count(img_large_path) as t from photogrammar_photos where nhgis_join is not null and ${wheres.join(' and ')} group by nhgis_join`)}`
+      : `${cartoURLBase}${encodeURIComponent(`select state as s, city as c, count(img_large_path) as t from photogrammar_photos where city is not null and ${wheres.join(' and ')} group by state, city`)}`;
   }
 );
 
@@ -372,7 +373,7 @@ export const getTimelineCellsFetchPath = createSelector(
     const photographers_wheres = Photographers
       .filter(p => p.count >= 75)
       .map(p => `photographer_name = '${p.firstname} ${p.lastname}'`);
-    return `${cartoURLBase}${encodeURIComponent(`SELECT year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g') as photographer, count(img_large_path) as count FROM photogrammar_photos where ${wheres.join(' and ')} and (${photographers_wheres.join( 'or ')}) group by year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g')`)}`;
+    return `${cartoURLBase}${encodeURIComponent(`SELECT year as y, month as m, regexp_replace(photographer_name, '[\\s\\.]', '', 'g') as pk, count(img_large_path) as t FROM photogrammar_photos where ${wheres.join(' and ')} and (${photographers_wheres.join( ' or ')}) and (year < 1944 or month <= 6) group by year, month, regexp_replace(photographer_name, '[\\s\\.]', '', 'g')`)}`.replace(/'/g, "%27");
   }
 );
 
@@ -411,7 +412,7 @@ export const getSidebarPhotoCountQuery = createSelector(
   (selectedPhotographer, selectedCounty, selectedCity, selectedState, timeRange, selectedMapView, wheres) => {
     let query;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
-    const sqlQueryBase = 'SELECT count(cartodb_id), min(year * 100 + month) as minDate, max(year * 100 + month) as maxDate FROM photogrammar_photos';
+    const sqlQueryBase = 'SELECT count(cartodb_id) FROM photogrammar_photos';
     if (wheres.length > 1) {
       const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
       query = `${sqlQueryBase} ${where}`;
@@ -489,7 +490,6 @@ export const getDateRangeString = createSelector(
 export const getVizLink = createSelector(
   [getSelectedCounty, getSelectedState, getSelectedViz, getSelectedTheme],
   (selectedCounty, selectedState, selectedViz, selectedTheme) => {
-    console.log(selectedViz);
     if (selectedViz === 'themes') {
       return `themes/${selectedTheme}`;
     }
@@ -702,7 +702,6 @@ export const getMakeLinkFunction = createSelector(
   (selectedViz, selectedMapView, selectedState, selectedCounty, selectedCity, selectedTheme, selectedPhotographer, filterTerms, timeRange) => {
     return (actions) => {
       const actionTypes = actions.map(a => a.type);
-      //console.log(actions, actionTypes);
       const getPayloadFor = (type) => (actions.find(a => a.type === type))
         ? actions.find(a => a.type === type).payload : null;
 
