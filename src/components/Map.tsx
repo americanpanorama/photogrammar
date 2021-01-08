@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+// @ts-ignore
 import Async from "react-async";
 import { Link, useParams, useLocation } from "react-router-dom";
 import * as d3 from 'd3';
@@ -83,14 +84,14 @@ const loadCountiesAndCities = async ({ fetchPath }: { fetchPath: string}) => {
       k: county.k,
       t: county.t,
     }));
-    return { counties };
+    return { counties, cities: [] };
   }
   if (isCartoCityData(rawData)) {
     const cities: PlaceCountData[] = rawData.rows.map((city: CartoCityRow): PlaceCountData => ({
       k: `${us.lookup(city.s).abbr}_${city.c}`.replace(/[\s\.,]/g,'') as CityKey,
       t: city.t,
     }));
-    return { cities };
+    return { cities, counties: [] };
   }
 
   return rawData;
@@ -297,9 +298,9 @@ const Map = (props: Props) => {
     // find the city
     const hoveredCity: CityMetadata = Cities.find(city => cityKey === city.k) as CityMetadata;
     if (hoveredCity) {
-      const [lat, lng] = getCentroidForCity(cityKey as CityKey);
-      hoveredCity.lat = lat;
-      hoveredCity.lng = lng; 
+      const [x, y] = getCentroidForCity(cityKey as CityKey);
+      hoveredCity.x = x;
+      hoveredCity.y = y; 
     }
     setHoveredCity(hoveredCity);
   };
@@ -415,12 +416,12 @@ const Map = (props: Props) => {
                           onCityUnhover={onCityUnhover}
                         />
                       ))}
-                      {(hoveredCity && hoveredCity.center) && (
+                      {(hoveredCity) && (
                         <MapLabel 
-                          x={hoveredCity.center[0]}
-                          y={hoveredCity.center[1] - Math.sqrt(hoveredCity.total / (cityDivisor * mapParameters.scale)) - 5 / mapParameters.scale}
-                          fontSize={12 / scale}
-                          label={hoveredCity.city}
+                          x={hoveredCity.x}
+                          y={hoveredCity.y}
+                          fontSize={16 / mapParameters.scale}
+                          label={hoveredCity.c}
                         />
                       )}
                     </React.Fragment>

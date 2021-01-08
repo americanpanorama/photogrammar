@@ -41,7 +41,7 @@ const TreemapTheme = (props: TreemapThemeProps) => {
           width: width - strokeWidth * 3 - margin,
           height: height - margin,
           backgroundColor: fill,
-          backgroundImage: `url(http://photogrammar.yale.edu/photos/service/pnp/${imgSrc})`,
+          backgroundImage: `url(//s3.amazonaws.com/dsl-general/photogrammar/${imgSrc})`,
 
           borderLeft: `${strokeWidth * 3}px ${fill} solid`,
         }}

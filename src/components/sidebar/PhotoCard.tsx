@@ -76,7 +76,7 @@ const PhotoCard = (props: Props) => {
             <div
               className="thumbnail"
               style={{
-                backgroundImage: `url(http://photogrammar.yale.edu/photos/service/pnp/${img_thumb_img})`,
+                backgroundImage: `url(//s3.amazonaws.com/dsl-general/photogrammar/${img_thumb_img})`,
               }}
             />
           ) : (

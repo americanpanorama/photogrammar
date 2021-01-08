@@ -67,6 +67,7 @@ Layout
     grid-template-columns: 100vw;
     grid-template-rows: 50px 50px 50vh 50px 75px calc(100vh - 75px);*/
     width: 100vw;
+    overflow-x: hidden;
   }
 
   #viz-canvas {

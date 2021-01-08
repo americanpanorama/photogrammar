@@ -51,7 +51,7 @@ const Lightbox = ({ fetchPath, closeLink }: { fetchPath: string; closeLink: stri
             linePieces.push(year.toString());
           }
           if (city && state) {
-            linePieces.push(`${city}, ${stateAbbr}`);
+            linePieces.push(`${city}, ${state}`);
           } else if (county && stateAbbr) {
             linePieces.push(`${county}, ${stateAbbr}`);
           } else if (stateAbbr) {
@@ -91,7 +91,7 @@ const Lightbox = ({ fetchPath, closeLink }: { fetchPath: string; closeLink: stri
 
               <figure>
                 <img 
-                  src={`http://photogrammar.yale.edu/photos/service/pnp/${img_large_path}`}
+                  src={`//s3.amazonaws.com/dsl-general/photogrammar/${img_large_path}`}
                   alt={captionLines.join('; ')}
                 />
                 {(captionLines.length > 0) && (

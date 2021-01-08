@@ -30,7 +30,7 @@ const SimilarPhotoCard = ({ photo, height, width }) => {
         </div>
         <div className="thumbnail">
           <img
-            src={`http://photogrammar.yale.edu/photos/service/pnp/${photo.img_thumb_img}`}
+            src={`//s3.amazonaws.com/dsl-general/photogrammar/${photo.img_thumb_img}`}
             alt={photo.caption}
           />
         </div>

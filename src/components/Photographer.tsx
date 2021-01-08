@@ -93,13 +93,13 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }: Props) => {
         <div className='bioAndInterviews'>
           {(bio) && (
             <div>
-              {bio.map((p) => {
+              {bio.map((p: string, idx: number) => {
                 const mdLinksPattern = new RegExp(/(\[[^\[]+\]\s?\(.+?\))/gm);
                 const mdEmPattern = new RegExp(/(\*[^*]*\*)/gm);
                 const splitPattern = new RegExp(mdEmPattern.source  + "|" + mdLinksPattern.source);
                 return (
-                  <p key={p}>
-                    {p.split(splitPattern).filter(pPart => pPart).map(pPart => {
+                  <p key={`paragraph${idx} ${p.substring(0, 30)}`}>
+                    {p.split(splitPattern).filter(pPart => pPart).map((pPart: string, partIdx: number) => {
                       if (pPart.match(mdLinksPattern)) {
                         const txt = pPart.match(/\[(.*?)\]/)[1];
                         const to = pPart.match(/\((.*?)\)/)[1];
@@ -107,7 +107,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }: Props) => {
                         return (
                           <Link
                             to={`${process.env.PUBLIC_URL}${to}`}
-                            key={pPart}
+                            key={`markdown${partIdx} ${pPart.substring(0, 30)}`}
                           >
                             {txt}
                           </Link>
@@ -115,13 +115,13 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }: Props) => {
                       }
                       if (pPart.match(/\*([^*]*)\*/)) {
                         return (
-                          <em key={pPart}>
+                          <em key={`markdown${partIdx} ${pPart.substring(0, 30)}`}>
                             {pPart.match(/\*([^*]*)\*/)[1]}
                           </em>
                         )
                       }
                       return (
-                        <React.Fragment key={pPart}>
+                        <React.Fragment key={`markdown${partIdx} ${pPart.substring(0, 30)}`}>
                           {pPart}
                         </React.Fragment>
                       );

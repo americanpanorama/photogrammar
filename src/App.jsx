@@ -19,6 +19,7 @@ import RoyStryker from './components/RoyStryker.js';
 import AikenAndWool from './components/AikenAndWool.js';
 import CBBaldwin from './components/CBBaldwin.js';
 import Search from './components/Search.js';
+import About from './components/About.tsx';
 
 const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, windowResized, searchOpen, isMobile }) => {
   useEffect(() => {
@@ -78,6 +79,9 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
                 </Route>
                 <Route path={'/photographers/'}>
                   <Photographers />
+                </Route>
+                <Route path='/about'>
+                  <About />
                 </Route>
                 <Route path={'/ohsearch/:searchFor'}>
                   <OralHistoriesSearch />

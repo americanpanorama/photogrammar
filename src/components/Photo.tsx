@@ -21,7 +21,24 @@ const loadPhotoData = async ({ photoMetadataQuery, similarPhotosQuery }: { photo
   ]);
   if (responses.some(res => !res.ok)) { console.warn(responses) }
   const dbDataPhoto: { rows: PhotoMetadata[] } = await responses[0].json();
+  const photoMetadata: PhotoMetadata = dbDataPhoto.rows[0];
   const dbDataSimilarPhotos: { rows: PhotoMetadata[] } = await responses[1].json();
+  // if the photo is part of a strip, retrieve those photos
+  if (photoMetadata.photograph_type) {
+    const stripQuery = `select * from photogrammar_photos where call_number = '${photoMetadata.call_number}' and photograph_type != 'ZC' order by photograph_type`;
+    const responseStripPhotos = await fetch(`https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=${encodeURIComponent(stripQuery)}`);
+    if (!responseStripPhotos.ok) {
+      console.warn(responseStripPhotos);
+    }
+    const stripPhotosJSON: { rows: PhotoMetadata[] } = await responseStripPhotos.json();
+    if (stripPhotosJSON.rows.length > 0) {
+      // there are two codes: `M${num}` or ABCDE
+      photoMetadata.stripPhotos = stripPhotosJSON.rows.map(sp => ({
+        ...sp,
+        idx: (sp.photograph_type.length === 1) ? sp.photograph_type.toLowerCase().charCodeAt(0) - 96 : parseInt(sp.photograph_type.substring(1)),
+      }));
+    }
+  }
   return {
     photoMetadata: dbDataPhoto.rows[0],
     similarPhotos: dbDataSimilarPhotos.rows,
@@ -37,8 +54,6 @@ const Photo = (props: Props) => {
     lightboxLink,
     makeLink,
   } = props;
-
-  const stripPhotos = [];
 
   return (
     <Async
@@ -63,6 +78,7 @@ const Photo = (props: Props) => {
           const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
           const {
+            loc_item_link,
             photographer_name,
             caption,
             year,
@@ -78,11 +94,11 @@ const Photo = (props: Props) => {
             // longitude,
             // latitude,
             img_large_path,
-            //stripPhotos,
+            stripPhotos,
           } = photoMetadata;
           const photographerKey = (photographer_name) ? photographer_name.replace(/[\s\.]/g, '') : null;
           const centroid = getCentroidForCounty(nhgis_join);
-          
+
           const captionLines: string[] = [];
           if (caption) {
             captionLines.push(`"${caption}"`);
@@ -115,9 +131,9 @@ const Photo = (props: Props) => {
           }
 
           // calculate some strip stats
-          //const stripLength = (stripPhotos && stripPhotos.length > 1) ? stripPhotos[stripPhotos.length -1].num : null;
-          //const stripNums = (stripPhotos && stripPhotos.length > 1) ? [...Array(stripLength).keys()].map(n => n + 1) : null;
-          //const selectedPhotoStripNum = (stripPhotos && stripPhotos.length > 1) ? parseInt(photoMetadata.photograph_type.substring(1)) : null;
+          const stripLength: number = (stripPhotos && stripPhotos.length > 1) ? stripPhotos[stripPhotos.length -1].idx : null;
+          const stripNums: number[] = (stripPhotos && stripPhotos.length > 1) ? (new Array<number>(stripLength)).fill(0).map((d: number, idx: number): number => idx + 1) : [];
+          const selectedPhotoStripNum: number = (stripPhotos && stripPhotos.length > 1) ? stripPhotos.find((sp: PhotoMetadata) => sp.loc_item_link === loc_item_link).idx : null;
 
           const closeLink = makeLink([{ type: 'set_clear_photo'}]);
 
@@ -246,7 +262,7 @@ const Photo = (props: Props) => {
               >
                 <Link to={lightboxLink}>
                   <img 
-                    src={`http://photogrammar.yale.edu/photos/service/pnp/${img_large_path}`}
+                    src={`//s3.amazonaws.com/dsl-general/photogrammar/${img_large_path}`}
                     className='full'
                     alt=""
                   />
@@ -256,25 +272,28 @@ const Photo = (props: Props) => {
               <div
                 className='relatedImages'
               >
-                {/* 
+
                 {(stripPhotos && stripPhotos.length > 1) && (
                   <React.Fragment>
                     <h5>
                       {`Part of a strip (${selectedPhotoStripNum} of ${stripLength})`}
                     </h5>
                     <div className='strip'>
-                      {stripNums.map(num => {
-                        const stripPhoto = stripPhotos.find(sp => sp.num === num);
+                      {stripNums.map((num: number) => {
+                        const stripPhoto = stripPhotos.find(sp => sp.idx === num);
                         if (stripPhoto) {
                           return (
-                            <Link to={`/photo/${stripPhoto.loc_item_link}`}>
+                            <Link 
+                              to={`/photo/${stripPhoto.loc_item_link}`}
+                              key={`stripPhoto${stripPhoto.loc_item_link}`}
+                            >
                               <div
                                 className={(num === selectedPhotoStripNum) ? 'stripPhoto selected' : 'stripPhoto'}
                                 style={{
-                                  backgroundImage: `url('http://photogrammar.yale.edu/photos/service/pnp/${stripPhoto.img_thumb_img}')`,
+                                  backgroundImage: `url('//s3.amazonaws.com/dsl-general/photogrammar/${stripPhoto.img_thumb_img}')`,
                                 }}
                               >
-                                <img src={`http://photogrammar.yale.edu/photos/service/pnp/${stripPhoto.img_thumb_img}`} />
+                                <img src={`//s3.amazonaws.com/dsl-general/photogrammar/${stripPhoto.img_thumb_img}`} />
                               </div>
                             </Link>
                           );
@@ -284,7 +303,6 @@ const Photo = (props: Props) => {
                     </div>
                   </React.Fragment>
                 )}
-              */}
 
                 {(photoMetadata.similarPhotos.length > 0) && (
                   <React.Fragment>

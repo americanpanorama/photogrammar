@@ -1,0 +1,32 @@
+#about {
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+#about h2 {
+  text-align: center;
+}
+
+#about h4 {
+  font-size: 1.25em;
+}
+
+#about p, #about li {
+  font-size: 1.1em;
+  color: #222;
+}
+
+#about .credit  {
+  display: grid; 
+  grid-template-columns: 100px auto;
+  grid-column-gap: 15px;
+}
+
+#about .credit .label {
+  text-align: right;
+  font-style: italic;
+}
+
+#about .credit .value {
+  color: #005B71;
+}

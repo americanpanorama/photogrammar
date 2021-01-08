@@ -226,7 +226,7 @@ export function calculateDimensions(options) {
   }
 
   // the photocard will be scaled to be between 150 and 200px
-  const photoCardMinWidth = (expandedSidebar) ? 250 : 160;
+  const photoCardMinWidth = (expandedSidebar) ? 200 : 145;
   const photoCardMaxWidth = 300;
   const maxCols = Math.floor(sidebarWidth / photoCardMinWidth);
   let cols = Math.floor(sidebarWidth / photoCardMinWidth);
@@ -249,8 +249,8 @@ export function calculateDimensions(options) {
   //const photoCardWidth = Math.min(200, sidebarWidth / 2);
   const photoCardPaddingMargin = Math.min(5, photoCardWidth * 0.25);
   const photoCardBorderWidth = Math.max(2, photoCardWidth * 0.01);
-  const interiorWidth = photoCardWidth - photoCardPaddingMargin * 2 - photoCardBorderWidth * 2;
-  const interiorHeight = photoCardHeight - photoCardPaddingMargin * 2 - photoCardBorderWidth * 2;
+  const interiorWidth = photoCardWidth - photoCardPaddingMargin * 2;
+  const interiorHeight = photoCardHeight - photoCardPaddingMargin * 2;
   //const photoCardHeight = 350;
   //const cols = Math.floor(sidebarWidth / photoCardWidth);
   //const rows = Math.max(1, Math.floor(sidebar.photosHeight / photoCardHeight));

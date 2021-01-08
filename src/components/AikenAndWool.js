@@ -6,6 +6,7 @@ const mapStateToProps = state =>  {
     selectedPhotographerData: {
       key: 'AikenAndWool',
       img: 'HelenWool.jpg',
+      locId: "http://id.loc.gov/authorities/names/nr2004032735",
       type: 'fsa',
       interview: {
         name: 'Oral history interview with Charlotte Aiken and Helen Wool, 1964 April 17. Archives of American Art, Smithsonian Institution.',

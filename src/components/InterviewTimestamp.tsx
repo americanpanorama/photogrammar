@@ -33,7 +33,7 @@ const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying, jumpTo, highligh
 
   return (
     <div
-      key={timestamp}
+      key={`timestamp${timestamp}`}
       ref={ref}
       className='transcriptSection'
       style={{
@@ -47,12 +47,11 @@ const InterviewTimestamp = ({ timestamp, paragraphs, isPlaying, jumpTo, highligh
         {toHHMMSS(timestamp)}
       </div>
       <div className='section'>
-        {paragraphs.map((p, idx) => (
+        {paragraphs.map((p: string, idx: number) => (
           <p key={`paragraph${idx} ${p.substring(0, 30)}`}>
             <Highlighter
               searchWords={highlight}
               textToHighlight={p}
-              key={`paragraph${idx} ${p.substring(0, 30)}`}
             />
           </p>
         ))}

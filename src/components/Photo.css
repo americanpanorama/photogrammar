@@ -135,6 +135,13 @@ button[role=expand] {
       margin: 0;
     }
 
+  .metadata .metadatum {
+    max-width: 400px;
+    text-align: right;
+    float: right;
+    clear: both;
+  }
+
 }
 
 .selectedPhoto .img > * {

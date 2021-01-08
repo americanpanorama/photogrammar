@@ -345,7 +345,7 @@ export const getTimelineCellsFetchPath = createSelector(
   [getSelectedViz, getSelectedMapView, getSelectedCounty, getSelectedCity, getSelectedState, getSelectedTheme, getFilterTerms, makeWheres],
   (selectedViz, selectedMapView, selectedCounty, selectedCity, selectedState, selectedTheme, filterTerms, wheres) => {
     if (filterTerms.length === 0) {
-      let path;
+      let path = `${process.env.PUBLIC_URL}/data/photoCounts/national.json`;
       if (selectedViz === 'map') {
         if (selectedMapView === 'counties') {
           if (selectedCounty) {

@@ -11,7 +11,7 @@ const Microphone = ({ onClick, className, role }: Props) => {
     <button
       role={role}
       onClick={(onClick) ? onClick : () => false}
-      className={className}
+      className={`microphoneIcon ${className}`}
     >
       <svg
         width={20}

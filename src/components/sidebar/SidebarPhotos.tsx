@@ -19,7 +19,7 @@ const formatPhotos = (data: AsyncFetch | PhotoMetadata[], offset: number, displa
   return rows.map((sp: PhotoMetadata, idx: number) => ({
     ...sp,
     caption: (sp.caption) ? he.decode(sp.caption) : '',
-    stateAbbr: us.lookup(sp.state).abbr as StateAbbr,
+    stateAbbr: (sp.state) ? us.lookup(sp.state).abbr as StateAbbr : null,
     idx: (fromDBAPI(data)) ? sp.theoffset + idx : sliceStart + idx,
   }));
 };
@@ -68,7 +68,7 @@ const SidebarPhotos = (props: Props) => {
   })
 
   const { data, error }: { data: AsyncFetch | PhotoMetadata[]; error: any; } = useFetch(query, { headers: { accept: "application/json" } });
-  if (error) return error.message;
+  if (error) { console.log(error); };
   if (data) {
     // calculate the five possible positions
     const getTranslateX = (offsetIdx: number): number => {
@@ -95,9 +95,8 @@ const SidebarPhotos = (props: Props) => {
     const calculateBlankCards = (numCards: number): string[] => new Array(Math.max(0, displayableCards - numCards)).fill('');
 
     const photos: PhotoMetadata[] = formatPhotos(data, sidebarPhotosOffset, displayableCards);
-
     if (photos.length === 0) {
-      return (<div>no photos available</div>);
+      return (<h2 className='noPhotos'>no photos available</h2>);
     }
     // assign the retrieved photos to the appropriate set and calculate the offset # of the current set
     let prevPhotos: PhotoMetadata[] = [];

@@ -206,7 +206,7 @@ const TimelineHeatmap = (props: Props) => {
     >
       {({ data, error, isPending }) => {
         //if (isPending) return "Loading..."
-        if (error) return `Something went wrong: ${error.message}`
+        if (error) return `Something went wrong with the timeline: ${error.message}`
         if (data) {
           const rows = formatPhotographers(data);
 

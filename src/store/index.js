@@ -34,6 +34,6 @@ export default function configureStore() {
  return createStore(
    reducers,
    initialState,
-   applyMiddleware(thunk, hashManager, logger)
+   applyMiddleware(thunk)
  );
 }

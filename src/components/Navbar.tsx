@@ -1,9 +1,11 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import * as React from 'react';
+import { Link, useLocation } from "react-router-dom";
 import './Navbar.css';
 import { Props } from './Navbar.d';
 
 const Navbar = ({ countiesLink, citiesLink, themesLink, selectedViz, selectedMapView, toggleSearch, isMobile }: Props) => {
+  const location = useLocation();
+  const { pathname } = location;
   return (
     <nav className="navbar">
       <ul className="nav navbar-nav navbar-right">
@@ -12,20 +14,20 @@ const Navbar = ({ countiesLink, citiesLink, themesLink, selectedViz, selectedMap
         >
           Search
         </li>
-        <li className={(selectedViz === 'photographers') ? 'active photographerslink' : 'photographerslink'}>
+        <li className={(selectedViz === 'photographers' && pathname !== '/about') ? 'active photographerslink' : 'photographerslink'}>
           <Link to='/photographers'>
             Photographers
           </Link>
         </li>
-        <li className={(selectedViz === 'themes') ? 'active themes' : 'themes'}>
+        <li className={(selectedViz === 'themes' && pathname !== '/about') ? 'active themes' : 'themes'}>
           <Link to={themesLink}>Themes</Link>
         </li>
-        <li className={(selectedViz === 'map' && selectedMapView === 'counties') ? 'active counties' : 'counties'}>
+        <li className={(selectedViz === 'map' && selectedMapView === 'counties' && pathname !== '/about') ? 'active counties' : 'counties'}>
           <Link to={countiesLink}>
             {`${(!isMobile) ? 'Map: ' : ''}Counties`}
           </Link>
         </li>
-        <li className={(selectedViz === 'map' && selectedMapView === 'cities') ? 'active cities' : 'cities'}>
+        <li className={(selectedViz === 'map' && selectedMapView === 'cities' && pathname !== '/about') ? 'active cities' : 'cities'}>
           <Link to={citiesLink}>
             {`${(!isMobile) ? 'Map: ' : ''}Cities & Towns`}
           </Link>
@@ -38,7 +40,7 @@ const Navbar = ({ countiesLink, citiesLink, themesLink, selectedViz, selectedMap
           </li>
         ) : (
           <React.Fragment>
-            <li><a href="#projects" className="section-scroll">About</a></li>
+            <li className={(pathname === '/about') ? 'active': ''}><Link to='/about'>About</Link></li>
             <li><a href="https://dsl.richmond.edu/panorama#maps" className="section-scroll" target='_blank'>American Panorama</a></li>
           </React.Fragment>
         )}

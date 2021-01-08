@@ -2,6 +2,7 @@
   width: 90%;
   height: 100px;
   margin: 10px auto;
+  border-top: 3px solid black;
 }
 
 #sidebarHeader h3 {
@@ -26,6 +27,9 @@
 }
 
 @media only screen and (min-width: 768px) {
+  #sidebarHeader {
+    border: 0;
+  }
   #sidebarHeader .timeAndNav {
     display: grid;
     grid-template-columns: auto auto 40px 40px 40px;

@@ -209,6 +209,8 @@ export interface CityMetadata {
   s: string;               // state name
   lat: number;
   lng: number;
+  x?: number;
+  y?: number;
 }
 
 export interface VisibleCity extends City {
@@ -312,6 +314,7 @@ export interface PhotoMetadata {
   vanderbilt_level1: string;
   vanderbilt_level2: string;
   vanderbilt_level3: string;
+  photograph_type?: string;
   img_large_path?: string;
   img_thumb_img?: string;
   loc_item_link?: string;
@@ -334,6 +337,7 @@ export interface Photographer {
 export interface PhotographerMetadata extends Photographer {
   img: string;
   type: "staff" | "nonstaff";
+  locId: string;
   bio: string[];
   interview?: {
     name: string;

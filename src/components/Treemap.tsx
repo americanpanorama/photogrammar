@@ -4,6 +4,7 @@ import Async from "react-async";
 import * as d3 from 'd3';
 import TreemapTheme from './TreemapTheme';
 import { TreemapProps, ThemePhoto, AsyncParams, Dimensions, Theme, TreemapThemeProps } from '../index.d';
+import { ThemeStats, DBData, AsyncData } from './Treemap.d';
 import './Treemap.css';
 
 interface OrganizedTheme {
@@ -35,16 +36,17 @@ const loadThemes = async ({ fetchPath, photosQuery }: { fetchPath: string; photo
     fetch(fetchPath),
     fetch(photosQuery)
   ]);
-  const rawThemes: any = await responses[0].json();
+  const rawThemes: DBData | AsyncData = await responses[0].json();
   // the local async data is already organized; if this is retrieved from carto (signaled by the `row` param) it needs to be organized
   let themes: Theme = {
     total: 0,
     children: {},
   };
-  if (rawThemes.themes.rows) {
-    const { rows } = rawThemes.themes;
-    if (rows.length > 0) {
-      rows.forEach((theme: {vanderbilt_level1: string, vanderbilt_level2: string, vanderbilt_level3: string, total: number}) => {
+  const isDBData = (data: DBData | AsyncData): data is DBData => (data as DBData).rows !== undefined;
+  
+  if (isDBData(rawThemes)) {
+    if (rawThemes.rows.length > 0) {
+      rawThemes.rows.forEach((theme: ThemeStats) => {
         const { vanderbilt_level1: level1, vanderbilt_level2: level2, vanderbilt_level3: level3, total } = theme;
         themes.children[level1] = themes.children[level1] || {
           total: 0,
@@ -215,77 +217,82 @@ const Treemap = (props: TreemapProps) => {
   const ref = useRef();
 
   return (
-    <Async
-      promiseFn={loadThemes}
-      fetchPath={fetchPath}
-      photosQuery={photosQuery}
-      watch={photosQuery}
+    <div
+      className='treemap'
+      style={{
+        width: width,
+        height: height,
+        position: 'relative'
+      }}
     >
-      {({ data, error, isPending }: AsyncParams) => {
-        if (error) return `Something went wrong: ${error.message}`;
-        if (data) {
-          const { themes, ancestors } = formatThemes(data, timeRange, selectedTheme, dimensions, filterTerms, makeLink);
-          const topLink = makeLink([{
-            type: 'set_theme',
-            payload: 'root',
-          }]);
-          return (
-            <div
-              className='treemap'
-              style={{
-                width: width,
-                height: height,
-                position: 'relative'
-              }}
-            >
-              <ul className='breadcrumbs'>
-                {(selectedTheme !== 'root') &&
-                  <li>
-                    <Link
-                      to={topLink}
-                    >
-                      Top
-                    </Link>
-                  </li>
-                }
-                {ancestors.map(ancestor => {
-                  const ancestorLink = makeLink([{
-                    type: 'set_theme',
-                    payload: ancestor.key,
-                  }]);
-                  return (
-                    <li
-                      key={ancestor.key}
-                    >
+      <label
+        className='explanation'
+        title='Visualization of the classification system designed by Paul Vanderbilt in 1942. It is a three-tier classification starting with 12 main subject headings (ex. THE LAND), then 1300 sub-headings (ex. Mountains, Deserts, Foothills, Plains) and then sub-sub headings. 88,000 photographs were assigned classifications.'
+      >
+        1942 Classification System
+      </label>
+
+      <Async
+        promiseFn={loadThemes}
+        fetchPath={fetchPath}
+        photosQuery={photosQuery}
+        watch={photosQuery}
+      >
+        {({ data, error, isPending }: AsyncParams) => {
+          if (error) return `Something went wrong: ${error.message}`;
+          if (data) {
+            const { themes, ancestors } = formatThemes(data, timeRange, selectedTheme, dimensions, filterTerms, makeLink);
+            const topLink = makeLink([{
+              type: 'set_theme',
+              payload: 'root',
+            }]);
+            // if none of the themes has any height, there aren't any results
+            if (themes.every((d: TreemapThemeProps) => d.height === 0)) {
+              return <h2 className='noResults'>No results</h2>;
+            }
+
+            return (
+              <React.Fragment>
+                <ul className='breadcrumbs'>
+                  {(selectedTheme !== 'root') &&
+                    <li>
                       <Link
-                        to={ancestorLink}
+                        to={topLink}
                       >
-                        {ancestor.name}
+                        Top
                       </Link>
                     </li>
-                  );
-                })}
-                
-              </ul>
-              {themes.map((cat: TreemapThemeProps) => (
-                  <TreemapTheme
-                    {...cat}
-                    key={cat.id}
-                  />
-              ))}
-
-              <label
-                className='explanation'
-                title='Visualization of the classification system designed by Paul Vanderbilt in 1942. It is a three-tier classification starting with 12 main subject headings (ex. THE LAND), then 1300 sub-headings (ex. Mountains, Deserts, Foothills, Plains) and then sub-sub headings. 88,000 photographs were assigned classifications.'
-              >
-                1942 Classification System
-              </label>
-
-            </div>
-          )
-        }
-      }}
-    </Async>
+                  }
+                  {ancestors.map(ancestor => {
+                    const ancestorLink = makeLink([{
+                      type: 'set_theme',
+                      payload: ancestor.key,
+                    }]);
+                    return (
+                      <li
+                        key={ancestor.key}
+                      >
+                        <Link
+                          to={ancestorLink}
+                        >
+                          {ancestor.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+                {themes.map((cat: TreemapThemeProps) => (
+                    <TreemapTheme
+                      {...cat}
+                      key={cat.id}
+                    />
+                ))}
+              </React.Fragment>
+            );
+          }
+        }}
+      </Async>
+    </div>
   );
 };
 
