@@ -1,1 +1,1 @@
-[{"year":1941,"month":8,"photographer":"JackDelano","count":1233},{"year":1941,"month":7,"photographer":"JackDelano","count":29},{"year":1940,"month":3,"photographer":"MarionPostWolcott","count":269},{"year":1941,"month":3,"photographer":"MarionPostWolcott","count":8},{"year":1940,"month":2,"photographer":"MarionPostWolcott","count":19}]
+[{"y":1940,"m":2,"pk":"MarionPostWolcott","t":96},{"y":1941,"m":8,"pk":"JackDelano","t":581},{"y":1941,"m":7,"pk":"JackDelano","t":29},{"y":1940,"m":3,"pk":"MarionPostWolcott","t":22},{"y":1941,"m":3,"pk":"MarionPostWolcott","t":8}]

@@ -1,1 +1,1 @@
-[{"year":1935,"month":11,"photographer":"CarlMydans","count":45},{"year":1936,"month":12,"photographer":"ArthurRothstein","count":22},{"year":1938,"month":10,"photographer":"ArthurRothstein","count":24}]
+[{"y":1935,"m":11,"pk":"CarlMydans","t":2},{"y":1936,"m":12,"pk":"ArthurRothstein","t":22},{"y":1938,"m":10,"pk":"ArthurRothstein","t":42},{"y":1941,"m":null,"pk":"unspecified","t":1}]

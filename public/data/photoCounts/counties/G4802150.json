@@ -1,1 +1,1 @@
-[{"year":1942,"month":1,"photographer":"ArthurRothstein","count":306},{"year":1942,"month":2,"photographer":"ArthurRothstein","count":101},{"year":1939,"month":1,"photographer":"RussellLee","count":29},{"year":1939,"month":2,"photographer":"RussellLee","count":2326}]
+[{"y":1942,"m":1,"pk":"ArthurRothstein","t":672},{"y":1942,"m":2,"pk":"ArthurRothstein","t":472},{"y":1939,"m":2,"pk":"RussellLee","t":1549},{"y":1939,"m":1,"pk":"RussellLee","t":66},{"y":1943,"m":null,"pk":"unspecified","t":1}]

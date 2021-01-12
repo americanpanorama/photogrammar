@@ -1,1 +1,1 @@
-[{"year":1939,"month":5,"photographer":"JohnVachon","count":2},{"year":1935,"month":10,"photographer":"BenShahn","count":3},{"year":1938,"month":9,"photographer":"MarionPostWolcott","count":15},{"year":1937,"month":5,"photographer":"RussellLee","count":1}]
+[{"y":1939,"m":5,"pk":"JohnVachon","t":2},{"y":1935,"m":10,"pk":"BenShahn","t":3},{"y":1938,"m":9,"pk":"MarionPostWolcott","t":133},{"y":1937,"m":null,"pk":"BenShahn","t":1},{"y":1935,"m":null,"pk":"ElmerJohnson","t":2},{"y":1937,"m":5,"pk":"RussellLee","t":1}]

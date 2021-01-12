@@ -1,1 +1,1 @@
-[{"year":1942,"month":6,"photographer":"ArthurRothstein","count":39},{"year":1942,"month":8,"photographer":"JackDelano","count":463},{"year":1942,"month":4,"photographer":"JackDelano","count":8}]
+[{"y":1942,"m":8,"pk":"JackDelano","t":2348},{"y":1942,"m":6,"pk":"ArthurRothstein","t":135},{"y":1941,"m":null,"pk":"CarlPryer","t":43},{"y":1940,"m":null,"pk":"CarlPryer","t":13},{"y":1942,"m":4,"pk":"JackDelano","t":13}]

@@ -1,1 +1,1 @@
-[{"year":1940,"month":12,"photographer":"JackDelano","count":655},{"year":1938,"month":8,"photographer":"SheldonDick","count":3},{"year":1943,"month":2,"photographer":"AnnRosener","count":3}]
+[{"y":1940,"m":12,"pk":"JackDelano","t":962},{"y":1938,"m":8,"pk":"SheldonDick","t":5},{"y":null,"m":null,"pk":"unspecified","t":2},{"y":1943,"m":2,"pk":"AnnRosener","t":3}]

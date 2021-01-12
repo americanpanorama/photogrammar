@@ -1,1 +1,1 @@
-[{"year":1936,"month":5,"photographer":"ArthurRothstein","count":20},{"year":1942,"month":7,"photographer":"AlfredTPalmer","count":121},{"year":1942,"month":6,"photographer":"AlfredTPalmer","count":11},{"year":1943,"month":3,"photographer":"JackDelano","count":234},{"year":1942,"month":10,"photographer":"AlfredTPalmer","count":15}]
+[{"y":1936,"m":5,"pk":"ArthurRothstein","t":35},{"y":1942,"m":7,"pk":"AlfredTPalmer","t":303},{"y":1943,"m":3,"pk":"JackDelano","t":234},{"y":1942,"m":10,"pk":"AlfredTPalmer","t":29},{"y":1942,"m":6,"pk":"AlfredTPalmer","t":21}]

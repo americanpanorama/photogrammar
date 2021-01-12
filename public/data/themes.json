@@ -1,0 +1,5038 @@
+[
+  {
+    "label": "Alphabetical Section",
+    "value": "root|Alphabetical Section"
+  },
+  {
+    "label": "Alphabetical Section / General",
+    "value": "root|Alphabetical Section|General"
+  },
+  {
+    "label": "Alphabetical Section / General / Animals",
+    "value": "root|Alphabetical Section|General|Animals"
+  },
+  {
+    "label": "Alphabetical Section / General / Barclay President of Liberia, State Visit",
+    "value": "root|Alphabetical Section|General|Barclay President of Liberia, State Visit"
+  },
+  {
+    "label": "Alphabetical Section / General / Bellows",
+    "value": "root|Alphabetical Section|General|Bellows"
+  },
+  {
+    "label": "Alphabetical Section / General / Bells",
+    "value": "root|Alphabetical Section|General|Bells"
+  },
+  {
+    "label": "Alphabetical Section / General / Cats",
+    "value": "root|Alphabetical Section|General|Cats"
+  },
+  {
+    "label": "Alphabetical Section / General / Cigarette Rolling",
+    "value": "root|Alphabetical Section|General|Cigarette Rolling"
+  },
+  {
+    "label": "Alphabetical Section / General / Coffee-Mill",
+    "value": "root|Alphabetical Section|General|Coffee-Mill"
+  },
+  {
+    "label": "Alphabetical Section / General / Conf. International Labour Office",
+    "value": "root|Alphabetical Section|General|Conf. International Labour Office"
+  },
+  {
+    "label": "Alphabetical Section / General / Dogs",
+    "value": "root|Alphabetical Section|General|Dogs"
+  },
+  {
+    "label": "Alphabetical Section / General / Effigy",
+    "value": "root|Alphabetical Section|General|Effigy"
+  },
+  {
+    "label": "Alphabetical Section / General / Exhibit: Faces of America",
+    "value": "root|Alphabetical Section|General|Exhibit: Faces of America"
+  },
+  {
+    "label": "Alphabetical Section / General / Exhibit: Image of America",
+    "value": "root|Alphabetical Section|General|Exhibit: Image of America"
+  },
+  {
+    "label": "Alphabetical Section / General / Exhibit: San Diego, 1936",
+    "value": "root|Alphabetical Section|General|Exhibit: San Diego, 1936"
+  },
+  {
+    "label": "Alphabetical Section / General / Flags",
+    "value": "root|Alphabetical Section|General|Flags"
+  },
+  {
+    "label": "Alphabetical Section / General / Gags",
+    "value": "root|Alphabetical Section|General|Gags"
+  },
+  {
+    "label": "Alphabetical Section / General / Guns",
+    "value": "root|Alphabetical Section|General|Guns"
+  },
+  {
+    "label": "Alphabetical Section / General / Hitching Post",
+    "value": "root|Alphabetical Section|General|Hitching Post"
+  },
+  {
+    "label": "Alphabetical Section / General / International Youth Assembly",
+    "value": "root|Alphabetical Section|General|International Youth Assembly"
+  },
+  {
+    "label": "Alphabetical Section / General / Leaves",
+    "value": "root|Alphabetical Section|General|Leaves"
+  },
+  {
+    "label": "Alphabetical Section / General / Lighting Fixture",
+    "value": "root|Alphabetical Section|General|Lighting Fixture"
+  },
+  {
+    "label": "Alphabetical Section / General / Sausage Chopper",
+    "value": "root|Alphabetical Section|General|Sausage Chopper"
+  },
+  {
+    "label": "Alphabetical Section / General / Scales",
+    "value": "root|Alphabetical Section|General|Scales"
+  },
+  {
+    "label": "Alphabetical Section / General / Scarecrows",
+    "value": "root|Alphabetical Section|General|Scarecrows"
+  },
+  {
+    "label": "Alphabetical Section / General / Signs",
+    "value": "root|Alphabetical Section|General|Signs"
+  },
+  {
+    "label": "Alphabetical Section / General / Swedish Journalists",
+    "value": "root|Alphabetical Section|General|Swedish Journalists"
+  },
+  {
+    "label": "Alphabetical Section / General / Turkish Journalists",
+    "value": "root|Alphabetical Section|General|Turkish Journalists"
+  },
+  {
+    "label": "Alphabetical Section / General / Vachon Photos",
+    "value": "root|Alphabetical Section|General|Vachon Photos"
+  },
+  {
+    "label": "Alphabetical Section / General / Watering Trough",
+    "value": "root|Alphabetical Section|General|Watering Trough"
+  },
+  {
+    "label": "Alphabetical Section / General / Weather Vanes",
+    "value": "root|Alphabetical Section|General|Weather Vanes"
+  },
+  {
+    "label": "Alphabetical Section / General / Wheels",
+    "value": "root|Alphabetical Section|General|Wheels"
+  },
+  {
+    "label": "Cities and Towns",
+    "value": "root|Cities and Towns"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas",
+    "value": "root|Cities and Towns|City Parks, Residential Areas"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas / Cemeteries",
+    "value": "root|Cities and Towns|City Parks, Residential Areas|Cemeteries"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas / Food, Garden Plots",
+    "value": "root|Cities and Towns|City Parks, Residential Areas|Food, Garden Plots"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas / Monuments",
+    "value": "root|Cities and Towns|City Parks, Residential Areas|Monuments"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas / Parks",
+    "value": "root|Cities and Towns|City Parks, Residential Areas|Parks"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas / Real Estate Developments",
+    "value": "root|Cities and Towns|City Parks, Residential Areas|Real Estate Developments"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas / Suburban Estates",
+    "value": "root|Cities and Towns|City Parks, Residential Areas|Suburban Estates"
+  },
+  {
+    "label": "Cities and Towns / City Parks, Residential Areas / Suburbs",
+    "value": "root|Cities and Towns|City Parks, Residential Areas|Suburbs"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings",
+    "value": "root|Cities and Towns|City Streets, Buildings"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Buildings",
+    "value": "root|Cities and Towns|City Streets, Buildings|Buildings"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Cities, Overall Views",
+    "value": "root|Cities and Towns|City Streets, Buildings|Cities, Overall Views"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Construction",
+    "value": "root|Cities and Towns|City Streets, Buildings|Construction"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Downtown Streets",
+    "value": "root|Cities and Towns|City Streets, Buildings|Downtown Streets"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Highway Approaches to City",
+    "value": "root|Cities and Towns|City Streets, Buildings|Highway Approaches to City"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Housing Projects",
+    "value": "root|Cities and Towns|City Streets, Buildings|Housing Projects"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Industrial Sections",
+    "value": "root|Cities and Towns|City Streets, Buildings|Industrial Sections"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Main Streets in Small Cities",
+    "value": "root|Cities and Towns|City Streets, Buildings|Main Streets in Small Cities"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Miscellaneous",
+    "value": "root|Cities and Towns|City Streets, Buildings|Miscellaneous"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Miscellaneous Buildings",
+    "value": "root|Cities and Towns|City Streets, Buildings|Miscellaneous Buildings"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / New York",
+    "value": "root|Cities and Towns|City Streets, Buildings|New York"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Parking",
+    "value": "root|Cities and Towns|City Streets, Buildings|Parking"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Secondary Streets in Large Cities",
+    "value": "root|Cities and Towns|City Streets, Buildings|Secondary Streets in Large Cities"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Slums",
+    "value": "root|Cities and Towns|City Streets, Buildings|Slums"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Stores",
+    "value": "root|Cities and Towns|City Streets, Buildings|Stores"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Traffic",
+    "value": "root|Cities and Towns|City Streets, Buildings|Traffic"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Washington D.C.",
+    "value": "root|Cities and Towns|City Streets, Buildings|Washington D.C."
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Washington D.C. Government Buildings",
+    "value": "root|Cities and Towns|City Streets, Buildings|Washington D.C. Government Buildings"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Waterfronts, Docks",
+    "value": "root|Cities and Towns|City Streets, Buildings|Waterfronts, Docks"
+  },
+  {
+    "label": "Cities and Towns / City Streets, Buildings / Workers' Houses",
+    "value": "root|Cities and Towns|City Streets, Buildings|Workers' Houses"
+  },
+  {
+    "label": "Cities and Towns / General",
+    "value": "root|Cities and Towns|General"
+  },
+  {
+    "label": "Cities and Towns / General / Cities",
+    "value": "root|Cities and Towns|General|Cities"
+  },
+  {
+    "label": "Cities and Towns / General / San Juan, Puerto Rico",
+    "value": "root|Cities and Towns|General|San Juan, Puerto Rico"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities",
+    "value": "root|Cities and Towns|Towns and Small Cities"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Abandoned Buildings",
+    "value": "root|Cities and Towns|Towns and Small Cities|Abandoned Buildings"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Aliquippa, Pa",
+    "value": "root|Cities and Towns|Towns and Small Cities|Aliquippa, Pa"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Boom Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Boom Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Buildings",
+    "value": "root|Cities and Towns|Towns and Small Cities|Buildings"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Cemeteries",
+    "value": "root|Cities and Towns|Towns and Small Cities|Cemeteries"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Company Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Company Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Company and Plantation Housing",
+    "value": "root|Cities and Towns|Towns and Small Cities|Company and Plantation Housing"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Consumers, Utah",
+    "value": "root|Cities and Towns|Towns and Small Cities|Consumers, Utah"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Deserted Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Deserted Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Fishing Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Fishing Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Green Belt. MD",
+    "value": "root|Cities and Towns|Towns and Small Cities|Green Belt. MD"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Houses",
+    "value": "root|Cities and Towns|Towns and Small Cities|Houses"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Housing Projects",
+    "value": "root|Cities and Towns|Towns and Small Cities|Housing Projects"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Industrial Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Industrial Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Mexican Sections",
+    "value": "root|Cities and Towns|Towns and Small Cities|Mexican Sections"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Mill Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Mill Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / MiningTowns",
+    "value": "root|Cities and Towns|Towns and Small Cities|MiningTowns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Monuments",
+    "value": "root|Cities and Towns|Towns and Small Cities|Monuments"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Overall Views",
+    "value": "root|Cities and Towns|Towns and Small Cities|Overall Views"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Parks",
+    "value": "root|Cities and Towns|Towns and Small Cities|Parks"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Planned Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Planned Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Pueblos",
+    "value": "root|Cities and Towns|Towns and Small Cities|Pueblos"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Real Estate Developments",
+    "value": "root|Cities and Towns|Towns and Small Cities|Real Estate Developments"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Restored Williamsburg, Va",
+    "value": "root|Cities and Towns|Towns and Small Cities|Restored Williamsburg, Va"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Signs and Historical Markers",
+    "value": "root|Cities and Towns|Towns and Small Cities|Signs and Historical Markers"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Slums",
+    "value": "root|Cities and Towns|Towns and Small Cities|Slums"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Stores",
+    "value": "root|Cities and Towns|Towns and Small Cities|Stores"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Streets",
+    "value": "root|Cities and Towns|Towns and Small Cities|Streets"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Towns",
+    "value": "root|Cities and Towns|Towns and Small Cities|Towns"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Walks, Underpasses",
+    "value": "root|Cities and Towns|Towns and Small Cities|Walks, Underpasses"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / Waterfronts",
+    "value": "root|Cities and Towns|Towns and Small Cities|Waterfronts"
+  },
+  {
+    "label": "Cities and Towns / Towns and Small Cities / West Virginia",
+    "value": "root|Cities and Towns|Towns and Small Cities|West Virginia"
+  },
+  {
+    "label": "Homes and Living Conditions",
+    "value": "root|Homes and Living Conditions"
+  },
+  {
+    "label": "Homes and Living Conditions / Exteriors",
+    "value": "root|Homes and Living Conditions|Exteriors"
+  },
+  {
+    "label": "Homes and Living Conditions / Exteriors / Gardens",
+    "value": "root|Homes and Living Conditions|Exteriors|Gardens"
+  },
+  {
+    "label": "Homes and Living Conditions / Exteriors / Porches, Yards, Gardens",
+    "value": "root|Homes and Living Conditions|Exteriors|Porches, Yards, Gardens"
+  },
+  {
+    "label": "Homes and Living Conditions / Exteriors / Servants",
+    "value": "root|Homes and Living Conditions|Exteriors|Servants"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities",
+    "value": "root|Homes and Living Conditions|Household Activities"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Canning and Preserving",
+    "value": "root|Homes and Living Conditions|Household Activities|Canning and Preserving"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Community Canning Centers",
+    "value": "root|Homes and Living Conditions|Household Activities|Community Canning Centers"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Cooking and Eating Outdoors",
+    "value": "root|Homes and Living Conditions|Household Activities|Cooking and Eating Outdoors"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Eating",
+    "value": "root|Homes and Living Conditions|Household Activities|Eating"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Food Preparation",
+    "value": "root|Homes and Living Conditions|Household Activities|Food Preparation"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Fuel Supply",
+    "value": "root|Homes and Living Conditions|Household Activities|Fuel Supply"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Housework",
+    "value": "root|Homes and Living Conditions|Household Activities|Housework"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Laundry , Ironing",
+    "value": "root|Homes and Living Conditions|Household Activities|Laundry , Ironing"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Men's Work, Maintenance",
+    "value": "root|Homes and Living Conditions|Household Activities|Men's Work, Maintenance"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Other Preservation Methods",
+    "value": "root|Homes and Living Conditions|Household Activities|Other Preservation Methods"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Outdoor Oven",
+    "value": "root|Homes and Living Conditions|Household Activities|Outdoor Oven"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Personal Cleanliness",
+    "value": "root|Homes and Living Conditions|Household Activities|Personal Cleanliness"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Privies, Toilets",
+    "value": "root|Homes and Living Conditions|Household Activities|Privies, Toilets"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Sleeping",
+    "value": "root|Homes and Living Conditions|Household Activities|Sleeping"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Soap Making",
+    "value": "root|Homes and Living Conditions|Household Activities|Soap Making"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Textile Crafts, Sewing, Weaving",
+    "value": "root|Homes and Living Conditions|Household Activities|Textile Crafts, Sewing, Weaving"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Washing Dishes, Cleaning",
+    "value": "root|Homes and Living Conditions|Household Activities|Washing Dishes, Cleaning"
+  },
+  {
+    "label": "Homes and Living Conditions / Household Activities / Water Supply",
+    "value": "root|Homes and Living Conditions|Household Activities|Water Supply"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes",
+    "value": "root|Homes and Living Conditions|Premanent Homes"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Abandoned Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Abandoned Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Apartment Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Apartment Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Architectural Details",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Architectural Details"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Arriving and Leaving Home",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Arriving and Leaving Home"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Details, Decorative Objects",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Details, Decorative Objects"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Farm Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Farm Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Furniture",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Furniture"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Hobbies, Collections",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Hobbies, Collections"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Home, Living Conditions",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Home, Living Conditions"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Interiors in Bad Condition",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Interiors in Bad Condition"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Listening to Radio",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Listening to Radio"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Mansions and Plantations",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Mansions and Plantations"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / New England Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|New England Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / People at Home",
+    "value": "root|Homes and Living Conditions|Premanent Homes|People at Home"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Pets",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Pets"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Rammed Earth Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Rammed Earth Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Reading",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Reading"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Rooms",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Rooms"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Row Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Row Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Sod Houses, LogCabins, Adobe, Dugouts",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Sod Houses, LogCabins, Adobe, Dugouts"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Storm Cellars",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Storm Cellars"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Substandard Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Substandard Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Substantial, Suburban Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Substantial, Suburban Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Tenement Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Tenement Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Unit House Project",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Unit House Project"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Victorian Houses",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Victorian Houses"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Visiting",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Visiting"
+  },
+  {
+    "label": "Homes and Living Conditions / Premanent Homes / Writing",
+    "value": "root|Homes and Living Conditions|Premanent Homes|Writing"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes",
+    "value": "root|Homes and Living Conditions|Temporary Abodes"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Camps",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Camps"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Covered Wagons, Chuckwagons",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Covered Wagons, Chuckwagons"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Dormitories, Bunkhouses",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Dormitories, Bunkhouses"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Evictions and Sharecroppers",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Evictions and Sharecroppers"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Hobo Jungles",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Hobo Jungles"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Houseboats, Barges",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Houseboats, Barges"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Interior Details",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Interior Details"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Life in Trailers",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Life in Trailers"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Log Cabins",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Log Cabins"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Mexican Section",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Mexican Section"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Migratory Workers' Camps",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Migratory Workers' Camps"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Rooming Houses, Dormitories, Hotels",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Rooming Houses, Dormitories, Hotels"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Shacks and Improvised Homes",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Shacks and Improvised Homes"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Shacktowns and Squatters",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Shacktowns and Squatters"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Teepees, Hogans",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Teepees, Hogans"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Tents, Shacks",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Tents, Shacks"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Tourist Cabins, Trailer Camps, Houseboats",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Tourist Cabins, Trailer Camps, Houseboats"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Trailers",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Trailers"
+  },
+  {
+    "label": "Homes and Living Conditions / Temporary Abodes / Trailers on Display",
+    "value": "root|Homes and Living Conditions|Temporary Abodes|Trailers on Display"
+  },
+  {
+    "label": "Itellectual and Creative Activity",
+    "value": "root|Itellectual and Creative Activity"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General",
+    "value": "root|Itellectual and Creative Activity|General"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Adult Education",
+    "value": "root|Itellectual and Creative Activity|General|Adult Education"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Art, Folk Art",
+    "value": "root|Itellectual and Creative Activity|General|Art, Folk Art"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Bacteriology",
+    "value": "root|Itellectual and Creative Activity|General|Bacteriology"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Campus Life",
+    "value": "root|Itellectual and Creative Activity|General|Campus Life"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Classes",
+    "value": "root|Itellectual and Creative Activity|General|Classes"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Decorative Arts and Crafts",
+    "value": "root|Itellectual and Creative Activity|General|Decorative Arts and Crafts"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Editorial Work",
+    "value": "root|Itellectual and Creative Activity|General|Editorial Work"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Education",
+    "value": "root|Itellectual and Creative Activity|General|Education"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Education Opportunities Tour",
+    "value": "root|Itellectual and Creative Activity|General|Education Opportunities Tour"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Exhibit and Display Technique",
+    "value": "root|Itellectual and Creative Activity|General|Exhibit and Display Technique"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Information",
+    "value": "root|Itellectual and Creative Activity|General|Information"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Laboratories",
+    "value": "root|Itellectual and Creative Activity|General|Laboratories"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Libraries",
+    "value": "root|Itellectual and Creative Activity|General|Libraries"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Meteorology",
+    "value": "root|Itellectual and Creative Activity|General|Meteorology"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Museums and Archives",
+    "value": "root|Itellectual and Creative Activity|General|Museums and Archives"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Newspapers",
+    "value": "root|Itellectual and Creative Activity|General|Newspapers"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Photography",
+    "value": "root|Itellectual and Creative Activity|General|Photography"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Publicity Campaign, Posters",
+    "value": "root|Itellectual and Creative Activity|General|Publicity Campaign, Posters"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Radio News",
+    "value": "root|Itellectual and Creative Activity|General|Radio News"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Science and Research",
+    "value": "root|Itellectual and Creative Activity|General|Science and Research"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / University, College Buildings",
+    "value": "root|Itellectual and Creative Activity|General|University, College Buildings"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / Weaving and Spinning",
+    "value": "root|Itellectual and Creative Activity|General|Weaving and Spinning"
+  },
+  {
+    "label": "Itellectual and Creative Activity / General / ·Special Adult Training Projects",
+    "value": "root|Itellectual and Creative Activity|General|·Special Adult Training Projects"
+  },
+  {
+    "label": "Medicine and Health",
+    "value": "root|Medicine and Health"
+  },
+  {
+    "label": "Medicine and Health / General",
+    "value": "root|Medicine and Health|General"
+  },
+  {
+    "label": "Medicine and Health / General / Cllnic",
+    "value": "root|Medicine and Health|General|Cllnic"
+  },
+  {
+    "label": "Medicine and Health / General / Dentistry",
+    "value": "root|Medicine and Health|General|Dentistry"
+  },
+  {
+    "label": "Medicine and Health / General / Drug Stores, Pharmacies",
+    "value": "root|Medicine and Health|General|Drug Stores, Pharmacies"
+  },
+  {
+    "label": "Medicine and Health / General / Elizabeth Kenny Institute",
+    "value": "root|Medicine and Health|General|Elizabeth Kenny Institute"
+  },
+  {
+    "label": "Medicine and Health / General / First Aid",
+    "value": "root|Medicine and Health|General|First Aid"
+  },
+  {
+    "label": "Medicine and Health / General / First Aid instruction",
+    "value": "root|Medicine and Health|General|First Aid instruction"
+  },
+  {
+    "label": "Medicine and Health / General / Hospitals",
+    "value": "root|Medicine and Health|General|Hospitals"
+  },
+  {
+    "label": "Medicine and Health / General / Medicine, Health, Safety",
+    "value": "root|Medicine and Health|General|Medicine, Health, Safety"
+  },
+  {
+    "label": "Medicine and Health / General / Military Medicine",
+    "value": "root|Medicine and Health|General|Military Medicine"
+  },
+  {
+    "label": "Medicine and Health / General / Nurses",
+    "value": "root|Medicine and Health|General|Nurses"
+  },
+  {
+    "label": "Medicine and Health / General / Patent Medicine",
+    "value": "root|Medicine and Health|General|Patent Medicine"
+  },
+  {
+    "label": "Medicine and Health / General / Pediatrics",
+    "value": "root|Medicine and Health|General|Pediatrics"
+  },
+  {
+    "label": "Medicine and Health / General / Physicians",
+    "value": "root|Medicine and Health|General|Physicians"
+  },
+  {
+    "label": "Medicine and Health / General / Safety",
+    "value": "root|Medicine and Health|General|Safety"
+  },
+  {
+    "label": "Medicine and Health / General / Safety in Industry",
+    "value": "root|Medicine and Health|General|Safety in Industry"
+  },
+  {
+    "label": "Medicine and Health / General / Safety on Fam1s,",
+    "value": "root|Medicine and Health|General|Safety on Fam1s,"
+  },
+  {
+    "label": "Medicine and Health / General / Sanitation, Public Health",
+    "value": "root|Medicine and Health|General|Sanitation, Public Health"
+  },
+  {
+    "label": "Medicine and Health / General / Veterinary Medicine",
+    "value": "root|Medicine and Health|General|Veterinary Medicine"
+  },
+  {
+    "label": "Organized Society",
+    "value": "root|Organized Society"
+  },
+  {
+    "label": "Organized Society / Foreign Relations",
+    "value": "root|Organized Society|Foreign Relations"
+  },
+  {
+    "label": "Organized Society / Foreign Relations / Diplomatic Corps",
+    "value": "root|Organized Society|Foreign Relations|Diplomatic Corps"
+  },
+  {
+    "label": "Organized Society / Foreign Relations / Foreign Relations, State Department",
+    "value": "root|Organized Society|Foreign Relations|Foreign Relations, State Department"
+  },
+  {
+    "label": "Organized Society / Foreign Relations / Immigration , Citizenship Training",
+    "value": "root|Organized Society|Foreign Relations|Immigration , Citizenship Training"
+  },
+  {
+    "label": "Organized Society / Government",
+    "value": "root|Organized Society|Government"
+  },
+  {
+    "label": "Organized Society / Government / Citizens' Organizations",
+    "value": "root|Organized Society|Government|Citizens' Organizations"
+  },
+  {
+    "label": "Organized Society / Government / Coast Guard",
+    "value": "root|Organized Society|Government|Coast Guard"
+  },
+  {
+    "label": "Organized Society / Government / Demonstration",
+    "value": "root|Organized Society|Government|Demonstration"
+  },
+  {
+    "label": "Organized Society / Government / Economic Administration",
+    "value": "root|Organized Society|Government|Economic Administration"
+  },
+  {
+    "label": "Organized Society / Government / F.D.Roosevelt",
+    "value": "root|Organized Society|Government|F.D.Roosevelt"
+  },
+  {
+    "label": "Organized Society / Government / Government",
+    "value": "root|Organized Society|Government|Government"
+  },
+  {
+    "label": "Organized Society / Government / Guards",
+    "value": "root|Organized Society|Government|Guards"
+  },
+  {
+    "label": "Organized Society / Government / Law",
+    "value": "root|Organized Society|Government|Law"
+  },
+  {
+    "label": "Organized Society / Government / Lawyers",
+    "value": "root|Organized Society|Government|Lawyers"
+  },
+  {
+    "label": "Organized Society / Government / Movements, Organized Society",
+    "value": "root|Organized Society|Government|Movements, Organized Society"
+  },
+  {
+    "label": "Organized Society / Government / Patriotism, Allegiance",
+    "value": "root|Organized Society|Government|Patriotism, Allegiance"
+  },
+  {
+    "label": "Organized Society / Government / Police Department",
+    "value": "root|Organized Society|Government|Police Department"
+  },
+  {
+    "label": "Organized Society / Government / Politics",
+    "value": "root|Organized Society|Government|Politics"
+  },
+  {
+    "label": "Organized Society / Government / Prisons",
+    "value": "root|Organized Society|Government|Prisons"
+  },
+  {
+    "label": "Organized Society / Government / Town Meetings",
+    "value": "root|Organized Society|Government|Town Meetings"
+  },
+  {
+    "label": "Organized Society / Government / Treasury Department",
+    "value": "root|Organized Society|Government|Treasury Department"
+  },
+  {
+    "label": "Organized Society / Government / Trial of the Nationalists",
+    "value": "root|Organized Society|Government|Trial of the Nationalists"
+  },
+  {
+    "label": "Organized Society / Government / Voting, Elections",
+    "value": "root|Organized Society|Government|Voting, Elections"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid",
+    "value": "root|Organized Society|Government and Other Organized Aid"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Administration, Meetings",
+    "value": "root|Organized Society|Government and Other Organized Aid|Administration, Meetings"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Arvin, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Arvin, California"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Athena, Oregon",
+    "value": "root|Organized Society|Government and Other Organized Aid|Athena, Oregon"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Bridgeton, New Jersey",
+    "value": "root|Organized Society|Government and Other Organized Aid|Bridgeton, New Jersey"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Civilian Conservation Corps",
+    "value": "root|Organized Society|Government and Other Organized Aid|Civilian Conservation Corps"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Cooperatives",
+    "value": "root|Organized Society|Government and Other Organized Aid|Cooperatives"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Exhibits: F.S.A.",
+    "value": "root|Organized Society|Government and Other Organized Aid|Exhibits: F.S.A."
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / F.S.A. Planned Communities",
+    "value": "root|Organized Society|Government and Other Organized Aid|F.S.A. Planned Communities"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / F.S.A. Representative, Meetings",
+    "value": "root|Organized Society|Government and Other Organized Aid|F.S.A. Representative, Meetings"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Farm Communities, Part-time Farms",
+    "value": "root|Organized Society|Government and Other Organized Aid|Farm Communities, Part-time Farms"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Farm Security Administration",
+    "value": "root|Organized Society|Government and Other Organized Aid|Farm Security Administration"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Farm Security Administration Camps",
+    "value": "root|Organized Society|Government and Other Organized Aid|Farm Security Administration Camps"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Farmersville, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Farmersville, California"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Firebaugh, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Firebaugh, California"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Food",
+    "value": "root|Organized Society|Government and Other Organized Aid|Food"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Government and Private Assistance",
+    "value": "root|Organized Society|Government and Other Organized Aid|Government and Private Assistance"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Greenbelt, Maryland",
+    "value": "root|Organized Society|Government and Other Organized Aid|Greenbelt, Maryland"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Homesteads",
+    "value": "root|Organized Society|Government and Other Organized Aid|Homesteads"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Japenese-Americans",
+    "value": "root|Organized Society|Government and Other Organized Aid|Japenese-Americans"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Land Use and Development",
+    "value": "root|Organized Society|Government and Other Organized Aid|Land Use and Development"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Laundry Units",
+    "value": "root|Organized Society|Government and Other Organized Aid|Laundry Units"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Migratory Workers, Farm Labor Camps",
+    "value": "root|Organized Society|Government and Other Organized Aid|Migratory Workers, Farm Labor Camps"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Mobile Camp Unit",
+    "value": "root|Organized Society|Government and Other Organized Aid|Mobile Camp Unit"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Published F.S.A. Layout",
+    "value": "root|Organized Society|Government and Other Organized Aid|Published F.S.A. Layout"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Rural Electrification Administration",
+    "value": "root|Organized Society|Government and Other Organized Aid|Rural Electrification Administration"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Shaffer, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Shaffer, California"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Sonoma, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Sonoma, California"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Tenessee Valley Authority",
+    "value": "root|Organized Society|Government and Other Organized Aid|Tenessee Valley Authority"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Vtisalia, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Vtisalia, California"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / War Housing",
+    "value": "root|Organized Society|Government and Other Organized Aid|War Housing"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Wilder, Idaho",
+    "value": "root|Organized Society|Government and Other Organized Aid|Wilder, Idaho"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Woodville, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Woodville, California"
+  },
+  {
+    "label": "Organized Society / Government and Other Organized Aid / Yuba City, California",
+    "value": "root|Organized Society|Government and Other Organized Aid|Yuba City, California"
+  },
+  {
+    "label": "Organized Society / Labor Organization",
+    "value": "root|Organized Society|Labor Organization"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Employment",
+    "value": "root|Organized Society|Labor Organization|Employment"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Going To and Leaving Work",
+    "value": "root|Organized Society|Labor Organization|Going To and Leaving Work"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Meetings, Speakers, Voting",
+    "value": "root|Organized Society|Labor Organization|Meetings, Speakers, Voting"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Relief Grants",
+    "value": "root|Organized Society|Labor Organization|Relief Grants"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Str!ikes, Pickets",
+    "value": "root|Organized Society|Labor Organization|Str!ikes, Pickets"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Unemployment",
+    "value": "root|Organized Society|Labor Organization|Unemployment"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Work Relief",
+    "value": "root|Organized Society|Labor Organization|Work Relief"
+  },
+  {
+    "label": "Organized Society / Labor Organization / Workers Being Paid",
+    "value": "root|Organized Society|Labor Organization|Workers Being Paid"
+  },
+  {
+    "label": "Organized Society / Labor Organization / labor Relations, Unions",
+    "value": "root|Organized Society|Labor Organization|labor Relations, Unions"
+  },
+  {
+    "label": "Organized Society / Non- and Semi-Governmental Organizations",
+    "value": "root|Organized Society|Non- and Semi-Governmental Organizations"
+  },
+  {
+    "label": "Organized Society / Non- and Semi-Governmental Organizations / American Legion",
+    "value": "root|Organized Society|Non- and Semi-Governmental Organizations|American Legion"
+  },
+  {
+    "label": "Organized Society / Non- and Semi-Governmental Organizations / Farm Bureau",
+    "value": "root|Organized Society|Non- and Semi-Governmental Organizations|Farm Bureau"
+  },
+  {
+    "label": "Organized Society / Non- and Semi-Governmental Organizations / Organizations",
+    "value": "root|Organized Society|Non- and Semi-Governmental Organizations|Organizations"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations",
+    "value": "root|Organized Society|Other Aid Organizations"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Aid to the Blind",
+    "value": "root|Organized Society|Other Aid Organizations|Aid to the Blind"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Aid to the Poor",
+    "value": "root|Organized Society|Other Aid Organizations|Aid to the Poor"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Civil Disturbances",
+    "value": "root|Organized Society|Other Aid Organizations|Civil Disturbances"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Emergency Aid in Disasters",
+    "value": "root|Organized Society|Other Aid Organizations|Emergency Aid in Disasters"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Flood Relief",
+    "value": "root|Organized Society|Other Aid Organizations|Flood Relief"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Home Demonstration, Home Economics Training",
+    "value": "root|Organized Society|Other Aid Organizations|Home Demonstration, Home Economics Training"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Home Skills",
+    "value": "root|Organized Society|Other Aid Organizations|Home Skills"
+  },
+  {
+    "label": "Organized Society / Other Aid Organizations / Vocational Training",
+    "value": "root|Organized Society|Other Aid Organizations|Vocational Training"
+  },
+  {
+    "label": "People As Such",
+    "value": "root|People As Such"
+  },
+  {
+    "label": "People As Such / Children",
+    "value": "root|People As Such|Children"
+  },
+  {
+    "label": "People As Such / Children / 4-H Clubs",
+    "value": "root|People As Such|Children|4-H Clubs"
+  },
+  {
+    "label": "People As Such / Children / Activities",
+    "value": "root|People As Such|Children|Activities"
+  },
+  {
+    "label": "People As Such / Children / Artwork",
+    "value": "root|People As Such|Children|Artwork"
+  },
+  {
+    "label": "People As Such / Children / Artwork by Children",
+    "value": "root|People As Such|Children|Artwork by Children"
+  },
+  {
+    "label": "People As Such / Children / Assemblies, Ceremonies",
+    "value": "root|People As Such|Children|Assemblies, Ceremonies"
+  },
+  {
+    "label": "People As Such / Children / At Fairs, Carnivals",
+    "value": "root|People As Such|Children|At Fairs, Carnivals"
+  },
+  {
+    "label": "People As Such / Children / At Play",
+    "value": "root|People As Such|Children|At Play"
+  },
+  {
+    "label": "People As Such / Children / Athletic Sports",
+    "value": "root|People As Such|Children|Athletic Sports"
+  },
+  {
+    "label": "People As Such / Children / Boyscouts",
+    "value": "root|People As Such|Children|Boyscouts"
+  },
+  {
+    "label": "People As Such / Children / Cafeterias and School Lunches",
+    "value": "root|People As Such|Children|Cafeterias and School Lunches"
+  },
+  {
+    "label": "People As Such / Children / Child Care and Health",
+    "value": "root|People As Such|Children|Child Care and Health"
+  },
+  {
+    "label": "People As Such / Children / Child ren at Home",
+    "value": "root|People As Such|Children|Child ren at Home"
+  },
+  {
+    "label": "People As Such / Children / Children",
+    "value": "root|People As Such|Children|Children"
+  },
+  {
+    "label": "People As Such / Children / Children with Adults",
+    "value": "root|People As Such|Children|Children with Adults"
+  },
+  {
+    "label": "People As Such / Children / Children with Animals",
+    "value": "root|People As Such|Children|Children with Animals"
+  },
+  {
+    "label": "People As Such / Children / City Children Doing Fam1 Work",
+    "value": "root|People As Such|Children|City Children Doing Fam1 Work"
+  },
+  {
+    "label": "People As Such / Children / Contests",
+    "value": "root|People As Such|Children|Contests"
+  },
+  {
+    "label": "People As Such / Children / Creative Activity",
+    "value": "root|People As Such|Children|Creative Activity"
+  },
+  {
+    "label": "People As Such / Children / Cruldren Reading",
+    "value": "root|People As Such|Children|Cruldren Reading"
+  },
+  {
+    "label": "People As Such / Children / Dancing",
+    "value": "root|People As Such|Children|Dancing"
+  },
+  {
+    "label": "People As Such / Children / Day Care For Children of War Workers",
+    "value": "root|People As Such|Children|Day Care For Children of War Workers"
+  },
+  {
+    "label": "People As Such / Children / Eating",
+    "value": "root|People As Such|Children|Eating"
+  },
+  {
+    "label": "People As Such / Children / Eating and Drinking",
+    "value": "root|People As Such|Children|Eating and Drinking"
+  },
+  {
+    "label": "People As Such / Children / Faculty Administration",
+    "value": "root|People As Such|Children|Faculty Administration"
+  },
+  {
+    "label": "People As Such / Children / Farm Chores",
+    "value": "root|People As Such|Children|Farm Chores"
+  },
+  {
+    "label": "People As Such / Children / Games",
+    "value": "root|People As Such|Children|Games"
+  },
+  {
+    "label": "People As Such / Children / Going To and Leaving School",
+    "value": "root|People As Such|Children|Going To and Leaving School"
+  },
+  {
+    "label": "People As Such / Children / Grade Schools",
+    "value": "root|People As Such|Children|Grade Schools"
+  },
+  {
+    "label": "People As Such / Children / Groups of Children",
+    "value": "root|People As Such|Children|Groups of Children"
+  },
+  {
+    "label": "People As Such / Children / Groups of Students",
+    "value": "root|People As Such|Children|Groups of Students"
+  },
+  {
+    "label": "People As Such / Children / High Schools",
+    "value": "root|People As Such|Children|High Schools"
+  },
+  {
+    "label": "People As Such / Children / Housework",
+    "value": "root|People As Such|Children|Housework"
+  },
+  {
+    "label": "People As Such / Children / In Slums",
+    "value": "root|People As Such|Children|In Slums"
+  },
+  {
+    "label": "People As Such / Children / In Street and Undesirable Places",
+    "value": "root|People As Such|Children|In Street and Undesirable Places"
+  },
+  {
+    "label": "People As Such / Children / In the City",
+    "value": "root|People As Such|Children|In the City"
+  },
+  {
+    "label": "People As Such / Children / In the Country",
+    "value": "root|People As Such|Children|In the Country"
+  },
+  {
+    "label": "People As Such / Children / Making Things",
+    "value": "root|People As Such|Children|Making Things"
+  },
+  {
+    "label": "People As Such / Children / Manual Training and Domestic Skills",
+    "value": "root|People As Such|Children|Manual Training and Domestic Skills"
+  },
+  {
+    "label": "People As Such / Children / Migrant Children",
+    "value": "root|People As Such|Children|Migrant Children"
+  },
+  {
+    "label": "People As Such / Children / Migrant Cranberry Pickers",
+    "value": "root|People As Such|Children|Migrant Cranberry Pickers"
+  },
+  {
+    "label": "People As Such / Children / Military Training",
+    "value": "root|People As Such|Children|Military Training"
+  },
+  {
+    "label": "People As Such / Children / Miners' Children",
+    "value": "root|People As Such|Children|Miners' Children"
+  },
+  {
+    "label": "People As Such / Children / Miscellaneous",
+    "value": "root|People As Such|Children|Miscellaneous"
+  },
+  {
+    "label": "People As Such / Children / Movies",
+    "value": "root|People As Such|Children|Movies"
+  },
+  {
+    "label": "People As Such / Children / Music",
+    "value": "root|People As Such|Children|Music"
+  },
+  {
+    "label": "People As Such / Children / Nursery Schools",
+    "value": "root|People As Such|Children|Nursery Schools"
+  },
+  {
+    "label": "People As Such / Children / Older Boys",
+    "value": "root|People As Such|Children|Older Boys"
+  },
+  {
+    "label": "People As Such / Children / Older Girls",
+    "value": "root|People As Such|Children|Older Girls"
+  },
+  {
+    "label": "People As Such / Children / One-Room Schools",
+    "value": "root|People As Such|Children|One-Room Schools"
+  },
+  {
+    "label": "People As Such / Children / Organizations",
+    "value": "root|People As Such|Children|Organizations"
+  },
+  {
+    "label": "People As Such / Children / Oriental Children",
+    "value": "root|People As Such|Children|Oriental Children"
+  },
+  {
+    "label": "People As Such / Children / Parties",
+    "value": "root|People As Such|Children|Parties"
+  },
+  {
+    "label": "People As Such / Children / Playgrounds",
+    "value": "root|People As Such|Children|Playgrounds"
+  },
+  {
+    "label": "People As Such / Children / Pre-Flight Training",
+    "value": "root|People As Such|Children|Pre-Flight Training"
+  },
+  {
+    "label": "People As Such / Children / Resting",
+    "value": "root|People As Such|Children|Resting"
+  },
+  {
+    "label": "People As Such / Children / School",
+    "value": "root|People As Such|Children|School"
+  },
+  {
+    "label": "People As Such / Children / School Buildings",
+    "value": "root|People As Such|Children|School Buildings"
+  },
+  {
+    "label": "People As Such / Children / School Busses",
+    "value": "root|People As Such|Children|School Busses"
+  },
+  {
+    "label": "People As Such / Children / School Newspapers",
+    "value": "root|People As Such|Children|School Newspapers"
+  },
+  {
+    "label": "People As Such / Children / Science and Labwork",
+    "value": "root|People As Such|Children|Science and Labwork"
+  },
+  {
+    "label": "People As Such / Children / Sectarian Schools",
+    "value": "root|People As Such|Children|Sectarian Schools"
+  },
+  {
+    "label": "People As Such / Children / Spanish-American",
+    "value": "root|People As Such|Children|Spanish-American"
+  },
+  {
+    "label": "People As Such / Children / Student Government",
+    "value": "root|People As Such|Children|Student Government"
+  },
+  {
+    "label": "People As Such / Children / Swimming",
+    "value": "root|People As Such|Children|Swimming"
+  },
+  {
+    "label": "People As Such / Children / Under Privileged",
+    "value": "root|People As Such|Children|Under Privileged"
+  },
+  {
+    "label": "People As Such / Children / Under Privileged [Children]",
+    "value": "root|People As Such|Children|Under Privileged [Children]"
+  },
+  {
+    "label": "People As Such / Children / Victory Program",
+    "value": "root|People As Such|Children|Victory Program"
+  },
+  {
+    "label": "People As Such / Children / Washing, Dressing, etc.",
+    "value": "root|People As Such|Children|Washing, Dressing, etc."
+  },
+  {
+    "label": "People As Such / Children / Winter Sports",
+    "value": "root|People As Such|Children|Winter Sports"
+  },
+  {
+    "label": "People As Such / Children / With Toys",
+    "value": "root|People As Such|Children|With Toys"
+  },
+  {
+    "label": "People As Such / Children / Work, Chores",
+    "value": "root|People As Such|Children|Work, Chores"
+  },
+  {
+    "label": "People As Such / Children / Young Children",
+    "value": "root|People As Such|Children|Young Children"
+  },
+  {
+    "label": "People As Such / Groups and Individuals",
+    "value": "root|People As Such|Groups and Individuals"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / At Fairs, Carnivals",
+    "value": "root|People As Such|Groups and Individuals|At Fairs, Carnivals"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / At Meetings, Events",
+    "value": "root|People As Such|Groups and Individuals|At Meetings, Events"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Bandidos",
+    "value": "root|People As Such|Groups and Individuals|Bandidos"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Bus and Truck Drivers",
+    "value": "root|People As Such|Groups and Individuals|Bus and Truck Drivers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Clothes, Accessories",
+    "value": "root|People As Such|Groups and Individuals|Clothes, Accessories"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Cowboys",
+    "value": "root|People As Such|Groups and Individuals|Cowboys"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Crowds, People",
+    "value": "root|People As Such|Groups and Individuals|Crowds, People"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Details: Hands, Feet, etc.",
+    "value": "root|People As Such|Groups and Individuals|Details: Hands, Feet, etc."
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Elderly Women",
+    "value": "root|People As Such|Groups and Individuals|Elderly Women"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Elmer Thomas Family Leaving Home",
+    "value": "root|People As Such|Groups and Individuals|Elmer Thomas Family Leaving Home"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Families",
+    "value": "root|People As Such|Groups and Individuals|Families"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Farm Families",
+    "value": "root|People As Such|Groups and Individuals|Farm Families"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Farm Women",
+    "value": "root|People As Such|Groups and Individuals|Farm Women"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Farmers and Farmers' Heads",
+    "value": "root|People As Such|Groups and Individuals|Farmers and Farmers' Heads"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Farmers in Groups",
+    "value": "root|People As Such|Groups and Individuals|Farmers in Groups"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Farmers with Equipment",
+    "value": "root|People As Such|Groups and Individuals|Farmers with Equipment"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Farmers' Figures",
+    "value": "root|People As Such|Groups and Individuals|Farmers' Figures"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Fishermen",
+    "value": "root|People As Such|Groups and Individuals|Fishermen"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Foreigners and Americans of Foreign Extraction",
+    "value": "root|People As Such|Groups and Individuals|Foreigners and Americans of Foreign Extraction"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / French Canadians",
+    "value": "root|People As Such|Groups and Individuals|French Canadians"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Groups",
+    "value": "root|People As Such|Groups and Individuals|Groups"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Groups of People",
+    "value": "root|People As Such|Groups and Individuals|Groups of People"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Hired Farm Hands",
+    "value": "root|People As Such|Groups and Individuals|Hired Farm Hands"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Husband and Wife",
+    "value": "root|People As Such|Groups and Individuals|Husband and Wife"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / In Terminals and Stations",
+    "value": "root|People As Such|Groups and Individuals|In Terminals and Stations"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / In the Streets",
+    "value": "root|People As Such|Groups and Individuals|In the Streets"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Indians",
+    "value": "root|People As Such|Groups and Individuals|Indians"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Individual Men, Full Figure",
+    "value": "root|People As Such|Groups and Individuals|Individual Men, Full Figure"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Industrial Workers, Mechanics",
+    "value": "root|People As Such|Groups and Individuals|Industrial Workers, Mechanics"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Italian Americans",
+    "value": "root|People As Such|Groups and Individuals|Italian Americans"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Jewish Americans",
+    "value": "root|People As Such|Groups and Individuals|Jewish Americans"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Longshoremen , Stevedores",
+    "value": "root|People As Such|Groups and Individuals|Longshoremen , Stevedores"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Lumbermen",
+    "value": "root|People As Such|Groups and Individuals|Lumbermen"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Men in their Prime",
+    "value": "root|People As Such|Groups and Individuals|Men in their Prime"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Men, Men's Heads",
+    "value": "root|People As Such|Groups and Individuals|Men, Men's Heads"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Mennonites",
+    "value": "root|People As Such|Groups and Individuals|Mennonites"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Middle Aged Men",
+    "value": "root|People As Such|Groups and Individuals|Middle Aged Men"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Middle Aged Women",
+    "value": "root|People As Such|Groups and Individuals|Middle Aged Women"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Migrant Workers",
+    "value": "root|People As Such|Groups and Individuals|Migrant Workers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Migratory Agricultural Workers",
+    "value": "root|People As Such|Groups and Individuals|Migratory Agricultural Workers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Migratory Farm Workers",
+    "value": "root|People As Such|Groups and Individuals|Migratory Farm Workers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Miners",
+    "value": "root|People As Such|Groups and Individuals|Miners"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Miners' Families",
+    "value": "root|People As Such|Groups and Individuals|Miners' Families"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Old Men",
+    "value": "root|People As Such|Groups and Individuals|Old Men"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Orientals, Japanese",
+    "value": "root|People As Such|Groups and Individuals|Orientals, Japanese"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Portuguese Americans",
+    "value": "root|People As Such|Groups and Individuals|Portuguese Americans"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Railroad Men",
+    "value": "root|People As Such|Groups and Individuals|Railroad Men"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Ranchers",
+    "value": "root|People As Such|Groups and Individuals|Ranchers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Sheep Ranchers",
+    "value": "root|People As Such|Groups and Individuals|Sheep Ranchers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Spanish-American and Mexican Women",
+    "value": "root|People As Such|Groups and Individuals|Spanish-American and Mexican Women"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Spanish-Americans and Mexicans",
+    "value": "root|People As Such|Groups and Individuals|Spanish-Americans and Mexicans"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Steel Workers",
+    "value": "root|People As Such|Groups and Individuals|Steel Workers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Sugar Laborers",
+    "value": "root|People As Such|Groups and Individuals|Sugar Laborers"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Transients, Vagrants",
+    "value": "root|People As Such|Groups and Individuals|Transients, Vagrants"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Women in Industry",
+    "value": "root|People As Such|Groups and Individuals|Women in Industry"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Women in Prime of Life",
+    "value": "root|People As Such|Groups and Individuals|Women in Prime of Life"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Women, Women's Heads",
+    "value": "root|People As Such|Groups and Individuals|Women, Women's Heads"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Young Women",
+    "value": "root|People As Such|Groups and Individuals|Young Women"
+  },
+  {
+    "label": "People As Such / Groups and Individuals / Youths",
+    "value": "root|People As Such|Groups and Individuals|Youths"
+  },
+  {
+    "label": "Religion",
+    "value": "root|Religion"
+  },
+  {
+    "label": "Religion / General",
+    "value": "root|Religion|General"
+  },
+  {
+    "label": "Religion / General / Ceremonies, Processions",
+    "value": "root|Religion|General|Ceremonies, Processions"
+  },
+  {
+    "label": "Religion / General / Church Buildings",
+    "value": "root|Religion|General|Church Buildings"
+  },
+  {
+    "label": "Religion / General / Church Furniture",
+    "value": "root|Religion|General|Church Furniture"
+  },
+  {
+    "label": "Religion / General / Churches, Details",
+    "value": "root|Religion|General|Churches, Details"
+  },
+  {
+    "label": "Religion / General / Clergy",
+    "value": "root|Religion|General|Clergy"
+  },
+  {
+    "label": "Religion / General / Family Prayers",
+    "value": "root|Religion|General|Family Prayers"
+  },
+  {
+    "label": "Religion / General / Funerals",
+    "value": "root|Religion|General|Funerals"
+  },
+  {
+    "label": "Religion / General / Going To and Leaving Church",
+    "value": "root|Religion|General|Going To and Leaving Church"
+  },
+  {
+    "label": "Religion / General / Jewish Services",
+    "value": "root|Religion|General|Jewish Services"
+  },
+  {
+    "label": "Religion / General / Missions",
+    "value": "root|Religion|General|Missions"
+  },
+  {
+    "label": "Religion / General / Negro Church Services",
+    "value": "root|Religion|General|Negro Church Services"
+  },
+  {
+    "label": "Religion / General / Parochial Duties of the Clergy",
+    "value": "root|Religion|General|Parochial Duties of the Clergy"
+  },
+  {
+    "label": "Religion / General / Religion",
+    "value": "root|Religion|General|Religion"
+  },
+  {
+    "label": "Religion / General / Religious Services, Meetings",
+    "value": "root|Religion|General|Religious Services, Meetings"
+  },
+  {
+    "label": "Religion / General / Religious Signs",
+    "value": "root|Religion|General|Religious Signs"
+  },
+  {
+    "label": "Religion / General / Revival Meetings",
+    "value": "root|Religion|General|Revival Meetings"
+  },
+  {
+    "label": "Religion / General / Salvation Army",
+    "value": "root|Religion|General|Salvation Army"
+  },
+  {
+    "label": "Religion / General / Services",
+    "value": "root|Religion|General|Services"
+  },
+  {
+    "label": "Religion / General / Sunday Schools, Bible Class",
+    "value": "root|Religion|General|Sunday Schools, Bible Class"
+  },
+  {
+    "label": "Social and Personal Activity",
+    "value": "root|Social and Personal Activity"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Carlo Tresca Funeral",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Carlo Tresca Funeral"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Ceremonies",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Ceremonies"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Church Suppers and Picnics",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Church Suppers and Picnics"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Competition, Contests",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Competition, Contests"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Conventions",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Conventions"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Dancing",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Dancing"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Fourth of July",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Fourth of July"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Funerals",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Funerals"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Informal Gatherings",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Informal Gatherings"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Lectures, Speakers",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Lectures, Speakers"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Memorial Services",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Memorial Services"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Organized Gatherings",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Organized Gatherings"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Parties",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Parties"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Social Activities",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Social Activities"
+  },
+  {
+    "label": "Social and Personal Activity / Ceremonies, Organized Gatherings / Square Dancing",
+    "value": "root|Social and Personal Activity|Ceremonies, Organized Gatherings|Square Dancing"
+  },
+  {
+    "label": "Social and Personal Activity / Dissipation and Crime",
+    "value": "root|Social and Personal Activity|Dissipation and Crime"
+  },
+  {
+    "label": "Social and Personal Activity / Dissipation and Crime / Dissipation, Crime, Prostitution, Prohibitionism",
+    "value": "root|Social and Personal Activity|Dissipation and Crime|Dissipation, Crime, Prostitution, Prohibitionism"
+  },
+  {
+    "label": "Social and Personal Activity / Dissipation and Crime / Exhibit: South Louisiana State Fair",
+    "value": "root|Social and Personal Activity|Dissipation and Crime|Exhibit: South Louisiana State Fair"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments",
+    "value": "root|Social and Personal Activity|Entertainments"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / 'Old Time' Shows",
+    "value": "root|Social and Personal Activity|Entertainments|'Old Time' Shows"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Brass Bands",
+    "value": "root|Social and Personal Activity|Entertainments|Brass Bands"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Carnivals, Festivals, Pageants",
+    "value": "root|Social and Personal Activity|Entertainments|Carnivals, Festivals, Pageants"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Circus",
+    "value": "root|Social and Personal Activity|Entertainments|Circus"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Commerce and Industry Exhibits",
+    "value": "root|Social and Personal Activity|Entertainments|Commerce and Industry Exhibits"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Crowds, Refreshments",
+    "value": "root|Social and Personal Activity|Entertainments|Crowds, Refreshments"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Dance Orchestras, Swing Bands",
+    "value": "root|Social and Personal Activity|Entertainments|Dance Orchestras, Swing Bands"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Fairs",
+    "value": "root|Social and Personal Activity|Entertainments|Fairs"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Group Singing",
+    "value": "root|Social and Personal Activity|Entertainments|Group Singing"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Horse Shows",
+    "value": "root|Social and Personal Activity|Entertainments|Horse Shows"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Motion Pictures",
+    "value": "root|Social and Personal Activity|Entertainments|Motion Pictures"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Music",
+    "value": "root|Social and Personal Activity|Entertainments|Music"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Parades",
+    "value": "root|Social and Personal Activity|Entertainments|Parades"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Radio",
+    "value": "root|Social and Personal Activity|Entertainments|Radio"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Religious Parades",
+    "value": "root|Social and Personal Activity|Entertainments|Religious Parades"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Rodeo",
+    "value": "root|Social and Personal Activity|Entertainments|Rodeo"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Stock Shows",
+    "value": "root|Social and Personal Activity|Entertainments|Stock Shows"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Theater, Burlesque , Show Business",
+    "value": "root|Social and Personal Activity|Entertainments|Theater, Burlesque , Show Business"
+  },
+  {
+    "label": "Social and Personal Activity / Entertainments / Traveling Medicine Show",
+    "value": "root|Social and Personal Activity|Entertainments|Traveling Medicine Show"
+  },
+  {
+    "label": "Social and Personal Activity / General",
+    "value": "root|Social and Personal Activity|General"
+  },
+  {
+    "label": "Social and Personal Activity / General / Flirtation, Love-Making, Courtship",
+    "value": "root|Social and Personal Activity|General|Flirtation, Love-Making, Courtship"
+  },
+  {
+    "label": "Social and Personal Activity / General / Hobbies",
+    "value": "root|Social and Personal Activity|General|Hobbies"
+  },
+  {
+    "label": "Social and Personal Activity / General / Photography as a Hobby",
+    "value": "root|Social and Personal Activity|General|Photography as a Hobby"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Bars, Saloons, Night Clubs",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Bars, Saloons, Night Clubs"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Bathing Beaches",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Bathing Beaches"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Carnival, Midway , Amusement Park",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Carnival, Midway , Amusement Park"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Drinking Water",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Drinking Water"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Drive In Food Shoppe",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Drive In Food Shoppe"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Dude Ranches",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Dude Ranches"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Eating Lunch on the Job",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Eating Lunch on the Job"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Hotels, Restaurants, Eating Places",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Hotels, Restaurants, Eating Places"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Institutional Dining Rooms",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Institutional Dining Rooms"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Lunch Rooms, Diners",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Lunch Rooms, Diners"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Minor Amusement Enterprises",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Minor Amusement Enterprises"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Picnics",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Picnics"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Refreshment Stands, Soft Drink Bars",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Refreshment Stands, Soft Drink Bars"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Resorts, Tourists , Vacations",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Resorts, Tourists , Vacations"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Restaurants",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Restaurants"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Rides",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Rides"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Roller Skating Rinks",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Roller Skating Rinks"
+  },
+  {
+    "label": "Social and Personal Activity / Hotels, Restaurants, Clubs, Vacations / Side Shows",
+    "value": "root|Social and Personal Activity|Hotels, Restaurants, Clubs, Vacations|Side Shows"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Baseball",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Baseball"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Bicycling",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Bicycling"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Boating, Sailing",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Boating, Sailing"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Card Games",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Card Games"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Cock Fighting",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Cock Fighting"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Fishing",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Fishing"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Football",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Football"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Gambling",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Gambling"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Harness Racing",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Harness Racing"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Horse Racing",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Horse Racing"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Hunting and Fishing",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Hunting and Fishing"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Indoor Games",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Indoor Games"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Outdoor Games",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Outdoor Games"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Outdoor Life",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Outdoor Life"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Physical Training, Calisthenics",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Physical Training, Calisthenics"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Popular Libraries",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Popular Libraries"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Reading",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Reading"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Recreation",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Recreation"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Relaxation, Loafing",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Relaxation, Loafing"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Shooting of Firearms",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Shooting of Firearms"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Skating",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Skating"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Sports, Gymnastics",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Sports, Gymnastics"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Swimming",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Swimming"
+  },
+  {
+    "label": "Social and Personal Activity / Recreation and Relaxation / Winter Sports",
+    "value": "root|Social and Personal Activity|Recreation and Relaxation|Winter Sports"
+  },
+  {
+    "label": "The Land",
+    "value": "root|The Land"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions",
+    "value": "root|The Land|Farms, Lands, Conditions"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Abandoned Farms",
+    "value": "root|The Land|Farms, Lands, Conditions|Abandoned Farms"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Barns",
+    "value": "root|The Land|Farms, Lands, Conditions|Barns"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Barns in Disrepair",
+    "value": "root|The Land|Farms, Lands, Conditions|Barns in Disrepair"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Commercialized Farms",
+    "value": "root|The Land|Farms, Lands, Conditions|Commercialized Farms"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Drought Conditions",
+    "value": "root|The Land|Farms, Lands, Conditions|Drought Conditions"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / DustStorms",
+    "value": "root|The Land|Farms, Lands, Conditions|DustStorms"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Erosion",
+    "value": "root|The Land|Farms, Lands, Conditions|Erosion"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Farms for Sale",
+    "value": "root|The Land|Farms, Lands, Conditions|Farms for Sale"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Farms, Ranches, Plantations",
+    "value": "root|The Land|Farms, Lands, Conditions|Farms, Ranches, Plantations"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Farmyards and Buildings",
+    "value": "root|The Land|Farms, Lands, Conditions|Farmyards and Buildings"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Fences",
+    "value": "root|The Land|Farms, Lands, Conditions|Fences"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Fields and Farmlands",
+    "value": "root|The Land|Farms, Lands, Conditions|Fields and Farmlands"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Land Treatment",
+    "value": "root|The Land|Farms, Lands, Conditions|Land Treatment"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Mountain Farms",
+    "value": "root|The Land|Farms, Lands, Conditions|Mountain Farms"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Poor or Submarginal Land",
+    "value": "root|The Land|Farms, Lands, Conditions|Poor or Submarginal Land"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Soil Drifts",
+    "value": "root|The Land|Farms, Lands, Conditions|Soil Drifts"
+  },
+  {
+    "label": "The Land / Farms, Lands, Conditions / Stump Land",
+    "value": "root|The Land|Farms, Lands, Conditions|Stump Land"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Brush and Grass Fires",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Brush and Grass Fires"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Conservation",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Conservation"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Deforestation",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Deforestation"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Fire Prevention",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Fire Prevention"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Forest Fires and Prevention",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Forest Fires and Prevention"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Forests",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Forests"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Parks",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Parks"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Plants",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Plants"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Trees",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Trees"
+  },
+  {
+    "label": "The Land / Forests, Plants, Parks, Wildlife / Wildlife Conservation",
+    "value": "root|The Land|Forests, Plants, Parks, Wildlife|Wildlife Conservation"
+  },
+  {
+    "label": "The Land / General",
+    "value": "root|The Land|General"
+  },
+  {
+    "label": "The Land / General / Land",
+    "value": "root|The Land|General|Land"
+  },
+  {
+    "label": "The Land / General / Miscellaneous Landscapes",
+    "value": "root|The Land|General|Miscellaneous Landscapes"
+  },
+  {
+    "label": "The Land / General / Panoramas",
+    "value": "root|The Land|General|Panoramas"
+  },
+  {
+    "label": "The Land / Highways, Railroads, Industrial Areas",
+    "value": "root|The Land|Highways, Railroads, Industrial Areas"
+  },
+  {
+    "label": "The Land / Highways, Railroads, Industrial Areas / Highways",
+    "value": "root|The Land|Highways, Railroads, Industrial Areas|Highways"
+  },
+  {
+    "label": "The Land / Highways, Railroads, Industrial Areas / Industrial Plant in the Country",
+    "value": "root|The Land|Highways, Railroads, Industrial Areas|Industrial Plant in the Country"
+  },
+  {
+    "label": "The Land / Highways, Railroads, Industrial Areas / Railroads",
+    "value": "root|The Land|Highways, Railroads, Industrial Areas|Railroads"
+  },
+  {
+    "label": "The Land / Highways, Railroads, Industrial Areas / Roads",
+    "value": "root|The Land|Highways, Railroads, Industrial Areas|Roads"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Abandoned Mines",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Abandoned Mines"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Bad Lands",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Bad Lands"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Canyons, Caves",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Canyons, Caves"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Desert",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Desert"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Foothills, Rolling Country",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Foothills, Rolling Country"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Geological Features",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Geological Features"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Grazing Land",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Grazing Land"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Historic Landmarks",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Historic Landmarks"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Mines",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Mines"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Mountains",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Mountains"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Oil and Gas Fields",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Oil and Gas Fields"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Rock Formations",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Rock Formations"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Ruins, Caves, Archeology",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Ruins, Caves, Archeology"
+  },
+  {
+    "label": "The Land / Mountains, Deserts, Foothills, Plains / Sand Dunes",
+    "value": "root|The Land|Mountains, Deserts, Foothills, Plains|Sand Dunes"
+  },
+  {
+    "label": "The Land / Seashore, Islands, Open Sea",
+    "value": "root|The Land|Seashore, Islands, Open Sea"
+  },
+  {
+    "label": "The Land / Seashore, Islands, Open Sea / Seashore and Lakeshore",
+    "value": "root|The Land|Seashore, Islands, Open Sea|Seashore and Lakeshore"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways",
+    "value": "root|The Land|Weather, Floods, Waterways"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Bridges",
+    "value": "root|The Land|Weather, Floods, Waterways|Bridges"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Canals, Locks",
+    "value": "root|The Land|Weather, Floods, Waterways|Canals, Locks"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Clouds",
+    "value": "root|The Land|Weather, Floods, Waterways|Clouds"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Dams",
+    "value": "root|The Land|Weather, Floods, Waterways|Dams"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Floods",
+    "value": "root|The Land|Weather, Floods, Waterways|Floods"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Hurricanes",
+    "value": "root|The Land|Weather, Floods, Waterways|Hurricanes"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Lakes, Ponds",
+    "value": "root|The Land|Weather, Floods, Waterways|Lakes, Ponds"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Rivers, Streams, Springs",
+    "value": "root|The Land|Weather, Floods, Waterways|Rivers, Streams, Springs"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Snow",
+    "value": "root|The Land|Weather, Floods, Waterways|Snow"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Spring Thaw",
+    "value": "root|The Land|Weather, Floods, Waterways|Spring Thaw"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Waterfalls",
+    "value": "root|The Land|Weather, Floods, Waterways|Waterfalls"
+  },
+  {
+    "label": "The Land / Weather, Floods, Waterways / Weather",
+    "value": "root|The Land|Weather, Floods, Waterways|Weather"
+  },
+  {
+    "label": "Transportation",
+    "value": "root|Transportation"
+  },
+  {
+    "label": "Transportation / Air Transport",
+    "value": "root|Transportation|Air Transport"
+  },
+  {
+    "label": "Transportation / Air Transport / Air Transportation",
+    "value": "root|Transportation|Air Transport|Air Transportation"
+  },
+  {
+    "label": "Transportation / Air Transport / Airports",
+    "value": "root|Transportation|Air Transport|Airports"
+  },
+  {
+    "label": "Transportation / Air Transport / Buildings",
+    "value": "root|Transportation|Air Transport|Buildings"
+  },
+  {
+    "label": "Transportation / Air Transport / Control, Communicating",
+    "value": "root|Transportation|Air Transport|Control, Communicating"
+  },
+  {
+    "label": "Transportation / Air Transport / Ground Crews",
+    "value": "root|Transportation|Air Transport|Ground Crews"
+  },
+  {
+    "label": "Transportation / Air Transport / Parachutes",
+    "value": "root|Transportation|Air Transport|Parachutes"
+  },
+  {
+    "label": "Transportation / Air Transport / Passengers",
+    "value": "root|Transportation|Air Transport|Passengers"
+  },
+  {
+    "label": "Transportation / Air Transport / Tickets, Baggage",
+    "value": "root|Transportation|Air Transport|Tickets, Baggage"
+  },
+  {
+    "label": "Transportation / Non-Mechanized",
+    "value": "root|Transportation|Non-Mechanized"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Animal Drawn Vehicles",
+    "value": "root|Transportation|Non-Mechanized|Animal Drawn Vehicles"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Hitchhiking",
+    "value": "root|Transportation|Non-Mechanized|Hitchhiking"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Horses, Donkeys",
+    "value": "root|Transportation|Non-Mechanized|Horses, Donkeys"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Oxen",
+    "value": "root|Transportation|Non-Mechanized|Oxen"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Pack Horses",
+    "value": "root|Transportation|Non-Mechanized|Pack Horses"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Riding Horses",
+    "value": "root|Transportation|Non-Mechanized|Riding Horses"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Sleighs, Sledges, Sleds",
+    "value": "root|Transportation|Non-Mechanized|Sleighs, Sledges, Sleds"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Transportation",
+    "value": "root|Transportation|Non-Mechanized|Transportation"
+  },
+  {
+    "label": "Transportation / Non-Mechanized / Walking",
+    "value": "root|Transportation|Non-Mechanized|Walking"
+  },
+  {
+    "label": "Transportation / Railroads",
+    "value": "root|Transportation|Railroads"
+  },
+  {
+    "label": "Transportation / Railroads / Baggage Service",
+    "value": "root|Transportation|Railroads|Baggage Service"
+  },
+  {
+    "label": "Transportation / Railroads / Catching a Ride",
+    "value": "root|Transportation|Railroads|Catching a Ride"
+  },
+  {
+    "label": "Transportation / Railroads / Chicago Union Station",
+    "value": "root|Transportation|Railroads|Chicago Union Station"
+  },
+  {
+    "label": "Transportation / Railroads / Express Handling",
+    "value": "root|Transportation|Railroads|Express Handling"
+  },
+  {
+    "label": "Transportation / Railroads / Express and Freight Handling",
+    "value": "root|Transportation|Railroads|Express and Freight Handling"
+  },
+  {
+    "label": "Transportation / Railroads / Freight Trains and Cars",
+    "value": "root|Transportation|Railroads|Freight Trains and Cars"
+  },
+  {
+    "label": "Transportation / Railroads / Locomotives",
+    "value": "root|Transportation|Railroads|Locomotives"
+  },
+  {
+    "label": "Transportation / Railroads / Miscellaneous",
+    "value": "root|Transportation|Railroads|Miscellaneous"
+  },
+  {
+    "label": "Transportation / Railroads / OreCars",
+    "value": "root|Transportation|Railroads|OreCars"
+  },
+  {
+    "label": "Transportation / Railroads / Passengers",
+    "value": "root|Transportation|Railroads|Passengers"
+  },
+  {
+    "label": "Transportation / Railroads / People in Large Stations",
+    "value": "root|Transportation|Railroads|People in Large Stations"
+  },
+  {
+    "label": "Transportation / Railroads / People on Platforms",
+    "value": "root|Transportation|Railroads|People on Platforms"
+  },
+  {
+    "label": "Transportation / Railroads / Railroad Maintenance",
+    "value": "root|Transportation|Railroads|Railroad Maintenance"
+  },
+  {
+    "label": "Transportation / Railroads / Railroad Stations",
+    "value": "root|Transportation|Railroads|Railroad Stations"
+  },
+  {
+    "label": "Transportation / Railroads / Railroad Workers",
+    "value": "root|Transportation|Railroads|Railroad Workers"
+  },
+  {
+    "label": "Transportation / Railroads / Railroad YMCA, Accommodations",
+    "value": "root|Transportation|Railroads|Railroad YMCA, Accommodations"
+  },
+  {
+    "label": "Transportation / Railroads / Railroad Yards",
+    "value": "root|Transportation|Railroads|Railroad Yards"
+  },
+  {
+    "label": "Transportation / Railroads / Railroads",
+    "value": "root|Transportation|Railroads|Railroads"
+  },
+  {
+    "label": "Transportation / Railroads / Refrigerator Cars, Icing",
+    "value": "root|Transportation|Railroads|Refrigerator Cars, Icing"
+  },
+  {
+    "label": "Transportation / Railroads / Repairs at the Riptrack",
+    "value": "root|Transportation|Railroads|Repairs at the Riptrack"
+  },
+  {
+    "label": "Transportation / Railroads / Roundhouses",
+    "value": "root|Transportation|Railroads|Roundhouses"
+  },
+  {
+    "label": "Transportation / Railroads / Signal Systems",
+    "value": "root|Transportation|Railroads|Signal Systems"
+  },
+  {
+    "label": "Transportation / Railroads / Station Personnel",
+    "value": "root|Transportation|Railroads|Station Personnel"
+  },
+  {
+    "label": "Transportation / Railroads / TankCars",
+    "value": "root|Transportation|Railroads|TankCars"
+  },
+  {
+    "label": "Transportation / Railroads / Tracks, Bridges, Tunnels",
+    "value": "root|Transportation|Railroads|Tracks, Bridges, Tunnels"
+  },
+  {
+    "label": "Transportation / Railroads / Yard Offices",
+    "value": "root|Transportation|Railroads|Yard Offices"
+  },
+  {
+    "label": "Transportation / Railroads / Yard Operations",
+    "value": "root|Transportation|Railroads|Yard Operations"
+  },
+  {
+    "label": "Transportation / Road Transport",
+    "value": "root|Transportation|Road Transport"
+  },
+  {
+    "label": "Transportation / Road Transport / Accidents, Wrecks",
+    "value": "root|Transportation|Road Transport|Accidents, Wrecks"
+  },
+  {
+    "label": "Transportation / Road Transport / At Service Stations",
+    "value": "root|Transportation|Road Transport|At Service Stations"
+  },
+  {
+    "label": "Transportation / Road Transport / Automobiles",
+    "value": "root|Transportation|Road Transport|Automobiles"
+  },
+  {
+    "label": "Transportation / Road Transport / Bus Garages, Repairs",
+    "value": "root|Transportation|Road Transport|Bus Garages, Repairs"
+  },
+  {
+    "label": "Transportation / Road Transport / Bus Terminals",
+    "value": "root|Transportation|Road Transport|Bus Terminals"
+  },
+  {
+    "label": "Transportation / Road Transport / Busses",
+    "value": "root|Transportation|Road Transport|Busses"
+  },
+  {
+    "label": "Transportation / Road Transport / CarPooling",
+    "value": "root|Transportation|Road Transport|CarPooling"
+  },
+  {
+    "label": "Transportation / Road Transport / Carbarns, Terminals",
+    "value": "root|Transportation|Road Transport|Carbarns, Terminals"
+  },
+  {
+    "label": "Transportation / Road Transport / Commuters",
+    "value": "root|Transportation|Road Transport|Commuters"
+  },
+  {
+    "label": "Transportation / Road Transport / Conductors, Motormen",
+    "value": "root|Transportation|Road Transport|Conductors, Motormen"
+  },
+  {
+    "label": "Transportation / Road Transport / Details, Licences, Decorations",
+    "value": "root|Transportation|Road Transport|Details, Licences, Decorations"
+  },
+  {
+    "label": "Transportation / Road Transport / Drivers, Dispatchers",
+    "value": "root|Transportation|Road Transport|Drivers, Dispatchers"
+  },
+  {
+    "label": "Transportation / Road Transport / Ferries",
+    "value": "root|Transportation|Road Transport|Ferries"
+  },
+  {
+    "label": "Transportation / Road Transport / Garages",
+    "value": "root|Transportation|Road Transport|Garages"
+  },
+  {
+    "label": "Transportation / Road Transport / Garages, Storage and Repair",
+    "value": "root|Transportation|Road Transport|Garages, Storage and Repair"
+  },
+  {
+    "label": "Transportation / Road Transport / Gas and Service Stations",
+    "value": "root|Transportation|Road Transport|Gas and Service Stations"
+  },
+  {
+    "label": "Transportation / Road Transport / Highway Markers, Signposts, Tollgates",
+    "value": "root|Transportation|Road Transport|Highway Markers, Signposts, Tollgates"
+  },
+  {
+    "label": "Transportation / Road Transport / Loading and Unloading",
+    "value": "root|Transportation|Road Transport|Loading and Unloading"
+  },
+  {
+    "label": "Transportation / Road Transport / Migrants' Cars",
+    "value": "root|Transportation|Road Transport|Migrants' Cars"
+  },
+  {
+    "label": "Transportation / Road Transport / Moving Household Goods",
+    "value": "root|Transportation|Road Transport|Moving Household Goods"
+  },
+  {
+    "label": "Transportation / Road Transport / On the Road",
+    "value": "root|Transportation|Road Transport|On the Road"
+  },
+  {
+    "label": "Transportation / Road Transport / Park.ing, Parking Lots",
+    "value": "root|Transportation|Road Transport|Park.ing, Parking Lots"
+  },
+  {
+    "label": "Transportation / Road Transport / Passengers",
+    "value": "root|Transportation|Road Transport|Passengers"
+  },
+  {
+    "label": "Transportation / Road Transport / Passengers in Busses",
+    "value": "root|Transportation|Road Transport|Passengers in Busses"
+  },
+  {
+    "label": "Transportation / Road Transport / People Going To and From Work",
+    "value": "root|Transportation|Road Transport|People Going To and From Work"
+  },
+  {
+    "label": "Transportation / Road Transport / People at Terminals",
+    "value": "root|Transportation|Road Transport|People at Terminals"
+  },
+  {
+    "label": "Transportation / Road Transport / Repairs on the Road",
+    "value": "root|Transportation|Road Transport|Repairs on the Road"
+  },
+  {
+    "label": "Transportation / Road Transport / Road Conditions, Ferries",
+    "value": "root|Transportation|Road Transport|Road Conditions, Ferries"
+  },
+  {
+    "label": "Transportation / Road Transport / Street Cars",
+    "value": "root|Transportation|Road Transport|Street Cars"
+  },
+  {
+    "label": "Transportation / Road Transport / Subways and Elevated Trains",
+    "value": "root|Transportation|Road Transport|Subways and Elevated Trains"
+  },
+  {
+    "label": "Transportation / Road Transport / Taxicabs",
+    "value": "root|Transportation|Road Transport|Taxicabs"
+  },
+  {
+    "label": "Transportation / Road Transport / Tollgates",
+    "value": "root|Transportation|Road Transport|Tollgates"
+  },
+  {
+    "label": "Transportation / Road Transport / Truck Drivers",
+    "value": "root|Transportation|Road Transport|Truck Drivers"
+  },
+  {
+    "label": "Transportation / Road Transport / Truck Repairs at Garages",
+    "value": "root|Transportation|Road Transport|Truck Repairs at Garages"
+  },
+  {
+    "label": "Transportation / Road Transport / Truck Terminals",
+    "value": "root|Transportation|Road Transport|Truck Terminals"
+  },
+  {
+    "label": "Transportation / Road Transport / Trucks",
+    "value": "root|Transportation|Road Transport|Trucks"
+  },
+  {
+    "label": "Transportation / Road Transport / Trucks Transporting People",
+    "value": "root|Transportation|Road Transport|Trucks Transporting People"
+  },
+  {
+    "label": "Transportation / Road Transport / Waiting for Busses, Board.ing",
+    "value": "root|Transportation|Road Transport|Waiting for Busses, Board.ing"
+  },
+  {
+    "label": "Transportation / Tourists",
+    "value": "root|Transportation|Tourists"
+  },
+  {
+    "label": "Transportation / Tourists / Travelers' Accommodations, Hotels",
+    "value": "root|Transportation|Tourists|Travelers' Accommodations, Hotels"
+  },
+  {
+    "label": "Transportation / Water Transport",
+    "value": "root|Transportation|Water Transport"
+  },
+  {
+    "label": "Transportation / Water Transport / Barges",
+    "value": "root|Transportation|Water Transport|Barges"
+  },
+  {
+    "label": "Transportation / Water Transport / Coal Barges, Loading Operations",
+    "value": "root|Transportation|Water Transport|Coal Barges, Loading Operations"
+  },
+  {
+    "label": "Transportation / Water Transport / Ferry Boats",
+    "value": "root|Transportation|Water Transport|Ferry Boats"
+  },
+  {
+    "label": "Transportation / Water Transport / Grain Boats, Loading Operations",
+    "value": "root|Transportation|Water Transport|Grain Boats, Loading Operations"
+  },
+  {
+    "label": "Transportation / Water Transport / Inland Shipping",
+    "value": "root|Transportation|Water Transport|Inland Shipping"
+  },
+  {
+    "label": "Transportation / Water Transport / Loading and Unloading",
+    "value": "root|Transportation|Water Transport|Loading and Unloading"
+  },
+  {
+    "label": "Transportation / Water Transport / Locks",
+    "value": "root|Transportation|Water Transport|Locks"
+  },
+  {
+    "label": "Transportation / Water Transport / Merchant Marine Training",
+    "value": "root|Transportation|Water Transport|Merchant Marine Training"
+  },
+  {
+    "label": "Transportation / Water Transport / Merchant Seamen",
+    "value": "root|Transportation|Water Transport|Merchant Seamen"
+  },
+  {
+    "label": "Transportation / Water Transport / Ore Barges, Loading Operations",
+    "value": "root|Transportation|Water Transport|Ore Barges, Loading Operations"
+  },
+  {
+    "label": "Transportation / Water Transport / Towboats",
+    "value": "root|Transportation|Water Transport|Towboats"
+  },
+  {
+    "label": "Transportation / Water Transport / Water Transportation",
+    "value": "root|Transportation|Water Transport|Water Transportation"
+  },
+  {
+    "label": "War",
+    "value": "root|War"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites",
+    "value": "root|War|Civilian Defence and Other Activites"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / 'Food for Victory' Campaign",
+    "value": "root|War|Civilian Defence and Other Activites|'Food for Victory' Campaign"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Air Plane Spotting",
+    "value": "root|War|Civilian Defence and Other Activites|Air Plane Spotting"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Air Raid Drill",
+    "value": "root|War|Civilian Defence and Other Activites|Air Raid Drill"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Air Raid Wardens",
+    "value": "root|War|Civilian Defence and Other Activites|Air Raid Wardens"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Airfield Activities",
+    "value": "root|War|Civilian Defence and Other Activites|Airfield Activities"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Base Canteen",
+    "value": "root|War|Civilian Defence and Other Activites|Base Canteen"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Blood Donors",
+    "value": "root|War|Civilian Defence and Other Activites|Blood Donors"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Boy Scouts",
+    "value": "root|War|Civilian Defence and Other Activites|Boy Scouts"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Civilian Activities",
+    "value": "root|War|Civilian Defence and Other Activites|Civilian Activities"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Civilian Air Patrol",
+    "value": "root|War|Civilian Defence and Other Activites|Civilian Air Patrol"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Civilian Defense",
+    "value": "root|War|Civilian Defence and Other Activites|Civilian Defense"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Fats and Grease",
+    "value": "root|War|Civilian Defence and Other Activites|Fats and Grease"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Inspection",
+    "value": "root|War|Civilian Defence and Other Activites|Inspection"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Metal",
+    "value": "root|War|Civilian Defence and Other Activites|Metal"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Paper",
+    "value": "root|War|Civilian Defence and Other Activites|Paper"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Patrol Planes",
+    "value": "root|War|Civilian Defence and Other Activites|Patrol Planes"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Personnel",
+    "value": "root|War|Civilian Defence and Other Activites|Personnel"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Rationing",
+    "value": "root|War|Civilian Defence and Other Activites|Rationing"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Red Cross",
+    "value": "root|War|Civilian Defence and Other Activites|Red Cross"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Rubber",
+    "value": "root|War|Civilian Defence and Other Activites|Rubber"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Scrap Salvage",
+    "value": "root|War|Civilian Defence and Other Activites|Scrap Salvage"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Servicemen's Families",
+    "value": "root|War|Civilian Defence and Other Activites|Servicemen's Families"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / Servicing Patrol Planes",
+    "value": "root|War|Civilian Defence and Other Activites|Servicing Patrol Planes"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / War Bonds, Stamps",
+    "value": "root|War|Civilian Defence and Other Activites|War Bonds, Stamps"
+  },
+  {
+    "label": "War / Civilian Defence and Other Activites / War Production Stimuli",
+    "value": "root|War|Civilian Defence and Other Activites|War Production Stimuli"
+  },
+  {
+    "label": "War / Evacuation and Refugues",
+    "value": "root|War|Evacuation and Refugues"
+  },
+  {
+    "label": "War / Evacuation and Refugues / American-Soviet War Exhibit, June 1943",
+    "value": "root|War|Evacuation and Refugues|American-Soviet War Exhibit, June 1943"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Camps, Arrival",
+    "value": "root|War|Evacuation and Refugues|Camps, Arrival"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Evacuation Camps for American Japanese",
+    "value": "root|War|Evacuation and Refugues|Evacuation Camps for American Japanese"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Nature of the Enemy Exhibit, May 1943",
+    "value": "root|War|Evacuation and Refugues|Nature of the Enemy Exhibit, May 1943"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Office of War Information",
+    "value": "root|War|Evacuation and Refugues|Office of War Information"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Posters",
+    "value": "root|War|Evacuation and Refugues|Posters"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Propaganda",
+    "value": "root|War|Evacuation and Refugues|Propaganda"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Sellng Possessions, Stores",
+    "value": "root|War|Evacuation and Refugues|Sellng Possessions, Stores"
+  },
+  {
+    "label": "War / Evacuation and Refugues / Transportation to Centers",
+    "value": "root|War|Evacuation and Refugues|Transportation to Centers"
+  },
+  {
+    "label": "War / Evacuation and Refugues / United Nations Exhibit, 1943",
+    "value": "root|War|Evacuation and Refugues|United Nations Exhibit, 1943"
+  },
+  {
+    "label": "War / Evacuation and Refugues / War in Advertising, Comics, etc.",
+    "value": "root|War|Evacuation and Refugues|War in Advertising, Comics, etc."
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting",
+    "value": "root|War|Fortifications, Armed Services, Recruiting"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / Armed Forces",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|Armed Forces"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / Fighting French",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|Fighting French"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / Fo reign Groups and Soldiers of Foreign Extraction",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|Fo reign Groups and Soldiers of Foreign Extraction"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / Individuals",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|Individuals"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / Individuals by Name",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|Individuals by Name"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / Officers by Name",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|Officers by Name"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / Recruiting, Draft Boards",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|Recruiting, Draft Boards"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / State Militia",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|State Militia"
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / W.A.C.S., W.A .V.E.S.",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|W.A.C.S., W.A .V.E.S."
+  },
+  {
+    "label": "War / Fortifications, Armed Services, Recruiting / War",
+    "value": "root|War|Fortifications, Armed Services, Recruiting|War"
+  },
+  {
+    "label": "War / Heroes, Awards",
+    "value": "root|War|Heroes, Awards"
+  },
+  {
+    "label": "War / Heroes, Awards / Honor Rolls",
+    "value": "root|War|Heroes, Awards|Honor Rolls"
+  },
+  {
+    "label": "War / Induction, General Training",
+    "value": "root|War|Induction, General Training"
+  },
+  {
+    "label": "War / Induction, General Training / Drill",
+    "value": "root|War|Induction, General Training|Drill"
+  },
+  {
+    "label": "War / Induction, General Training / Headquarters",
+    "value": "root|War|Induction, General Training|Headquarters"
+  },
+  {
+    "label": "War / Induction, General Training / Induction Camps, Basic Training",
+    "value": "root|War|Induction, General Training|Induction Camps, Basic Training"
+  },
+  {
+    "label": "War / Induction, General Training / Maneuvres",
+    "value": "root|War|Induction, General Training|Maneuvres"
+  },
+  {
+    "label": "War / Induction, General Training / Mascots",
+    "value": "root|War|Induction, General Training|Mascots"
+  },
+  {
+    "label": "War / Induction, General Training / Mess Halls",
+    "value": "root|War|Induction, General Training|Mess Halls"
+  },
+  {
+    "label": "War / Induction, General Training / Musicians",
+    "value": "root|War|Induction, General Training|Musicians"
+  },
+  {
+    "label": "War / Induction, General Training / Outfitting",
+    "value": "root|War|Induction, General Training|Outfitting"
+  },
+  {
+    "label": "War / Induction, General Training / Physical Examination",
+    "value": "root|War|Induction, General Training|Physical Examination"
+  },
+  {
+    "label": "War / Induction, General Training / Physical Training",
+    "value": "root|War|Induction, General Training|Physical Training"
+  },
+  {
+    "label": "War / Induction, General Training / Recreation",
+    "value": "root|War|Induction, General Training|Recreation"
+  },
+  {
+    "label": "War / Induction, General Training / Uniforms, Insignias, Kits, Packs",
+    "value": "root|War|Induction, General Training|Uniforms, Insignias, Kits, Packs"
+  },
+  {
+    "label": "War / Induction, General Training / View of Camps",
+    "value": "root|War|Induction, General Training|View of Camps"
+  },
+  {
+    "label": "War / Servicemen on Leave",
+    "value": "root|War|Servicemen on Leave"
+  },
+  {
+    "label": "War / Servicemen on Leave / Around Town",
+    "value": "root|War|Servicemen on Leave|Around Town"
+  },
+  {
+    "label": "War / Servicemen on Leave / At Home",
+    "value": "root|War|Servicemen on Leave|At Home"
+  },
+  {
+    "label": "War / Servicemen on Leave / Entertainment , U.S .O.",
+    "value": "root|War|Servicemen on Leave|Entertainment , U.S .O."
+  },
+  {
+    "label": "War / Servicemen on Leave / In Stations",
+    "value": "root|War|Servicemen on Leave|In Stations"
+  },
+  {
+    "label": "War / Servicemen on Leave / Servicemen on Leave",
+    "value": "root|War|Servicemen on Leave|Servicemen on Leave"
+  },
+  {
+    "label": "War / Special Training Functions",
+    "value": "root|War|Special Training Functions"
+  },
+  {
+    "label": "War / Special Training Functions / Air Force, Aircraft Training",
+    "value": "root|War|Special Training Functions|Air Force, Aircraft Training"
+  },
+  {
+    "label": "War / Special Training Functions / Airfields",
+    "value": "root|War|Special Training Functions|Airfields"
+  },
+  {
+    "label": "War / Special Training Functions / Armored Forces, Tanks",
+    "value": "root|War|Special Training Functions|Armored Forces, Tanks"
+  },
+  {
+    "label": "War / Special Training Functions / Artillery",
+    "value": "root|War|Special Training Functions|Artillery"
+  },
+  {
+    "label": "War / Special Training Functions / Attack Scout Dive Bombers",
+    "value": "root|War|Special Training Functions|Attack Scout Dive Bombers"
+  },
+  {
+    "label": "War / Special Training Functions / B-17 Flying Fortress",
+    "value": "root|War|Special Training Functions|B-17 Flying Fortress"
+  },
+  {
+    "label": "War / Special Training Functions / Barrage Balloons",
+    "value": "root|War|Special Training Functions|Barrage Balloons"
+  },
+  {
+    "label": "War / Special Training Functions / Bayonet Drill",
+    "value": "root|War|Special Training Functions|Bayonet Drill"
+  },
+  {
+    "label": "War / Special Training Functions / Bombers",
+    "value": "root|War|Special Training Functions|Bombers"
+  },
+  {
+    "label": "War / Special Training Functions / Camouflage",
+    "value": "root|War|Special Training Functions|Camouflage"
+  },
+  {
+    "label": "War / Special Training Functions / Cavalry, Motorized Troops, Tanks",
+    "value": "root|War|Special Training Functions|Cavalry, Motorized Troops, Tanks"
+  },
+  {
+    "label": "War / Special Training Functions / Chemical Warfare",
+    "value": "root|War|Special Training Functions|Chemical Warfare"
+  },
+  {
+    "label": "War / Special Training Functions / Communications, Signal Corps",
+    "value": "root|War|Special Training Functions|Communications, Signal Corps"
+  },
+  {
+    "label": "War / Special Training Functions / Engineers",
+    "value": "root|War|Special Training Functions|Engineers"
+  },
+  {
+    "label": "War / Special Training Functions / General Flight Training Classes",
+    "value": "root|War|Special Training Functions|General Flight Training Classes"
+  },
+  {
+    "label": "War / Special Training Functions / Gliders",
+    "value": "root|War|Special Training Functions|Gliders"
+  },
+  {
+    "label": "War / Special Training Functions / Ground Crews",
+    "value": "root|War|Special Training Functions|Ground Crews"
+  },
+  {
+    "label": "War / Special Training Functions / Mechanized Cavalry, Scout Cars",
+    "value": "root|War|Special Training Functions|Mechanized Cavalry, Scout Cars"
+  },
+  {
+    "label": "War / Special Training Functions / Military Government",
+    "value": "root|War|Special Training Functions|Military Government"
+  },
+  {
+    "label": "War / Special Training Functions / Military Police, Shore Patrol",
+    "value": "root|War|Special Training Functions|Military Police, Shore Patrol"
+  },
+  {
+    "label": "War / Special Training Functions / Motorcycle Troops",
+    "value": "root|War|Special Training Functions|Motorcycle Troops"
+  },
+  {
+    "label": "War / Special Training Functions / Naval Academy",
+    "value": "root|War|Special Training Functions|Naval Academy"
+  },
+  {
+    "label": "War / Special Training Functions / Photographs",
+    "value": "root|War|Special Training Functions|Photographs"
+  },
+  {
+    "label": "War / Special Training Functions / Planes",
+    "value": "root|War|Special Training Functions|Planes"
+  },
+  {
+    "label": "War / Special Training Functions / Repairs and Maintenance",
+    "value": "root|War|Special Training Functions|Repairs and Maintenance"
+  },
+  {
+    "label": "War / Special Training Functions / Rifle Shooting",
+    "value": "root|War|Special Training Functions|Rifle Shooting"
+  },
+  {
+    "label": "War / Special Training Functions / Studying Ship Engines",
+    "value": "root|War|Special Training Functions|Studying Ship Engines"
+  },
+  {
+    "label": "War / Special Training Functions / Trainers",
+    "value": "root|War|Special Training Functions|Trainers"
+  },
+  {
+    "label": "War / Special Training Functions / Transport Utility Planes",
+    "value": "root|War|Special Training Functions|Transport Utility Planes"
+  },
+  {
+    "label": "War / Transportation and Medical Services",
+    "value": "root|War|Transportation and Medical Services"
+  },
+  {
+    "label": "War / Transportation and Medical Services / Medical Services",
+    "value": "root|War|Transportation and Medical Services|Medical Services"
+  },
+  {
+    "label": "Work",
+    "value": "root|Work"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Agricultural Machinery",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Agricultural Machinery"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Agricultural Training",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Agricultural Training"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Agriculture",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Agriculture"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Apples",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Apples"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Auctioning, Marketing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Auctioning, Marketing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Barley",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Barley"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Barns, Curing, Stripping",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Barns, Curing, Stripping"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Beans",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Beans"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Bee Keeping",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Bee Keeping"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Beef Cattle",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Beef Cattle"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Berries",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Berries"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Branding, Dehorning, Castrating",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Branding, Dehorning, Castrating"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Breeding",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Breeding"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Breeding and Training Farm",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Breeding and Training Farm"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Bringing in from the Field",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Bringing in from the Field"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Building and Repairing Fences",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Building and Repairing Fences"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Buildings",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Buildings"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Butter",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Butter"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cabbages",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cabbages"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Calves",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Calves"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Carrots",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Carrots"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cauliflowers",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cauliflowers"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Celery",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Celery"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Citrus Fruits",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Citrus Fruits"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Clearing Land",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Clearing Land"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Coffee",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Coffee"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Combines",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Combines"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Commercial Flower Gardening",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Commercial Flower Gardening"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Corn",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Corn"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cotton",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cotton"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cotton Choppers and Pickers",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cotton Choppers and Pickers"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cow Hands, Cowboys",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cow Hands, Cowboys"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cranberries",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cranberries"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Crops",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Crops"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cultivating",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cultivating"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cultivating Cotton",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cultivating Cotton"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Cultivating, Working, Topping",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Cultivating, Working, Topping"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Dairy Cattle",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Dairy Cattle"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Dairy Farms",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Dairy Farms"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Disease, Care",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Disease, Care"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Eggs",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Eggs"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Farm Planning and Accounting",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Farm Planning and Accounting"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Feed",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Feed"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Fertilizing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Fertilizing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Goats",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Goats"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Grading, Packing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Grading, Packing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Grain",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Grain"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Grapefruit",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Grapefruit"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Grapes",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Grapes"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Grasses, Hay, Sorghum",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Grasses, Hay, Sorghum"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Greenhouses",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Greenhouses"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Guayule",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Guayule"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Harvesting",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Harvesting"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Herding",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Herding"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Hogs",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Hogs"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Homemade Tools and Equipment",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Homemade Tools and Equipment"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Hops",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Hops"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Horse Breeding",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Horse Breeding"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Horses, Mules, Donkeys",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Horses, Mules, Donkeys"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Husking, Shelling",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Husking, Shelling"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Irrigation",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Irrigation"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Kaffir Corn, Sudan Grass",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Kaffir Corn, Sudan Grass"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Keeping Good Milk Good",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Keeping Good Milk Good"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Lambing and Shearing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Lambing and Shearing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Lettuce",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Lettuce"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Livestock",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Livestock"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Lunch",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Lunch"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Maintaining Farm Machinery",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Maintaining Farm Machinery"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Marketing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Marketing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Melons",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Melons"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Milking, Shipping Milk",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Milking, Shipping Milk"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Milo",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Milo"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Miscellaneous Farm Work",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Miscellaneous Farm Work"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Oats",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Oats"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Onions",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Onions"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Orchards",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Orchards"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Other Fowl",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Other Fowl"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Pea Pickers' Camp",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Pea Pickers' Camp"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Peaches",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Peaches"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Peanuts",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Peanuts"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Pears",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Pears"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Peas, Pea Vines",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Peas, Pea Vines"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Peppers",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Peppers"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Pests",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Pests"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Picking Cotton",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Picking Cotton"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Pineapples",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Pineapples"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Plant Quarantine, Inspection",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Plant Quarantine, Inspection"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Planting",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Planting"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Planting, Seeding",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Planting, Seeding"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / PlantingCotton",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|PlantingCotton"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Plowing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Plowing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Potatoes",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Potatoes"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Poultry, Chickens",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Poultry, Chickens"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Projecting Agricultural Diseases",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Projecting Agricultural Diseases"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Rabbits",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Rabbits"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Reservoirs, Stock Water Dams",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Reservoirs, Stock Water Dams"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Rice",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Rice"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Round Up",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Round Up"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Round Up , Branding",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Round Up , Branding"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Sampling, Inspecting",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Sampling, Inspecting"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Seed",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Seed"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Shearing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Shearing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Shearing Goats",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Shearing Goats"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Sheep",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Sheep"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Shipping, Marketing",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Shipping, Marketing"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Slaughtering",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Slaughtering"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Small Vegetable Gardens",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Small Vegetable Gardens"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Sorghum",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Sorghum"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Soy Beans",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Soy Beans"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Spinach",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Spinach"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Storage",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Storage"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Storage, Corn Cribs",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Storage, Corn Cribs"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Strawberries",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Strawberries"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Sugar Beets",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Sugar Beets"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Sugar Cane",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Sugar Cane"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Sugar Cane Harvesting",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Sugar Cane Harvesting"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Sweet Potatoes, Yams",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Sweet Potatoes, Yams"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Tobacco",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Tobacco"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Tomatoes",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Tomatoes"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Transporting to Gin or Market",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Transporting to Gin or Market"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Transporting to Market",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Transporting to Market"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Turkeys",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Turkeys"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Veterinary Medicine",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Veterinary Medicine"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Victory Gardeners",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Victory Gardeners"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Victory Gardens",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Victory Gardens"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Weighing, Recording",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Weighing, Recording"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Wheat",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Wheat"
+  },
+  {
+    "label": "Work / Agriculture: Crops, Livestock, Ranches / Working Cultivated Land",
+    "value": "root|Work|Agriculture: Crops, Livestock, Ranches|Working Cultivated Land"
+  },
+  {
+    "label": "Work / Engineering and Building",
+    "value": "root|Work|Engineering and Building"
+  },
+  {
+    "label": "Work / Engineering and Building / Adobe Houses",
+    "value": "root|Work|Engineering and Building|Adobe Houses"
+  },
+  {
+    "label": "Work / Engineering and Building / Aerial Views",
+    "value": "root|Work|Engineering and Building|Aerial Views"
+  },
+  {
+    "label": "Work / Engineering and Building / Alaska Highway",
+    "value": "root|Work|Engineering and Building|Alaska Highway"
+  },
+  {
+    "label": "Work / Engineering and Building / Architecture",
+    "value": "root|Work|Engineering and Building|Architecture"
+  },
+  {
+    "label": "Work / Engineering and Building / Bridges",
+    "value": "root|Work|Engineering and Building|Bridges"
+  },
+  {
+    "label": "Work / Engineering and Building / Building Materials",
+    "value": "root|Work|Engineering and Building|Building Materials"
+  },
+  {
+    "label": "Work / Engineering and Building / Building Trades",
+    "value": "root|Work|Engineering and Building|Building Trades"
+  },
+  {
+    "label": "Work / Engineering and Building / Carpentry",
+    "value": "root|Work|Engineering and Building|Carpentry"
+  },
+  {
+    "label": "Work / Engineering and Building / Carpentry, Log Houses",
+    "value": "root|Work|Engineering and Building|Carpentry, Log Houses"
+  },
+  {
+    "label": "Work / Engineering and Building / City Streets",
+    "value": "root|Work|Engineering and Building|City Streets"
+  },
+  {
+    "label": "Work / Engineering and Building / Concretework",
+    "value": "root|Work|Engineering and Building|Concretework"
+  },
+  {
+    "label": "Work / Engineering and Building / Construction Projects",
+    "value": "root|Work|Engineering and Building|Construction Projects"
+  },
+  {
+    "label": "Work / Engineering and Building / Construction of Small Houses",
+    "value": "root|Work|Engineering and Building|Construction of Small Houses"
+  },
+  {
+    "label": "Work / Engineering and Building / Dams and Lock Construction",
+    "value": "root|Work|Engineering and Building|Dams and Lock Construction"
+  },
+  {
+    "label": "Work / Engineering and Building / Delivery, Erection",
+    "value": "root|Work|Engineering and Building|Delivery, Erection"
+  },
+  {
+    "label": "Work / Engineering and Building / Demolition, House Wrecking",
+    "value": "root|Work|Engineering and Building|Demolition, House Wrecking"
+  },
+  {
+    "label": "Work / Engineering and Building / Doors , Windows",
+    "value": "root|Work|Engineering and Building|Doors , Windows"
+  },
+  {
+    "label": "Work / Engineering and Building / Engineering",
+    "value": "root|Work|Engineering and Building|Engineering"
+  },
+  {
+    "label": "Work / Engineering and Building / Farm Buildings and Grounds",
+    "value": "root|Work|Engineering and Building|Farm Buildings and Grounds"
+  },
+  {
+    "label": "Work / Engineering and Building / Foundations",
+    "value": "root|Work|Engineering and Building|Foundations"
+  },
+  {
+    "label": "Work / Engineering and Building / Greenbelt, Maryland",
+    "value": "root|Work|Engineering and Building|Greenbelt, Maryland"
+  },
+  {
+    "label": "Work / Engineering and Building / Greenhills, Ohio",
+    "value": "root|Work|Engineering and Building|Greenhills, Ohio"
+  },
+  {
+    "label": "Work / Engineering and Building / Irrigation",
+    "value": "root|Work|Engineering and Building|Irrigation"
+  },
+  {
+    "label": "Work / Engineering and Building / Land Clearing, Earth Moving",
+    "value": "root|Work|Engineering and Building|Land Clearing, Earth Moving"
+  },
+  {
+    "label": "Work / Engineering and Building / Landscape Architecture",
+    "value": "root|Work|Engineering and Building|Landscape Architecture"
+  },
+  {
+    "label": "Work / Engineering and Building / Masonry",
+    "value": "root|Work|Engineering and Building|Masonry"
+  },
+  {
+    "label": "Work / Engineering and Building / Miscellaneous Trades",
+    "value": "root|Work|Engineering and Building|Miscellaneous Trades"
+  },
+  {
+    "label": "Work / Engineering and Building / Moving Houses",
+    "value": "root|Work|Engineering and Building|Moving Houses"
+  },
+  {
+    "label": "Work / Engineering and Building / Oil Pipeline Construction",
+    "value": "root|Work|Engineering and Building|Oil Pipeline Construction"
+  },
+  {
+    "label": "Work / Engineering and Building / Painting",
+    "value": "root|Work|Engineering and Building|Painting"
+  },
+  {
+    "label": "Work / Engineering and Building / Prefabricated Houses",
+    "value": "root|Work|Engineering and Building|Prefabricated Houses"
+  },
+  {
+    "label": "Work / Engineering and Building / Privies",
+    "value": "root|Work|Engineering and Building|Privies"
+  },
+  {
+    "label": "Work / Engineering and Building / Rammed Earth Construction",
+    "value": "root|Work|Engineering and Building|Rammed Earth Construction"
+  },
+  {
+    "label": "Work / Engineering and Building / Road Construction",
+    "value": "root|Work|Engineering and Building|Road Construction"
+  },
+  {
+    "label": "Work / Engineering and Building / Screen Doors and Windows",
+    "value": "root|Work|Engineering and Building|Screen Doors and Windows"
+  },
+  {
+    "label": "Work / Engineering and Building / Sewers",
+    "value": "root|Work|Engineering and Building|Sewers"
+  },
+  {
+    "label": "Work / Engineering and Building / Stock Water Dams and Other Water Controls",
+    "value": "root|Work|Engineering and Building|Stock Water Dams and Other Water Controls"
+  },
+  {
+    "label": "Work / Engineering and Building / Stockpiles, Pre-cutting, Pre-casting, Pre-assembly, Miscellaneous",
+    "value": "root|Work|Engineering and Building|Stockpiles, Pre-cutting, Pre-casting, Pre-assembly, Miscellaneous"
+  },
+  {
+    "label": "Work / Engineering and Building / Surveying",
+    "value": "root|Work|Engineering and Building|Surveying"
+  },
+  {
+    "label": "Work / Engineering and Building / Training for Industrial Skills",
+    "value": "root|Work|Engineering and Building|Training for Industrial Skills"
+  },
+  {
+    "label": "Work / Engineering and Building / Washington, D.C. (Official Buildings)",
+    "value": "root|Work|Engineering and Building|Washington, D.C. (Official Buildings)"
+  },
+  {
+    "label": "Work / Engineering and Building / Water Supply",
+    "value": "root|Work|Engineering and Building|Water Supply"
+  },
+  {
+    "label": "Work / Engineering and Building / Workmen",
+    "value": "root|Work|Engineering and Building|Workmen"
+  },
+  {
+    "label": "Work / Fishing",
+    "value": "root|Work|Fishing"
+  },
+  {
+    "label": "Work / Fishing / Crabs, Oysters",
+    "value": "root|Work|Fishing|Crabs, Oysters"
+  },
+  {
+    "label": "Work / Fishing / Fishermen in their Boats",
+    "value": "root|Work|Fishing|Fishermen in their Boats"
+  },
+  {
+    "label": "Work / Fishing / Fishing",
+    "value": "root|Work|Fishing|Fishing"
+  },
+  {
+    "label": "Work / Fishing / Hauling in the Catch",
+    "value": "root|Work|Fishing|Hauling in the Catch"
+  },
+  {
+    "label": "Work / Fishing / Indians, Celilo Falls, Oregon",
+    "value": "root|Work|Fishing|Indians, Celilo Falls, Oregon"
+  },
+  {
+    "label": "Work / Fishing / Life on Board",
+    "value": "root|Work|Fishing|Life on Board"
+  },
+  {
+    "label": "Work / Fishing / Maintenance",
+    "value": "root|Work|Fishing|Maintenance"
+  },
+  {
+    "label": "Work / Fishing / Unloading, Dock Scenes",
+    "value": "root|Work|Fishing|Unloading, Dock Scenes"
+  },
+  {
+    "label": "Work / Forest Products",
+    "value": "root|Work|Forest Products"
+  },
+  {
+    "label": "Work / Forest Products / Booming Operations",
+    "value": "root|Work|Forest Products|Booming Operations"
+  },
+  {
+    "label": "Work / Forest Products / Firewood",
+    "value": "root|Work|Forest Products|Firewood"
+  },
+  {
+    "label": "Work / Forest Products / Fur Auction",
+    "value": "root|Work|Forest Products|Fur Auction"
+  },
+  {
+    "label": "Work / Forest Products / Fur Trapping and Trappers",
+    "value": "root|Work|Forest Products|Fur Trapping and Trappers"
+  },
+  {
+    "label": "Work / Forest Products / Hauling Logs",
+    "value": "root|Work|Forest Products|Hauling Logs"
+  },
+  {
+    "label": "Work / Forest Products / Lumbering",
+    "value": "root|Work|Forest Products|Lumbering"
+  },
+  {
+    "label": "Work / Forest Products / Lumbering, Forest Products",
+    "value": "root|Work|Forest Products|Lumbering, Forest Products"
+  },
+  {
+    "label": "Work / Forest Products / Lumberjacks, Lumbercamps",
+    "value": "root|Work|Forest Products|Lumberjacks, Lumbercamps"
+  },
+  {
+    "label": "Work / Forest Products / Maple Syrup",
+    "value": "root|Work|Forest Products|Maple Syrup"
+  },
+  {
+    "label": "Work / Forest Products / Nurseries, Planting Trees",
+    "value": "root|Work|Forest Products|Nurseries, Planting Trees"
+  },
+  {
+    "label": "Work / Forest Products / Pulpwood Drive",
+    "value": "root|Work|Forest Products|Pulpwood Drive"
+  },
+  {
+    "label": "Work / Forest Products / Sawmills",
+    "value": "root|Work|Forest Products|Sawmills"
+  },
+  {
+    "label": "Work / Forest Products / Sluicing Operations",
+    "value": "root|Work|Forest Products|Sluicing Operations"
+  },
+  {
+    "label": "Work / Forest Products / Tie Cutting Camp",
+    "value": "root|Work|Forest Products|Tie Cutting Camp"
+  },
+  {
+    "label": "Work / Forest Products / Turpentine",
+    "value": "root|Work|Forest Products|Turpentine"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying",
+    "value": "root|Work|Mining, Oil Wells, Quarrying"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Abandoned Gold Mines",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Abandoned Gold Mines"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Blasting and Drilling",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Blasting and Drilling"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Breaking and Cleaning Plants",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Breaking and Cleaning Plants"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Chromite",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Chromite"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Coal",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Coal"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Copper",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Copper"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Drilling Wells",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Drilling Wells"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Drilling, Blasting, Mucking",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Drilling, Blasting, Mucking"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Gold",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Gold"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Iron",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Iron"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Lead",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Lead"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Loading and Transport",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Loading and Transport"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Machine Shop",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Machine Shop"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Mercury",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Mercury"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Miners",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Miners"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Mines",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Mines"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Petroleum, Oil Wells",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Petroleum, Oil Wells"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Prospecting",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Prospecting"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Quarries",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Quarries"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Safety Operations",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Safety Operations"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Small Private Mines: Gopher Hole Mines",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Small Private Mines: Gopher Hole Mines"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Sulphur",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Sulphur"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Tipples",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Tipples"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Transporting Ore to Mill",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Transporting Ore to Mill"
+  },
+  {
+    "label": "Work / Mining, Oil Wells, Quarrying / Tungsten",
+    "value": "root|Work|Mining, Oil Wells, Quarrying|Tungsten"
+  },
+  {
+    "label": "Work / Processing and Manufacturing",
+    "value": "root|Work|Processing and Manufacturing"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Aircraft Engines",
+    "value": "root|Work|Processing and Manufacturing|Aircraft Engines"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Aircraft Industry",
+    "value": "root|Work|Processing and Manufacturing|Aircraft Industry"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Alcoholic Beverages, Wine",
+    "value": "root|Work|Processing and Manufacturing|Alcoholic Beverages, Wine"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Aluminium",
+    "value": "root|Work|Processing and Manufacturing|Aluminium"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Ampoule Preparations",
+    "value": "root|Work|Processing and Manufacturing|Ampoule Preparations"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Assembling",
+    "value": "root|Work|Processing and Manufacturing|Assembling"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Auto Industry",
+    "value": "root|Work|Processing and Manufacturing|Auto Industry"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / B-17 Bomber",
+    "value": "root|Work|Processing and Manufacturing|B-17 Bomber"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Baking",
+    "value": "root|Work|Processing and Manufacturing|Baking"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Ball Bearings,",
+    "value": "root|Work|Processing and Manufacturing|Ball Bearings,"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Bedding, Mattresses",
+    "value": "root|Work|Processing and Manufacturing|Bedding, Mattresses"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Blood Plasma",
+    "value": "root|Work|Processing and Manufacturing|Blood Plasma"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Boot Making",
+    "value": "root|Work|Processing and Manufacturing|Boot Making"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Butter",
+    "value": "root|Work|Processing and Manufacturing|Butter"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Canning",
+    "value": "root|Work|Processing and Manufacturing|Canning"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Capsule Preparations",
+    "value": "root|Work|Processing and Manufacturing|Capsule Preparations"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Carbon Black",
+    "value": "root|Work|Processing and Manufacturing|Carbon Black"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Cheese",
+    "value": "root|Work|Processing and Manufacturing|Cheese"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Chemical Industry",
+    "value": "root|Work|Processing and Manufacturing|Chemical Industry"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Chromium",
+    "value": "root|Work|Processing and Manufacturing|Chromium"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Cigars",
+    "value": "root|Work|Processing and Manufacturing|Cigars"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / CitrusFruit",
+    "value": "root|Work|Processing and Manufacturing|CitrusFruit"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Clothing Industry",
+    "value": "root|Work|Processing and Manufacturing|Clothing Industry"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Coke",
+    "value": "root|Work|Processing and Manufacturing|Coke"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Copper",
+    "value": "root|Work|Processing and Manufacturing|Copper"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Cotton, Ginning and Processing",
+    "value": "root|Work|Processing and Manufacturing|Cotton, Ginning and Processing"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Cottonseed Oil",
+    "value": "root|Work|Processing and Manufacturing|Cottonseed Oil"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Cranes",
+    "value": "root|Work|Processing and Manufacturing|Cranes"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Creosoting, Treating",
+    "value": "root|Work|Processing and Manufacturing|Creosoting, Treating"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Cutting, Welding, Riveting, Chipping",
+    "value": "root|Work|Processing and Manufacturing|Cutting, Welding, Riveting, Chipping"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Dairy Products",
+    "value": "root|Work|Processing and Manufacturing|Dairy Products"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Dehydration",
+    "value": "root|Work|Processing and Manufacturing|Dehydration"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Drying Fruit",
+    "value": "root|Work|Processing and Manufacturing|Drying Fruit"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Early Stages",
+    "value": "root|Work|Processing and Manufacturing|Early Stages"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Electric Machinery",
+    "value": "root|Work|Processing and Manufacturing|Electric Machinery"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Electrical Work",
+    "value": "root|Work|Processing and Manufacturing|Electrical Work"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Engineering Equipment",
+    "value": "root|Work|Processing and Manufacturing|Engineering Equipment"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Feed",
+    "value": "root|Work|Processing and Manufacturing|Feed"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Fish",
+    "value": "root|Work|Processing and Manufacturing|Fish"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Flags",
+    "value": "root|Work|Processing and Manufacturing|Flags"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Flour Mills, Bread",
+    "value": "root|Work|Processing and Manufacturing|Flour Mills, Bread"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Food Products",
+    "value": "root|Work|Processing and Manufacturing|Food Products"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Frozen Foods",
+    "value": "root|Work|Processing and Manufacturing|Frozen Foods"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Fruit and Vegetable Packing",
+    "value": "root|Work|Processing and Manufacturing|Fruit and Vegetable Packing"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Fur Goods",
+    "value": "root|Work|Processing and Manufacturing|Fur Goods"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Furnaces",
+    "value": "root|Work|Processing and Manufacturing|Furnaces"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Gas Masks",
+    "value": "root|Work|Processing and Manufacturing|Gas Masks"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Glass",
+    "value": "root|Work|Processing and Manufacturing|Glass"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Grist Mill",
+    "value": "root|Work|Processing and Manufacturing|Grist Mill"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Guayule",
+    "value": "root|Work|Processing and Manufacturing|Guayule"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Half Completed Ships",
+    "value": "root|Work|Processing and Manufacturing|Half Completed Ships"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Hats, Millinery",
+    "value": "root|Work|Processing and Manufacturing|Hats, Millinery"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Hop Kiln",
+    "value": "root|Work|Processing and Manufacturing|Hop Kiln"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Household Equipment",
+    "value": "root|Work|Processing and Manufacturing|Household Equipment"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Inter-Regional Pipelines",
+    "value": "root|Work|Processing and Manufacturing|Inter-Regional Pipelines"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Launching",
+    "value": "root|Work|Processing and Manufacturing|Launching"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Leather",
+    "value": "root|Work|Processing and Manufacturing|Leather"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Locomotives, Rolling Stock",
+    "value": "root|Work|Processing and Manufacturing|Locomotives, Rolling Stock"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Machinery, Hardware, Devices",
+    "value": "root|Work|Processing and Manufacturing|Machinery, Hardware, Devices"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Magnesium",
+    "value": "root|Work|Processing and Manufacturing|Magnesium"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Manganese",
+    "value": "root|Work|Processing and Manufacturing|Manganese"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Manufacturing and Processing Industry",
+    "value": "root|Work|Processing and Manufacturing|Manufacturing and Processing Industry"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Meat",
+    "value": "root|Work|Processing and Manufacturing|Meat"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Mercury",
+    "value": "root|Work|Processing and Manufacturing|Mercury"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Munitions",
+    "value": "root|Work|Processing and Manufacturing|Munitions"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Nearly Completed Ships",
+    "value": "root|Work|Processing and Manufacturing|Nearly Completed Ships"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Needlework",
+    "value": "root|Work|Processing and Manufacturing|Needlework"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Olive Oil",
+    "value": "root|Work|Processing and Manufacturing|Olive Oil"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Outfitting",
+    "value": "root|Work|Processing and Manufacturing|Outfitting"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Packaging, Bottling",
+    "value": "root|Work|Processing and Manufacturing|Packaging, Bottling"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Papermills and Paper Products",
+    "value": "root|Work|Processing and Manufacturing|Papermills and Paper Products"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Parachutes",
+    "value": "root|Work|Processing and Manufacturing|Parachutes"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Patent Medicines, Medical Supplies",
+    "value": "root|Work|Processing and Manufacturing|Patent Medicines, Medical Supplies"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Peanuts",
+    "value": "root|Work|Processing and Manufacturing|Peanuts"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Peas",
+    "value": "root|Work|Processing and Manufacturing|Peas"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Pecan Shelling",
+    "value": "root|Work|Processing and Manufacturing|Pecan Shelling"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Petroleum Refining, Coal",
+    "value": "root|Work|Processing and Manufacturing|Petroleum Refining, Coal"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Photo Duplication",
+    "value": "root|Work|Processing and Manufacturing|Photo Duplication"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Photo Engraving",
+    "value": "root|Work|Processing and Manufacturing|Photo Engraving"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Photo Murals",
+    "value": "root|Work|Processing and Manufacturing|Photo Murals"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Photography",
+    "value": "root|Work|Processing and Manufacturing|Photography"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Pipe",
+    "value": "root|Work|Processing and Manufacturing|Pipe"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Postage Stamps",
+    "value": "root|Work|Processing and Manufacturing|Postage Stamps"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Potatoes, Root Vegetables",
+    "value": "root|Work|Processing and Manufacturing|Potatoes, Root Vegetables"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Poultry, Turkeys",
+    "value": "root|Work|Processing and Manufacturing|Poultry, Turkeys"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Prefabrication",
+    "value": "root|Work|Processing and Manufacturing|Prefabrication"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Printing",
+    "value": "root|Work|Processing and Manufacturing|Printing"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Propeller",
+    "value": "root|Work|Processing and Manufacturing|Propeller"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Rice Mill",
+    "value": "root|Work|Processing and Manufacturing|Rice Mill"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / SaddleMaking",
+    "value": "root|Work|Processing and Manufacturing|SaddleMaking"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Salmon",
+    "value": "root|Work|Processing and Manufacturing|Salmon"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Sheet Steel",
+    "value": "root|Work|Processing and Manufacturing|Sheet Steel"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Shingles",
+    "value": "root|Work|Processing and Manufacturing|Shingles"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Ship Building",
+    "value": "root|Work|Processing and Manufacturing|Ship Building"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Small Boats",
+    "value": "root|Work|Processing and Manufacturing|Small Boats"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Sorghum",
+    "value": "root|Work|Processing and Manufacturing|Sorghum"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Spaghetti, Noodles",
+    "value": "root|Work|Processing and Manufacturing|Spaghetti, Noodles"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Steel",
+    "value": "root|Work|Processing and Manufacturing|Steel"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Steel casting",
+    "value": "root|Work|Processing and Manufacturing|Steel casting"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Steelmills",
+    "value": "root|Work|Processing and Manufacturing|Steelmills"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Stone, Cement, Clay, Glass",
+    "value": "root|Work|Processing and Manufacturing|Stone, Cement, Clay, Glass"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Sugar Refining",
+    "value": "root|Work|Processing and Manufacturing|Sugar Refining"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Sugar, Sugar Beet",
+    "value": "root|Work|Processing and Manufacturing|Sugar, Sugar Beet"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Testing and Checking",
+    "value": "root|Work|Processing and Manufacturing|Testing and Checking"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Textile Industry",
+    "value": "root|Work|Processing and Manufacturing|Textile Industry"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Tin",
+    "value": "root|Work|Processing and Manufacturing|Tin"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Tinplate",
+    "value": "root|Work|Processing and Manufacturing|Tinplate"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Tire Retreading",
+    "value": "root|Work|Processing and Manufacturing|Tire Retreading"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Transportation and Equipment",
+    "value": "root|Work|Processing and Manufacturing|Transportation and Equipment"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Transporting, Tank Cars and Trucks",
+    "value": "root|Work|Processing and Manufacturing|Transporting, Tank Cars and Trucks"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Tuna",
+    "value": "root|Work|Processing and Manufacturing|Tuna"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Tungsten",
+    "value": "root|Work|Processing and Manufacturing|Tungsten"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Turpentine and Rosin",
+    "value": "root|Work|Processing and Manufacturing|Turpentine and Rosin"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Wagons and Carriages",
+    "value": "root|Work|Processing and Manufacturing|Wagons and Carriages"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / War Materials",
+    "value": "root|Work|Processing and Manufacturing|War Materials"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / War Transport Vehicles",
+    "value": "root|Work|Processing and Manufacturing|War Transport Vehicles"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Wire and Cables",
+    "value": "root|Work|Processing and Manufacturing|Wire and Cables"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Wood Products, Millwork, Furniture",
+    "value": "root|Work|Processing and Manufacturing|Wood Products, Millwork, Furniture"
+  },
+  {
+    "label": "Work / Processing and Manufacturing / Wool and Mohair Plant",
+    "value": "root|Work|Processing and Manufacturing|Wool and Mohair Plant"
+  },
+  {
+    "label": "Work / Research and Administration",
+    "value": "root|Work|Research and Administration"
+  },
+  {
+    "label": "Work / Research and Administration / Business: Banks, Office Stockrooms",
+    "value": "root|Work|Research and Administration|Business: Banks, Office Stockrooms"
+  },
+  {
+    "label": "Work / Research and Administration / Executives",
+    "value": "root|Work|Research and Administration|Executives"
+  },
+  {
+    "label": "Work / Research and Administration / Government Office Workers",
+    "value": "root|Work|Research and Administration|Government Office Workers"
+  },
+  {
+    "label": "Work / Research and Administration / Management",
+    "value": "root|Work|Research and Administration|Management"
+  },
+  {
+    "label": "Work / Research and Administration / Office Workers",
+    "value": "root|Work|Research and Administration|Office Workers"
+  },
+  {
+    "label": "Work / Research and Administration / Small Business Management",
+    "value": "root|Work|Research and Administration|Small Business Management"
+  },
+  {
+    "label": "Work / Research and Administration / Technical Research",
+    "value": "root|Work|Research and Administration|Technical Research"
+  },
+  {
+    "label": "Work / Selling and Distribution",
+    "value": "root|Work|Selling and Distribution"
+  },
+  {
+    "label": "Work / Selling and Distribution / Advertising, Stores",
+    "value": "root|Work|Selling and Distribution|Advertising, Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Antiques, Curios",
+    "value": "root|Work|Selling and Distribution|Antiques, Curios"
+  },
+  {
+    "label": "Work / Selling and Distribution / Auctions",
+    "value": "root|Work|Selling and Distribution|Auctions"
+  },
+  {
+    "label": "Work / Selling and Distribution / Automobile Salesrooms",
+    "value": "root|Work|Selling and Distribution|Automobile Salesrooms"
+  },
+  {
+    "label": "Work / Selling and Distribution / Bakeries",
+    "value": "root|Work|Selling and Distribution|Bakeries"
+  },
+  {
+    "label": "Work / Selling and Distribution / Bookstores",
+    "value": "root|Work|Selling and Distribution|Bookstores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Burpee & Co. Seed Dealers, Philadelphia",
+    "value": "root|Work|Selling and Distribution|Burpee & Co. Seed Dealers, Philadelphia"
+  },
+  {
+    "label": "Work / Selling and Distribution / Clothing, Shoes",
+    "value": "root|Work|Selling and Distribution|Clothing, Shoes"
+  },
+  {
+    "label": "Work / Selling and Distribution / Coal Yards",
+    "value": "root|Work|Selling and Distribution|Coal Yards"
+  },
+  {
+    "label": "Work / Selling and Distribution / Cold Storage",
+    "value": "root|Work|Selling and Distribution|Cold Storage"
+  },
+  {
+    "label": "Work / Selling and Distribution / Company and Plantation Stores",
+    "value": "root|Work|Selling and Distribution|Company and Plantation Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Cooperative Stores",
+    "value": "root|Work|Selling and Distribution|Cooperative Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Cotton Dealers",
+    "value": "root|Work|Selling and Distribution|Cotton Dealers"
+  },
+  {
+    "label": "Work / Selling and Distribution / Department Stores",
+    "value": "root|Work|Selling and Distribution|Department Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Door to Door Selling",
+    "value": "root|Work|Selling and Distribution|Door to Door Selling"
+  },
+  {
+    "label": "Work / Selling and Distribution / Drug Stores",
+    "value": "root|Work|Selling and Distribution|Drug Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Ever Normal Granaries",
+    "value": "root|Work|Selling and Distribution|Ever Normal Granaries"
+  },
+  {
+    "label": "Work / Selling and Distribution / Exchange",
+    "value": "root|Work|Selling and Distribution|Exchange"
+  },
+  {
+    "label": "Work / Selling and Distribution / Farmers Markets",
+    "value": "root|Work|Selling and Distribution|Farmers Markets"
+  },
+  {
+    "label": "Work / Selling and Distribution / Feed",
+    "value": "root|Work|Selling and Distribution|Feed"
+  },
+  {
+    "label": "Work / Selling and Distribution / Feed Stores",
+    "value": "root|Work|Selling and Distribution|Feed Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Five and Ten Stores",
+    "value": "root|Work|Selling and Distribution|Five and Ten Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Flower Vendors",
+    "value": "root|Work|Selling and Distribution|Flower Vendors"
+  },
+  {
+    "label": "Work / Selling and Distribution / Food Stores, Groceries and Vegetables",
+    "value": "root|Work|Selling and Distribution|Food Stores, Groceries and Vegetables"
+  },
+  {
+    "label": "Work / Selling and Distribution / Fulton Fish Market, New York",
+    "value": "root|Work|Selling and Distribution|Fulton Fish Market, New York"
+  },
+  {
+    "label": "Work / Selling and Distribution / General Stores",
+    "value": "root|Work|Selling and Distribution|General Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Grain Brokers",
+    "value": "root|Work|Selling and Distribution|Grain Brokers"
+  },
+  {
+    "label": "Work / Selling and Distribution / Grain Elevators",
+    "value": "root|Work|Selling and Distribution|Grain Elevators"
+  },
+  {
+    "label": "Work / Selling and Distribution / Hardware, Farm Machinery, Furniture",
+    "value": "root|Work|Selling and Distribution|Hardware, Farm Machinery, Furniture"
+  },
+  {
+    "label": "Work / Selling and Distribution / Harnesses",
+    "value": "root|Work|Selling and Distribution|Harnesses"
+  },
+  {
+    "label": "Work / Selling and Distribution / Horse and Mule Dealers",
+    "value": "root|Work|Selling and Distribution|Horse and Mule Dealers"
+  },
+  {
+    "label": "Work / Selling and Distribution / Itinerant Horse and Mule Dealers",
+    "value": "root|Work|Selling and Distribution|Itinerant Horse and Mule Dealers"
+  },
+  {
+    "label": "Work / Selling and Distribution / Junk Business",
+    "value": "root|Work|Selling and Distribution|Junk Business"
+  },
+  {
+    "label": "Work / Selling and Distribution / Lumber Yards",
+    "value": "root|Work|Selling and Distribution|Lumber Yards"
+  },
+  {
+    "label": "Work / Selling and Distribution / Luxuries, Flowers, Liquors, Tobacco",
+    "value": "root|Work|Selling and Distribution|Luxuries, Flowers, Liquors, Tobacco"
+  },
+  {
+    "label": "Work / Selling and Distribution / Markets",
+    "value": "root|Work|Selling and Distribution|Markets"
+  },
+  {
+    "label": "Work / Selling and Distribution / Miscellaneous Shops and Stores",
+    "value": "root|Work|Selling and Distribution|Miscellaneous Shops and Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Mobile Ice Cream Business",
+    "value": "root|Work|Selling and Distribution|Mobile Ice Cream Business"
+  },
+  {
+    "label": "Work / Selling and Distribution / Newspaper Vendor",
+    "value": "root|Work|Selling and Distribution|Newspaper Vendor"
+  },
+  {
+    "label": "Work / Selling and Distribution / Newsstands",
+    "value": "root|Work|Selling and Distribution|Newsstands"
+  },
+  {
+    "label": "Work / Selling and Distribution / Novelties, Souvenirs",
+    "value": "root|Work|Selling and Distribution|Novelties, Souvenirs"
+  },
+  {
+    "label": "Work / Selling and Distribution / Oil and Gas Tanks",
+    "value": "root|Work|Selling and Distribution|Oil and Gas Tanks"
+  },
+  {
+    "label": "Work / Selling and Distribution / Potatoes",
+    "value": "root|Work|Selling and Distribution|Potatoes"
+  },
+  {
+    "label": "Work / Selling and Distribution / Radios",
+    "value": "root|Work|Selling and Distribution|Radios"
+  },
+  {
+    "label": "Work / Selling and Distribution / RoadsideStands",
+    "value": "root|Work|Selling and Distribution|RoadsideStands"
+  },
+  {
+    "label": "Work / Selling and Distribution / Saddles, Ranch Supplies",
+    "value": "root|Work|Selling and Distribution|Saddles, Ranch Supplies"
+  },
+  {
+    "label": "Work / Selling and Distribution / Scavengers",
+    "value": "root|Work|Selling and Distribution|Scavengers"
+  },
+  {
+    "label": "Work / Selling and Distribution / Secondhand Stores, Pawnshops",
+    "value": "root|Work|Selling and Distribution|Secondhand Stores, Pawnshops"
+  },
+  {
+    "label": "Work / Selling and Distribution / Seed Dealers",
+    "value": "root|Work|Selling and Distribution|Seed Dealers"
+  },
+  {
+    "label": "Work / Selling and Distribution / Seed and Garden Supplies",
+    "value": "root|Work|Selling and Distribution|Seed and Garden Supplies"
+  },
+  {
+    "label": "Work / Selling and Distribution / Ship Chandlery",
+    "value": "root|Work|Selling and Distribution|Ship Chandlery"
+  },
+  {
+    "label": "Work / Selling and Distribution / Shopping",
+    "value": "root|Work|Selling and Distribution|Shopping"
+  },
+  {
+    "label": "Work / Selling and Distribution / Stock Yards",
+    "value": "root|Work|Selling and Distribution|Stock Yards"
+  },
+  {
+    "label": "Work / Selling and Distribution / Stores",
+    "value": "root|Work|Selling and Distribution|Stores"
+  },
+  {
+    "label": "Work / Selling and Distribution / Street Vendors",
+    "value": "root|Work|Selling and Distribution|Street Vendors"
+  },
+  {
+    "label": "Work / Selling and Distribution / Toys",
+    "value": "root|Work|Selling and Distribution|Toys"
+  },
+  {
+    "label": "Work / Selling and Distribution / Warehouse, Storage",
+    "value": "root|Work|Selling and Distribution|Warehouse, Storage"
+  },
+  {
+    "label": "Work / Selling and Distribution / Wholesale Dealers",
+    "value": "root|Work|Selling and Distribution|Wholesale Dealers"
+  },
+  {
+    "label": "Work / Selling and Distribution / Wholesale Food Markets",
+    "value": "root|Work|Selling and Distribution|Wholesale Food Markets"
+  },
+  {
+    "label": "Work / Selling and Distribution / Window Displays",
+    "value": "root|Work|Selling and Distribution|Window Displays"
+  },
+  {
+    "label": "Work / Services",
+    "value": "root|Work|Services"
+  },
+  {
+    "label": "Work / Services / Barbers Shops",
+    "value": "root|Work|Services|Barbers Shops"
+  },
+  {
+    "label": "Work / Services / Beauty Parlors",
+    "value": "root|Work|Services|Beauty Parlors"
+  },
+  {
+    "label": "Work / Services / Blacksmiths",
+    "value": "root|Work|Services|Blacksmiths"
+  },
+  {
+    "label": "Work / Services / Communication",
+    "value": "root|Work|Services|Communication"
+  },
+  {
+    "label": "Work / Services / Cooks, Waiters",
+    "value": "root|Work|Services|Cooks, Waiters"
+  },
+  {
+    "label": "Work / Services / Electricity",
+    "value": "root|Work|Services|Electricity"
+  },
+  {
+    "label": "Work / Services / Food Preparation",
+    "value": "root|Work|Services|Food Preparation"
+  },
+  {
+    "label": "Work / Services / Garbage Disposal",
+    "value": "root|Work|Services|Garbage Disposal"
+  },
+  {
+    "label": "Work / Services / Ice",
+    "value": "root|Work|Services|Ice"
+  },
+  {
+    "label": "Work / Services / Janitors, Caretakers",
+    "value": "root|Work|Services|Janitors, Caretakers"
+  },
+  {
+    "label": "Work / Services / Laundries",
+    "value": "root|Work|Services|Laundries"
+  },
+  {
+    "label": "Work / Services / Mechanical Services",
+    "value": "root|Work|Services|Mechanical Services"
+  },
+  {
+    "label": "Work / Services / Milk and Other Dairy Products",
+    "value": "root|Work|Services|Milk and Other Dairy Products"
+  },
+  {
+    "label": "Work / Services / Miscellaneous",
+    "value": "root|Work|Services|Miscellaneous"
+  },
+  {
+    "label": "Work / Services / Miscellaneous Services",
+    "value": "root|Work|Services|Miscellaneous Services"
+  },
+  {
+    "label": "Work / Services / Municipal Services",
+    "value": "root|Work|Services|Municipal Services"
+  },
+  {
+    "label": "Work / Services / Personal Services",
+    "value": "root|Work|Services|Personal Services"
+  },
+  {
+    "label": "Work / Services / Personnel",
+    "value": "root|Work|Services|Personnel"
+  },
+  {
+    "label": "Work / Services / Plant and Equipment",
+    "value": "root|Work|Services|Plant and Equipment"
+  },
+  {
+    "label": "Work / Services / Postal Service",
+    "value": "root|Work|Services|Postal Service"
+  },
+  {
+    "label": "Work / Services / Sewage",
+    "value": "root|Work|Services|Sewage"
+  },
+  {
+    "label": "Work / Services / Shoe Repair",
+    "value": "root|Work|Services|Shoe Repair"
+  },
+  {
+    "label": "Work / Services / Stations, Fires",
+    "value": "root|Work|Services|Stations, Fires"
+  },
+  {
+    "label": "Work / Services / Telephone and Telegraph",
+    "value": "root|Work|Services|Telephone and Telegraph"
+  },
+  {
+    "label": "Work / Services / Training Drills",
+    "value": "root|Work|Services|Training Drills"
+  },
+  {
+    "label": "Work / Services / Utilities",
+    "value": "root|Work|Services|Utilities"
+  },
+  {
+    "label": "Work / Services / Water Supply",
+    "value": "root|Work|Services|Water Supply"
+  },
+  {
+    "label": "Work / Services / Water Witch",
+    "value": "root|Work|Services|Water Witch"
+  }
+]

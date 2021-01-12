@@ -1,1 +1,1 @@
-[{"year":1938,"month":8,"photographer":"BenShahn","count":8},{"year":1939,"month":11,"photographer":"ArthurRothstein","count":1},{"year":1940,"month":5,"photographer":"JohnVachon","count":3},{"year":1942,"month":4,"photographer":"JackDelano","count":10},{"year":1942,"month":11,"photographer":"GordonParks","count":39}]
+[{"y":1938,"m":8,"pk":"BenShahn","t":8},{"y":1940,"m":5,"pk":"JohnVachon","t":3},{"y":1942,"m":4,"pk":"JackDelano","t":10},{"y":1942,"m":11,"pk":"GordonParks","t":39},{"y":1941,"m":null,"pk":"Slater","t":1},{"y":1939,"m":11,"pk":"ArthurRothstein","t":1}]

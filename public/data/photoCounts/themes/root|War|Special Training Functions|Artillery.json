@@ -1,1 +1,1 @@
-[{"year":1942,"month":4,"photographer":"JackDelano","count":27},{"year":1942,"month":7,"photographer":"Whitman","count":3},{"year":1942,"month":8,"photographer":"HowardLiberman","count":1}]
+[{"y":1942,"m":4,"pk":"JackDelano","t":27},{"y":1942,"m":7,"pk":"Whitman","t":3},{"y":1942,"m":8,"pk":"HowardLiberman","t":1},{"y":1942,"m":null,"pk":"unspecified","t":4}]

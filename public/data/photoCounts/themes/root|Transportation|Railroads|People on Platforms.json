@@ -1,1 +1,1 @@
-[{"year":1937,"month":10,"photographer":"ArthurRothstein","count":1},{"year":1942,"month":9,"photographer":"JohnCollier","count":94},{"year":1942,"month":9,"photographer":"JackDelano","count":20},{"year":1943,"month":7,"photographer":"AnnRosener","count":102}]
+[{"y":1937,"m":10,"pk":"ArthurRothstein","t":1},{"y":1942,"m":9,"pk":"JohnCollier","t":83},{"y":1942,"m":9,"pk":"JackDelano","t":20},{"y":1943,"m":7,"pk":"AnnRosener","t":102}]

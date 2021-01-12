@@ -1,1 +1,1 @@
-[{"year":1939,"month":2,"photographer":"DorotheaLange","count":6},{"year":1942,"month":5,"photographer":"RussellLee","count":127},{"year":1942,"month":12,"photographer":"AndreasFeininger","count":131}]
+[{"y":1942,"m":5,"pk":"RussellLee","t":127},{"y":1939,"m":2,"pk":"DorotheaLange","t":6},{"y":1942,"m":12,"pk":"AndreasFeininger","t":229}]

@@ -1,1 +1,1 @@
-[{"year":1936,"month":5,"photographer":"PaulCarter","count":40},{"year":1936,"month":6,"photographer":"PaulCarter","count":3},{"year":1937,"month":5,"photographer":"RussellLee","count":1},{"year":1937,"month":6,"photographer":"RussellLee","count":17}]
+[{"y":1936,"m":5,"pk":"PaulCarter","t":56},{"y":1936,"m":6,"pk":"PaulCarter","t":4},{"y":1937,"m":5,"pk":"RussellLee","t":1},{"y":1937,"m":6,"pk":"RussellLee","t":17}]

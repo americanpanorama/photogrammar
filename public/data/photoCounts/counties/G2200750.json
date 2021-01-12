@@ -1,1 +1,1 @@
-[{"year":1935,"month":9,"photographer":"ArthurRothstein","count":311},{"year":1935,"month":10,"photographer":"BenShahn","count":69},{"year":1938,"month":9,"photographer":"RussellLee","count":106},{"year":1935,"month":8,"photographer":"ArthurRothstein","count":2},{"year":1943,"month":6,"photographer":"JohnVachon","count":223}]
+[{"y":1935,"m":10,"pk":"BenShahn","t":1673},{"y":1935,"m":9,"pk":"ArthurRothstein","t":311},{"y":1938,"m":9,"pk":"RussellLee","t":162},{"y":1943,"m":6,"pk":"JohnVachon","t":434},{"y":1935,"m":8,"pk":"ArthurRothstein","t":2}]

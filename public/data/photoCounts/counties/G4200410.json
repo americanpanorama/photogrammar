@@ -1,1 +1,1 @@
-[{"year":1940,"month":7,"photographer":"JohnVachon","count":9},{"year":1940,"month":9,"photographer":"RoydenDixon","count":2},{"year":1943,"month":2,"photographer":"MarjoryCollins","count":209}]
+[{"y":1943,"m":2,"pk":"MarjoryCollins","t":558},{"y":1940,"m":7,"pk":"JohnVachon","t":9},{"y":1940,"m":9,"pk":"RoydenDixon","t":2}]

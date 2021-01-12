@@ -1,1 +1,1 @@
-[{"year":1940,"month":4,"photographer":"JohnVachon","count":238},{"year":1939,"month":9,"photographer":"ArthurRothstein","count":75},{"year":1939,"month":10,"photographer":"ArthurRothstein","count":303},{"year":1939,"month":11,"photographer":"ArthurRothstein","count":15},{"year":1940,"month":2,"photographer":"ArthurRothstein","count":115}]
+[{"y":1940,"m":4,"pk":"JohnVachon","t":348},{"y":1939,"m":10,"pk":"ArthurRothstein","t":356},{"y":1939,"m":9,"pk":"ArthurRothstein","t":141},{"y":1940,"m":2,"pk":"ArthurRothstein","t":37},{"y":1939,"m":11,"pk":"ArthurRothstein","t":15}]

@@ -1,1 +1,1 @@
-[{"year":1943,"month":4,"photographer":"JosephAHorne","count":44},{"year":1943,"month":5,"photographer":"LouiseRosskam","count":442},{"year":1943,"month":6,"photographer":"AnnRosener","count":2},{"year":1943,"month":6,"photographer":"JosephAHorne","count":48},{"year":1943,"month":5,"photographer":"JohnVachon","count":2}]
+[{"y":1943,"m":4,"pk":"JosephAHorne","t":4},{"y":1943,"m":5,"pk":"LouiseRosskam","t":667},{"y":1943,"m":6,"pk":"JosephAHorne","t":81},{"y":1944,"m":null,"pk":"HowardRHollem","t":478},{"y":1943,"m":5,"pk":"JohnVachon","t":2}]

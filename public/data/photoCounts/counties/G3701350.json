@@ -1,1 +1,1 @@
-[{"year":1939,"month":9,"photographer":"MarionPostWolcott","count":433},{"year":1939,"month":7,"photographer":"DorotheaLange","count":20},{"year":1940,"month":5,"photographer":"JackDelano","count":21},{"year":1939,"month":11,"photographer":"MarionPostWolcott","count":38},{"year":1940,"month":10,"photographer":"MarionPostWolcott","count":7}]
+[{"y":1939,"m":9,"pk":"MarionPostWolcott","t":625},{"y":1940,"m":5,"pk":"JackDelano","t":21},{"y":1939,"m":11,"pk":"MarionPostWolcott","t":38},{"y":1940,"m":10,"pk":"MarionPostWolcott","t":7},{"y":1939,"m":7,"pk":"DorotheaLange","t":12}]

@@ -1,1 +1,1 @@
-[{"year":1935,"month":8,"photographer":"ArthurRothstein","count":432},{"year":1936,"month":8,"photographer":"DorotheaLange","count":1},{"year":1937,"month":6,"photographer":"DorotheaLange","count":7},{"year":1938,"month":8,"photographer":"DorotheaLange","count":2}]
+[{"y":1935,"m":8,"pk":"ArthurRothstein","t":432},{"y":1936,"m":8,"pk":"DorotheaLange","t":4},{"y":1937,"m":6,"pk":"DorotheaLange","t":12},{"y":1938,"m":8,"pk":"DorotheaLange","t":23}]

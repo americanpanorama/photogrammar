@@ -1,1 +1,1 @@
-[{"year":1941,"month":5,"photographer":"MarionPostWolcott","count":1},{"year":1942,"month":9,"photographer":"JackDelano","count":57}]
+[{"y":1942,"m":9,"pk":"JackDelano","t":57},{"y":1942,"m":null,"pk":"unspecified","t":1},{"y":1941,"m":5,"pk":"MarionPostWolcott","t":1}]

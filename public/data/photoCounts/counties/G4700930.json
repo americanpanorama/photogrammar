@@ -1,1 +1,1 @@
-[{"year":1942,"month":6,"photographer":"ArthurRothstein","count":48},{"year":1943,"month":9,"photographer":"EstherBubley","count":30},{"year":1942,"month":6,"photographer":"NA","count":1}]
+[{"y":1942,"m":6,"pk":"ArthurRothstein","t":52},{"y":1943,"m":9,"pk":"EstherBubley","t":30},{"y":1941,"m":null,"pk":"CarlPryer","t":22},{"y":1940,"m":null,"pk":"CarlPryer","t":5},{"y":null,"m":null,"pk":"unspecified","t":1},{"y":null,"m":null,"pk":"CarlPryer","t":1},{"y":1940,"m":null,"pk":"unspecified","t":1},{"y":1942,"m":6,"pk":"unspecified","t":1}]

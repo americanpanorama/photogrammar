@@ -1,1 +1,1 @@
-{"name":"John D. Cress","counties":{"G5300330":{"total":1}},"cities":{"WA_Seattle":{"total":1}},"themes":{"total":1,"children":{"Work":{"total":1,"children":{"Forest Products":{"total":1,"children":{"Hauling Logs":{"total":1}}}}}}}}
+{"counties":[{"k":"G5300330","t":1,"ms":[]}],"cities":[{"k":"WA_Seattle","t":1,"ms":[]}],"themes":{"total":1,"children":{"Work":{"total":1,"children":{"Forest Products":{"total":1,"children":{"Hauling Logs":{"total":1}}}}}}}}

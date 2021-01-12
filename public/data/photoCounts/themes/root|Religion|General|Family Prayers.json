@@ -1,1 +1,1 @@
-[{"year":1942,"month":8,"photographer":"GordonParks","count":51},{"year":1942,"month":11,"photographer":"GordonParks","count":3},{"year":1942,"month":11,"photographer":"MarjoryCollins","count":1}]
+[{"y":1942,"m":11,"pk":"GordonParks","t":3},{"y":1942,"m":11,"pk":"MarjoryCollins","t":1},{"y":1942,"m":8,"pk":"GordonParks","t":1}]

@@ -1,1 +1,1 @@
-[{"year":1938,"month":5,"photographer":"JohnVachon","count":97},{"year":1935,"month":8,"photographer":"ArthurRothstein","count":120},{"year":1935,"month":9,"photographer":"ArthurRothstein","count":35},{"year":1936,"month":6,"photographer":"CarlMydans","count":9},{"year":1939,"month":5,"photographer":"MarionPostWolcott","count":10}]
+[{"y":1938,"m":5,"pk":"JohnVachon","t":439},{"y":1935,"m":8,"pk":"ArthurRothstein","t":106},{"y":1935,"m":9,"pk":"ArthurRothstein","t":35},{"y":1936,"m":6,"pk":"CarlMydans","t":9},{"y":1939,"m":5,"pk":"MarionPostWolcott","t":19}]

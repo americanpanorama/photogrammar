@@ -1,1 +1,1 @@
-[{"year":1940,"month":3,"photographer":"MarionPostWolcott","count":11},{"year":1943,"month":5,"photographer":"JohnCollier","count":42},{"year":1943,"month":4,"photographer":"JohnCollier","count":1}]
+[{"y":1940,"m":3,"pk":"MarionPostWolcott","t":21},{"y":1943,"m":5,"pk":"JohnCollier","t":42},{"y":1943,"m":4,"pk":"JohnCollier","t":1},{"y":null,"m":null,"pk":"MarionPostWolcott","t":5}]

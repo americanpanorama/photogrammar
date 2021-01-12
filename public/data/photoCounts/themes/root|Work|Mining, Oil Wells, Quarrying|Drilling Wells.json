@@ -1,1 +1,1 @@
-[{"year":1939,"month":4,"photographer":"RussellLee","count":48},{"year":1939,"month":8,"photographer":"RussellLee","count":417},{"year":1939,"month":10,"photographer":"RussellLee","count":1},{"year":1940,"month":3,"photographer":"RussellLee","count":4},{"year":1942,"month":11,"photographer":"JohnVachon","count":69}]
+[{"y":1939,"m":4,"pk":"RussellLee","t":47},{"y":1939,"m":8,"pk":"RussellLee","t":26},{"y":1939,"m":10,"pk":"RussellLee","t":1},{"y":1942,"m":11,"pk":"JohnVachon","t":69},{"y":1940,"m":3,"pk":"RussellLee","t":1}]

@@ -1,1 +1,1 @@
-[{"year":1940,"month":11,"photographer":"JohnVachon","count":16},{"year":1942,"month":7,"photographer":"ArthurRothstein","count":7},{"year":1942,"month":11,"photographer":"MarjoryCollins","count":30},{"year":1938,"month":10,"photographer":"PaulVanderbilt","count":1}]
+[{"y":1942,"m":7,"pk":"ArthurRothstein","t":39},{"y":1942,"m":11,"pk":"MarjoryCollins","t":82},{"y":1938,"m":10,"pk":"PaulVanderbilt","t":7},{"y":1944,"m":null,"pk":"LewisWalker","t":10},{"y":1940,"m":11,"pk":"JohnVachon","t":16}]

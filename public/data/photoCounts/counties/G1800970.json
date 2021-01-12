@@ -1,1 +1,1 @@
-[{"year":1942,"month":4,"photographer":"JackDelano","count":10},{"year":1943,"month":9,"photographer":"EstherBubley","count":81}]
+[{"y":1942,"m":4,"pk":"JackDelano","t":112},{"y":1943,"m":9,"pk":"EstherBubley","t":81},{"y":null,"m":null,"pk":"unspecified","t":6},{"y":1942,"m":null,"pk":"unspecified","t":1}]

@@ -1,1 +1,1 @@
-[{"year":1941,"month":5,"photographer":"RussellLee","count":7},{"year":1941,"month":8,"photographer":"MarionPostWolcott","count":2},{"year":1941,"month":9,"photographer":"MarionPostWolcott","count":18},{"year":1942,"month":5,"photographer":"JohnVachon","count":11}]
+[{"y":1941,"m":8,"pk":"MarionPostWolcott","t":7},{"y":1941,"m":9,"pk":"MarionPostWolcott","t":34},{"y":1942,"m":5,"pk":"JohnVachon","t":11},{"y":1941,"m":5,"pk":"RussellLee","t":7}]

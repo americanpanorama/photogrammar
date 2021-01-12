@@ -1,1 +1,1 @@
-[{"year":1940,"month":12,"photographer":"JackDelano","count":1},{"year":1940,"month":10,"photographer":"JackDelano","count":7},{"year":1941,"month":8,"photographer":"JackDelano","count":1},{"year":1942,"month":8,"photographer":"JohnCollier","count":5},{"year":1943,"month":5,"photographer":"JohnCollier","count":2}]
+[{"y":1940,"m":12,"pk":"JackDelano","t":20},{"y":1940,"m":10,"pk":"JackDelano","t":7},{"y":1941,"m":8,"pk":"JackDelano","t":1},{"y":1942,"m":8,"pk":"JohnCollier","t":5},{"y":1943,"m":5,"pk":"JohnCollier","t":2}]

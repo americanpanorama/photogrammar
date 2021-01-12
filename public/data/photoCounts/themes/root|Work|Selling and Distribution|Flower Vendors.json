@@ -1,1 +1,1 @@
-[{"year":1942,"month":4,"photographer":"JohnFerrell","count":110},{"year":1942,"month":2,"photographer":"JohnVachon","count":4},{"year":1943,"month":4,"photographer":"JohnCollier","count":41},{"year":1943,"month":4,"photographer":"MarjoryCollins","count":10},{"year":1943,"month":5,"photographer":"JosephAHorne","count":5}]
+[{"y":1942,"m":4,"pk":"JohnFerrell","t":191},{"y":1942,"m":2,"pk":"JohnVachon","t":1},{"y":1943,"m":4,"pk":"JohnCollier","t":41},{"y":1943,"m":4,"pk":"MarjoryCollins","t":16},{"y":1943,"m":5,"pk":"JosephAHorne","t":8}]

@@ -1,1 +1,1 @@
-[{"year":1942,"month":12,"photographer":"AndreasFeininger","count":21},{"year":1942,"month":5,"photographer":"RussellLee","count":15},{"year":1942,"month":8,"photographer":"JackDelano","count":4},{"year":1943,"month":7,"photographer":"JackDelano","count":46}]
+[{"y":1942,"m":12,"pk":"AndreasFeininger","t":21},{"y":1942,"m":5,"pk":"RussellLee","t":15},{"y":1942,"m":8,"pk":"JackDelano","t":4},{"y":1943,"m":7,"pk":"JackDelano","t":46}]

@@ -1,1 +1,1 @@
-[{"year":1942,"month":11,"photographer":"MarjoryCollins","count":15},{"year":1943,"month":1,"photographer":"ArthurSSiegel","count":50},{"year":1943,"month":6,"photographer":"GordonParks","count":8},{"year":1943,"month":5,"photographer":"GordonParks","count":56},{"year":1943,"month":1,"photographer":"HowardRHollem","count":11}]
+[{"y":1942,"m":11,"pk":"MarjoryCollins","t":15},{"y":1943,"m":1,"pk":"ArthurSSiegel","t":50},{"y":1943,"m":6,"pk":"GordonParks","t":8},{"y":1943,"m":5,"pk":"GordonParks","t":56},{"y":1943,"m":1,"pk":"HowardRHollem","t":71}]

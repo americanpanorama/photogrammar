@@ -1,1 +1,1 @@
-[{"year":1940,"month":2,"photographer":"ArthurRothstein","count":306},{"year":1936,"month":4,"photographer":"TheodorJung","count":58},{"year":1938,"month":6,"photographer":"ArthurRothstein","count":23},{"year":1939,"month":1,"photographer":"ArthurRothstein","count":5},{"year":1940,"month":10,"photographer":"JohnVachon","count":28}]
+[{"y":1940,"m":2,"pk":"ArthurRothstein","t":423},{"y":1936,"m":4,"pk":"TheodorJung","t":132},{"y":1938,"m":6,"pk":"ArthurRothstein","t":17},{"y":1939,"m":1,"pk":"ArthurRothstein","t":7},{"y":1940,"m":10,"pk":"JohnVachon","t":29}]

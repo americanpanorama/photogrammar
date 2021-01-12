@@ -1,1 +1,1 @@
-[{"year":1935,"month":10,"photographer":"BenShahn","count":19},{"year":1935,"month":9,"photographer":"ElmerJohnson","count":46},{"year":1935,"month":4,"photographer":"NA","count":15}]
+[{"y":1935,"m":4,"pk":"unspecified","t":25},{"y":1935,"m":10,"pk":"BenShahn","t":35},{"y":1935,"m":9,"pk":"ElmerJohnson","t":99},{"y":1937,"m":null,"pk":"BenShahn","t":1076},{"y":1935,"m":null,"pk":"unspecified","t":3},{"y":null,"m":null,"pk":"ElmerJohnson","t":9}]

@@ -1,1 +1,1 @@
-[{"year":1941,"month":12,"photographer":"JohnVachon","count":102},{"year":1942,"month":5,"photographer":"HowardLiberman","count":21},{"year":1942,"month":6,"photographer":"JackDelano","count":195},{"year":1943,"month":2,"photographer":"JohnVachon","count":9}]
+[{"y":1941,"m":12,"pk":"JohnVachon","t":102},{"y":1942,"m":6,"pk":"JackDelano","t":246},{"y":1943,"m":2,"pk":"JohnVachon","t":9},{"y":1942,"m":null,"pk":"unspecified","t":3},{"y":null,"m":null,"pk":"unspecified","t":1},{"y":1942,"m":5,"pk":"HowardLiberman","t":3}]

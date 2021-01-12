@@ -1,1 +1,1 @@
-[{"year":1940,"month":4,"photographer":"MarionPostWolcott","count":40},{"year":1940,"month":4,"photographer":"RussellLee","count":15},{"year":1940,"month":3,"photographer":"MarionPostWolcott","count":5},{"year":1943,"month":2,"photographer":"MarjoryCollins","count":1}]
+[{"y":1940,"m":4,"pk":"MarionPostWolcott","t":505},{"y":1940,"m":3,"pk":"MarionPostWolcott","t":5},{"y":1943,"m":2,"pk":"MarjoryCollins","t":1},{"y":1940,"m":4,"pk":"RussellLee","t":3}]

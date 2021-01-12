@@ -1,1 +1,1 @@
-[{"year":1940,"month":4,"photographer":"JohnVachon","count":8},{"year":1939,"month":9,"photographer":"ArthurRothstein","count":9},{"year":1939,"month":9,"photographer":"JohnVachon","count":11}]
+[{"y":1939,"m":9,"pk":"ArthurRothstein","t":9},{"y":1939,"m":9,"pk":"JohnVachon","t":23},{"y":1940,"m":4,"pk":"JohnVachon","t":8}]

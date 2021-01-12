@@ -1,1 +1,1 @@
-[{"year":1942,"month":12,"photographer":"GordonParks","count":20},{"year":1943,"month":1,"photographer":"JohnVachon","count":14},{"year":1943,"month":6,"photographer":"MarjoryCollins","count":47}]
+[{"y":1942,"m":12,"pk":"GordonParks","t":106},{"y":1943,"m":1,"pk":"JohnVachon","t":14},{"y":1943,"m":6,"pk":"MarjoryCollins","t":47},{"y":1942,"m":null,"pk":"unspecified","t":2},{"y":1943,"m":null,"pk":"unspecified","t":41}]

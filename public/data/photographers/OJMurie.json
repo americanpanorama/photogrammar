@@ -1,1 +1,1 @@
-{"name":"O. J. Murie","counties":{"G0250115":{"total":2,"m193803":1,"m193706":1}},"cities":{},"themes":{"total":0,"children":{}}}
+{"counties":[{"k":"G0250115","t":2,"ms":[{"y":1938,"m":3,"t":1},{"y":1937,"m":6,"t":1}]}],"cities":[{"k":"AK_AttuIsland","t":2,"ms":[{"y":1938,"m":3,"t":1},{"y":1937,"m":6,"t":1}]}],"themes":{"total":0,"children":{}}}

@@ -1,1 +1,1 @@
-[{"year":1937,"month":7,"photographer":"EdwinRosskam","count":1},{"year":1942,"month":4,"photographer":"JohnCollier","count":5},{"year":1943,"month":6,"photographer":"GordonParks","count":502},{"year":1943,"month":5,"photographer":"GordonParks","count":2},{"year":1942,"month":9,"photographer":"HowardLiberman","count":2}]
+[{"y":1937,"m":7,"pk":"EdwinRosskam","t":1},{"y":1942,"m":4,"pk":"JohnCollier","t":5},{"y":1943,"m":6,"pk":"GordonParks","t":105},{"y":1943,"m":5,"pk":"GordonParks","t":2},{"y":1942,"m":9,"pk":"HowardLiberman","t":2}]

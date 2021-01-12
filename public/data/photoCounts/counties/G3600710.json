@@ -1,1 +1,1 @@
-[{"year":1939,"month":11,"photographer":"ArthurRothstein","count":45},{"year":1939,"month":9,"photographer":"ArthurRothstein","count":5},{"year":1943,"month":8,"photographer":"GordonParks","count":279},{"year":1943,"month":1,"photographer":"NA","count":10}]
+[{"y":1943,"m":8,"pk":"GordonParks","t":447},{"y":1939,"m":11,"pk":"ArthurRothstein","t":33},{"y":1943,"m":1,"pk":"unspecified","t":10},{"y":null,"m":null,"pk":"unspecified","t":2},{"y":1942,"m":null,"pk":"unspecified","t":2},{"y":1939,"m":9,"pk":"ArthurRothstein","t":5}]

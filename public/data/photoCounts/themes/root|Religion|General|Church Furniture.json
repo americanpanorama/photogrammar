@@ -1,1 +1,1 @@
-[{"year":1943,"month":1,"photographer":"JohnCollier","count":16},{"year":1943,"month":2,"photographer":"JohnCollier","count":75},{"year":1943,"month":4,"photographer":"JohnVachon","count":1}]
+[{"y":1943,"m":1,"pk":"JohnCollier","t":16},{"y":1943,"m":2,"pk":"JohnCollier","t":75},{"y":1943,"m":4,"pk":"JohnVachon","t":1}]

@@ -1,1 +1,1 @@
-[{"year":1942,"month":3,"photographer":"MarjoryCollins","count":3},{"year":1943,"month":6,"photographer":"PhilipBonn","count":4},{"year":1943,"month":10,"photographer":"EstherBubley","count":11}]
+[{"y":1942,"m":3,"pk":"MarjoryCollins","t":3},{"y":1943,"m":6,"pk":"PhilipBonn","t":4},{"y":1943,"m":10,"pk":"EstherBubley","t":11},{"y":null,"m":null,"pk":"unspecified","t":1}]

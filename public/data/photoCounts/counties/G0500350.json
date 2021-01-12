@@ -1,1 +1,1 @@
-[{"year":1935,"month":10,"photographer":"BenShahn","count":229},{"year":1938,"month":9,"photographer":"RussellLee","count":228},{"year":1936,"month":5,"photographer":"CarlMydans","count":2},{"year":1936,"month":6,"photographer":"CarlMydans","count":26},{"year":1936,"month":7,"photographer":"DorotheaLange","count":3}]
+[{"y":1935,"m":10,"pk":"BenShahn","t":229},{"y":1938,"m":9,"pk":"RussellLee","t":315},{"y":1936,"m":5,"pk":"CarlMydans","t":2},{"y":1936,"m":6,"pk":"CarlMydans","t":22},{"y":1936,"m":7,"pk":"DorotheaLange","t":3}]

@@ -1,1 +1,1 @@
-[{"year":1936,"month":3,"photographer":"PaulCarter","count":178},{"year":1939,"month":10,"photographer":"RussellLee","count":7},{"year":1936,"month":4,"photographer":"PaulCarter","count":33},{"year":1938,"month":8,"photographer":"SheldonDick","count":13},{"year":1942,"month":12,"photographer":"NA","count":11}]
+[{"y":1936,"m":3,"pk":"PaulCarter","t":178},{"y":1939,"m":10,"pk":"RussellLee","t":7},{"y":1936,"m":4,"pk":"PaulCarter","t":40},{"y":1938,"m":8,"pk":"SheldonDick","t":13},{"y":1942,"m":12,"pk":"unspecified","t":11}]

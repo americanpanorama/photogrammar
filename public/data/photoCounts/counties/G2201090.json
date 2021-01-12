@@ -1,1 +1,1 @@
-[{"year":1938,"month":11,"photographer":"RussellLee","count":1},{"year":1938,"month":10,"photographer":"RussellLee","count":8},{"year":1940,"month":6,"photographer":"MarionPostWolcott","count":78},{"year":1940,"month":5,"photographer":"MarionPostWolcott","count":19},{"year":1940,"month":7,"photographer":"MarionPostWolcott","count":1}]
+[{"y":1938,"m":10,"pk":"RussellLee","t":8},{"y":1940,"m":6,"pk":"MarionPostWolcott","t":78},{"y":1940,"m":5,"pk":"MarionPostWolcott","t":19},{"y":1938,"m":11,"pk":"RussellLee","t":1},{"y":1940,"m":7,"pk":"MarionPostWolcott","t":1}]

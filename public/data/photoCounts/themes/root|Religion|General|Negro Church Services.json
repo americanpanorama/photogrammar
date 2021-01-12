@@ -1,1 +1,1 @@
-[{"year":1942,"month":7,"photographer":"GordonParks","count":1},{"year":1942,"month":8,"photographer":"GordonParks","count":19},{"year":1942,"month":7,"photographer":"JohnCollier","count":4},{"year":1942,"month":12,"photographer":"JohnCollier","count":4},{"year":1942,"month":11,"photographer":"GordonParks","count":746}]
+[{"y":1942,"m":8,"pk":"GordonParks","t":673},{"y":1942,"m":7,"pk":"GordonParks","t":1},{"y":1942,"m":7,"pk":"JohnCollier","t":4},{"y":1942,"m":12,"pk":"JohnCollier","t":4},{"y":1942,"m":11,"pk":"GordonParks","t":88}]

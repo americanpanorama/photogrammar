@@ -1,1 +1,1 @@
-[{"year":1942,"month":2,"photographer":"RussellLee","count":31},{"year":1942,"month":3,"photographer":"RussellLee","count":222},{"year":1937,"month":3,"photographer":"DorotheaLange","count":1},{"year":1937,"month":4,"photographer":"DorotheaLange","count":11},{"year":1937,"month":5,"photographer":"DorotheaLange","count":12}]
+[{"y":1942,"m":3,"pk":"RussellLee","t":1024},{"y":1942,"m":2,"pk":"RussellLee","t":713},{"y":1937,"m":3,"pk":"DorotheaLange","t":1},{"y":1937,"m":4,"pk":"DorotheaLange","t":17},{"y":1937,"m":5,"pk":"DorotheaLange","t":16}]

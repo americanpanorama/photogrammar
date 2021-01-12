@@ -1,1 +1,1 @@
-[{"year":1936,"month":5,"photographer":"ArthurRothstein","count":3},{"year":1936,"month":6,"photographer":"ArthurRothstein","count":4},{"year":1936,"month":7,"photographer":"ArthurRothstein","count":13},{"year":1942,"month":3,"photographer":"JohnVachon","count":1}]
+[{"y":1936,"m":6,"pk":"ArthurRothstein","t":5},{"y":1936,"m":7,"pk":"ArthurRothstein","t":21},{"y":1936,"m":5,"pk":"ArthurRothstein","t":3},{"y":1942,"m":3,"pk":"JohnVachon","t":1}]
