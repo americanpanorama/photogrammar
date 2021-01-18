@@ -37,7 +37,9 @@ const PhotoCard = (props: Props) => {
   } = photo;
 
   let location = state || '';
-  if (selectedMapView === 'counties' && county && stateAbbr) {
+  if (stateAbbr && stateAbbr === 'DC') {
+    location = 'Washington, DC';
+  } else if (selectedMapView === 'counties' && county && stateAbbr) {
     location = `${county}, ${stateAbbr}`;
   }
   if (selectedMapView === 'cities' && city && stateAbbr) {

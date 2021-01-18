@@ -220,7 +220,7 @@ const Photo = (props: Props) => {
                   {((city || county) && state && centroid && centroid.center && centroid.center[0]) ? (
                     <Link to={placeLink}>
                       <button>
-                        {`${county || city}, ${state}`}
+                        {(state === 'District of Columbia') ? 'Washington, DC' : `${county || city}, ${state}`}
                       </button>
                     </Link>
                   ) : (
