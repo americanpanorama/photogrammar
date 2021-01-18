@@ -41,6 +41,19 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
+      <Switch>
+        <Route
+          path='/'
+          exact
+        >
+          <Redirect to='/maps' />
+        </Route>
+        <Route
+          path='/state/DC'
+        >
+          <Redirect to='/county/G1100010' />
+        </Route>
+      </Switch>
       <div
         className={`wrapper ${className}`}
       >
@@ -55,12 +68,17 @@ const App = ({ className, isInitialized, initializeData, hasCompletedFirstLoad, 
         {(hasCompletedFirstLoad) && (
           <React.Fragment>
               <div id="viz-canvas">
-            <Switch>
+              <Switch>
                 <Route
                   path='/'
                   exact
                 >
                   <Redirect to='/maps' />
+                </Route>
+                <Route
+                  path='/state/DC'
+                >
+                  <Redirect to='/county/G1100010' />
                 </Route>
                 <Route path={'/photo/:id+'}>
                   <Photo />

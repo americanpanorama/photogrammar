@@ -7,6 +7,7 @@ import { StyledCounty } from '../index.d';
 interface Props extends StyledCounty {
   scale: number;
   linkActive: boolean;
+  link?: string;
   makeLink([]: { type: string, payload: string}[]): string;
   onCountyHover(arg0: string): void;
   onCountyUnhover(): void;
@@ -26,6 +27,7 @@ const County = (props: Props) => {
     onCountyHover,
     onCountyUnhover,
   } = props;
+  let { link } = props;
   const ref = useRef(null);
 
   const currentStrokeWidth = useRef(props.strokeWidth);
@@ -44,10 +46,12 @@ const County = (props: Props) => {
   //   }
   // });
 
-  const link = makeLink([{
-    type: 'set_county',
-    payload: nhgis_join,
-  }]);
+  if (!link) {
+    link = makeLink([{
+      type: 'set_county',
+      payload: nhgis_join,
+    }]);
+  }
 
   return (
     <Link

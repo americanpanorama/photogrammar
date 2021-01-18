@@ -124,6 +124,9 @@ const Map = (props: Props) => {
   const [ scale, setScale ] = useState(mapParameters.scale);
   const { pathname } = useLocation();
 
+  // DC as a county is always selectable
+  const DC: ProjectedCounty = (Counties as ProjectedCounty[]).find((c: ProjectedCounty) => c.s === 'DC');
+
   useEffect(
     () => {
       d3.select(ref.current)
@@ -141,7 +144,12 @@ const Map = (props: Props) => {
 
   let linkUp;
   if (selectedCity || selectedCounty) {
-    linkUp = makeLink([{ type: 'clear_county' }, { type: 'clear_city'}]);
+    // CD is an exception as there is no state
+    if (selectedCounty === DC.j || selectedCity === 'DC_Washington') {
+      linkUp = makeLink([{ type: 'clear_county' }, { type: 'clear_city'}, { type: 'clear_state'}]);
+    } else {
+      linkUp = makeLink([{ type: 'clear_county' }, { type: 'clear_city'}]);
+    }
   } else if (selectedState) {
     linkUp = makeLink([{ type: 'clear_state' }]);
   }
@@ -265,6 +273,7 @@ const Map = (props: Props) => {
       }
     });
   };
+
 
 
   const getMapLabelProps = (): MapLabelProps | null => {
@@ -463,6 +472,28 @@ const Map = (props: Props) => {
               );
             })
           }
+
+          {(selectedCounty !== DC.j && selectedCity !== 'DC_Washington') && (
+            <County
+              d={DC.d}
+              name='Washington, DC'
+              nhgis_join={DC.j}
+              state='DC'
+              area_sqmi={DC.a}
+              fill={'transparent'}
+              strokeOpacity={1}
+              photoCount={DC.c}
+              labelCoords={DC.l}
+              fillOpacity={0}
+              scale={mapParameters.scale}
+              strokeWidth={(mapScale === 'national') ?  0 : 0.75 / mapParameters.scale}
+              linkActive={true}
+              link={(selectedMapView === 'counties') ? `/county/${DC.j}` : '/city/DC_Washington'}
+              makeLink={makeLink}
+              onCountyHover={onCountyHover}
+              onCountyUnhover={onCountyUnhover}
+            />
+          )}
 
           {(mapLabelProps) && (
             <MapLabel 

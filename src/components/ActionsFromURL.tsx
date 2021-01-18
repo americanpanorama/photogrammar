@@ -49,15 +49,19 @@ const ActionsFromURL = ({ setState }: { setState: (obj: AppState) => void }): nu
       themes: selectedTheme,
       timeline,
       city: selectedCity,
-      county: selectedCounty,
       photo: selectedPhoto,
       photographers: selectedPhotographer,
       caption,
     } = stateParams;
+    let {
+      county: selectedCounty,
+    } = stateParams;
 
     // set the state from city or county if necessary;
     let selectedState: string = stateParams.state;
-    if (selectedCounty) {
+    if (selectedState === 'DC') {
+      selectedCounty = 'G1100010';
+    } else if (selectedCounty) {
       ({ s: selectedState } = Counties.find(c => c.j === selectedCounty));
     } else if (selectedCity) {
       selectedState = selectedCity.substring(0, 2);

@@ -289,7 +289,7 @@ const TimelineHeatmap = (props: Props) => {
                         x={-15}
                         y={0}
                         textAnchor='end'
-                        fontSize={svgheight / rows.length * 1.25}
+                        fontSize={Math.min(18, svgheight / rows.length * 1.25)}
                         className='tip'
                       >
                         <tspan>
@@ -312,11 +312,11 @@ const TimelineHeatmap = (props: Props) => {
                   >
                     <text
                       textAnchor='middle'
-                      fontSize={monthHeight * 1.2}
-                      y={monthHeight * 5.6}
+                      fontSize={Math.min(16, monthHeight * 1.2)}
+                      y={monthHeight * 2.5 + Math.min(40, monthHeight * 2.5)}
                       fill='#666'
                     >
-                      Number of photos taken each month
+                      # of photos taken each month
                     </text> 
 
                     <defs>
@@ -343,22 +343,22 @@ const TimelineHeatmap = (props: Props) => {
 
                     <g
                       className='axis'
-                      transform={`translate(0 ${monthHeight * 4.2})`}
+                      transform={`translate(0 ${monthHeight * 2.5 + Math.min(18, monthHeight * 1.25)})`}
                     >
                       <text
-                        fontSize={monthHeight * 1.25}
+                        fontSize={Math.min(16, monthHeight * 1.2)}
                         x={leftAxisWidth * -1 / 4}
                       >
                         0
                       </text>
                       <text
-                        fontSize={monthHeight * 1.25}
+                        fontSize={Math.min(16, monthHeight * 1.2)}
                       >
                         175
                       </text>
                       <text
                         x={leftAxisWidth * 1 / 4}
-                        fontSize={monthHeight * 1.25}
+                        fontSize={Math.min(16, monthHeight * 1.2)}
                       >
                         350+
                       </text>

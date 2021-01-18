@@ -522,7 +522,7 @@ export const getMapParameters = createSelector(
       yGutter = 1.5;
       xGutter = 1.5;
       center = Centroids.cities[selectedCity];
-      ({dx, dy} = Centroids.states[selectedState]);
+      ({dx, dy} = (selectedCity === 'DC_Washington') ? Centroids.counties.G1100010 : Centroids.states[selectedState]);
     } else if (selectedState) {
       yGutter = 0.85;
       xGutter = 0.6;
@@ -731,7 +731,8 @@ export const getMakeLinkFunction = createSelector(
           return getPayloadFor('set_city');
         }
         if (actionTypes.includes('clear_city') || actionTypes.includes('set_county')
-          || actionTypes.includes('clear_state')) {
+          || actionTypes.includes('clear_state')
+          || (actionTypes.includes('set_selected_map_view') && getPayloadFor('set_selected_map_view') === 'counties')) {
           return null;
         }
         return selectedCity;

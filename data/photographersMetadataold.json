@@ -1,0 +1,336 @@
+[
+  {
+    "key": "ArthurRothstein",
+    "img": "ArthurRothstein.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with Arthur Rothstein, 1964 May 25. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-arthur-rothstein-13317",
+      "files": [
+        {
+          "recording": "rothstein/recording.mp3",
+          "transcript": "rothstein/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born in 1915 and raised in New York City, Rothstein’s interest in photography flourished as a teenager. Along with a home darkroom, he exhibited his photos in local salons. With the intention of pursuing a career in medicine, Rothstein attended Columbia University. He continued to pursue his hobby by founding the University Camera Club and serving as the yearbook’s photography editor. His extracurricular activity soon became his career. His work on a pictorial record of agriculture with economists [Roy Stryker] (/photographers/RoyStryker) and Rexford Tugwell soon lead to a position with the New Deal. He followed the two men to D.C. when Stryker offered him a job in 1935 with the Historical Section. As one of the first staff photographers, he helped guide the visual and political directions for the unit alongside colleagues such as [Ben Shahn] (/photographers/BenShahn), [Carl Mydans] (/photographers/CarlMydans), and [Dorothea Lange] (/photographers/DorotheaLange) as well as helped set-up the infrastructure such as the the photo laboratory alongside Russell Lee (/photographers/RussellLee). In addition to taking some of the most iconic images such as the dust bowl and Gee’s Bend [link], he became known for his photo essays, an emerging genre of documentary and journalism.",
+      "Following his tenure at the Historical Section, he took a position in 1940 as a staff photographer at Look, a biweekly magazine known for pioneering the use of photo essays. After a year, he left to serve as a photographer in the US Signal Corps during World War II followed by a position with the United Nations in China. He returned to Look in 1947, rising to the position of Director of Photography, and remained with the publication until 1971, when the magazine shuttered. Along with a stint at Parade, he was an avid teacher. In addition to his faculty positions at Columbia University Graduate School of Journalism among other institutions, he mentored photographers such as Stan Kubrik and wrote several books on photography. Honors include several one-person exhibitions, numerous photojournalism awards, and a position as a juror for the Pulitzer Prize. He died on November 11, 1985 in New Rochelle, New York."
+    ]
+  },
+  {
+    "key": "BenShahn",
+    "img": "BenShahn.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with Ben Shahn, 1964 April 14. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-ben-shahn-12760",
+      "files": [
+        {
+          "recording": "shahnA/recording.mp3",
+          "transcript": "shahnA/transcript.json"
+        },
+        {
+          "recording": "shahnB/recording.mp3",
+          "transcript": "shahnB/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born in Kaunas, Russia (now Lithuania) on September 12, 1989, the family immigrated to Brooklyn, New York in 1906. After a few years studying biology at New York University, he enrolled in City College to study the arts in 1921 followed by the National Academy of Design. His acclaimed career in the arts began with lithographic work followed by a focus on painting, which would become the medium that earned him his reputation as a left-wing social realist artist. Building off the success of his work The Passion of Sacco and Vanzetti, he worked briefly as Diego Rivera’s assistant in 1933 and began working for the Public Works of Art Project, a New Deal program. With mentorship from his roommate [Walker Evans] (/photographers//WalkerEvans), he refined his photography and was hired by Roy Stryker in 1935. Along with being one of the first photographers to join the Historical Section, he is known for his images taken through a right-angle viewfinder on his Leica camera, which enabled capturing images without drawing the attention of the people being photographed.",
+      "Shahn remained with the Historical Section until 1938, when he returned to painting upon receiving a mural commission in the Bronx with his wife, painter Bernarda Bryson Shahn. Like the Historical Section, Shahn also found himself working for OWI during World War II, where he designed posters and did not return to photography. Soon after, he added to his political engagement the role of city councilman in Roosevelt, New Jersey, where he lived alongside fellow Historical Section photographers and friends [Edwin] (/photographs/EdwinRosskam) and [Louise Rosskam] (/photographers/LouiseRosskam). His art career also continued to flourish including work for Time and Fortune and major exhibitions such as a solo show at the Museum of Modern Art. He died on March 14, 1969 in New York City."
+    ]
+  },
+  {
+    "key": "CarlMydans",
+    "img": "CarlMydans.jpg",
+    "type": "staff",
+    "interview": [],
+    "bio": [
+      "Born May 20, 1907 in Boston, Massachusetts, Mydans studied at Boston University’s School of Journalism. At the time, his main tool was the typewriter. His work with the student paper led to reporting jobs with the *Boston Globe* and *Boston Herald*. In 1931, Mydan moved to New York to join the reporting staff of *American Banker*, a daily trade magazine for the financial industry. His freelance work further convinced him of the power of images to tell stories, so he honed his photography skills with the new 35mm camera and began his transition to photojournalism. In 1935, Mydans moved to Washington D.C. to work for the Historical Section of the Resettlement Administration. As one of the first photographers, he became known for bringing a journalistic approach to the unit and for his images that compassionately conveyed the suffering of the Great Depression, particularly among rural communities in the American South.",
+      "While Mydans was close to [Roy Stryker] (/photographers/RoyStryker), he was actually hired by Robert Thorpe, whom he would soon follow to the new and pioneering magazine, *Life*. Compared to acclaimed war photographer Robert Capa, his photographs of World War II while on assignment abroad earned him international recognition. The experience also resulted in he and his wife Shelley Smith Mydans, an accomplished journalist and writer also working with *Life*, becoming prisoners of war in Japan and then China. Neither was deterred by the experience, and he remained with the now acclaimed photography weekly for the 36 year run of the magazine followed by assignments with major outlets such as *Time* and *Smithsonian*. Along with major exhibitions and books, accomplishments included the U.S. Camera Magazine's Gold Achievement Award. He died in Larchmont, N.Y. in August 2004."
+    ]
+  },
+  {
+    "key": "TheodorJung",
+    "img": "TheodorJung.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with Theodor Jung, 1965 Jan. 19. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-theodor-jung-13179",
+      "files": [
+        {
+          "recording": "jungA/recording.mp3",
+          "transcript": "jungA/transcript.json"
+        },
+        {
+          "recording": "jungB/recording.mp3",
+          "transcript": "jungB/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born in Vienna, Theodor Jung emigrated at age 6 to Chicago in 1912. He received a Brownie camera at age 10, which piqued his interest in photography. His education focused on the graphic arts including time spent at the Vienna [NAME OF SCHOOL]. Having participated in hunger marches and experienced unemployment,  Jung developed a deep concern for everyday people shaped by his own experiences living in Chicago, attention to American and European politics, and interest in social documentary photographers such as Eugene Atget.",
+      "Upon returning to the United States amid the Great Depression, Jung moved to  Washington DC for a job within the Federal Emergency Relief Administration. His photographs about social security captured the attention of Roy Stryker, who hired Jung in 1934. Along with taking photos, he worked on administrative tasks such as writing photo captions and designing pamphlets.  He would remain with the unit until 1943, when he would pursue a career in areas such as advertising and book design."
+    ]
+  },
+  {
+    "key": "EdwinRosskam",
+    "img": "EdwinRosskam.jpg",
+    "type": "nonstaff",
+    "interview": {
+      "name": "Oral history interview with Edwin and Louise Rosskam, 1965 August 3. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-edwin-and-louise-rosskam-13112",
+      "files": [
+        {
+          "recording": "rosskam1A/recording.mp3",
+          "transcript": "rosskam1A/transcript.json"
+        },
+        {
+          "recording": "rosskam1B/recording.mp3",
+          "transcript": "rosskam1B/transcript.json"
+        },
+        {
+          "recording": "rosskam2A/recording.mp3",
+          "transcript": "rosskam2A/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born in Germany in 1903 to American parents, Rosskam moved back to the United States shortly after the First World War.  Shaped by his experience as a civil prisoner of war and of losing his father in Germany,  he turned to the arts. After a year at Haverford, he matriculated and graduated from the Academy of Fine Arts in Philadelphia. While he enjoyed success as a painter, photography became his expressive mode of choice. The shift came during his  time with the Lost Generation in Paris in the late 1920s, where he received photography lessons from Man Ray. He traveled extensively taking photographs for european press outlets before returning to the United States amidst the Great Depression. He remarried in 1936, and his wife, [Louise Rosskam] (/photographers/LouiseRosskam), joined him at the *Philadelphia Record*, beginning what would turn into over four decades of personal and professional collaborations.",
+      "Rosskmam’s freelance work brought him into contact with Roy Stryker, who hired Edwin for his expertise in layouts for picture stories in 1938. After a year, he left in July 1940 but then returned in 1941 and remained for two more years.  Taking photos was secondary to his primary role, which was to design exhibitions that were sent across the United States and select photos for publications such as Time and Sherwood Anderson’s Home Town. Among the most prominent projects, which was completed during his brief hiatus from the FSA,  was Twelve Millions Black Voices, which paired images from the File selected by Rosskam with the writing of renowned author Richard Wright. The Rosskams then joined Stryker in 1943 at Standard Oil alongside [Gordon Parks] (/photographers/GordonParks), [John Vachon] (/photographers/JohnVachon) and his wife, [Louise Rosskam] (/photographers/LouiseRosskam). The Rosskam’s then moved in 1945 to Puerto Rico to start a project modeled on the FSA File. After several years, they moved back to the United States residing in Roosevelt, New Jersey alongside the [Shahns] (/photographers/BenShahn) where they continued to work in the arts and raise their two daughters. He passed away on February 25, 1985."
+    ]
+  },
+  {
+    "key": "LouiseRosskam",
+    "img": "EdwinRosskam.jpg",
+    "type": "nonstaff",
+    "interview": {
+      "name": "Oral history interview with Edwin and Louise Rosskam, 1965 August 3. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-edwin-and-louise-rosskam-13112",
+      "files": [
+        {
+          "recording": "rosskam1A/recording.mp3",
+          "transcript": "rosskam1A/transcript.json"
+        },
+        {
+          "recording": "rosskam1B/recording.mp3",
+          "transcript": "rosskam1B/transcript.json"
+        },
+        {
+          "recording": "rosskam2A/recording.mp3",
+          "transcript": "rosskam2A/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born in 1910, she grew up among seven siblings in Philadelphia. She earned a degree in Biology from the University of Pennsylvania. Her background in science would lead to her expertise in darkroom processing, a skill that she would hone upon marrying Edwin Rosskam. With their relationship forged over their mutual interest in photography, they started working for the Philadelphia Record in 1936 and then left for an assignment for Life in Puerto Rico in 1938. They then turned to creating photo-documentary books, an emerging genre of documentary work that would remain an important part of their artistic repertoire. Their work lead them to the FSA.",
+      "While not formally employed by the FSA, [Stryker] (/photographers/RoyStryker) supported her work by providing film and collecting the photos. While helping guarantee her husband’s success by helping him with his FSA assignments, she built her own career as a freelance photographer working for government officials and magazines.  The Rosskams would spend the next several years as a part of photography projects modeled on the FSA-OWI Historic Division. When Stryker left for Standard Oil,  Louise was hired alongside her husband, [Gordon Parks] (/photographers/GordonParks), and [John Vachon] (/photographers/JohnVachon). Along with creating photos for the file, they published the photo-documentary book Towboat River.   With the support of Rexford Tugwell, governor of Puerto Rico until 1946,  they set-up a photography project modeled on the Historic Division in 1945. Looking to return to the United States, they reached out to [Jack] (/photographers/JackDelano) and Irene Delano, who came to lead the project. They moved to Roosevelt, New Jersey  in 1953 amidst the political turmoil in Puerto Rico and  to raise their two daughters.  She would return to photography intermediately with several books and exhibitions over the next several decades. She passed away in 2003."
+    ]
+  },
+  {
+    "key": "EstherBubley",
+    "img": "EstherBubley.jpg",
+    "type": "nonstaff",
+    "interview": [],
+    "bio": [
+      "Born in Wisconsin, Bubley spent her teens in the thick of the Great Depression. Upon graduating high school in 1936, she spent two years at Superior State Teachers College. Eager to pursue photography, she then enrolled in the Minneapolis School of Art for their own year photography program. Following a quick stint at Vogue, she was hired as a darkroom assistant in 1942. By that time, the FSA Historic Unit had been transferred to the Office of War Information. While her marriage with Edwin Locke, an administrative chief in the unit, was brief and tumultuous, her impact on the file was long lasting. Her focus on the everyday lives of people, particular women, was a hallmark of her work.",
+      "While her time with the historic unit was also short-lived, she continued to work with Roy Stryker, departing for Standard Oil with him alongside [Gordon Parks] (/photographers/GordonParks), [John Vachon] (/photographers/JohnVachon), and [Edwin] (/photographers/EdwinRosskam) and [Louise Rosskam] (/photographers/LouiseRosskam).  She would continue her illustrative career as a photojouralist with magazines such as Ladies’ Home Journal and Life. Her work was featured in major exhibitions such as Steichen’s *The Family of Man* and garner major awards. She was awarded an honorary doctorate in 1991 from her alma mater, which had been renamed the Minneapolis College of Art and Design."
+    ]
+  },
+  {
+    "key": "GordonParks",
+    "img": "GordonParks.jpg",
+    "type": "nonstaff",
+    "interview": {
+      "name": "Oral history interview with Gordon Parks, 1964 Dec. 30. Archives of American Art, Smithsonian Institution.",
+      "files": [
+        {
+          "recording": "parks/recording.mp3",
+          "transcript": "parks/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born on November 30, 1912 in Fort Scott, Kansas, Parks grew up in the segregated midwest. Following the death of his mother, 14-year-old Parks moved to St. Paul, Minnesota to live with his sister and her husband. Purchasing his first camera at age 25, Park’s fashion photos quickly caught the attention of local businesses and their clientele. With the support of Marva Louis, the wife of the heavyweight boxing champion Joe Louis, Parks and his wife opened a portrait studio in Chicago in 1940. While Parks took photos of society women in the studio, he created powerful depictions of everyday Black life in urban America under segregation. The work earned him a Julius Rosenwald Fellowship in 1942 and led to a job in the Historical Section. While [Stryker] (/photographers/RoyStryker) would remain cautious about how the images circulated, Park’s photographs drew on his background in portraiture and lived experiences of racism and poverty to create some of the most iconic images of the era. Among the most well known is American Gothic, Washington, D.C. of Elle Watson, a charwoman in the federal government.",
+      "Parks remained with the Historical Section until he left with Stryker alongside [Esther Bubley] (/photographers/EstherBubley), [John Collier] (/photographers/JohnCollier), [Russell Lee] (/photographers/RussellLee), [John Vachon] (/photographers/JohnVachon), and [Edwin] (/photographers/EdwinRosskam) and [Louise Rosskam] (/photographers/LouiseRosskam) to join Standard Oil in 1944. After a few years, he returned primarily to commercial photography. Along with fashion photography for magazines such as *Ebony*, *Glamour*, and *Vogue*, he continued to shed light on social inequalities in the United States while celebrating Black life. He was the first African American staff photographer for *Life*, where he worked from 1948 to 1972, and a founder of *Essence*. As well as a writer, he also was a pioneer in the film industry, credited with helping create the blaxploitation genre with the Hollywood hit *Shaft* (1971) and paving the way for Black directors. Along with numerous books and exhibitions, honors include the American Society of Magazine Photographers’ Magazine Photographer of the Year, Congress of Racial Equality Lifetime Achievement Award, and Library of Congress Living Legend accolade. He died on March 7, 2006 in New York City."
+    ]
+  },
+  {
+    "key": "JackDelano",
+    "img": "JackDelano.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with Jack and Irene Delano, 1965 June 12. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-jack-and-irene-delano-13026",
+      "files": [
+        {
+          "recording": "delano65_1of2_reel_SideA_s/recording.mp3",
+          "transcript": "delano65_1of2_reel_SideA_s/transcript.json"
+        },
+        {
+          "recording": "delano65_1of2_reel_SideB_s/recording.mp3",
+          "transcript": "delano65_1of2_reel_SideB_s/transcript.json"
+        },
+        {
+          "recording": "delano65_2of2_reel_SideA_s/recording.mp3",
+          "transcript": "delano65_2of2_reel_SideA_s/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born Jacob Ovcharov on August 1, 1914 in Podolie, Russia (now Ukraine), he emigrated to the United States in 1923.  After attending the Pennsylvania Academy of Fine Arts, he joined the WPA in New York in 1936 where he photographed anthracite coal mining conditions in eastern Pennsylvania.  The photographs earned him a job with the Historic Division from 1939-1943. Among the most prolific photographers for the division, he photographed across the contiguous United States and Puerto Rico. The experience in Puerto Rico profoundly impacted Delano, who moved to the U.S territory in 1946 and continued to work in the arts and media. He passed away on August 12, 1997."
+    ]
+  },
+  {
+    "key": "JohnVachon",
+    "img": "JohnVachon.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with John Vachon, 1964 April 28. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-john-vachon-11830",
+      "files": [
+        {
+          "recording": "vachon/recording.mp3",
+          "transcript": "vachon/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born on May 19, 1914, John Vachon grew up in Saint Paul, Minnesota. After studying English literature at the College of St. Thomas (now University of St. Thoma), he moved to Washington DC to continue his studies at American University with the plan of becoming a teacher or writer. Instead, he joined the FSA as an assistant messenger in 1936 and soon began managing “the file”[link to description of the file in About]. Expressing interest in learning how to take pictures, Vachon soon became versed in the 35-mm Leica thanks to the support of Walker Evans and began to hone his craft with guidance from Arthur Rothstein, Ben Shahn and Roy Stryker.  By 1938, Vachon was traveling the country on his own on assignments taking photos across small towns and large cities as he developed his own style.  He was promoted to junior photographer in 1940.  Among his most prominent images are photos taken during a six month trip across the Great Plains in 1942, which can be explored on the [Photogrammar map] (/map).",
+      "Following the FSA, Vachon joined a cohort of photographers including [Esther Bubley] (/photographers/EstherBubley) and [Gordon Parks] (/photographers/GordonParks) who followed [Roy Stryker] (/photographers/RoyStryker) to Standard Oil in 1943.  After a year serving in the Army during  World War II from 1944-1945, he returned to his budding career in photography. He became a member of the Photo League, an acclaimed photography cooperative based on New York City. Starting in 1947, Vachon worked for Look as a staff photographer over the next two decades where he specialized in picture-story photography. He would remarry in 1961 after the death of his first wife, Millicent “Penny” Leeper, of over twenty years. He passed away in 1975."
+    ]
+  },
+  {
+    "key": "MarionPostWolcott",
+    "img": "MarionPostWolcott.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with Marion Post Wolcott, 1965 January 18. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-marion-post-wolcott-12262",
+      "files": [
+        {
+          "recording": "wolcott/recording.mp3",
+          "transcript": "wolcott/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born in New Jersey on June 7, 1910, her interest in the arts was fueled by the vibrant creative communities in Greenwich Village.  Along with studying modern dance, she pursued a degree in early childhood education at New School for Social Research and New York University in 1927. Her teaching position in a Masschusettes mill village ended with the school’s closure due to the Great Depression, so she moved to Paris and then Vienna to continue her studies. While Vienna would stoke her interest in photography, thanks to the support of the highly respected female portrait photographer Trude Fleischmann, she also experienced first hand the rising tide of facism. She returned to the United States in 1934. Her early teaching experiences along with the violence of Nazi Germany cemented her commitment to political and social issues.",
+      "With a new teaching position in New York, she continued to refine her craft by taking photographs, attending lectures at the Photo League, and circulating within avant garde documentary circles. Like her future colleague [Marjory Collins] (/photographers/MarjoryCollins),  Ralph Steiner became a mentor. Her experience as a freelancer with magazines such as Fortune  led to a position as a staff photographer in 1937 at the Philadelphia Evening Bulletin, where the eras sexism was on full display. Steiner and another mentor, acclaimed photographer Paul Strand, encouraged Stryker to hire Post at the Historic Division. He did so in 1938, making her the first full time female photographer on the unit. While she did not shy away from the challenges of the country, her work at the FSA is noted for its focus on middle class life and therefore bringing a more nuanced socioeconomic depiction of the era.  Wolcott left in February 1942 shortly after marrying Lee Wolcott. While she continued to take photographs, it was secondary to her role raising her children and teaching. With renewed attention to her work, she returned to freelance photography upon moving to California in 1968 and exhibited regularly. Awards included the Dorothea Lange Award from the Oakland Museum  in 1986 and the Sprague Award from the National Press Photographers’ Association in 1990. She passed away on November 24, 1990."
+    ]
+  },
+  {
+    "key": "MarjoryCollins",
+    "img": "MarjoryCollins.jpg",
+    "type": "staff",
+    "interview": [],
+    "bio": [
+      "Born on March 15, 1915, she grew up outside New York City in Westchester County. After attending Sweet Briar College and the University of Munich, she moved to Greenwich Village in 1935. Honing her skills in photography, she studied informally with acclaimed avant garde documentarian Ralph Steiner. Her career as a documentary photographer flourished as she worked for magazines such as PM and major photo agencies such as Black Star represented her work alongside future colleague [Andreas Feininger] (/photographers/AndreasFeininger). Her story about Hoboken, New Jersey for U.S. Camera in 1941 led to an offer from Office of War Information . After several months New York Office, she moved to D.C. in January 1942. While her photographs would amplify government narratives of a harmonious and strong nation banning together for world warm, her willingness to depict the more sordid sides of the country would garner critique and leave a more nuanced visual record of the era beyond propaganda.",
+      "While her personal life remained fraught, she enjoyed professional success as a freelance photographer following the OWI. Her work for the U.S. government and commercial press brought her primarily to Europe and Africa.  As editing and writing became a larger part of her repertoire, she settled in Vermont, worked for publications such as the Journal of Public Health, and engaged in social causes such as civil rights and the feminist movements.  She founded Prime Time in 1971 to address issues faced by older women in society, a topic that would also become the subject of her thesis in American Studies from Antioch College.  She moved in the 1980s to San Francisco, where she earned her M.A. She passed away in 1985."
+    ]
+  },
+  {
+    "key": "ArthurSSiegel",
+    "img": "ArthurSSiegel.jpg",
+    "type": "staff",
+    "interview": [],
+    "bio": [
+      "Born in 1913, Siegel interest in photography bloomed before college. He received his B.A from Wayne State University in 1936 followed by working for the university as a photography teacher.  A year later, he received a scholarship to study photography with acclaimed artist László Moholy-Nagy and his acolyte Gyorgy Kepes  at the New Bauhaus: American School of Design (and today known as the IIT Institute of Design)  in Chicago. The aesthetics of the Bauhaus school of art would leave a lasting impression on his photography.  Siegel continued to forge his career in photography as a freelancer for major magazines such as *Colliers*, *Fortune*, and *Life* in the late 1930s. ",
+      "A part time gig with the FSA turned into full time employment when the unit joined the Office of War Information in 1942. He was among the FSA photographers given special access to a new color film called kodachrome that would revolutionize photography.  After the FSA and a brief stint with the US Army Air Corps, he returned to work with Moholy-Nagy at the Institute of Design to lead their photography program for three years. His experience at the intersection of documentary and the aesthetics of modernism would shape his pioneering work in color photography. Recognitions included a one-man show in fall 1952 at the Art Institute of Chicago, which was their first show of color photographs made up entirely of dye transfers. After two decades of commercial and experimental work, he returned yet again to his mentor’s institution in 1967 as a professor and took the reins of the photography department. He passed away in 1978."
+    ]
+  },
+  {
+    "key": "RussellLee",
+    "img": "RussellLee.jpg",
+    "type": "staff",
+    "interview": [],
+    "bio": [
+      "Born on July 21, 1903 in Ottawa, Illinois, he was orphaned by age 10 and therefore  moving regularly to live with relatives. He received  a chemical engineering degree from Lehigh University in 1925, but soon after switched paths.  His wife and her network of artists including Diego Rivera instilled in him an interest in the arts. After an unsuccessful foray into painting, he turned to the camera. The technical process of making pictures tapped into his formal education while the ways of seeing through the viewfinder aligned with his interest in the visual arts. Upon viewing Lee’s portfolio of images depicting the challenges of everyday life under the Great Depression, Stryker hired him as a staff photographer in 1936. He would stay with the Historic Division until 1943. Among his most noted assignments is Japanese internment during World War II and color photographs of a desert, homesteader community in [Pie Town, New Mexico] (/city/NM_Pie Town#mapview=cities). He is also credited with pioneering the use of flash for indoor photographer.",
+      "Lee would continue his career in photography for the next four decades. From 1943 to 1947,  Lee continued to take photographs for different units of the US federal  government.  Assignments included documenting air strips used during World War II and the effects of mining bituminous coal. Upon moving to Austin, Texas with his family, he freelanced including a stint at Standard Oil with Roy Stryker alongside [NAME PHOTOGRPAHERS].  In 1965, he became a photography instructor  at the University of Texas-Austin. He passed away on August 28, 1986."
+    ]
+  },
+  {
+    "key": "WalkerEvans",
+    "img": "WalkerEvans.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with Walker Evans, 1971 Oct. 13-Dec. 23. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-walker-evans-11721",
+      "files": [
+        {
+          "recording": "evans1A/recording.mp3",
+          "transcript": "evans1A/transcript.json"
+        },
+        {
+          "recording": "evans1B/recording.mp3",
+          "transcript": "evans1B/transcript.json"
+        },
+        {
+          "recording": "evans2A/recording.mp3",
+          "transcript": "evans2A/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born on November 3, 1908 in St. Louis, Missouri, Evans grew up in Chicago, Toledo, and New York City. Following a year at Williams College, he moved back to New York City and then Paris to pursue his interest in literature. While he had made snapshots in his youth, photography had remained a hobby until he moved back to New York City in 1927 and traded in the writer’s pen for a camera, inspired by the work of Eugène Atget. Circulating among artistic circles in the East Village, Evans soon found outlets for his photos with the support of friends such as Lincoln Kirstein and shared an artists studio with [Ben Shahn] (/photographers/BenShahn). Urged by Ernestine Evans, who helped [Roy Stryker] (/photographers/RoyStryker) set-up the Historical Section (and was not related to Walker), Evans met with Stryker and joined the section in 1935. While Stryker and Evans's relationship would sour, Evans credited the experience with giving him the time and resources to refine his craft and develop his own style. His images of rural life and vernacular architecture created during his time on the section contributed to his reputation as one of the most celebrated documentary photographers of the twentieth century.",
+      "While Evans officially departed in 1938, his work outside the section during the time would also catapult his career. In 1936, he took a leave to work with James Agee on an assignment for *Fortune*. When the outlet turned the project, they published *Let Us Now Praise Famous Men*, which continues to garner praise and critique for their genre bending depiction of an Alabama sharecropping family. His budding reputation in fine art photography blossomed with a 1938 solo show at the Museum of Modern Art (MOMA) as well as the accompanying book *American Photographs*, which demonstrated how the photography book could be a work of art itself. With the opportunity to work with *Time*, he joined the staff in 1945. He soon returned to *Fortune*, where he remained until 1965, when he joined the photography faculty at the Yale University School of Art. Honors included Guggenheim Fellowships and a retrospective at MOMA in 1971. He died on April 10, 1975 in New Haven, Connecticut."
+    ]
+  },
+  {
+    "key": "JohnCollier",
+    "img": "JohnCollier.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with John Collier, 1965 January 18. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-john-collier-12715",
+      "files": [
+        {
+          "recording": "collierA/recording.mp3",
+          "transcript": "collierA/transcript.json"
+        },
+        {
+          "recording": "collierB/recording.mp3",
+          "transcript": "collierB/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born outside New York City in 1913, his spent most of his childhood and early adulthood in the California bay area and Taos, New Mexico. Due to learning disabilities and hearing loss from a car accident at age 8, Collier was homeschooled. His mother Lucy’s generous attention to his education would shape his own teaching philosophy while the time he spent with the indigenous communities in Taos would forge his belief in the power of nonverbal culture and communication. His foray into the arts was  supported by his family’s network among the political and cultural elite. Among his mentors was painter and family friend Maynard Dixon, which also resulted in a friendship with his then wife, [Dorothea Lange] (/photographers/DorotheaLange).  After a brief stint at the California School of Fine Arts, his shifted focus to photography.  He moved in 1939 to Taos and used Paul Strand’s old darkroom as his studio.  While he was economically unsuccessful, the year in Taos allowed him time to hone his skill.",
+      "Returning to San Francisco, he worked commercial jobs and submitted his portfolio to Stryker and the Historic Division. He was hired in 1941 and remained with the organization until Stryker left for Standard Oil along with [Esther Bubley] (/photographers/EstherBubley), [Gordon Parks] (/photographers/GordonParks), [Edwin] (/photographers/EdwinRosskam) and [Louise Rosskam] (/photographers/LouiseRosskam), and [John Vachon] (/photographers/JohnVachon). Working for the government sent him down a similar path of his prominent father, a sociologist who served as Commissioner of the Bureau of Indian Affairs from 1933 to 1945, with whom he shared his name.  Following his time at Standard Oil, Collier and his wife Mary E. T. Collier became pioneers of visual anthropology. Their work included collaborations with anthropologist Anbial Buitron in Ecuador among the Otavalo community, photographic studies in New Mexico and Peru, and the groundbreaking book Visual Anthropology: Photography As Research Method (1967). In 1959, they moved to San Francisco where Collier returned to California School of Fine Arts as a teacher. In 1961, he would also join the Anthropology faculty at San Francisco State University. His lasting impact is exemplified by the John Collier Jr. Award for Still Photography from the Society of Visual Anthropology. He passed away in 1992 in Costa Rica. "
+    ]
+  },
+  {
+    "key": "DorotheaLange",
+    "img": "DorotheaLange.jpg",
+    "type": "staff",
+    "interview": {
+      "name": "Oral history interview with Dorothea Lange, 1964 May 22. Archives of American Art, Smithsonian Institution.",
+      "link": "https://www.aaa.si.edu/collections/interviews/oral-history-interview-dorothea-lange-11757",
+      "files": [
+        {
+          "recording": "langeA/recording.mp3",
+          "transcript": "langeA/transcript.json"
+        },
+        {
+          "recording": "langeB/recording.mp3",
+          "transcript": "langeB/transcript.json"
+        }
+      ]
+    },
+    "bio": [
+      "Born on May 26, 1895 in Hoboken, New Jersey, she moved with her mother and brother to New York City’s Lower East Side at age 12. Uninterested in formal schooling, her education in photography began in the public library. She then picked up the camera and began apprenticing with acclaimed photographer Arnold Genthe, and soon stopped her studies at a local teacher's college. In 1918, she moved to California. She joined the San Francisco Camera Club, became enmeshed with the bohemian cultural elite, married painter Maynard Dixon, and earned a reputation as a portrait photographer. Galvanized by the Great Depression, she increasingly brought her camera outside of her studio and began a major shift to social documentary photography. Working alongside economist Paul Taylor and photographer Imogen Cunningham, she worked for the California State Emergency Relief Administration. Her partnership with Taylor would also become personal for the two married in 1935 and would continue to work together for decades.",
+      "Her work documenting the depression earned her quick acclaim. Along with her photos being featured in Survey Graphic, her photos caught the attention of [Roy Stryker] (/photographers/RoyStryker). While employed with the Historical Section from 1935 to 1939, she continued to live in California driving across the southwest and American south focusing largely on the conditions and needs of migrants and tenant farmers. Lange created many of the most iconic images of the era including Migrant Mother. In late 1939, she left the section and turned down the prestigious Guggenheim Fellowship to document japanese internment for the War Relocation Authority, a set of images that would cement her reputation as one of the most important social documentary photographers of the 20th century. In the subsequent years, she taught photography, helped found the acclaimed photography quarterly Aperture in 1952, and freelanced for outlets such as Life. Among her many honors was a retrospective of her work at the Museum of Modern Art, the first for a female photographer at the institution. After years of declining health, she died on October 11, 1965 in San Francisco, California."
+    ]
+  },
+  {
+    "key": "AndreasFeininger",
+    "img": "AndreasFeininger.jpg",
+    "type": "nonstaff",
+    "interview": {},
+    "bio": [
+      "Feininger was born in  December 1906 in Paris. An American-German painter, his father, Lyonel, moved the family to Germany in 1908.  After a decade in Berlin, the family moved to Weimer, where his father became Master of the Printing Workshop at the Bauhaus school. He graduated as a cabinetmaker from the school in 1925, continued his studies by expanding to architecture, and then turned to photography thanks to the influence of László Moholy-Nagy, who was teaching at the Bauhaus in Dessau and shortly after would move to the United States.  Like [Arthur Siegel] (/photographers/ArthurSiegel), the Bauhaus art movement would leave a last impact on Feininger’s aesthetic and intellectual formation, particularly the mentorship of Moholy-Nagy.",
+      "After a brief stint at Le Corbusier’s studio in Paris and then Stockholm, he immigrated to the United States in 1939 with the rise of facism.  He became a freelance photographer with the Black Star Agency, a photography agency founded by german refugees. He then joined the Historic Unit once it had been transferred to the Office of War Information and became an architect of the unit’s world war two propaganda aesthetic. His work earned him a staff position at Life in 1943. Along with working for the magazine for almost two decades, he became an acclaimed teacher of photography known for his photography manuals. His extensive work earned awards including the Robert Leavitt Award from the American Society of Media Photographers. He passed away on February 18, 1999 in New York."
+    ]
+  }
+]

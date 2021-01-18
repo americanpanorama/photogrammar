@@ -33,11 +33,13 @@ const Photographers = ({ photographersStaff, photographersNonstaff }: { photogra
               className='photographerCard'
             >
               <img
-                src={`${process.env.PUBLIC_URL}/static/photographerPhotos/RoyStryker.jpg`}
+                src={`${process.env.PUBLIC_URL}/static/photographerThumbnails/RoyStryker.jpg`}
               />
               <figcaption>
                 <MicrophoneButton />
-                Roy Stryker, Director of the FSA Photography Program
+                Roy Stryker
+                <br />
+                Director of the FSA Photography Program
               </figcaption>
             </figure>
           </Link>
@@ -49,7 +51,7 @@ const Photographers = ({ photographersStaff, photographersNonstaff }: { photogra
               className='photographerCard'
             >
               <img
-                src={`${process.env.PUBLIC_URL}/static/photographerPhotos/HelenWool.jpg`}
+                src={`${process.env.PUBLIC_URL}/static/photographerThumbnails/HelenWool.jpg`}
               />
               <figcaption>
                 <MicrophoneButton />
@@ -65,11 +67,13 @@ const Photographers = ({ photographersStaff, photographersNonstaff }: { photogra
               className='photographerCard'
             >
               <img
-                src={`${process.env.PUBLIC_URL}/static/photographerPhotos/CBBaldwin.jpg`}
+                src={`${process.env.PUBLIC_URL}/static/photographerThumbnails/CBBaldwin.jpg`}
               />
               <figcaption>
                 <MicrophoneButton />
-                C. B. Baldwin, Administrator of the FSA
+                C. B. Baldwin
+                <br />
+                Administrator of the FSA
               </figcaption>
             </figure>
           </Link>
@@ -85,22 +89,22 @@ const Photographers = ({ photographersStaff, photographersNonstaff }: { photogra
                 className='photographerCard'
               >
                 <img
-                  src={`${process.env.PUBLIC_URL}/static/photographerPhotos/${photographer.img}`}
+                  src={`${process.env.PUBLIC_URL}/static/photographerThumbnails/${photographer.img}`}
                 />
                 <figcaption>
-                  {(photographer.count) && (
-                    <span
-                      className='count'
-                    >
-                      {`${photographer.count.toLocaleString()} photos`}
-                    </span>
-                  )}
                   {(photographer.interview && photographer.interview.files && photographer.interview.files.length > 0) && (
                     <MicrophoneButton />
 
                   )}
 
                   {`${photographer.firstname} ${photographer.lastname}`}
+                  {(photographer.count) && (
+                    <div
+                      className='count'
+                    >
+                      {`${photographer.count.toLocaleString()} photos`}
+                    </div>
+                  )}
                 </figcaption>
               </figure>
             </Link>
@@ -118,21 +122,21 @@ const Photographers = ({ photographersStaff, photographersNonstaff }: { photogra
                 className='photographerCard'
               >
                 <img
-                  src={`${process.env.PUBLIC_URL}/static/photographerPhotos/${photographer.img}`}
+                  src={`${process.env.PUBLIC_URL}/static/photographerThumbnails/${photographer.img}`}
                 />
                 <figcaption>
-                  {(photographer.count) && (
-                    <span
-                      className='count'
-                    >
-                      {`${photographer.count.toLocaleString()} photos`}
-                    </span>
-                  )}
                   {(photographer.interview && photographer.interview.files && photographer.interview.files.length > 0) && (
                     <MicrophoneButton />
                   )}
 
                   {`${photographer.firstname} ${photographer.lastname}`}
+                  {(photographer.count) && (
+                    <div
+                      className='count'
+                    >
+                      {`${photographer.count.toLocaleString()} photos`}
+                    </div>
+                  )}
                 </figcaption>
               </figure>
             </Link>

@@ -13,7 +13,7 @@
     }
 
   .photographers .photographerCard {
-    width: 240px;
+    width: 180px;
   }
 }
 
@@ -39,16 +39,24 @@
 
 .photographers a {
   text-decoration: none;
+    align-self: flex-start;
+}
+
+.photographers a .photographerCard {
+
+}
+
+.photographers a .photographerCard img {
+  width: 100%;
 }
 
 .photographers a .photographerCard figcaption {
   color: #777 !important;
   font-weight: 700;
-  text-align: left;
+  text-align: center;
 }
 
 .photographers .photographerCard .count {
-  float: right;
   font-weight: 300;
 }
 
