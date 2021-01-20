@@ -91,6 +91,7 @@ const Photo = (props: Props) => {
             vanderbilt_level1,
             vanderbilt_level2,
             vanderbilt_level3,
+            call_number,
             // longitude,
             // latitude,
             img_large_path,
@@ -200,7 +201,7 @@ const Photo = (props: Props) => {
 
                 {(vanderbilt_level3) && (
                   <React.Fragment>
-                    <h5>Classification (Original Tagging System)</h5>
+                    <h5>Themes (Original Tagging System)</h5>
                     <div className='tags'>
                       <Link to={vl1Link}>
                         {vanderbilt_level1}
@@ -254,6 +255,17 @@ const Photo = (props: Props) => {
                       )}
                     </g>
                   </svg>
+                )}
+
+                {(call_number) && (
+                  <React.Fragment>
+                    <h5>Library of Congress Call Number</h5>
+                    <div className="metadatum">
+                      <a href={`http://www.loc.gov/pictures/item/${loc_item_link}`} target='_blank'>
+                        {call_number}
+                      </a>
+                    </div>
+                  </React.Fragment>
                 )}
               </div>
               <div 

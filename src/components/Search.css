@@ -25,7 +25,7 @@
   padding: 20px;
 
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 120px auto;
   grid-column-gap: 20px;
   grid-row-gap: 40px;
   grid-auto-rows: 38px;

@@ -254,7 +254,7 @@ export const makeWheres = createSelector(
         let name;
         if (photographer) {
           const { firstname, lastname } = photographer;
-          name = `${firstname} ${lastname}`;
+          name = (firstname) ? `${firstname} ${lastname}` : lastname;
         }
         wheres.push(`photographer_name = '${name}'`);
       }
@@ -866,6 +866,16 @@ export const getMakeLinkFunction = createSelector(
         } else if (nextSelectedState) {
           pathname = `${pathname}/state/${nextSelectedState}`;
         } 
+        if (nextSelectedPhotographer) {
+          pathname = `${pathname}/photographers/${nextSelectedPhotographer}`;
+        }
+        if (nextTimeRange[0] !== 193501 || nextTimeRange[1] !== 194406) {
+          pathname = `${pathname}/timeline/${nextTimeRange.join('-')}`;
+        }
+        if (nextFilterTerms && nextFilterTerms.length > 0) {
+          pathname = `${pathname}/caption/${filterTerms.join(' ')}`;
+        }
+      } else if (nextSelectedViz === 'photographers') {
         if (nextSelectedPhotographer) {
           pathname = `${pathname}/photographers/${nextSelectedPhotographer}`;
         }

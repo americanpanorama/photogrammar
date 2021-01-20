@@ -208,10 +208,13 @@ export function calculateDimensions(options) {
   };
 
   let sidebarWidth = innerWidth;
+  let unexpandedSidebarWidth = innerWidth;
   if (!isMobile) {
     sidebarWidth = (!expandedSidebar)
       ? Math.max(200, windowWidth * 0.33)
       : Math.max(200, windowWidth * 0.66);
+
+    unexpandedSidebarWidth = Math.max(200, windowWidth * 0.33);
   }
   const sidebarHeight = (!isMobile)
     ? vizCanvas.height - 75 - welcomeHeight
@@ -226,17 +229,19 @@ export function calculateDimensions(options) {
   }
 
   // the photocard will be scaled to be between 150 and 200px
-  const photoCardMinWidth = (expandedSidebar) ? 200 : 145;
+  const photoCardMinWidth = 145; // (expandedSidebar) ? 200 : 145;
   const photoCardMaxWidth = 300;
   const maxCols = Math.floor(sidebarWidth / photoCardMinWidth);
   let cols = Math.floor(sidebarWidth / photoCardMinWidth);
-  let photoCardWidth = sidebarWidth / cols * 0.96;
+  let photoCardWidth = unexpandedSidebarWidth / cols * 0.96;
 
-  // if the maxCols is three or greater, increase the size to make them more visible--shooting for 250 give or take
-  for (let potentialCols = cols - 1; potentialCols >= 3 && photoCardWidth < 220; potentialCols -= 1) {
+  // if the maxCols is three or greater on , increase the size to make them more visible--shooting for 250 give or take
+  const defaultCols = (expandedSidebar) ? 6 : 3;
+  for (let potentialCols = cols - 1; potentialCols >= defaultCols && photoCardWidth < 220; potentialCols -= 1) {
     cols = potentialCols;
     photoCardWidth = sidebarWidth / potentialCols * 0.96
   }
+
   if (isMobile) {
     photoCardWidth = innerWidth * 0.45;
     cols = 2;
