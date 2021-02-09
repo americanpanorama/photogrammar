@@ -13,6 +13,8 @@ import County from './County';
 import State from './State';
 import City from './City';
 import MapLabel from './MapLabel';
+import MapCitiesInfo from './MapCitiesInfo';
+import MapCountiesInfo from './MapCountiesInfo';
 import './Map.css';
 import {
   MapLabelProps,
@@ -122,6 +124,7 @@ const Map = (props: Props) => {
   const [ translateX, setTranslateX ] = useState(mapParameters.translateX);
   const [ translateY, setTranslateY ] = useState(mapParameters.translateY);
   const [ scale, setScale ] = useState(mapParameters.scale);
+  const [ modalOpen, setModalOpen ] = useState(false);
   const { pathname } = useLocation();
 
   // DC as a county is always selectable
@@ -334,6 +337,11 @@ const Map = (props: Props) => {
       <div
         className='mapControls'
       >
+        <button
+          onClick={() => setModalOpen(true)}
+        >
+          ?
+        </button>
         {(linkUp) && (
           <Link to={linkUp}>
             <button>
@@ -503,6 +511,18 @@ const Map = (props: Props) => {
           )}
         </g>
       </svg>
+
+      {(modalOpen && selectedMapView === 'cities') && (
+        <MapCitiesInfo 
+          close={() => setModalOpen(false)}
+        />
+      )}
+
+      {(modalOpen && selectedMapView === 'counties') && (
+        <MapCountiesInfo 
+          close={() => setModalOpen(false)}
+        />
+      )}
     </React.Fragment>
   );
 };

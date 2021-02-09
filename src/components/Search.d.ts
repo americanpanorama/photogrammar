@@ -3,6 +3,7 @@ import { CityKey, NHGISJoinCode, StateAbbr, MapView } from '../index.d';
 export interface Option {
   label: string;
   value: string;
+  sublabels?: string[];
 }
 
 export interface Props {
@@ -12,7 +13,7 @@ export interface Props {
   selectedCountyOption: Option;
   selectedCityOption: Option;
   selectedPhotoCaption: Option;
-  terms: Option;
+  terms: string[];
   timeRange: [number, number];
   selectedMapView: MapView;
   countiesOrCitiesOptions: {
@@ -24,7 +25,7 @@ export interface Props {
   toggleSearch: () => void;
 }
 
-export type Field = 'photographer_name' | 'state' | 'nhgis_join' | 'city' | 'themes';
+export type Field = 'photographer_name' | 'state' | 'nhgis_join' | 'city' | 'themes' | 'count';
 
 export interface Cities {
   city: CityKey;

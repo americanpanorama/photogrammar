@@ -229,7 +229,7 @@ const Treemap = (props: TreemapProps) => {
         className='explanation'
         title='Visualization of the classification system designed by Paul Vanderbilt in 1942. It is a three-tier classification starting with 12 main subject headings (ex. THE LAND), then 1300 sub-headings (ex. Mountains, Deserts, Foothills, Plains) and then sub-sub headings. 88,000 photographs were assigned classifications.'
       >
-        1942 Classification System
+        1942 Classification System ⓘ
       </label>
 
       <Async

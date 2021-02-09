@@ -8,6 +8,7 @@ import PhotographersSelect from './search/PhotographersSelect.js';
 import StateSelect from './search/StateSelect.js';
 import SearchSelect from './search/SearchSelect';
 import ThemesSelect from './search/ThemesSelect.js';
+import SearchButton from './search/SearchButton';
 import themes from '../../data/themes.json';
 import CloseButton from './buttons/Close.tsx';
 import './Search.css';
@@ -28,11 +29,12 @@ const Search = (props: Props) => {
     toggleSearch,
   } = props;
 
+  const [resultsCountQuery, setResultsCountQuery] = useState<null | string>(null);
   const [photographerOption, setPhotographerOption] = useState(selectedPhotographerOption);
   const [stateOption, setStateOption] = useState(selectedStateOption);
   const [countyOrCityOption, setCountyOrCityOption] = useState(selectedCountyOption || selectedCityOption);
   const [themeOption, setThemeOption] = useState(selectedThemeOption);
-  const [photoCaptionOption, setPhotoCaptionOption] = useState(terms);
+  //const [photoCaptionOption, setPhotoCaptionOption] = useState(terms);
   const [photoCaptionOptions, setPhotoCaptionOptions] = useState([selectedPhotoCaption]);
   const [timeRangeOptions, setTimeRangeOptions] = useState(timeRange);
   const [linkTo, setLinkTo] = useState('/');
@@ -44,7 +46,7 @@ const Search = (props: Props) => {
     const state = stateOption && stateOption.value;
     const cityOrCounty = countyOrCityOption && countyOrCityOption.value;
     const theme = themeOption && themeOption.value;
-    const filterTerms = photoCaptionOption && photoCaptionOption.value;
+    const filterTerms = photoCaptionOptions && photoCaptionOptions[0] && photoCaptionOptions[0].value;
 
     if (cityOrCounty) {
       path = `/${(selectedMapView === 'cities') ? 'city' : 'county'}/${cityOrCounty}`;
@@ -57,7 +59,7 @@ const Search = (props: Props) => {
     }
 
     if (theme && !path.includes('/themes/')) {
-      path = `/themes/${theme}`
+      path = `${path}/themes/${theme}`
     }
 
     if (photographer) {
@@ -75,6 +77,8 @@ const Search = (props: Props) => {
     if (path !== linkTo) {
       setLinkTo(path);
     }
+
+
   })
 
   if (!open) {
@@ -97,7 +101,7 @@ const Search = (props: Props) => {
     x(Math.floor(timeRangeOptions[1] / 100) + monthNum(timeRangeOptions[1] % 100)),
   ];
 
-  const makeQuery = (field: Field) => {
+  const makeQuery = (field: Field | 'count') => {
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const wheres = [];
 
@@ -111,7 +115,16 @@ const Search = (props: Props) => {
       wheres.push(`nhgis_join = '${countyOrCityOption.value}'`);
     }
     if (field !== 'city' && selectedMapView === 'cities' && countyOrCityOption && countyOrCityOption.label) {
-      wheres.push(`city = '${countyOrCityOption.label}'`);
+      // some cities are nested together and only selectable together, you need to get all of them for the count
+      if (field === 'count' && countyOrCityOption.sublabels) {
+        const cityWheres: string[] = [`city = '${countyOrCityOption.label}'`];
+        countyOrCityOption.sublabels.forEach((otherCity: string) => {
+          cityWheres.push(`city = '${otherCity}'`);
+        });
+        wheres.push(`(${cityWheres.join(' or ')})`);
+      } else {
+        wheres.push(`city = '${countyOrCityOption.label}'`);
+      }
     }
     if (field !== 'themes' && themeOption && themeOption.value) {
       const levels = themeOption.value.replace('root|', '').split('|')
@@ -126,36 +139,38 @@ const Search = (props: Props) => {
       } 
     }
     const [startTime, endTime] = timeRangeOptions;
-    if (startTime > 193501) {
-      const startYear = Math.floor(startTime / 100);
-      const startMonth = startTime % 100;
-      wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
-    }
-    if (endTime < 194406) {
-      const endYear = Math.floor(endTime / 100);
-      const endMonth = endTime % 100;
-      wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
-    }
+    const startYear = Math.floor(startTime / 100);
+    const startMonth = startTime % 100;
+    wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+
+    const endYear = Math.floor(endTime / 100);
+    const endMonth = endTime % 100;
+    wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
 
     // the value of the filter term can be in a few places from the creatable component
-    if (photoCaptionOption && photoCaptionOption.value) {
-      const terms = photoCaptionOption.value.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g);
+    if (photoCaptionOptions && photoCaptionOptions[0] && photoCaptionOptions[0].value) {
+      const terms = photoCaptionOptions[0].value.match(/(".*?"|[^",\s]+)(?=\s*|\s*$)/g);
       terms.forEach(filterTerm => {
          wheres.push(`caption ~* '\\m${filterTerm}'`);
       });
-    }
+    } 
+
     if (wheres.length > 0 && field === 'themes') {
       wheres.push('vanderbilt_level1 is not null');
     }
 
     if (wheres.length > 0) {
-      const query = (field !== 'themes')
-        ? `select distinct ${field} as field from photogrammar_photos where ${wheres.join(' and ')}`
-        : `select distinct concat(case when vanderbilt_level1 is not null then concat('root|', vanderbilt_level1) else '' end, case when vanderbilt_level2 is not null then concat('|', vanderbilt_level2) else '' end,  case when vanderbilt_level3 is not null then concat ('|', vanderbilt_level3) else '' end) as field from photogrammar_photos where ${wheres.join(' and ')}`;
+      let query: string;
+      if (field === 'themes') {
+        query = `select distinct concat(case when vanderbilt_level1 is not null then concat('root|', vanderbilt_level1) else '' end, case when vanderbilt_level2 is not null then concat('|', vanderbilt_level2) else '' end,  case when vanderbilt_level3 is not null then concat ('|', vanderbilt_level3) else '' end) as field from photogrammar_photos where ${wheres.join(' and ')}`;
+      } else if (field === 'count') {
+        query = `select count(loc_item_link) as numPhotos from photogrammar_photos where ${wheres.join(' and ')}`;
+      } else {
+        query = `select distinct ${field} as field from photogrammar_photos where ${wheres.join(' and ')}`;
+      }
 
       return `${cartoURLBase}${encodeURIComponent(query)}`;
     } 
-
     return null;
   };
 
@@ -243,6 +258,7 @@ const Search = (props: Props) => {
             fetchPath={makeQuery('city')}
             defaultValue={countyOrCityOption}
             onChange={(inputValue: ValueType<Option, false>, action: ActionMeta<Option>) => { setCountyOrCityOption(inputValue); }}
+            formatOptionLabel={({value, label, sublabels}: Option) => (<div>{label}{(sublabels) ? ` (includes ${sublabels.join(', ')})`: ''}</div>)}
             label='City'
             allOptions={countiesOrCitiesOptions.cities[stateOption.value]}
           />
@@ -276,10 +292,10 @@ const Search = (props: Props) => {
               },
               ...photoCaptionOptions.filter(d => d.value),
             ]);
-            setPhotoCaptionOption({
-              label: inputValue,
-              value: inputValue,
-            });
+            // setPhotoCaptionOption({
+            //   label: inputValue,
+            //   value: inputValue,
+            // });
           }}
           onChange={(inputValue: ValueType<Option, false>, { action }: { action: string }) => {
             if (action === 'clear') {
@@ -296,7 +312,7 @@ const Search = (props: Props) => {
                 inputValue,
                 ...photoCaptionOptions.filter(d => d.value !== inputValue.value),
               ]);
-              setPhotoCaptionOption(inputValue);
+              //setPhotoCaptionOption(inputValue);
             }
           }}
           formatCreateLabel={(inputValue) => `search captions for "${inputValue}"`}
@@ -326,11 +342,11 @@ const Search = (props: Props) => {
             handleStyle={[
               {
                 borderColor: 'black',
-                backgroundColor: 'yellow',
+                backgroundColor: '#F2BE00',
               },
               {
                 borderColor: 'black',
-                backgroundColor: 'yellow',
+                backgroundColor: '#F2BE00',
               },
             ]} 
             activeDotStyle={{
@@ -339,16 +355,11 @@ const Search = (props: Props) => {
           />
         </div>
 
-        <Link
-          to={linkTo}
-          role='submit'
-        >
-          <button
-            role='submit'
-          >
-            submit
-          </button>
-        </Link>
+        <SearchButton
+          linkTo={linkTo}
+          fetchPath={makeQuery('count')}
+          toggleSearch={toggleSearch}
+        />
       </div>
     </div>
   );

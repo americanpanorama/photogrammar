@@ -283,16 +283,23 @@ export const makeWheres = createSelector(
         }
       }
 
-      if (startTime > 193501) {
-        const startYear = Math.floor(startTime / 100);
-        const startMonth = startTime % 100;
-        wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
-      }
-      if (endTime < 194504) {
-        const endYear = Math.floor(endTime / 100);
-        const endMonth = endTime % 100;
-        wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
-      }
+      const startYear = Math.floor(startTime / 100);
+      const startMonth = startTime % 100;
+      wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+      const endYear = Math.floor(endTime / 100);
+      const endMonth = endTime % 100;
+      wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+
+      // if (startTime > 193501) {
+      //   const startYear = Math.floor(startTime / 100);
+      //   const startMonth = startTime % 100;
+      //   wheres.push(`(year > ${startYear} or (year = ${startYear} and month >= ${startMonth}))`);
+      // }
+      // if (endTime < 194504) {
+      //   const endYear = Math.floor(endTime / 100);
+      //   const endMonth = endTime % 100;
+      //   wheres.push(`(year < ${endYear} or (year = ${endYear} and month <= ${endMonth}))`);
+      // }
 
       if (filterTerms && filterTerms.length > 0) {
         filterTerms.forEach(filterTerm => {
@@ -344,7 +351,7 @@ export const getThemesBackgroundPhotosQuery = createSelector(
 export const getTimelineCellsFetchPath = createSelector(
   [getSelectedViz, getSelectedMapView, getSelectedCounty, getSelectedCity, getSelectedState, getSelectedTheme, getFilterTerms, makeWheres],
   (selectedViz, selectedMapView, selectedCounty, selectedCity, selectedState, selectedTheme, filterTerms, wheres) => {
-    if (filterTerms.length === 0) {
+    if (filterTerms.length === 0 && !selectedCounty && !selectedCity && !selectedState) {
       let path = `${process.env.PUBLIC_URL}/data/photoCounts/national.json`;
       if (selectedViz === 'map') {
         if (selectedMapView === 'counties') {
@@ -390,9 +397,9 @@ export const getSidebarPhotosQuery = createSelector(
     const offsetForQuery = Math.max(0, offset - displayableCards);
     const limit = (offset === 0) ? displayableCards * 2 : displayableCards * 3;
     const sqlQueryBase = `SELECT loc_item_link, photographer_name, caption, year, month, vanderbilt_level1, vanderbilt_level2, vanderbilt_level3, city, county, state, img_thumb_img, ${offsetForQuery} as theoffset FROM photogrammar_photos`;
-    if (wheres.length > 1) {
-      const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
-      query = `${sqlQueryBase} ${where} order by year, month, loc_item_link limit ${limit} offset ${offsetForQuery}`;
+    // there's always two wheres for the end and start dates
+    if (wheres.length > 2) {
+      query = `${sqlQueryBase} where ${wheres.join(' and ')} order by year, month, loc_item_link limit ${limit} offset ${offsetForQuery}`;
       return encodeURI(`${cartoURLBase}${query}`);
     } else {
       // it's national
@@ -413,9 +420,9 @@ export const getSidebarPhotoCountQuery = createSelector(
     let query;
     const cartoURLBase = 'https://digitalscholarshiplab.cartodb.com/api/v2/sql?format=JSON&q=';
     const sqlQueryBase = 'SELECT count(cartodb_id) FROM photogrammar_photos';
-    if (wheres.length > 1) {
-      const where = (wheres.length > 0) ? `where ${wheres.join(' and ')}` : null;
-      query = `${sqlQueryBase} ${where}`;
+    // there's always two wheres for the end and start dates
+    if (wheres.length > 2) {
+      query = `${sqlQueryBase} where ${wheres.join(' and ')}`;
       return `${cartoURLBase}${encodeURIComponent(query)}`;
     } 
     return null;
@@ -611,20 +618,18 @@ export const getCitiesSearchOptions = () => {
 
   const citiesOptions = {};
   Cities.forEach(city => {
-    citiesOptions[getStateAbbr(city.s)] = citiesOptions[getStateAbbr(city.s)] || [];
-    citiesOptions[getStateAbbr(city.s)].push({
+    citiesOptions[city.s] = citiesOptions[city.s] || [];
+    const option = {
       value: city.k,
       label: city.c,
-    });
-
+    };
     if (city.otherPlaces) {
+      option.sublabels = [];
       city.otherPlaces.forEach(otherCity => {
-        citiesOptions[getStateAbbr(city.s)].push({
-          value: city.k,
-          label: otherCity.c,
-        });
+        option.sublabels.push(otherCity.c);
       });
     }
+    citiesOptions[city.s].push(option);
   });
 
   Object.keys(citiesOptions).forEach(state => {

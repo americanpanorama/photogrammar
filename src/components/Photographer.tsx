@@ -38,6 +38,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }: Props) => {
     bio,
     img,
     interview,
+    locId,
   } = selectedPhotographerData;
 
   const hasInterview = interview && interview.files && interview.files.length > 0;
@@ -106,7 +107,7 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }: Props) => {
 
                         return (
                           <Link
-                            to={`${process.env.PUBLIC_URL}${to}`}
+                            to={to}
                             key={`markdown${partIdx} ${pPart.substring(0, 30)}`}
                           >
                             {txt}
@@ -131,6 +132,8 @@ const Photographer = ({ selectedPhotographerData, expandedSidebar }: Props) => {
               })}
             </div>
           )}
+
+           <div>For more information: <a href={locId} target='_blank'>Library of Congress Named Authority File</a></div>
           {(hasInterview) && (
             <div className='interviews'>
 

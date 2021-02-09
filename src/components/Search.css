@@ -8,6 +8,7 @@
   z-index: 1500;
 
 
+
 }
 
 
@@ -17,27 +18,37 @@
   top: 50%;
   left: 50%;
   width: min(600px, 90vw);
-  height: calc(90vh - 40px);
-  margin-top: calc(-45vh + 20px);
+  height: min(calc(90vh - 40px), 650px);
+  margin-top: max(calc(-45vh + 20px), -325px);
   margin-left: max(-300px, -45vw);
   overflow-y: scroll;
   background-color: white;
+  border-radius: 20px;
   padding: 20px;
 
   display: grid;
-  grid-template-columns: 120px auto;
+  grid-template-columns: 120px auto 50px;
   grid-column-gap: 20px;
   grid-row-gap: 40px;
   grid-auto-rows: 38px;
 }
 
+/* keep the top left cell empty */
+#advancedSearch::before {
+  grid-column: 1;
+  grid-row: 1;
+  content: '';
+}
+
 #advancedSearch .controls {
-  grid-column: 1 / span 2;
+  grid-column: 3 / span 1;
   text-align: right;
+  grid-row: 1 / span 1;
 }
 
 #advancedSearch h2 {
   grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
 }
 
 #advancedSearch h4 {
@@ -54,16 +65,26 @@
   padding: 0;
 }
 
-#advancedSearch a[role=submit] {
+#advancedSearch a[role=submit], #advancedSearch > button[role=submit] {
   grid-column: 2 / span 1;
-  border-radius: 19px;
+  
   width: auto;
 }
 
-#advancedSearch a[role=submit] button[role=submit]{
-  color: black;
+#advancedSearch a[role=submit] button[role=submit], #advancedSearch > button[role=submit]{
+  color: var(--map-counties-color);
   text-decoration: none;
+  border-radius: 19px;
+  border: 2px solid var(--map-counties-color);
   width: 100%;
+  height: 40px;
+  background-color: var(--map-counties-lightened-color);
+}
+
+#advancedSearch > button[role=submit]:disabled {
+  background-color: #eee;
+  color: #888;
+  border: 2px solid #eee;
 }
 
 .styled__control-is-focused {

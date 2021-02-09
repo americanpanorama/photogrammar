@@ -70,11 +70,11 @@ const TimelineSlider = ({timeRange, width, marginLeft, setTimeRange, makeLink}: 
         handleStyle={[
           {
             borderColor: 'black',
-            backgroundColor: 'yellow',
+            backgroundColor: '#F2BE00',
           },
           {
             borderColor: 'black',
-            backgroundColor: 'yellow',
+            backgroundColor: '#F2BE00',
           },
         ]} 
         activeDotStyle={{

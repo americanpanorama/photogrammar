@@ -371,6 +371,7 @@ const TimelineHeatmap = (props: Props) => {
                     textAnchor='end'
                     onClick={() => setShowOthers(!showOthers)}
                     fontSize={monthHeight * 1.2}
+                    style={{ cursor: 'pointer' }}
                   >
                     {(showOthers) ? 'collapse other photographers' : 'other photographers'}
                   </text>

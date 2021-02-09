@@ -56,6 +56,11 @@ button:focus {
   outline: none;
 }
 
+a {
+  color: var(--map-counties-color);
+  text-decoration: none;
+}
+
 
 
 /* ------------------------------------------------------------------
@@ -194,4 +199,41 @@ Navigation
   width: 66%;
   max-width: calc(100%-200px);
   overflow-y: scroll;*/
+}
+
+#modalWrapper {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(25, 25, 25, 0.6);
+  z-index: 1500;
+
+
+}
+
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(600px, 90vw);
+  height: 300px;
+  margin-top: -150px;
+  margin-left: max(-300px, -45vw);
+  overflow-y: scroll;
+  background-color: white;
+  padding: 20px;
+  font-size: 1.1em;
+  border-radius: 20px
+}
+
+#modalWrapper button {
+  float: right;
+  padding: 0;
+}
+
+.modal p {
+  clear: both;
 }

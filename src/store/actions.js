@@ -96,9 +96,18 @@ export function toggleExpandedSidebar() {
       type: A.DIMENSIONS_CALCULATED,
       payload: theDimensions,
     });
+    // if the photo offset is an even page, adjust the offset so it shows the current and previous; if it's an odd page it should show the current and next, e.g. if the current page is 2 and the sidebar is selected, reset offset to 0 to show the first and second photocard sets
+    if (!getState().expandedSidebar && getState().sidebarPhotosOffset % theDimensions.photoCards.displayableCards !== 0) {
+      dispatch({
+        type: A.SET_PHOTO_OFFSET,
+        payload: Math.floor(getState().sidebarPhotosOffset / theDimensions.photoCards.displayableCards) * theDimensions.photoCards.displayableCards,
+      })
+    }
     dispatch({
       type: A.TOGGLE_EXPANDED_SIDEBAR,
     });
+
+
   }
 }
 
@@ -145,6 +154,14 @@ export function windowResized() {
       type: A.DIMENSIONS_CALCULATED,
       payload: theDimensions,
     });
+
+    // adjust the photo offset to the nearest set number to keep them as multiples of the number of displayable cards
+    if (getState().sidebarPhotosOffset % theDimensions.photoCards.displayableCards !== 0) {
+      dispatch({
+        type: A.SET_PHOTO_OFFSET,
+        payload: Math.floor(getState().sidebarPhotosOffset / theDimensions.photoCards.displayableCards) * theDimensions.photoCards.displayableCards,
+      })
+    }
   }
 }
  
@@ -232,15 +249,18 @@ export function calculateDimensions(options) {
   const photoCardMinWidth = 145; // (expandedSidebar) ? 200 : 145;
   const photoCardMaxWidth = 300;
   const maxCols = Math.floor(sidebarWidth / photoCardMinWidth);
-  let cols = Math.floor(sidebarWidth / photoCardMinWidth);
-  let photoCardWidth = unexpandedSidebarWidth / cols * 0.96;
-
-  // if the maxCols is three or greater on , increase the size to make them more visible--shooting for 250 give or take
-  const defaultCols = (expandedSidebar) ? 6 : 3;
-  for (let potentialCols = cols - 1; potentialCols >= defaultCols && photoCardWidth < 220; potentialCols -= 1) {
-    cols = potentialCols;
-    photoCardWidth = sidebarWidth / potentialCols * 0.96
+  let photoCardWidth = unexpandedSidebarWidth / Math.floor(unexpandedSidebarWidth / photoCardMinWidth) * 0.96;
+  let cols = Math.floor(unexpandedSidebarWidth/ photoCardMinWidth);
+  if (expandedSidebar) {
+    cols = cols * 2;
   }
+
+  // // if the maxCols is three or greater on , increase the size to make them more visible--shooting for 250 give or take
+  // const defaultCols = (expandedSidebar) ? 6 : 3;
+  // for (let potentialCols = cols - 1; potentialCols >= defaultCols && photoCardWidth < 220; potentialCols -= 1) {
+  //   //cols = potentialCols;
+  //   //photoCardWidth = sidebarWidth / potentialCols * 0.96
+  // }
 
   if (isMobile) {
     photoCardWidth = innerWidth * 0.45;

@@ -22,6 +22,7 @@
   margin: 0 20px;
   font-size: 1.2em;
   line-height: 1.5;
+  cursor: text !important;
 }
 
 .photographers .photographersGroups h3 {

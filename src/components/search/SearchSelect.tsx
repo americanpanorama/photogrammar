@@ -10,7 +10,7 @@ const fetchSelectable = async ({ fetchPath }: { fetchPath: string }) => {
   return await response.json();
 };
 
-const SearchSelect = ({ label, defaultValue, onChange, fetchPath, allOptions, altFilterFunction }: Props) => {
+const SearchSelect = ({ label, defaultValue, onChange, formatOptionLabel, fetchPath, allOptions, altFilterFunction }: Props) => {
   const customStyles = {
     control: (provided: { [cssSelector: string ]: string; }, state: { isFocused: boolean; }) => {
       return {
@@ -74,6 +74,7 @@ const SearchSelect = ({ label, defaultValue, onChange, fetchPath, allOptions, al
                 defaultValue={defaultValue}
                 isClearable
                 onChange={onChange}
+                formatOptionLabel={formatOptionLabel}
                 className='dropdown'
                 styles={customStyles}
               />
